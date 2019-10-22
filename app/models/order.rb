@@ -3,5 +3,4 @@ class Order < ApplicationRecord
   has_many :orderitems
   
   validates :status, presence: true
-  validates :order_date, presence: true 
 end
