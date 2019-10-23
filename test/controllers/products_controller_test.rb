@@ -88,9 +88,44 @@ describe ProductsController do
   end
 
   describe "edit" do
+    it "will show edit page for valid product" do
+
+      # get edit_product_path(@product.id)
+
+      # must_respond_with :success
+    end
+
+    it "will redirect if given invalid product" do
+
+      # invalid_product_id = -1
+
+      # get edit_product_path(invalid_product_id)
+
+      # must_respond_with :redirect
+      # must_redirect_to products_path
+    end
+
   end
 
   describe "update" do
+    it "updates product information with valid information" do
+      # product_updates = {
+      #   product: {
+      #     price: 15.00 
+      #   }
+      # }
+
+      # expect { 
+      #   patch product_path(@product.id), params: product_updates
+      # }.wont_change "Product.count"
+
+      # expect(@product.).must_equal updated_product.id
+
+    end
+
+    it "doesnt update product information with invalid information" do
+    end
+
   end
 
   describe "destroy" do
