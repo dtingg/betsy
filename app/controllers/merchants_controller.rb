@@ -18,6 +18,8 @@ class MerchantsController < ApplicationController
   end
   
   def create
+    auth_hash = request.env["omniauth.auth"]
+    raise
   end
   
   def edit 
