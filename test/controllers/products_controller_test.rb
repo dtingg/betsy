@@ -3,8 +3,8 @@ require "test_helper"
 describe ProductsController do
 
   before do
-    merchant = Merchant.create(uid: 9999, username: "random", email: "email")
-    @product = Product.create(name: "Test ", price: 10.00, merchant: merchant)
+    @merchant = Merchant.create(uid: 9999, username: "random", email: "email")
+    @product = Product.create(name: "Test ", price: 10.00, merchant: @merchant)
   end
 
   describe "index" do
@@ -45,11 +45,46 @@ describe ProductsController do
   end
   
   describe "new" do
-
-
+    it 'shows the form to add a new product' do
+      get new_product_path
+      must_respond_with :success
+    end
   end
 
   describe "create" do
+    it "creates a new product given valid information" do      
+      new_product = {
+        product: {
+          name: "Test2 ", 
+          price: 10.00, 
+          merchant_id: @merchant.id
+        }
+      }
+
+      expect { 
+        post products_path, params: new_product 
+      }.must_differ "Product.count", 1
+
+      created_product = Product.last
+
+      must_respond_with :redirect
+      must_redirect_to product_path(created_product.id)
+    end
+
+    it "doesn't create a new product if given invalid information" do
+      invalid_product = {
+        product: {
+          name: "Invalid product", 
+          price: 10.00 
+        }
+      }
+
+      expect { 
+        post products_path, params: invalid_product
+      }.wont_change "Product.count"
+
+      must_respond_with :bad_request
+    end
   end
 
   describe "edit" do
