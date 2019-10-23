@@ -28,6 +28,19 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+    @product = Product.find_by(id: params[:id])
+    if @product.nil?
+      redirect_to products_path
+      return
+    end
+  end
+
+  def update
+    
+  
+  end
+
 
   private
 
