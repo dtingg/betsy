@@ -1,0 +1,12 @@
+merchant_one:
+  uid: 123
+  username: george
+  email: anemail@adadev.org
+merchant_two:
+  uid: 1234
+  username: murphy
+  email: murc@adadev.org
+merchant_thre:
+  uid: 12345
+  username: wallace
+  email: alsi@adadev.org
