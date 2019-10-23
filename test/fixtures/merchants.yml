@@ -6,7 +6,7 @@ merchant_two:
   uid: 1234
   username: murphy
   email: murc@adadev.org
-merchant_thre:
+merchant_three:
   uid: 12345
   username: wallace
   email: alsi@adadev.org
