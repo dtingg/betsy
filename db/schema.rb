@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_23_214505) do
+ActiveRecord::Schema.define(version: 2019_10_23_221251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,6 @@ ActiveRecord::Schema.define(version: 2019_10_23_214505) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "order_id"
-    t.index ["order_id"], name: "index_merchants_on_order_id"
   end
 
   create_table "orderitems", force: :cascade do |t|
@@ -49,6 +47,8 @@ ActiveRecord::Schema.define(version: 2019_10_23_214505) do
     t.string "cc_exp"
     t.string "cc_cvv"
     t.datetime "order_date"
+    t.bigint "merchant_id"
+    t.index ["merchant_id"], name: "index_orders_on_merchant_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -61,9 +61,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_214505) do
     t.datetime "updated_at", null: false
     t.bigint "merchant_id"
     t.string "photo_url"
-    t.bigint "review_id"
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
-    t.index ["review_id"], name: "index_products_on_review_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -73,11 +71,13 @@ ActiveRecord::Schema.define(version: 2019_10_23_214505) do
     t.string "reviewer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_reviews_on_product_id"
   end
 
-  add_foreign_key "merchants", "orders"
   add_foreign_key "orderitems", "orders"
   add_foreign_key "orderitems", "products"
+  add_foreign_key "orders", "merchants"
   add_foreign_key "products", "merchants"
-  add_foreign_key "products", "reviews"
+  add_foreign_key "reviews", "products"
 end
