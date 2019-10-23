@@ -8,7 +8,7 @@ describe MerchantsController do
     end
     
     it "should not break if there are no merchants" do 
-      Merchant.all.destroy_all
+      Merchant.destroy_all
       get merchants_path
       must_respond_with :success
     end
