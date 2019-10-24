@@ -1,0 +1,51 @@
+name,description,active,stock_qty,price,merchant_id,photo_url
+Harry Potter soap,Homemade soap inspired by Harry Potter,true,15,16.09,25,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Monk soap,Handmade kaolin and rose clay peppermint soap,true,9,10.68,13,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Elf soap,Elf toy Christmas soap,true,8,74.36,24,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Snoopy soap,Soap featuring Snoopy characters,true,6,29.54,21,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Peach soap,Peaches and cream silk soap,true,16,83.03,3,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Rose soap,Handmade soap shaped like roses,true,12,30.9,7,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Spinach and Cucumber soap,"Handmade soap for acne, psoriasis, or sensitive skin",true,18,79.33,14,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Lavender Oatmeal soap,"Handmade soap, great gift for Mom",true,18,73.11,20,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Shea butter soap,Handmade soap bars made with shea butter,false,5,48.77,10,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Lemon soap,Handmade soap shaped like lemons,true,9,98.23,17,https://i.etsystatic.com/5203039/r/il/77ebfd/334431410/il_1588xN.334431410.jpg
+Hemp soap,Organic hemp soap,true,4,66.08,1,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Pumpkin soap,Small handmade soaps shaped like pumpkins,true,0,53.52,13,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Wild berry glycerin soap,Handmade soap made with glycerin and wild berries,true,10,66.04,21,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Orange and nutmeg soap,Handmade vegan soap,true,11,14.66,17,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Lavender soap,Handmade lavender soap,false,11,16.95,25,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Candy cane soap,Christmas soap inspired by candy canes,true,12,15.73,23,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Vegan soap,Handmade vegan soap,false,4,68.2,16,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Coconut soap,Handmade coconut soap,true,9,4.1,9,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Vegan soap sampler,Sampler of various vegan soaps,true,5,9.35,23,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Vegetable soap,Soap made from vegetables,false,5,56.22,20,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Strawberry soap,Strawberry scented soap,false,11,41.09,18,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Blueberry soap,Soap made from blueberries,false,19,57.77,19,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Pizza soap,Soap that smells like pizza,false,13,75.05,10,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Beer soap,Soap made from beer,true,20,93.33,3,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Wine soap,Soap made from wine,true,9,25.68,6,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Green soap,Handmade green soap,false,6,35.93,16,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Blue soap,Handmade blue soap,false,4,98.24,22,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Red soap,Handmade red soap,false,2,82.85,7,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Raspberry soap,Soap made with raspberries,true,18,67.24,20,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Nutmeg soap,Soap that smells like nutmeg,false,19,46.39,23,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Cardamom soap,Soap made with cardamom,true,3,59.84,20,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Tumeric soap,Soap made with tumeric,false,1,93.57,16,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Black pepper soap,Soap made with black pepper,false,1,89.66,25,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Salt soap,Soap made from salt,true,11,48.42,12,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Potato soap,Soap made from potatoes,false,4,69.96,4,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Sweet potato soap,Soap made from sweet potatoes,true,13,13.85,23,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Taro soap,Soap made from taro,true,15,12.34,24,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Pink soap,Homemade pink soap,false,3,0.52,4,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933988/pink.jpg
+French soap,Handmade French soap,false,8,98.15,7,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933988/pink.jpg
+Italian soap,Handmade Italian soap,false,19,16.92,11,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933988/pink.jpg
+Australian soap,Soap from Australia,false,11,60.75,13,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933988/pink.jpg
+Seattle soap,Soap from Seattle,true,16,97.36,24,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933988/pink.jpg
+Portland soap,Soap made in Portland,false,8,82.08,1,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933988/pink.jpg
+New York soap,Soap made in New York,true,3,36.23,3,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933994/rose.jpg
+San Francisco soap,Soap made in San Francisco,false,14,31.15,2,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933994/rose.jpg
+Oregon soap,Soap made in Oregon,false,3,48.43,25,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933994/rose.jpg
+Washington soap,Soap made in Washington,false,2,51.68,17,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933994/rose.jpg
+California soap,Soap made in California,false,12,91.05,18,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933994/rose.jpg
+Idaho soap,Soap made in Idaho,true,8,3.27,14,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933994/rose.jpg
+Arizona soap,Soap made in Arizona,true,7,33.19,5,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933994/rose.jpg
