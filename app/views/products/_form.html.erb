@@ -1,0 +1,38 @@
+<h2><%= verb %> <%= @product.name %></h2>
+
+<%= form_for @product do |f| %>
+  <div>
+     <%= f.label :name %> 
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+     <%= f.label :description %> 
+    <%= f.text_field :description %>
+  </div>
+
+  <div>
+     <%= f.label :stock_qty %> 
+    <%= f.text_field :stock_qty %>
+  </div>
+
+  <div>
+     <%= f.label :price %> 
+    <%= f.text_field :price %>
+  </div>
+  
+  <div>
+     <%= f.label "Status Active?" %> 
+    <%= f.select :active,[[true], [false]]%>
+  </div>
+
+  <div>
+     <%= f.label :photo_url  %> 
+     <%= f.text_field :photo_url %>
+  </div>
+
+  <%#= f.hidden_field :merchant_id, :value => session[:merchant_id]%>
+
+  <%= f.submit action_name %>
+<% end %>
+
