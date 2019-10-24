@@ -34,10 +34,12 @@ describe ProductsController do
       must_respond_with :success
     end
 
-    it "redirects to products for invalid product" do
+    it "redirects to products for invalid product id" do
       invalid_product_id = -1
 
       get product_path(invalid_product_id)
+
+      expect(flash[:error]).must_equal "Could not find product with id #{invalid_product_id}"
 
       must_respond_with :redirect
       must_redirect_to products_path
@@ -55,7 +57,7 @@ describe ProductsController do
     it "creates a new product given valid information" do      
       new_product = {
         product: {
-          name: "Test2 ", 
+          name: "Test2", 
           price: 10.00, 
           merchant_id: @merchant.id
         }
@@ -67,6 +69,7 @@ describe ProductsController do
 
       created_product = Product.last
 
+      expect(created_product.name).must_equal new_product[:product][:name]
       must_respond_with :redirect
       must_redirect_to product_path(created_product.id)
     end
@@ -83,23 +86,24 @@ describe ProductsController do
         post products_path, params: invalid_product
       }.wont_change "Product.count"
 
+      expect(flash.now[:failure]).must_equal "Product failed to save"
       must_respond_with :bad_request
     end
   end
 
   describe "edit" do
     it "will show edit page for valid product" do
-
       get edit_product_path(@product.id)
 
       must_respond_with :success
     end
 
     it "will redirect if given invalid product" do
-
       invalid_product_id = -1
 
       get edit_product_path(invalid_product_id)
+
+      expect(flash[:error]).must_equal "Could not find product with id #{invalid_product_id}"
 
       must_respond_with :redirect
       must_redirect_to products_path
@@ -109,23 +113,41 @@ describe ProductsController do
 
   describe "update" do
     it "updates product information with valid information" do
-      # product_updates = {
-      #   product: {
-      #     price: 15.00 
-      #   }
-      # }
+      product_updates = {
+        product: {
+          price: 15.00 
+        }
+      }
 
-      # expect { 
-      #   patch product_path(@product.id), params: product_updates
-      # }.wont_change "Product.count"
+      expect { 
+        patch product_path(@product.id), params: product_updates
+      }.wont_change "Product.count"
 
-      # expect(@product.).must_equal updated_product.id
+      updated_product = Product.find_by(id: @product.id)
 
+      expect(updated_product.price).must_equal product_updates[:product][:price]
+
+      must_respond_with :redirect
+      must_redirect_to product_path(@product.id)
     end
 
     it "doesnt update product information with invalid information" do
-    end
+      original_product_price = @product.price
 
+      invalid_product_updates = {
+        product: {
+          price: nil
+        }
+      }
+
+      expect { 
+        patch product_path(@product.id), params: invalid_product_updates
+      }.wont_change "Product.count"
+
+      expect(flash.now[:failure]).must_equal "Product failed to save"
+      expect(@product.price).must_equal original_product_price
+      must_respond_with :bad_request
+    end
   end
 
   describe "destroy" do

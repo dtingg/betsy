@@ -6,7 +6,9 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find_by(id: params[:id])
+
     if @product.nil?
+      flash[:error] = "Could not find product with id #{params[:id]}"
       redirect_to products_path
       return
     end
@@ -25,20 +27,34 @@ class ProductsController < ApplicationController
     else
       flash.now[:failure] = "Product failed to save"
       render :new, status: :bad_request
+      return
     end
   end
 
   def edit
     @product = Product.find_by(id: params[:id])
+
     if @product.nil?
+      flash[:error] = "Could not find product with id #{params[:id]}"
       redirect_to products_path
       return
     end
   end
 
   def update
-    
-  
+    @product = Product.find_by(id: params[:id])
+
+    if @product.update(product_params)
+      redirect_to product_path(@product.id)
+      return
+    else
+      flash.now[:failure] = "Product failed to save"
+      render :edit, status: :bad_request
+      return
+    end
+  end
+
+  def destroy
   end
 
 
