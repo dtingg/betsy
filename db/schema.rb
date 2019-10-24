@@ -11,10 +11,10 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_10_23_221251) do
-
+  
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
+  
   create_table "merchants", force: :cascade do |t|
     t.integer "uid"
     t.string "username"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_221251) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
+  
   create_table "orderitems", force: :cascade do |t|
     t.integer "quantity"
     t.datetime "created_at", null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_221251) do
     t.index ["order_id"], name: "index_orderitems_on_order_id"
     t.index ["product_id"], name: "index_orderitems_on_product_id"
   end
-
+  
   create_table "orders", force: :cascade do |t|
     t.string "status"
     t.string "name"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_221251) do
     t.bigint "merchant_id"
     t.index ["merchant_id"], name: "index_orders_on_merchant_id"
   end
-
+  
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_221251) do
     t.string "photo_url"
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
   end
-
+  
   create_table "reviews", force: :cascade do |t|
     t.string "comment"
     t.integer "rating"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_221251) do
     t.bigint "product_id"
     t.index ["product_id"], name: "index_reviews_on_product_id"
   end
-
+  
   add_foreign_key "orderitems", "orders"
   add_foreign_key "orderitems", "products"
   add_foreign_key "orders", "merchants"
