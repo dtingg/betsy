@@ -1,7 +1,19 @@
 require "test_helper"
 
 describe HomepagesController do
-  # it "does a thing" do
-  #   value(1+1).must_equal 2
-  # end
+  describe "index" do
+    it "responds with success when there are products saved" do
+      get root_path
+
+      must_respond_with :success
+    end
+
+    it "responds with success when there are no products saved" do
+      Product.destroy_all
+
+      get root_path
+
+      must_respond_with :success
+    end
+  end
 end
