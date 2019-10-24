@@ -3,7 +3,7 @@ require "test_helper"
 describe ReviewsController do
   let (:new_merchant) { Merchant.create(uid: 9999, username: "random", email: "email") }
   let (:new_product) { Product.create(name: "Test ", price: 10.00, merchant: new_merchant) }
-  let (:new_review) { Review.create(product_id: new_product.id, rating: 5) }
+  let (:new_review) { Review.new(product_id: new_product.id, rating: 5) }
   
   describe "show" do 
     it "should respond with success when given a valid review" do 
@@ -15,10 +15,37 @@ describe ReviewsController do
     end
     
     it "should respond with redirect with an invalid review" do 
+
+      invalid_id = -1
       
-      get product_review_path(product_id: new_product.id, id: -1)
+      get product_review_path(product_id: new_product.id, id: invalid_id)
     
       must_respond_with :redirect
+      must_redirect_to root_path
+      expect(flash[:error]).wont_be_nil
+    end
+  end
+
+  describe "create" do 
+    it "can create a new review" do 
+
+      review_hash = {
+        review:{
+          product_id: new_product.id, 
+          rating: 5,
+        }
+      }
+
+      expect { 
+        post product_reviews_path(new_product.id), params: review_hash
+      }.must_differ "Review.count", 1
+      
+      must_respond_with :redirect
+      must_redirect_to  product_path(id: new_product.id)
+      
+    end
+    
+    it "will will not create a new product if invalid fields are given" do 
     end
   end
   
