@@ -16,3 +16,20 @@
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
+
+nav h1 {
+  text-align: center;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+nav ul li {
+  list-style-type: none;
+}
+img {
+  width: 150px;
+}
