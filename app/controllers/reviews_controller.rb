@@ -3,6 +3,17 @@ class ReviewsController < ApplicationController
     @reviews = Review.all
   end
   
+  def show 
+    review_id = params[:id]
+    @review = Review.find_by(id: review_id)
+    
+    if @review.nil?
+      flash[:error] = "Review Not Found"
+      render reviews_path
+    end
+    
+  end
+  
   def create
     @review = Review.new(review_params)
   end

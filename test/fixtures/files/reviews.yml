@@ -1,0 +1,22 @@
+review_one:
+  #sync up with product one .yml file developed
+  product_id: 123 
+  reviewer: "Anonymous Adie"
+  date: Time.now
+  rating: 4
+  comment: "OMG! I love this product.  Rated a four since the soap doesn't foam as much as I would like."
+review_two:
+  product_id: 456
+  reviewer: "Cynthia Tee"
+  date: Time.now
+  rating: 5
+  comment: "My favorite soap of all time!  I always give as part of birthday gifts!"
+review_three:
+  product_id: 789
+  reviewer: "Grace Hopper"
+  date: Time.now
+  rating: 2
+  comment: "Liked how the soap looked, but it dissolved too fast.  I wish it would have lasted longer."
+
+
+  
