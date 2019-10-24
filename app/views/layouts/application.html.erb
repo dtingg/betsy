@@ -9,7 +9,15 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <nav>
-  <%= link_to "Login with GitHub", github_login_path %>
+    <h1>SUDSY</h1>
+    <ul>
+      <li><%= link_to "home", products_path, class: "btn btn-primary" %></li>
+      <li><%= link_to "all products", products_path, class: "btn btn-primary" %></li>
+      <li><%= link_to "create product", new_product_path, class: "btn btn-primary" %></li>
+      <li><%= link_to "all merchants", merchants_path, class: "btn btn-primary" %></li>
+      <li><%= link_to "Login with GitHub", github_login_path, class: "btn btn-primary" %></li>
+      <li class="btn btn-primary">Shopping cart</li>
+    </ul>
   </nav>
   <body>
     <section class="flash">
