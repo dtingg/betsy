@@ -6,8 +6,6 @@ Rails.application.routes.draw do
     resources :reviews
   end
   
-  resources :reviews
-  
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "users#create"
 end

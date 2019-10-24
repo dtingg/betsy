@@ -28,4 +28,30 @@ describe ReviewsController do
       must_redirect_to products_path
     end
   end
+  
+  describe "create" do
+    
+    it "can create a new review" do
+      new_review_params = {
+        review: {
+          product_id: 999,
+          reviewer: "Evelyn Boyd Granville",
+          date: Time.now,
+          rating: 5,
+          comment: "Love the scent and it just looks so cute!"
+        }
+      }
+      
+      expect { post reviews_path, params: new_review_params }.must_change "Review.count", 1
+      
+      new_review = Review.find_by(id: new_review_params[:review][:id])
+      
+      expect(new_review.reviewer).must_equal new_review_params[:review][:reviewer]
+      
+      must_respond_with :redirect
+      must_redirect_to review_path(new_review)
+      
+    end
+  end
 end
+
