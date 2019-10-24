@@ -25,7 +25,7 @@ describe ReviewsController do
     
     it "should respond with redirect with an invalid review" do 
       get review_path(-1)
-      must_respond_with :not_found
+      must_redirect_to products_path
     end
   end
 end

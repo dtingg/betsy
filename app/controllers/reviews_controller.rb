@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
     
     if @review.nil?
       flash[:error] = "Review Not Found"
-      render reviews_path
+      redirect_to products_path
     end
     
   end
