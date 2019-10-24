@@ -1,27 +1,19 @@
+require "pry"
+
 class MerchantsController < ApplicationController
+  before_action :find_merchant, only: [:show]
+  before_action :if_merchant_missing, only: [:show, :create]
+  
   def index 
     @merchants = Merchant.all
   end
   
-  def show 
-    merchant_id = params[:id]
-    @merchant = Merchant.find_by(id: merchant_id)
-    
-    if @merchant.nil?
-      flash[:error] = "Not a Valid Merchant"
-      redirect merchants_path
-    end
-    
-  end
-  
-  def new 
-  end
+  def show; end
   
   def create
     auth_hash = request.env["omniauth.auth"]
     merchant = Merchant.find_by(uid: auth_hash[:uid])
     if merchant
-      # merchant found in db
       flash[:success] = "Logged in as returning merchant #{ merchant.username }"
     else
       merchant = Merchant.build_from_github(auth_hash)
@@ -29,7 +21,8 @@ class MerchantsController < ApplicationController
         flash[:success] = "Logged in as new merchant #{ merchant.username }"
       else
         flash[:error] = "Could not create new merchant account: #{ merchant.errors.messages }"
-        return redirect_to merchants_path
+        redirect_to merchants_path
+        return 
       end
     end
     
@@ -104,4 +97,21 @@ class MerchantsController < ApplicationController
   #     redirect_to root_path
   #   end
   # end
+  private
+  
+  def merchant_params
+    return params.require(:merchant).permit(:uid, :username, :email)
+  end
+  
+  def find_merchant
+    @merchant = Merchant.find_by(id: params[:id])
+  end
+  
+  def if_merchant_missing
+    if @merchant.nil?
+      flash[:warning] = "Could not find merchant with id #{params[:id]}"
+      redirect_to merchants_path 
+      return
+    end
+  end
 end
