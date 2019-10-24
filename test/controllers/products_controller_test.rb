@@ -7,9 +7,10 @@ describe ProductsController do
     @product = Product.create(name: "Test ", price: 10.00, merchant: @merchant)
   end
 
+  let(:invalid_product_id) { -1 }
+
   describe "index" do
     it "responds with success when there are products" do
-
       get products_path
 
       must_respond_with :success
@@ -34,10 +35,10 @@ describe ProductsController do
       must_respond_with :success
     end
 
-    it "redirects to products for invalid product" do
-      invalid_product_id = -1
-
+    it "redirects to products for invalid product id" do
       get product_path(invalid_product_id)
+
+      expect(flash[:warning]).must_equal "Could not find product with id #{invalid_product_id}"
 
       must_respond_with :redirect
       must_redirect_to products_path
@@ -55,7 +56,7 @@ describe ProductsController do
     it "creates a new product given valid information" do      
       new_product = {
         product: {
-          name: "Test2 ", 
+          name: "Test2", 
           price: 10.00, 
           merchant_id: @merchant.id
         }
@@ -67,6 +68,7 @@ describe ProductsController do
 
       created_product = Product.last
 
+      expect(created_product.name).must_equal new_product[:product][:name]
       must_respond_with :redirect
       must_redirect_to product_path(created_product.id)
     end
@@ -83,51 +85,87 @@ describe ProductsController do
         post products_path, params: invalid_product
       }.wont_change "Product.count"
 
+      expect(flash.now[:failure]).must_equal "Product failed to save"
       must_respond_with :bad_request
     end
   end
 
   describe "edit" do
     it "will show edit page for valid product" do
+      get edit_product_path(@product.id)
 
-      # get edit_product_path(@product.id)
-
-      # must_respond_with :success
+      must_respond_with :success
     end
 
     it "will redirect if given invalid product" do
+      get edit_product_path(invalid_product_id)
 
-      # invalid_product_id = -1
+      expect(flash[:warning]).must_equal "Could not find product with id #{invalid_product_id}"
 
-      # get edit_product_path(invalid_product_id)
-
-      # must_respond_with :redirect
-      # must_redirect_to products_path
+      must_respond_with :redirect
+      must_redirect_to products_path
     end
 
   end
 
   describe "update" do
     it "updates product information with valid information" do
-      # product_updates = {
-      #   product: {
-      #     price: 15.00 
-      #   }
-      # }
+      product_updates = {
+        product: {
+          price: 15.00 
+        }
+      }
 
-      # expect { 
-      #   patch product_path(@product.id), params: product_updates
-      # }.wont_change "Product.count"
+      expect { 
+        patch product_path(@product.id), params: product_updates
+      }.wont_change "Product.count"
 
-      # expect(@product.).must_equal updated_product.id
+      updated_product = Product.find_by(id: @product.id)
 
+      expect(updated_product.price).must_equal product_updates[:product][:price]
+
+      must_respond_with :redirect
+      must_redirect_to product_path(@product.id)
     end
 
     it "doesnt update product information with invalid information" do
-    end
+      original_product_price = @product.price
 
+      invalid_product_updates = {
+        product: {
+          price: nil
+        }
+      }
+
+      expect { 
+        patch product_path(@product.id), params: invalid_product_updates
+      }.wont_change "Product.count"
+
+      expect(flash.now[:failure]).must_equal "Product failed to save"
+      expect(@product.price).must_equal original_product_price
+      must_respond_with :bad_request
+    end
   end
 
   describe "destroy" do
+    it "destroys product when given valid product id" do
+      expect {
+        delete product_path(@product.id)
+      }.must_differ "Product.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to products_path
+    end
+
+    it "redirects when given invalid product id" do
+      expect {
+        delete product_path(invalid_product_id)
+      }.wont_change "Product.count"
+
+
+      expect(flash[:warning]).must_equal "Could not find product with id #{invalid_product_id}"
+      must_respond_with :redirect
+      must_redirect_to products_path
+    end
   end
 end
