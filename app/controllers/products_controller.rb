@@ -1,18 +1,12 @@
 class ProductsController < ApplicationController
+  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :if_product_missing, only: [:show, :edit, :destroy]
 
   def index
     @products = Product.all
   end
 
-  def show
-    @product = Product.find_by(id: params[:id])
-
-    if @product.nil?
-      flash[:error] = "Could not find product with id #{params[:id]}"
-      redirect_to products_path
-      return
-    end
-  end
+  def show ; end
 
   def new
     @product = Product.new
@@ -31,19 +25,9 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit
-    @product = Product.find_by(id: params[:id])
-
-    if @product.nil?
-      flash[:error] = "Could not find product with id #{params[:id]}"
-      redirect_to products_path
-      return
-    end
-  end
+  def edit ; end
 
   def update
-    @product = Product.find_by(id: params[:id])
-
     if @product.update(product_params)
       redirect_to product_path(@product.id)
       return
@@ -55,13 +39,27 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-  end
+    @product.destroy
 
+    redirect_to products_path
+    return
+  end
 
   private
 
   def product_params
     return params.require(:product).permit(:name, :description, :active, :stock_qty, :price, :merchant_id, :photo_url)
   end
+
+  def find_product
+    @product = Product.find_by(id: params[:id])
+  end
   
+  def if_product_missing
+    if @product.nil?
+      flash[:warning] = "Could not find product with id #{params[:id]}"
+      redirect_to products_path 
+      return
+    end
+  end
 end

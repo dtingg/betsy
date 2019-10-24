@@ -7,9 +7,10 @@ describe ProductsController do
     @product = Product.create(name: "Test ", price: 10.00, merchant: @merchant)
   end
 
+  let(:invalid_product_id) { -1 }
+
   describe "index" do
     it "responds with success when there are products" do
-
       get products_path
 
       must_respond_with :success
@@ -35,11 +36,9 @@ describe ProductsController do
     end
 
     it "redirects to products for invalid product id" do
-      invalid_product_id = -1
-
       get product_path(invalid_product_id)
 
-      expect(flash[:error]).must_equal "Could not find product with id #{invalid_product_id}"
+      expect(flash[:warning]).must_equal "Could not find product with id #{invalid_product_id}"
 
       must_respond_with :redirect
       must_redirect_to products_path
@@ -99,11 +98,9 @@ describe ProductsController do
     end
 
     it "will redirect if given invalid product" do
-      invalid_product_id = -1
-
       get edit_product_path(invalid_product_id)
 
-      expect(flash[:error]).must_equal "Could not find product with id #{invalid_product_id}"
+      expect(flash[:warning]).must_equal "Could not find product with id #{invalid_product_id}"
 
       must_respond_with :redirect
       must_redirect_to products_path
@@ -151,5 +148,24 @@ describe ProductsController do
   end
 
   describe "destroy" do
+    it "destroys product when given valid product id" do
+      expect {
+        delete product_path(@product.id)
+      }.must_differ "Product.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to products_path
+    end
+
+    it "redirects when given invalid product id" do
+      expect {
+        delete product_path(invalid_product_id)
+      }.wont_change "Product.count"
+
+
+      expect(flash[:warning]).must_equal "Could not find product with id #{invalid_product_id}"
+      must_respond_with :redirect
+      must_redirect_to products_path
+    end
   end
 end
