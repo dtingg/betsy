@@ -1,0 +1,14 @@
+<section class="heading">
+<h1>Merchants</h1> <%= button_to "Add New merchant", new_merchant_path, :method => "get" %>
+</section>
+<table>
+<tr>
+<th> UID </th>
+<th> Username </th>
+</tr>
+  <% @merchants.each do |merchant|  %>
+  <tr>
+    <td><%= merchant.uid %></td><td><%= link_to merchant.username, merchant_path(merchant) %></td>
+  </tr>
+  <% end %>
+</table>
