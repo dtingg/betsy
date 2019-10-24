@@ -9,7 +9,11 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <nav>
-  <%= link_to "Login with GitHub", github_login_path %>
+    <% if session[:uid] %>
+     <%= link_to "Log Out", logout_path, method: "delete" %>
+    <% else %>
+      <%= link_to "Login with GitHub", github_login_path %>
+    <% end%>
   </nav>
   <body>
 
