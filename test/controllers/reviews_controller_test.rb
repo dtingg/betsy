@@ -23,5 +23,9 @@ describe ReviewsController do
       must_respond_with :success
     end
     
+    it "should respond with redirect with an invalid review" do 
+      get review_path(-1)
+      must_respond_with :not_found
+    end
   end
 end

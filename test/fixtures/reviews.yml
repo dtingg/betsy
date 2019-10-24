@@ -1,5 +1,4 @@
 review_one:
-  #sync up with product one .yml file developed
   product_id: 123 
   reviewer: "Anonymous Adie"
   date: Time.now
