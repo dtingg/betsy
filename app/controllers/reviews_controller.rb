@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :find_review, only: [:show, :edit, :update, :destroy]
-  before_action :if_missing_work, only: [:show, :edit, :destroy]
+  before_action :if_missing_review, only: [:show, :edit, :destroy]
 
   # def index
   #   @reviews = Review.all
