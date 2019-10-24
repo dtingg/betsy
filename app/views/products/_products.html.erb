@@ -1,9 +1,11 @@
-<ul>
-      <li>Photo</li>
-      <li>Product Name</li>
-      <li>Description</li>
-      <li>Status</li>
-      <li>Stock Quantity</li>
-      <li>Price</li>
-      <li>Merchant</li>
-<ul>
+<% @products.each do |product| %>
+      <ul>
+            <li>Photo: <%= image_tag(product.photo_url, alt:"#{product.name}") %></li>
+            <li>Product Name: <%= product.name %></li>
+            <li>Description: <%= product.description %></li>
+            <li>Status: <%= product.active %></li>
+            <li>Stock Quantity: <%= product.stock_qty %></li>
+            <li>Price: $<%= product.price %></li>
+            <li>Merchant ID: <%= product.merchant_id %></li>
+      </ul>
+<% end%>
