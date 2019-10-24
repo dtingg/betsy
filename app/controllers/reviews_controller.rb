@@ -2,12 +2,25 @@ class ReviewsController < ApplicationController
   before_action :find_review, only: [:show, :edit, :update, :destroy]
   before_action :if_missing_work, only: [:show, :edit, :destroy]
 
-  def index
-    @reviews = Review.all
+  # def index
+  #   @reviews = Review.all
+  # end
+
+  def new
+    @review = Review.new
   end
 
   def create
     @review = Review.new(review_params)
+    
+    if @review.save
+      redirect_to product_path(id: @review.product_id)
+      return
+    else 
+      flash.now[:failure] = "Work failed to save"
+      render :new, status: :bad_request 
+      return
+    end
   end
   
   def show ; end
@@ -16,7 +29,7 @@ class ReviewsController < ApplicationController
 
   def update    
     if @review.update(review_params)
-      # redirect_to review_path(@review.id) 
+      redirect_to product_path(id: @review.product_id)
       return
     else 
       render :edit, status: :bad_request 
@@ -26,7 +39,7 @@ class ReviewsController < ApplicationController
 
   def destroy    
     @review.destroy
-    # redirect_to root_path
+    redirect_to product_path(id: @review.product_id)
     return
   end
   
@@ -43,8 +56,7 @@ class ReviewsController < ApplicationController
   def if_missing_review
     if @review.nil?
       flash[:error] = "Review with id #{params[:id]} was not found"
-      redirect_to products_path
-      #Shouldn't it be redirect_to root_path????
+      redirect_to root_path
       return
     end
   end
