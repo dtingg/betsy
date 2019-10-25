@@ -13,6 +13,6 @@
   <%= f.hidden_field :order_id, value: @cart.id %>
   <%= f.hidden_field :product_id, value: @product.id %>
   <%= f.label :quantity %>
-  <%= f.select :quantity, [5, 4, 3, 2, 1]%>
+  <%= f.select :quantity, (1..@product.stock_qty)%>
   <%= f.submit "Add to cart" %>
 <% end %>
