@@ -121,7 +121,6 @@ describe ReviewsController do
     end
 
     it "will not update a review when invalid information is provided" do
-  
       new_review.save
       updated_review = {
         review: {
@@ -134,14 +133,22 @@ describe ReviewsController do
       }.wont_change "Review.count"
       
       must_respond_with :bad_request 
+      expect(flash[:failure]).wont_be_nil
     end
   end
 
+  describe "destroy" do
+    it "destroys a review" do
+      new_review.save
 
+      expect {
+        delete product_review_path(product_id: new_product.id, id: new_review.id)
+      }.must_differ "Review.count", -1
 
-  
-  
-  
+      must_respond_with :redirect
+      must_redirect_to product_path(id: new_product.id)
+    end
+  end
 end
 
 
