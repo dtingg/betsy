@@ -29,7 +29,7 @@ describe OrderitemsController do
       updated_quantity = previous_quantity - orderitem_hash[:orderitem][:quantity]
       updated_product = Product.find_by(id: product.id)
       
-      expect(updated_product.stock_qty).must_equal udpated_quantity
+      expect(updated_product.stock_qty).must_equal updated_quantity
       
       expect(flash[:success]).must_equal "Item added to your cart"
       must_respond_with :redirect  
