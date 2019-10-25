@@ -25,9 +25,10 @@ describe MerchantsController do
     end
     
     it "should respond with redirect with an invalid merchant" do 
-      get merchant_path(-1)
-      must_respond_with :error
+      get merchant_path(-9)
+      must_respond_with :redirect
       must_redirect_to merchants_path
+      
     end
   end
   

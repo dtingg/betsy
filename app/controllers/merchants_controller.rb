@@ -109,7 +109,7 @@ class MerchantsController < ApplicationController
   
   def if_merchant_missing
     if @merchant.nil?
-      flash[:warning] = "Could not find merchant with id #{params[:id]}"
+      flash[:redirect] = "Could not find merchant with id #{params[:id]}"
       redirect_to merchants_path 
       return
     end
