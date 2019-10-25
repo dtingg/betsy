@@ -2,9 +2,10 @@
 
 <% if @cart.orderitems.any? %>
   <% @cart.orderitems.each do |item| %>
-    <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %>
-    <%= item.quantity %>
-    <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %>
+    <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %><br>
+    Quantity: 
+    <%= item.quantity %><br>
+    <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %><br>
     <%= link_to "Delete item", orderitem_path(item), method: :delete %><br><br>
   <% end %>
 <% else %>
