@@ -74,7 +74,6 @@ describe ReviewsController do
       get product_review_path(product_id: new_product.id, id: invalid_id)
     
       must_respond_with :redirect
-      must_redirect_to root_path
       expect(flash[:error]).wont_be_nil
     end
   end
