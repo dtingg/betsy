@@ -1,6 +1,11 @@
 require "test_helper"
 
 describe OrderitemsController do
+  let (:merchant) { Merchant.create }
+  let (:product) { Product.create(merchant_id: merchant.id, name: "Oatmeal soap", price: 5.55) }
+  let (:order) { Order.create(status: "pending") }
+  let (:orderitem) { Orderitem.create(order_id: order.id, product_id: product.id, quantity: 3) }
+  
   describe "create" do
     it "does not create an orderitem if the form data is nil, and responds with redirect" do
       orderitem_hash = { orderitem: nil }
@@ -11,11 +16,7 @@ describe OrderitemsController do
     end
     
     it "can create a new orderitem with valid information accurately, and redirect" do
-      test_order = Order.create(status: "pending")
-      test_merchant = Merchant.create
-      test_product = Product.create(merchant_id: test_merchant.id, name: "Oatmeal soap", price: 5.55)
-      
-      orderitem_hash = { orderitem: { order_id: test_order.id, product_id: test_product.id, quantity: 3 }}
+      orderitem_hash = { orderitem: { order_id: order.id, product_id: product.id, quantity: 3 }}
       
       expect { post orderitems_path, params: orderitem_hash }.must_change "Orderitem.count", 1
       
@@ -29,11 +30,7 @@ describe OrderitemsController do
     end
     
     it "will not create a new orderitem if a required field is missing" do
-      test_order = Order.create(status: "pending")
-      test_merchant = Merchant.create
-      test_product = Product.create(merchant_id: test_merchant.id, name: "Oatmeal soap", price: 5.55)
-      
-      orderitem_hash = { orderitem: { order_id: test_order.id, product_id: test_product.id, quantity: nil }}
+      orderitem_hash = { orderitem: { order_id: order.id, product_id: product.id, quantity: nil }}
       
       expect { post orderitems_path, params: orderitem_hash }.wont_change "Orderitem.count", 1
       
@@ -41,4 +38,23 @@ describe OrderitemsController do
       must_respond_with :redirect
     end      
   end
+  
+  describe "destroy" do
+    it "does not change the database when the orderitem does not exist, and responds with a redirect" do  
+      invalid_id = -1
+      
+      expect{ delete orderitem_path(invalid_id) }.wont_change "Orderitem.count"
+      
+      must_respond_with :redirect
+    end
+    
+    it "destroys the orderitem when it exists in the database, and responds with a redirect" do
+      test_orderitem = orderitem
+      
+      expect { delete orderitem_path(test_orderitem.id) }.must_differ "Orderitem.count", -1
+      expect(flash[:success]).must_equal "Item removed from your cart"
+      
+      must_respond_with :redirect
+    end
+  end    
 end

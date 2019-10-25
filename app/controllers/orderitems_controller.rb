@@ -21,20 +21,17 @@ class OrderitemsController < ApplicationController
     end
   end
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  # def destroy
-  #   @orderitem.destroy
-  
-  #   redirect_back(fallback_location: root_path)
-  # end
+  def destroy
+    if @orderitem.nil?
+      redirect_back(fallback_location: root_path)
+      return
+    end
+    
+    @orderitem.destroy
+    flash[:success] = "Item removed from your cart"  
+    redirect_back(fallback_location: root_path)
+    return
+  end
   
   private
   
