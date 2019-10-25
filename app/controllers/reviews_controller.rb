@@ -57,7 +57,7 @@ class ReviewsController < ApplicationController
   def if_missing_review
     if @review.nil?
       flash[:error] = "Review with id #{params[:id]} was not found"
-      redirect_to root_path
+      redirect_back(fallback_location: root_path)
       return
     end
   end
