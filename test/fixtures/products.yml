@@ -1,0 +1,25 @@
+potter:
+  name: "harry potter soap"
+  description: "handmade"
+  active: true
+  stock_qty: 12
+  price: 3.00
+  merchant: merchant_two
+  photo_url: ""
+rose:
+  name: "rose soap"
+  description: "handmade"
+  active: true
+  stock_qty: 12
+  price: 3.00
+  merchant: merchant_two
+  photo_url: ""
+cucumber:
+  name: "cucumber"
+  description: "handmade"
+  active: true
+  stock_qty: 12
+  price: 3.00
+  merchant: merchant_two
+  photo_url: ""
+

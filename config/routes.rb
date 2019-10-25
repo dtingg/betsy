@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   
   resources :orders
   resources :merchants
-  resources :products
   resources :orderitems
+  resources :products do
+    resources :reviews, except: [:index] 
+  end
   
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "users#create"
