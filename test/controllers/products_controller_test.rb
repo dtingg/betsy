@@ -3,8 +3,8 @@ require "test_helper"
 describe ProductsController do
 
   before do
-    @merchant = Merchant.create(uid: 9999, username: "random", email: "email")
-    @product = Product.create(name: "Test ", price: 10.00, merchant: @merchant)
+    @merchant = Merchant.create(uid: 9999, username: "random", email: "email" )
+    @product = Product.create(name: "Test ", price: 10.00, merchant: @merchant, photo_url: "")
   end
 
   let(:invalid_product_id) { -1 }

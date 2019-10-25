@@ -1,5 +1,5 @@
 class Merchant < ApplicationRecord
-  has_many :products
+  has_many :products, dependent: :destroy
   
   def self.build_from_github(auth_hash)
     merchant = Merchant.new
