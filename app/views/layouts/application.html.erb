@@ -21,7 +21,7 @@
       <% else %>
       <li><%= link_to "Login with GitHub", github_login_path, class: "btn btn-primary" %></li>
       <% end %>
-      <li class="btn btn-primary">Shopping cart</li>
+      <li><%= link_to "Shopping cart", order_path(@cart), class: "btn btn-primary" %></li>
     </ul>
     <h2>
     <% if session[:user_id] %>
