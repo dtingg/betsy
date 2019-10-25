@@ -2,9 +2,10 @@
 
 <% if @cart.orderitems.any? %>
   <% @cart.orderitems.each do |item| %>
+    <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %>
     <%= item.quantity %>
     <%= item.product.name %>
-    <%= link_to "Delete item", orderitem_path(item), method: :delete %><br>
+    <%= link_to "Delete item", orderitem_path(item), method: :delete %><br><br>
   <% end %>
 <% else %>
   Your shopping cart is empty.
