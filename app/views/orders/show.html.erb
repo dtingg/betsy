@@ -4,7 +4,7 @@
   <% @cart.orderitems.each do |item| %>
     <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %>
     <%= item.quantity %>
-    <%= item.product.name %>
+    <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %>
     <%= link_to "Delete item", orderitem_path(item), method: :delete %><br><br>
   <% end %>
 <% else %>

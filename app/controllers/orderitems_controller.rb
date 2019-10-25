@@ -28,7 +28,7 @@ class OrderitemsController < ApplicationController
       return
     end
     
-    @orderitem.destroy
+    @orderitem.remove_from_cart    
     flash[:success] = "Item removed from your cart"  
     redirect_back(fallback_location: root_path)
     return

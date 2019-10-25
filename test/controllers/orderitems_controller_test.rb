@@ -54,12 +54,12 @@ describe OrderitemsController do
       must_respond_with :redirect
     end
     
-    it "destroys the orderitem when it exists in the database, and responds with a redirect" do
+    it "destroys the orderitem when it exists in the database, and responds with a redirect" do    
       test_orderitem = orderitem
       
       expect { delete orderitem_path(test_orderitem.id) }.must_differ "Orderitem.count", -1
-      expect(flash[:success]).must_equal "Item removed from your cart"
       
+      expect(flash[:success]).must_equal "Item removed from your cart"
       must_respond_with :redirect
     end
   end    
