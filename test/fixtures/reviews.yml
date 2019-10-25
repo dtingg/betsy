@@ -11,7 +11,7 @@ review_two:
   rating: 5
   comment: "My favorite soap of all time!  I always give as part of birthday gifts!"
 review_three:
-  product_id: 789
+  product: rose
   reviewer: "Grace Hopper"
   date: Time.now
   rating: 2
