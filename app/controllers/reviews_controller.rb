@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
       redirect_to product_path(id: @review.product_id)
       return
     else 
-      flash.now[:failure] = "Work failed to save"
+      flash.now[:failure] = "Review failed to save"
       render :new, status: :bad_request 
       return
     end
