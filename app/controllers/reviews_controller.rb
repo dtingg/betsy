@@ -34,6 +34,7 @@ class ReviewsController < ApplicationController
     else 
       render :edit, status: :bad_request 
       flash.now[:failure] = "Review failed to save"
+      render :edit, status: :bad_request 
       return
     end
   end
