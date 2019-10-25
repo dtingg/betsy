@@ -2,7 +2,7 @@ require "pry"
 
 class MerchantsController < ApplicationController
   before_action :find_merchant, only: [:show]
-  before_action :if_merchant_missing, only: [:show, :create]
+  before_action :if_merchant_missing, only: [:show]
   
   def index 
     @merchants = Merchant.all
@@ -108,10 +108,13 @@ class MerchantsController < ApplicationController
   end
   
   def if_merchant_missing
+    puts "********* made it *********"
     if @merchant.nil?
+      puts "MERCHANT WAS NIL"
       flash[:warning] = "Could not find merchant with id #{params[:id]}"
       redirect_to merchants_path 
       return
     end
+    puts "MERCHANT WASNT NILL"
   end
 end

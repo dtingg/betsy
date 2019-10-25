@@ -38,9 +38,9 @@ describe MerchantsController do
       
       
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(new_merchant))
-      get auth_github_callback_path
+      # get auth_github_callback_path
       expect{ get auth_github_callback_path }.must_change "Merchant.count", 1
-      ​
+      
       must_redirect_to merchants_path
       
       
