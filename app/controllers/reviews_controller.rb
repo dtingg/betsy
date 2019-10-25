@@ -32,7 +32,6 @@ class ReviewsController < ApplicationController
       redirect_to product_path(id: @review.product_id)
       return
     else 
-      render :edit, status: :bad_request 
       flash.now[:failure] = "Review failed to save"
       render :edit, status: :bad_request 
       return
