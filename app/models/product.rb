@@ -4,8 +4,13 @@ class Product < ApplicationRecord
   has_many :reviews
   #has_many :orderitems
   #has_and_belongs_to_many :categories
-
+  
   validates :merchant_id, presence: true
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true
+  
+  def update_qty(number)
+    self.stock_qty -= number
+    self.save
+  end
 end

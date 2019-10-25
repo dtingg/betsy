@@ -2,7 +2,6 @@ class OrderitemsController < ApplicationController
   before_action :find_orderitem, only: [:destroy]
   
   def create
-    # Orderitem.create(order_id: @cart.id, product_id: 7, quantity: 2)
     if params[:orderitem].nil?
       redirect_back(fallback_location: root_path)
       return
@@ -11,6 +10,8 @@ class OrderitemsController < ApplicationController
     @orderitem = Orderitem.new(orderitem_params)
     
     if @orderitem.save
+      @orderitem.product.update_qty(@orderitem.quantity)
+      
       flash[:success] = "Item added to your cart"
       redirect_back(fallback_location: root_path)
       return

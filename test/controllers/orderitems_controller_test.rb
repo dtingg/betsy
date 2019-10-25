@@ -15,16 +15,22 @@ describe OrderitemsController do
       must_respond_with :redirect
     end
     
-    it "can create a new orderitem with valid information accurately, and redirect" do
+    it "can create a new orderitem with valid information accurately, updates product quantity, and redirects" do
       orderitem_hash = { orderitem: { order_id: order.id, product_id: product.id, quantity: 3 }}
+      previous_quantity = product.stock_qty
       
       expect { post orderitems_path, params: orderitem_hash }.must_change "Orderitem.count", 1
       
       new_orderitem = Orderitem.last
-      
       expect(new_orderitem.order_id).must_equal orderitem_hash[:orderitem][:order_id]
       expect(new_orderitem.product_id).must_equal orderitem_hash[:orderitem][:product_id]
       expect(new_orderitem.quantity).must_equal orderitem_hash[:orderitem][:quantity]
+      
+      udpated_quantity = previous_quantity - orderitem_hash[:orderitem][:quantity]
+      updated_product = Product.find_by(id: product.id)
+      
+      expect(updated_product.stock_qty).must_equal udpated_quantity
+      
       expect(flash[:success]).must_equal "Item added to your cart"
       must_respond_with :redirect  
     end
