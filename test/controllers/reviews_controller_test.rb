@@ -148,6 +148,19 @@ describe ReviewsController do
       must_respond_with :redirect
       must_redirect_to product_path(id: new_product.id)
     end
+
+    it "will not destroy a review if invalid id is provided" do
+      invalid_id = -1
+
+      expect {
+        delete product_review_path(product_id: new_product.id, id: invalid_id = -1)
+      }.wont_change "Review.count"
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+      expect(flash[:error]).wont_be_nil
+
+    end
   end
 end
 
