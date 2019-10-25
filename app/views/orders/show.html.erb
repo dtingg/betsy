@@ -1,0 +1,13 @@
+<h1>Shopping cart</h1>
+
+<% if @cart.orderitems.any? %>
+  <% @cart.orderitems.each do |item| %>
+    <%= item.quantity %>
+    <%= item.product.name %>
+    <%= link_to "Delete item", orderitem_path(item), method: :delete %><br>
+  <% end %>
+<% else %>
+  Your shopping cart is empty.
+<% end %>
+
+<%= link_to "New orderitem", orderitems_path, method: :post %>
