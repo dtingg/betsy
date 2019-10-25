@@ -26,7 +26,7 @@ describe OrderitemsController do
       expect(new_orderitem.product_id).must_equal orderitem_hash[:orderitem][:product_id]
       expect(new_orderitem.quantity).must_equal orderitem_hash[:orderitem][:quantity]
       
-      udpated_quantity = previous_quantity - orderitem_hash[:orderitem][:quantity]
+      updated_quantity = previous_quantity - orderitem_hash[:orderitem][:quantity]
       updated_product = Product.find_by(id: product.id)
       
       expect(updated_product.stock_qty).must_equal udpated_quantity
