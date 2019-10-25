@@ -159,7 +159,6 @@ describe ReviewsController do
       must_respond_with :redirect
       must_redirect_to root_path
       expect(flash[:error]).wont_be_nil
-
     end
   end
 end
