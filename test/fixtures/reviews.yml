@@ -1,5 +1,5 @@
 review_one:
-  product_id: 123 
+  product: potter
   reviewer: "Anonymous Adie"
   date: Time.now
   rating: 4
