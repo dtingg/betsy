@@ -5,9 +5,6 @@
   <% alpha_items.order(:id).each do |item| %>
     <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %><br>
     <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %><br>
-
-
-    <%= item.quantity %>
     <%= form_with model: item do |f| %>
       <%= f.hidden_field :id, value: @cart.id %>
       <%= hidden_field_tag :old_quantity, item.quantity %>
@@ -16,7 +13,7 @@
       <%= f.select :quantity, (1..available)%>
       <%= f.submit "Update quantity" %>
     <% end %>
-    <%= link_to "Remove from cart", orderitem_path(item), method: :delete %><br><br>
+    <%= button_to "Remove from cart", orderitem_path(item), method: :delete %><br><br>
   <% end %>
 <% else %>
   Your shopping cart is empty.
