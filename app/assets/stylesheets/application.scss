@@ -14,7 +14,7 @@
 
 /* Custom bootstrap variables must be set or imported *before* bootstrap. */
 @import "bootstrap";
-/* Import scss content */
+
 @import "**/*";
 
 nav h1 {
@@ -32,4 +32,12 @@ nav ul li {
 }
 img {
   width: 150px;
+}
+
+.success {
+  background-color: lightgreen
+}
+
+.failure {
+  background-color: darksalmon
 }

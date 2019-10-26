@@ -6,10 +6,13 @@ Rails.application.routes.draw do
   resources :orders
   resources :merchants
   resources :orderitems
-  resources :products do
-    resources :reviews, except: [:index] 
-  end
+  resources :reviews, only: [:new, :create]
+  resources :products 
   
+  resources :products, only: [:show] do
+    resources :reviews, only: [:new, :create]
+  end
+
   get "/auth/github", as: "github_login"
   get "/auth/github/callback", to: "merchants#create"
   delete "/logout", to: "merchants#destroy", as: "logout"

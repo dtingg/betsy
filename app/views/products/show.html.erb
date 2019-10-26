@@ -16,3 +16,21 @@
   <%= f.select :quantity, (1..@product.stock_qty)%>
   <%= f.submit "Add to cart" %>
 <% end %>
+
+
+<section>
+      <h1>Product Reviews</h1>
+      <ul>
+        <% Review.where(product_id: params[:id]).each do |review|%>
+          <li>Date: <%= review.date.to_s[0..9] %></li>
+          <li>Reviewer: <%= review.reviewer %></li>
+          <li>Rating: <%= review.rating %></li>
+          <li>Coment: <%= review.comment %></li>
+          <hr>
+        <%end%>
+      </ul>
+    </section>
+
+    <li class="nav-item app-header__nav_item">
+  <%=link_to "Add Review",  new_product_review_path(@product.id), :class=>"btn btn-primary"%>
+</li>
