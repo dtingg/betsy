@@ -2,10 +2,53 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+h4, h5 {
+  margin-left: 5%;
+}
+
+p {
+  text-align: center;
+}
+th {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+.cell_center {
+  text-align: center;
+}
+
+.cell_left {
+  text-align: left;
+}
+
+.merchant_details {
+  width: 90%;
+  margin-left: 5%;
+}
 .merchant_info {
-  width: 60%;
+  width: 90%;
+  margin-left: 5%;
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   grid-template-rows: auto auto auto auto;
 
+}
+
+.page_title {
+  margin-left: 5%;
+}
+
+.sm_product_image {
+  width: 75px;
+  height: 75px;
+  crop: fill;
+}
+
+#merchant_index {
+  width: 90%;
+  margin-left: 5%;
 }

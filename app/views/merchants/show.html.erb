@@ -19,7 +19,7 @@
 <section class="info_section">
 <h4>Orders</h4>
 <h5><a name="orders_active">Active Orders</a></h5>
-<table class="table table-hover table-sm" id="merchant_product_index">
+<table class="table table-hover table-sm merchant_details" frame = "box" id="merchant_product_index">
 <thead>
   <tr>
     <th>#</th>
@@ -30,10 +30,10 @@
   </tr>
 </thead>
 </table>
-No Order History
+<p>No Order History</p>
 <br /><br />
 <h5><a name="orders_inactive">Inactive Orders</a></h5>
-<table class="table table-hover table-sm" id="merchant_product_index">
+<table class="table table-hover table-sm merchant_details" frame = "box" id="merchant_product_index">
 <thead>
   <tr>
     <th>#</th>
@@ -44,11 +44,11 @@ No Order History
   </tr>
 </thead>
 </table>
-No Order History
+<p> No Order History </p>
 <br /><br />
 <h4>Products</h4>
 <h5><a name="products_active">Active Products</a></h5>
-<table class="table table-hover table-sm" id="merchant_product_index">
+<table class="table table-hover table-sm merchant_details" frame = "box">
 <thead>
   <tr>
     <th>NAME</th>
@@ -66,7 +66,7 @@ No Order History
   <tr>
     <td><%= product.name%></td>
     <td><%= product.description %></td>
-    <td>✅ <%= product.active %></td>
+    <td>✅</td>
     <td><%= product.stock_qty %></td>
     <td>$<%= product.price%></td>
     <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
@@ -78,7 +78,7 @@ No Order History
 </table>
 <br /><br />
 <h5><a name="products_inactive">Inactive Products</a></h5>
-<table class="table table-hover table-sm" id="merchant_product_index">
+<table class="table table-hover table-sm merchant_details" frame = "box">
 <thead>
   <tr>
     <th>NAME</th>
@@ -96,7 +96,7 @@ No Order History
   <tr>
     <td><%= product.name%></td>
     <td><%= product.description %></td>
-    <td>❌ <%= product.active %></td>
+    <td>❌</td> 
     <td><%= product.stock_qty %></td>
     <td>$<%= product.price%></td>
     <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
