@@ -44,7 +44,7 @@ class OrderitemsController < ApplicationController
       redirect_back(fallback_location: root_path)
       return
       
-      # This is for updating quantity in shopping cart  
+      # This is for updating quantity in shopping cart view
     elsif @orderitem.update(orderitem_params)
       difference = @orderitem.quantity - params[:old_quantity].to_i
       
