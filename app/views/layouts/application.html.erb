@@ -15,8 +15,7 @@
       <li><%= link_to "all products", products_path, class: "btn btn-primary" %></li>
       <li><%= link_to "create product", new_product_path, class: "btn btn-primary" %></li>
       <li><%= link_to "all merchants", merchants_path, class: "btn btn-primary" %></li>
-      <% if session[:user_id] %>
-        <% @current_merchant = Merchant.find_by(id: session[:user_id]) %>
+      <% if @current_user %>
       <li><%= link_to "Log out", logout_path, class: "btn btn-primary", method: "delete" %></li>
       <% else %>
       <li><%= link_to "Login with GitHub", github_login_path, class: "btn btn-primary" %></li>
