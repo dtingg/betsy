@@ -5,7 +5,7 @@
 <thead>
 <tr>
 <th> ICONS </th>
-<th>UID</th>
+<th> UID</th>
 <th> USERNAME </th>
 <th> EMAIL </th>
 <th> ACTIVE PRODUCTS </th>
@@ -18,8 +18,8 @@
     <td><%= link_to merchant.uid, merchant_path(merchant.id) %></td>
     <td><%= link_to merchant.username, merchant_path(merchant.id) %></td>
     <td><%= mail_to merchant.email, merchant.email %></td>
-    <td>#</td>
-    <td>$</td>
+    <td><%= merchant.active_products.to_s.first %></td>
+    <td>$ 0.00</td>
   </tr>
   <% end %>
 </table>

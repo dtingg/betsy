@@ -1,3 +1,11 @@
 // Place all the styles related to the Merchants controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.merchant_info {
+  width: 60%;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: auto auto auto auto;
+
+}

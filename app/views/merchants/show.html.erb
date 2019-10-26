@@ -1,31 +1,110 @@
-Name: <%= @merchant.username %>
-UID: <%= @merchant.uid %>
-E-Mail: <%= @merchant.email %>
-
-<table>
-<tr>
-<th>NAME</th>
-<th>DESCRIPTION</th>
-<th>ACTIVE</th>
-<th>STOCK QTY.</th>
-<th>PRICE</th>
-<th>PHOTO</th>
-<th>EDIT</th>
-<th>DELETE</th>
-</tr>
+<p><%= link_to "Return to Merchant List", merchants_path %></p>
+<%# <p><%= link_to "Add New Product", merchant_products_path(@merchant.id), method: :post %></p>
+<section class="merchant_info">
+  <h2><%= @merchant.username.capitalize %></h2>
+  <h3>$ 0.00</h3>
+  <p><%= @merchant.email %></p>
+  <p>Gross Sales</p>
+  <p><%= @merchant.uid %></p>
+  <p><%= @merchant.active_products %></p>
+  <p>Membership Duration: <%= @merchant.member_since %></p> 
+  <p># Average Product Rating</p>
+</section>
+<%# <section class="inpage_links">
+  <a href="#orders_active">Active Orders</a>
+  <a href="#orders_inactive">Inactive Orders</a>
+  <a href="#products_active">Active Products</a>
+  <a href="#products_inactive">Inactive Products</a>
+</section> %>
+<section class="info_section">
+<h4>Orders</h4>
+<h5><a name="orders_active">Active Orders</a></h5>
+<table class="table table-hover table-sm" id="merchant_product_index">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>DATE</th>
+    <th>STATUS</th>
+    <th>ITEMS</th>
+    <th>EDIT</th>
+  </tr>
+</thead>
+</table>
+No Order History
+<br /><br />
+<h5><a name="orders_inactive">Inactive Orders</a></h5>
+<table class="table table-hover table-sm" id="merchant_product_index">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>DATE</th>
+    <th>STATUS</th>
+    <th>ITEMS</th>
+    <th>EDIT</th>
+  </tr>
+</thead>
+</table>
+No Order History
+<br /><br />
+<h4>Products</h4>
+<h5><a name="products_active">Active Products</a></h5>
+<table class="table table-hover table-sm" id="merchant_product_index">
+<thead>
+  <tr>
+    <th>NAME</th>
+    <th>DESCRIPTION</th>
+    <th>ACTIVE</th>
+    <th>STOCK QTY.</th>
+    <th>PRICE</th>
+    <th>PHOTO</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  </tr>
+  </thead>
 <% @merchant.products.each do |product| %>
-<tr>
-<td><%= product.name%></td>
-<td><%= product.description %></td>
-<td><%= product.active %></td>
-<td><%= product.stock_qty %></td>
-<td>$<%= product.price%></td>
-<td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
-<td><%= link_to "Edit Product", edit_product_path(product.id) %></td>
-<td><%= link_to "Delete Product", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
-</tr>
+<% if product.active == true %>
+  <tr>
+    <td><%= product.name%></td>
+    <td><%= product.description %></td>
+    <td>✅ <%= product.active %></td>
+    <td><%= product.stock_qty %></td>
+    <td>$<%= product.price%></td>
+    <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
+    <td><%= link_to "Edit Product", edit_product_path(product.id) %></td>
+    <td><%= link_to "Delete Product", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
+<br /><br />
+<h5><a name="products_inactive">Inactive Products</a></h5>
+<table class="table table-hover table-sm" id="merchant_product_index">
+<thead>
+  <tr>
+    <th>NAME</th>
+    <th>DESCRIPTION</th>
+    <th>ACTIVE</th>
+    <th>STOCK QTY.</th>
+    <th>PRICE</th>
+    <th>PHOTO</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  </tr>
+  </thead>
+<% @merchant.products.each do |product| %>
+<% if product.active == false %>
+  <tr>
+    <td><%= product.name%></td>
+    <td><%= product.description %></td>
+    <td>❌ <%= product.active %></td>
+    <td><%= product.stock_qty %></td>
+    <td>$<%= product.price%></td>
+    <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
+    <td><%= link_to "Edit Product", edit_product_path(product.id) %></td>
+    <td><%= link_to "Delete Product", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
+  </tr>
+<% end %>
 <% end %>
 </table>
 
-<%# <p><%= link_to "Add New Product", merchant_products_path(@merchant.id), method: :post %></p>
-<p><%= link_to "Return to Merchant List", merchants_path %></p>
+
