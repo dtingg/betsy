@@ -1,14 +1,25 @@
 <section class="heading">
-<h1>Merchants</h1> <%= button_to "Add New merchant", new_merchant_path %>
+<h1>Merchants</h1> 
 </section>
-<table>
+<table class="table table-hover table-sm" id="merchant_index">
+<thead>
 <tr>
-<th> UID </th>
-<th> Username </th>
+<th> ICONS </th>
+<th>UID</th>
+<th> USERNAME </th>
+<th> EMAIL </th>
+<th> ACTIVE PRODUCTS </th>
+<th> GROSS SALES </th>
 </tr>
+</thead>
   <% @merchants.each do |merchant|  %>
   <tr>
-    <td><%= merchant.uid %></td><td><%= link_to merchant.username, merchant_path(merchant) %></td>
+    <td></td>
+    <td><%= link_to merchant.uid, merchant_path(merchant.id) %></td>
+    <td><%= link_to merchant.username, merchant_path(merchant.id) %></td>
+    <td><%= mail_to merchant.email, merchant.email %></td>
+    <td>#</td>
+    <td>$</td>
   </tr>
   <% end %>
 </table>

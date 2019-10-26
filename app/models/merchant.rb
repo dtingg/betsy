@@ -10,7 +10,13 @@ class Merchant < ApplicationRecord
     return merchant
   end
   
-  # def self.alphabetic
-  #   return Merchant.order(name: :asc)
-  # end
+  def self.alphabetic
+    return Merchant.order(name: :asc)
+  end
+  
+  def self.gross_sales
+  end
+  
+  def self.top_rated
+  end
 end
