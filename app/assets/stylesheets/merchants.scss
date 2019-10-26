@@ -6,6 +6,12 @@ h4, h5 {
   margin-left: 5%;
 }
 
+img {
+  align-self: center;
+  justify-self: center;
+  max-height: 250px;
+  max-width: 300px;
+}
 p {
   text-align: center;
 }
@@ -14,6 +20,7 @@ th {
 }
 
 td {
+  width: 25%;
   text-align: center;
 }
 
@@ -25,13 +32,22 @@ td {
   text-align: left;
 }
 
+.cell_right {
+  text-align: right;
+}
+
 .merchant_details {
   width: 90%;
   margin-left: 5%;
 }
+
 .merchant_info {
-  width: 90%;
-  margin-left: 5%;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  width: 70%;
+  margin-left: 15%;
+}
+.merchant_info_details {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   grid-template-rows: auto auto auto auto;

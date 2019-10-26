@@ -5,7 +5,6 @@
 <table class="table table-hover table-sm" frame = "box" id="merchant_index">
 <thead>
 <tr>
-<th> ICONS </th>
 <th> UID</th>
 <th> USERNAME </th>
 <th> EMAIL </th>
@@ -15,7 +14,6 @@
 </thead>
   <% @merchants.each do |merchant|  %>
   <tr>
-    <td></td>
     <td class="cell_center"><%= link_to merchant.uid, merchant_path(merchant.id) %></td>
     <td class="cell_left"><%= link_to merchant.username, merchant_path(merchant.id) %></td>
     <td class="cell_left"><%= mail_to merchant.email, merchant.email %></td>

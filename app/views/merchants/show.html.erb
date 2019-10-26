@@ -1,14 +1,17 @@
 <p><%= link_to "Return to Merchant List", merchants_path %></p>
 <%# <p><%= link_to "Add New Product", merchant_products_path(@merchant.id), method: :post %></p>
 <section class="merchant_info">
-  <h2><%= @merchant.username.capitalize %></h2>
-  <h3>$ 0.00</h3>
-  <p><%= @merchant.email %></p>
-  <p>Gross Sales</p>
-  <p><%= @merchant.uid %></p>
-  <p><%= @merchant.active_products %></p>
-  <p>Membership Duration: <%= @merchant.member_since %></p> 
-  <p># Average Product Rating</p>
+<%= image_tag("placeholder.jpg", :alt => "placeholder image") %>
+<section class="merchant_info_details">
+  <h2 class="cell_left"><%= @merchant.username.capitalize %></h2>
+  <h3 class="cell_right">$ 0.00</h3>
+  <p class="cell_left"><%= @merchant.email %></p>
+  <p class="cell_right">Gross Sales</p>
+  <p class="cell_left"><%= @merchant.uid %></p>
+  <p class="cell_right"><%= @merchant.active_products %></p>
+  <p class="cell_left">Membership Duration: <%= @merchant.member_since %></p> 
+  <p class="cell_right"># Average Product Rating</p>
+</section>
 </section>
 <%# <section class="inpage_links">
   <a href="#orders_active">Active Orders</a>
