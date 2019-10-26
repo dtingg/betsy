@@ -1,5 +1,3 @@
-require "pry"
-
 class MerchantsController < ApplicationController
   before_action :find_merchant, only: [:show]
   before_action :if_merchant_missing, only: [:show]
