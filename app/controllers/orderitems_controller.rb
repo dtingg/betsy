@@ -14,6 +14,7 @@ class OrderitemsController < ApplicationController
     if @orderitem
       @orderitem.increase_qty(params[:orderitem][:quantity])
       redirect_back(fallback_location: root_path)
+      flash[:success] = "Item quantity updated"
       return
       # Else create a new one
     else
@@ -66,7 +67,7 @@ class OrderitemsController < ApplicationController
   
   def destroy
     if @orderitem.nil?
-      flash[:error] = "Unable to remove item from cart."
+      flash[:error] = "Unable to remove item from cart"
       redirect_back(fallback_location: root_path)
       return
     else
