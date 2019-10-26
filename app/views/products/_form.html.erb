@@ -1,38 +1,52 @@
-<h2><%= verb %> <%= @product.name %></h2>
+<section>
+      <% if @product.errors.any? %>
+        <section class="alert alert-danger">
+        <h1>Errors</h1>
+        <ul>
+          <% @product.errors.each do |key, message| %>
+            <li><strong><%= key.capitalize %></strong> <%= message %></li>
+          <% end %>
+        </ul>
+        </section>
+      <% end %>
+    </section>
 
-<%= form_for @product do |f| %>
-  <div>
-     <%= f.label :name %> 
-    <%= f.text_field :name %>
-  </div>
+<h2><%= verb %> Product</h2>
 
-  <div>
-     <%= f.label :description %> 
-    <%= f.text_field :description %>
-  </div>
+<section>
+  <%= form_with model: @product do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "Product Name" %> 
+      <%= f.text_field :name, class: "form-control"%>
+    </div>
 
-  <div>
-     <%= f.label :stock_qty %> 
-    <%= f.text_field :stock_qty %>
-  </div>
+    <div class="form-group">
+      <%= f.label :price %> 
+      <%= f.text_field :price, class: "form-control" %>
+    </div>
 
-  <div>
-     <%= f.label :price %> 
-    <%= f.text_field :price %>
-  </div>
-  
-  <div>
-     <%= f.label "Status Active?" %> 
-    <%= f.select :active,[[true], [false]]%>
-  </div>
+    <div class="form-group">
+      <%= f.label :stock_qty %> 
+      <%= f.text_field :stock_qty, class: "form-control" %>
+    </div>
 
-  <div>
-     <%= f.label :photo_url  %> 
-     <%= f.text_field :photo_url %>
-  </div>
+    <div class="form-group">
+      <%= f.label "Status Active?" %> 
+      <%= f.select :active,[[true], [false]]%>
+    </div>
 
-  <%#= f.hidden_field :merchant_id, :value => session[:merchant_id]%>
+    <div class="form-group">
+      <%= f.label :photo_url  %> 
+      <%= f.text_field :photo_url, class: "form-control" %>
+    </div>
 
+    <div class="form-group">
+      <%= f.label :description %> 
+      <%= f.text_area :description, class: "form-control" %>
+    </div>
+
+  <%#= f.hidden_field :merchant_id, value: params[session[:merchant_id]]%>
   <%= f.submit action_name %>
-<% end %>
+  <% end %>
+</section>
 

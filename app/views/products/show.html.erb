@@ -23,7 +23,6 @@
       <ul>
         <% Review.where(product_id: params[:id]).each do |review|%>
           <li>Date: <%= review.date.to_s[0..9] %></li>
-          <li>Reviewer: <%= review.reviewer %></li>
           <li>Rating: <%= review.rating %></li>
           <li>Coment: <%= review.comment %></li>
           <hr>
