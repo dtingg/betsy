@@ -1,5 +1,5 @@
 class OrderitemsController < ApplicationController
-  before_action :find_orderitem, only: [:destroy]
+  before_action :find_orderitem, only: [:edit, :update, :destroy]
   
   def create
     if params[:orderitem].nil?
@@ -10,7 +10,7 @@ class OrderitemsController < ApplicationController
     @orderitem = Orderitem.new(orderitem_params)
     
     if @orderitem.save
-      @orderitem.product.update_qty(@orderitem.quantity)
+      @orderitem.product.decrease_qty(@orderitem.quantity)
       
       flash[:success] = "Item added to your cart"
       redirect_back(fallback_location: root_path)
@@ -21,6 +21,32 @@ class OrderitemsController < ApplicationController
       return
     end
   end
+  
+  def edit
+    if @orderitem.nil?
+      redirect_back(fallback_location: root_path)
+      return
+    end
+  end
+  
+  def update
+    if @orderitem.nil?
+      redirect_back(fallback_location: root_path)
+      return
+    elsif @orderitem.update(orderitem_params)
+      # @orderitem.product.update_qty(orderitem_params[:quantity])
+      
+      flash[:success] = "Product quantity updated"
+      redirect_back(fallback_location: root_path)
+      return
+    else
+      flash[:error] = "Unable to update product quantity"
+      redirect_back(fallback_location: root_path)
+      return
+    end
+  end
+  
+  
   
   def destroy
     if @orderitem.nil?
@@ -44,4 +70,5 @@ class OrderitemsController < ApplicationController
   def orderitem_params
     return params.require(:orderitem).permit(:quantity, :order_id, :product_id, :complete)
   end
+  
 end
