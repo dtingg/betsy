@@ -8,12 +8,12 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0 }
   
-  def decrease_qty(number)
+  def remove_stock(number)
     self.stock_qty -= number
     self.save
   end
   
-  def increase_qty(number)
+  def return_stock(number)
     self.stock_qty += number
     self.save
   end

@@ -6,8 +6,24 @@ class Orderitem < ApplicationRecord
   validates :product_id, presence: true
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
   
+  def increase_qty(additional_qty)
+    self.quantity += additional_qty.to_i
+    self.product.remove_stock(additional_qty.to_i)
+    self.save
+  end
+  
   def remove_from_cart
-    self.product.decrease_qty(self.quantity)    
+    self.product.return_stock(self.quantity)    
     self.destroy
+  end
+  
+  def self.exists?(order_id, product_id)
+    result = Orderitem.where(order_id: order_id, product_id: product_id)  
+    
+    if result.empty?
+      return false
+    else
+      return result[0]
+    end
   end
 end
