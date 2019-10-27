@@ -15,7 +15,7 @@ E-Mail: <%= @merchant.email %>
 </tr>
 <% @merchant.products.each do |product| %>
 <tr>
-<td><%= product.name%></td>
+<td><%= link_to product.name, product_path(product)%></td>
 <td><%= product.description %></td>
 <td><%= product.active %></td>
 <td><%= product.stock_qty %></td>

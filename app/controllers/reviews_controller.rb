@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @product = Product.find_by(id: params[:product_id])
 
-    if @product.merchant_id != session[:merchant_id]
+    if @product.merchant_id != Merchant.find_by(id: session[:user_id]).id
       if @review.save
         flash[:success] = "Review was succesfully posted"
         redirect_to product_path(id: @review.product_id)
@@ -21,7 +21,7 @@ class ReviewsController < ApplicationController
     else 
       flash[:failure] = "A problem occurred: You cannot review your own product."
     end   
-    redirect_to works_path
+    redirect_to product_path(id: @review.product_id)
   end
   
   private
