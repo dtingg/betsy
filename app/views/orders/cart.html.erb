@@ -3,8 +3,8 @@
 <% if @order.orderitems.any? %>
   <% alpha_items = @order.orderitems %>
   <% alpha_items.order(:id).each do |item| %>
-    <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %><br>
     <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %><br>
+    <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %><br>
     <%= form_with model: item do |f| %>
       <%= f.hidden_field :id, value: @order.id %>
       <%= hidden_field_tag :old_quantity, item.quantity %>

@@ -11,3 +11,10 @@ Zipcode: <%= @order.zipcode %><br>
 Credit card number: <%= @order.cc_num %><br>
 Credit card expriation: <%= @order.cc_exp %><br>
 Credit card cvv: <%= @order.cc_cvv %><br>
+
+<% @order.orderitems.each do |item| %>
+  <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %><br>
+  <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %><br>
+  Quantity: <%= item.quantity %><br>
+  Unit price: $<%= item.product.price %><br><br>
+<% end %>
