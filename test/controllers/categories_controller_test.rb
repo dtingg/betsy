@@ -29,6 +29,18 @@ describe CategoriesController do
   end
 
   describe "create" do
+    it "should create a new category" do
+      
+      new_category_params = {
+        category: {name: "A Wonderful New Category"}
+      }
 
+      expect {
+        post categories_path, params: new_category_params 
+      }.must_change "Category.count", 1
+
+      new_category = Category.find_by(name: new_category_params[:category][:name])
+      expect(new_category.name).must_equal new_category_params[:category][:name]
+    end
   end
 end
