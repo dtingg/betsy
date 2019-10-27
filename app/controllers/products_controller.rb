@@ -9,12 +9,16 @@ class ProductsController < ApplicationController
   def show ; end
 
   def new
-    @product = Product.new
+    if session[:user_id] != nil 
+      @product = Product.new
+    else
+      flash[:failure] = "A problem occurred: You must log in to add a product"
+      redirect_to root_path
+    end  
   end
 
   def create
     @product = Product.new(product_params)
-    
     if @product.save
       redirect_to product_path(@product.id)
       return
@@ -22,7 +26,7 @@ class ProductsController < ApplicationController
       flash.now[:failure] = "Product failed to save"
       render :new, status: :bad_request
       return
-    end
+    end  
   end
 
   def edit ; end
