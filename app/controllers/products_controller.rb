@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show, :update, :destroy]
-  before_action :if_product_missing, only: [:show, :destroy]
+  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :if_product_missing, only: [:show, :edit, :destroy]
 
   def index
     @products = Product.all
@@ -30,12 +30,6 @@ class ProductsController < ApplicationController
   end
 
   def edit 
-    @product = Product.find_by(id: params[:id])
-    if @product.nil?
-      flash[:warning] = "Could not find product with id #{params[:id]}"
-      redirect_to products_path 
-      return
-    end
     if session[:user_id] != nil 
       if @product.merchant_id != Merchant.find_by(id: session[:user_id]).id
         flash[:failure] = "A problem occurred: You cannot edit other merchants products."
