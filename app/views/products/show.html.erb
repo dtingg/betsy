@@ -4,8 +4,8 @@
   <li>Product Name: <%= @product.name.titleize %></li>
   <li>Description: <%= @product.description %></li>
   <li>Status: <%= @product.active %></li>
-  <li>Price: $<%= @product.price %></li>
-  <li>Merchant: <%= @product.merchant.username %></li>
+  <li>Price: $<%= sprintf('%.2f', @product.price) %></li>
+  <li>Merchant: <%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %></li>
 </ul>
 
 <% if @product.stock_qty > 0 %>

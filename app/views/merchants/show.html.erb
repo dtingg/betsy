@@ -20,8 +20,8 @@ Username: <%= @merchant.username %>
 </tr>
 <% @merchant.products.order(:name).each do |product| %>
 <tr>
-<td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
-<td><%= product.name%></td>
+<td><%= link_to image_tag(product.photo_url, class: "sm_product_image", alt:"#{product.name}"), product_path(product) %></td>
+<td><%= link_to "#{product.name}", product_path(product)%></td>
 <td><%= product.description %></td>
 <td><%= product.active %></td>
 <td><%= product.stock_qty %></td>

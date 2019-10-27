@@ -8,13 +8,30 @@ Address: <%= @order.address %><br>
 City: <%= @order.city %><br>
 State: <%= @order.state %><br>
 Zipcode: <%= @order.zipcode %><br>
-Credit card number: <%= @order.cc_num %><br>
+<% cc_length = @order.cc_num.length %>
+Credit card number: <%= "X" * (cc_length - 4) + @order.cc_num[-4..-1] %><br>
 Credit card expriation: <%= @order.cc_exp %><br>
 Credit card cvv: <%= @order.cc_cvv %><br>
 
+<table>
+<tr>
+<th>PHOTO</th>
+<th>NAME</th>
+<th>DESCRIPTION</th>
+<th>MERCHANT</th>
+<th>QUANTITY</th>
+<th>UNIT PRICE</th>
+<th>LINE PRICE</th>
+</tr>
 <% @order.orderitems.each do |item| %>
-  <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %><br>
-  <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %><br>
-  Quantity: <%= item.quantity %><br>
-  Unit price: $<%= item.product.price %><br><br>
+<tr>
+<td><%= link_to image_tag(item.product.photo_url, alt:"#{item.product.name}"), product_path(item.product) %></td>
+<td><%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %></td>
+<td><%= item.product.description %></td>
+<td><%= link_to "#{item.product.merchant.username}", merchant_path(item.product.merchant) %></td>
+<td><%= item.quantity %></td>
+<td>$<%= item.product.price %></td>
+<td>$<%= item.quantity * item.product.price %></td>
+</tr>
 <% end %>
+</table>

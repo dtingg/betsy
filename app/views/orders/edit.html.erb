@@ -32,5 +32,6 @@
   <%= f.text_field :cc_cvv %><br>
   <%= f.hidden_field :status, value: "paid" %>
   <%= f.hidden_field :order_date, value: Time.new %>
+  <%= hidden_field_tag :order_paid, true %>
   <%= f.submit "Complete order" %>
 <% end %>
