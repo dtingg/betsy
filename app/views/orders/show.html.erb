@@ -1,20 +1,13 @@
-<h1>Shopping cart</h1>
-
-<% if @cart.orderitems.any? %>
-  <% alpha_items = @cart.orderitems %>
-  <% alpha_items.order(:id).each do |item| %>
-    <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %><br>
-    <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %><br>
-    <%= form_with model: item do |f| %>
-      <%= f.hidden_field :id, value: @cart.id %>
-      <%= hidden_field_tag :old_quantity, item.quantity %>
-      <%= f.label :quantity %>
-      <% available = item.product.stock_qty + item.quantity %>
-      <%= f.select :quantity, (1..available)%>
-      <%= f.submit "Update quantity" %>
-    <% end %>
-    <%= button_to "Remove from cart", orderitem_path(item), method: :delete %><br><br>
-  <% end %>
-<% else %>
-  Your shopping cart is empty.
-<% end %>
+<h1>Order details</h1>
+<% date = @order.order_date.in_time_zone("Pacific Time (US & Canada)") %>
+Placed: <%= date.strftime( "%B %e, %Y %l:%M %p") %><br>
+Status: <%= @order.status.capitalize %><br>
+Name: <%= @order.name %><br>
+Email: <%= @order.email %><br>
+Address: <%= @order.address %><br>
+City: <%= @order.city %><br>
+State: <%= @order.state %><br>
+Zipcode: <%= @order.zipcode %><br>
+Credit card number: <%= @order.cc_num %><br>
+Credit card expriation: <%= @order.cc_exp %><br>
+Credit card cvv: <%= @order.cc_cvv %><br>

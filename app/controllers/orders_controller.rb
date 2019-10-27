@@ -1,4 +1,33 @@
 class OrdersController < ApplicationController
+  def show
+    
+  end
+  
+  def edit
+    if @order.nil?
+      redirect_back(fallback_location: root_path)
+      return
+    end
+  end
+  
+  def update
+    if @order.nil?
+      redirect_back(fallback_location: root_path)
+      return
+    end
+    
+    if @order.update(order_params)
+      flash[:success] = "Thank you for your order!"  
+      redirect_to order_path(@order)
+      return
+    else
+      render :edit
+      return
+    end
+  end
+  
+  def cart
+  end
   
   private
   
