@@ -53,7 +53,7 @@ describe CategoriesController do
       expect(new_category.name).must_equal new_category_params[:category][:name]
     end
 
-    it "should not create a new category without valid input data" do
+    it "should not create a new category when name is set to nil" do
       new_category_params = {
         category: {name: nil}
       }
@@ -61,9 +61,28 @@ describe CategoriesController do
       expect {
         post categories_path, params: new_category_params 
       }.wont_change "Category.count"
-
-      # new_category = Category.find_by(name: new_category_params[:category][:name])
-      # expect(new_category.name).must_equal new_category_params[:category][:name]
     end
+
+    it "should not create a new category when name is an empty string" do
+     # empty string
+      new_category_params = {
+        category: {name: ""}
+      }
+
+      expect {
+        post categories_path, params: new_category_params 
+      }.wont_change "Category.count"
+
+      # whitespace
+      new_category_params = {
+        category: {name: "   "}
+      }
+
+      expect {
+        post categories_path, params: new_category_params 
+      }.wont_change "Category.count"
+    end
+
+
   end
 end
