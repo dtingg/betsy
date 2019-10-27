@@ -1,6 +1,11 @@
-Name: <%= @merchant.username %>
-UID: <%= @merchant.uid %>
-E-Mail: <%= @merchant.email %>
+<% if @merchant.uid < 100000 %>
+  <%= image_tag "https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo" %>
+<% else %>
+  <%= image_tag "https://avatars1.githubusercontent.com/u/#{@merchant.uid}", alt: "github profile photo" %>
+<% end %>
+Username: <%= @merchant.username %>
+<%# UID: <%= @merchant.uid %>
+<%# E-Mail: <%= @merchant.email %>
 
 <table>
 <tr>
