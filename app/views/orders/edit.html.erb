@@ -2,7 +2,7 @@
 <h2>Errors</h2>
 <ul>
   <% @order.errors.each do |column, message| %>
-    <li><%= column.capitalize %> <%= message %></li>
+    <li><%= message %></li>
   <% end %>
 </ul>
 <% end %>
@@ -20,15 +20,15 @@
   <%= f.text_field :city %><br>
   <%= f.label :state %>
   <%= f.text_field :state %><br>
-  <%= f.label :zipcode %>
+  <%= f.label :zip_code %>
   <%= f.text_field :zipcode %><br>
   <br>
   Billing information<br>
-  <%= f.label :cc_num %>
+  <%= f.label :credit_card_number %>
   <%= f.text_field :cc_num %><br>
-  <%= f.label :cc_exp %>
+  <%= f.label :credit_card_expiration %>
   <%= f.text_field :cc_exp %><br>
-  <%= f.label :cc_cvv %>
+  <%= f.label :credit_card_cvv %>
   <%= f.text_field :cc_cvv %><br>
   <%= f.hidden_field :status, value: "paid" %>
   <%= f.hidden_field :order_date, value: Time.new %>
