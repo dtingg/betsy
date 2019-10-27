@@ -9,23 +9,23 @@ Username: <%= @merchant.username %>
 
 <table>
 <tr>
+<th>PHOTO</th>
 <th>NAME</th>
 <th>DESCRIPTION</th>
 <th>ACTIVE</th>
 <th>STOCK QTY.</th>
 <th>PRICE</th>
-<th>PHOTO</th>
 <th>EDIT</th>
 <th>DELETE</th>
 </tr>
 <% @merchant.products.order(:name).each do |product| %>
 <tr>
+<td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
 <td><%= product.name%></td>
 <td><%= product.description %></td>
 <td><%= product.active %></td>
 <td><%= product.stock_qty %></td>
 <td>$<%= product.price%></td>
-<td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
 <td><%= link_to "Edit Product", edit_product_path(product.id) %></td>
 <td><%= link_to "Delete Product", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
 </tr>
