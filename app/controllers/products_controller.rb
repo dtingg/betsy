@@ -36,10 +36,15 @@ class ProductsController < ApplicationController
       redirect_to products_path 
       return
     end
-    if @product.merchant_id != Merchant.find_by(id: session[:user_id]).id
-      flash[:failure] = "A problem occurred: You cannot edit other merchants products."
-      redirect_to product_path(id: @product.id) 
-    end      
+    if session[:user_id] != nil 
+      if @product.merchant_id != Merchant.find_by(id: session[:user_id]).id
+        flash[:failure] = "A problem occurred: You cannot edit other merchants products."
+        redirect_to product_path(id: @product.id) 
+      end
+    else
+      flash[:failure] = "A problem occurred: You must log in to edit the product"
+      redirect_to root_path
+    end
   end
 
   def update
