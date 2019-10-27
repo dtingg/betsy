@@ -5,7 +5,26 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 
-  def show; end
+  def show
+    @category = Category.find_by(id: params[:id])
+  end
+
+  def new
+    @category = Category.new
+  end
+
+  def create
+    @category = Category.new(name: params[:category][:name])
+
+    if @category.save
+      redirect_to category_path(@category.id)
+      return
+    else
+      flash.now[:failure] = "Category failed to save"
+      render :new, status: :bad_request
+      return
+    end
+  end
 
   private
   def category_params

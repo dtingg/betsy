@@ -18,7 +18,7 @@ describe CategoriesController do
     it "should respond with success when asked to show a particular category" do
       bubbly_category = categories(:bubbly)
 
-      get category_path(bubbly_category.id)
+      get categories_path(bubbly_category.id)
       must_respond_with :success
     end
 
@@ -26,5 +26,9 @@ describe CategoriesController do
       get category_path(-1)
       must_respond_with :redirect
     end
+  end
+
+  describe "create" do
+
   end
 end
