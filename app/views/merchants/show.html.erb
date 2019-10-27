@@ -13,7 +13,7 @@ E-Mail: <%= @merchant.email %>
 <th>EDIT</th>
 <th>DELETE</th>
 </tr>
-<% @merchant.products.each do |product| %>
+<% @merchant.products.order(:name).each do |product| %>
 <tr>
 <td><%= link_to product.name, product_path(product)%></td>
 <td><%= product.description %></td>
