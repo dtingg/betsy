@@ -10,5 +10,5 @@ class Order < ApplicationRecord
   validates :zipcode, presence: { message: "Zip code can't be blank"}, :on => :update
   validates :cc_num, length: { in: 13..16, message: "Credit card number must be 13-16 numbers in length" }, :on => :update
   validates :cc_exp, presence: { message: "Credit card expiration can't be blank"}, :on => :update
-  validates :cc_cvv, length: { in: 3..4, message: "Credit card cvv must be 3-4 numbers in length" }, :on => :update  
+  validates :cc_cvv, length: { in: 3..4, message: "Credit card CVV must be 3-4 numbers in length" }, :on => :update  
 end

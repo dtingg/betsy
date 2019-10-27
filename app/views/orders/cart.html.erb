@@ -15,8 +15,7 @@
     <% end %>
     <%= button_to "Remove from cart", orderitem_path(item), method: :delete %><br><br>
   <% end %>
-  <%# <%= button_to "Checkout", edit_order_path(@order), method: :get %>
-  <%= button_to "Checkout", checkout_path(@order), method: :get %><br><br>  
+  <%= button_to "Checkout", checkout_path, method: :get %><br><br>  
 <% else %>
   Your shopping cart is empty.
 <% end %>
