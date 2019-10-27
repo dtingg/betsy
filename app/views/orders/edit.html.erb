@@ -1,0 +1,36 @@
+<% if @order.errors.any? %>
+<h2>Errors</h2>
+<ul>
+  <% @order.errors.each do |column, message| %>
+    <li><%= column.capitalize %> <%= message %></li>
+  <% end %>
+</ul>
+<% end %>
+<h1>Checkout</h1>
+<%= form_with model: @order, url: order_path do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <%= f.label :email %>
+  <%= f.text_field :email %><br>
+  <br>
+  Shipping information<br>
+  <%= f.label :address %>
+  <%= f.text_field :address %><br>
+  <%= f.label :city %>
+  <%= f.text_field :city %><br>
+  <%= f.label :state %>
+  <%= f.text_field :state %><br>
+  <%= f.label :zipcode %>
+  <%= f.text_field :zipcode %><br>
+  <br>
+  Billing information<br>
+  <%= f.label :cc_num %>
+  <%= f.text_field :cc_num %><br>
+  <%= f.label :cc_exp %>
+  <%= f.text_field :cc_exp %><br>
+  <%= f.label :cc_cvv %>
+  <%= f.text_field :cc_cvv %><br>
+  <%= f.hidden_field :status, value: "paid" %>
+  <%= f.hidden_field :order_date, value: Time.new %>
+  <%= f.submit "Complete order" %>
+<% end %>

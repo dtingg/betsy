@@ -1,12 +1,20 @@
-<h1>Shopping cart</h1>
+<h1>Order details</h1>
+<% date = @order.order_date.in_time_zone("Pacific Time (US & Canada)") %>
+Placed: <%= date.strftime( "%B %e, %Y %l:%M %p") %><br>
+Status: <%= @order.status.capitalize %><br>
+Name: <%= @order.name %><br>
+Email: <%= @order.email %><br>
+Address: <%= @order.address %><br>
+City: <%= @order.city %><br>
+State: <%= @order.state %><br>
+Zipcode: <%= @order.zipcode %><br>
+Credit card number: <%= @order.cc_num %><br>
+Credit card expriation: <%= @order.cc_exp %><br>
+Credit card cvv: <%= @order.cc_cvv %><br>
 
-<% if @cart.orderitems.any? %>
-  <% @cart.orderitems.each do |item| %>
-    <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %>
-    <%= item.quantity %>
-    <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %>
-    <%= link_to "Delete item", orderitem_path(item), method: :delete %><br><br>
-  <% end %>
-<% else %>
-  Your shopping cart is empty.
+<% @order.orderitems.each do |item| %>
+  <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %><br>
+  <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %><br>
+  Quantity: <%= item.quantity %><br>
+  Unit price: $<%= item.product.price %><br><br>
 <% end %>
