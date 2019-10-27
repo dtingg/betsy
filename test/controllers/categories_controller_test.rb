@@ -14,6 +14,16 @@ describe CategoriesController do
     end
   end
 
+  describe "new" do
+    it "should get the new category path" do
+
+      get new_category_path
+      must_respond_with :success
+
+    end
+
+  end
+
   describe "show" do
     it "should respond with success when asked to show a particular category" do
       bubbly_category = categories(:bubbly)
@@ -41,6 +51,19 @@ describe CategoriesController do
 
       new_category = Category.find_by(name: new_category_params[:category][:name])
       expect(new_category.name).must_equal new_category_params[:category][:name]
+    end
+
+    it "should not create a new category without valid input data" do
+      new_category_params = {
+        category: {name: nil}
+      }
+
+      expect {
+        post categories_path, params: new_category_params 
+      }.wont_change "Category.count"
+
+      # new_category = Category.find_by(name: new_category_params[:category][:name])
+      # expect(new_category.name).must_equal new_category_params[:category][:name]
     end
   end
 end
