@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  before_action :find_cart
+  before_action :find_order
   before_action :current_user
   
   private
