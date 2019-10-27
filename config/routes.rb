@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root "homepages#index"
   
   resources :orders
+  get "/orders/:id/cart", to: "orders#cart", as: "cart"
+  get "/orders/:id/checkout", to: "orders#edit", as: "checkout"
   resources :merchants
   resources :orderitems
   resources :categories, only: [:show, :index, :new, :create]
