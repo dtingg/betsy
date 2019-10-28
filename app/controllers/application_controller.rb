@@ -29,10 +29,10 @@ class ApplicationController < ActionController::Base
 
   def add_to_recently_viewed(product)
     @recent = session[:recently_viewed]
-    @recent.insert(0, product)
+    @recent.insert(0, product.id)
     
-    if @recent.count > 11
-      @recent.last.delete
+    if @recent.count > 5
+      @recent.delete_at(-1)
     end
 
     session[:recently_viewed] = @recent
