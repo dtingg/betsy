@@ -17,6 +17,11 @@ class Orderitem < ApplicationRecord
     self.destroy
   end
   
+  def total
+    total = self.quantity * self.product.price
+    return total
+  end
+  
   def self.exists?(order_id, product_id)
     result = Orderitem.where(order_id: order_id, product_id: product_id)  
     
