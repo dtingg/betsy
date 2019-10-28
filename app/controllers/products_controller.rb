@@ -15,8 +15,7 @@ class ProductsController < ApplicationController
     if session[:user_id] != nil 
       @product = Product.new
     else
-      flash[:failure] = "A problem occurred: You must log in to add a product"
-      redirect_to root_path
+      not_authorized
     end  
   end
   
@@ -37,10 +36,10 @@ class ProductsController < ApplicationController
       if @product.merchant_id != Merchant.find_by(id: session[:user_id]).id
         flash[:failure] = "A problem occurred: You cannot edit other merchants products."
         redirect_to product_path(id: @product.id) 
+        return
       end
     else
-      flash[:failure] = "A problem occurred: You must log in to edit the product"
-      redirect_to root_path
+      not_authorized
     end
   end
   
@@ -56,10 +55,13 @@ class ProductsController < ApplicationController
   end
   
   def destroy
-    @product.destroy
-    
-    redirect_to products_path
-    return
+    if session[:user_id]
+      @product.destroy
+      redirect_to products_path
+      return
+    else
+      not_authorized
+    end
   end
   
   private
@@ -78,5 +80,10 @@ class ProductsController < ApplicationController
       redirect_to products_path 
       return
     end
+  end
+
+  def not_authorized
+    flash[:failure] = "A problem occurred: You must log in to perform this action"
+    redirect_back(fallback_location: products_path)
   end
 end

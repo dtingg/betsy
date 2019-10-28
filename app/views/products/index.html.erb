@@ -12,7 +12,8 @@
     <ul>
     <% if session[:recently_viewed] %>
       <% session[:recently_viewed].each do |product| %>
-        <li>Product: <%= product["name"] %></li>
+        <% p = Product.find(product) %>
+        <li>Product: <%= p["name"] %></li>
       <% end %>
     <% end %>
     </ul>
