@@ -18,6 +18,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/hbmnvixez/image/upload/v1572106015/duck.png">
   </head>
+  
   <nav>
     <h1>SUDSY</h1>
     <ul>
@@ -43,6 +44,7 @@
     <% end %>
     <h2>
   </nav>
+
   <body>
     <section class="flash">
       <% flash.each do |name, message| %>
@@ -50,9 +52,10 @@
       <% end %>
     </section>
     <%= yield %>
-    <footer>
-      This website is for a school project.  No products are actually for sale.<br>
-      Copyright &copy; 2019 Daniela, Dianna, Katie, Natalie, and Raisah. All rights reserved.
-    </footer>
   </body>
+
+  <footer>
+    This website is for a school project.  No products are actually for sale.<br>
+    Copyright &copy; 2019 Daniela, Dianna, Katie, Natalie, and Raisah. All rights reserved.
+  </footer>
 </html>

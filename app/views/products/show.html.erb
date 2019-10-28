@@ -7,9 +7,9 @@
     <h2><%= @product.name.titleize %> </h2>
 
     <ul>
+      <li><%= @product.merchant.username %></li>
       <li><%= @product.description %></li>
       <li>$<%= @product.price %></li>
-      <li><%= @product.merchant.username %></li>
     </ul>
 
     <% if @product.stock_qty > 0 && @product.active %>
@@ -29,7 +29,9 @@
     <%= @product.stock_qty %> left in stock!
     <%else%>
     Item not in stock
-    <%end%>
+    <%end%> <br />
+
+    <%= link_to "Edit Product", edit_product_path %>
   </section>
 
   <section class="product-reviews">
