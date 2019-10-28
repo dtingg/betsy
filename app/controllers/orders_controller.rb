@@ -1,11 +1,10 @@
 class OrdersController < ApplicationController
-  # before_action :find_order, only: [:show]
-  
-  def index
-  end
+  before_action :find_order, only: [:show]
   
   def show
     @order = Order.find_by(id: params[:id])
+    
+    binding.pry
     
     if @order.nil?
       redirect_back(fallback_location: root_path)
@@ -43,11 +42,6 @@ class OrdersController < ApplicationController
   end
   
   def cart
-    
-    
-    
-    
-    
   end
   
   private
