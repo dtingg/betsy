@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Form</title>
-  </head>
-
-<body>
-  <main>
     <section>
       <% if @review.errors.any? %>
         <section class="alert alert-danger">
@@ -46,9 +37,4 @@
 
         <%= f.submit "#{action_name} Review", formaction: product_reviews_path(product_id: params[:product_id]), method: "post",  class: "work-button" %>
       <% end %>
-     </section>
-
-    </main>
-  </body>
-</html>
-
+    

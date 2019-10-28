@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
   end
 
   def edit 
-    if session[:user_id] != nil 
+    if session[:user_id]
       if @product.merchant_id != Merchant.find_by(id: session[:user_id]).id
         flash[:failure] = "A problem occurred: You cannot edit other merchants products."
         redirect_to product_path(id: @product.id) 
