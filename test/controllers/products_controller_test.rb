@@ -45,10 +45,47 @@ describe ProductsController do
         must_redirect_to products_path
       end
     end
+
+    describe "new" do
+      it "does not show the form to create new product" do
+        get new_product_path
+
+        expect(flash[:failure]).must_equal "A problem occurred: You must log in to add a product"
+        
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
+    end
+
+    describe "create" do
+      it "does not show the form to edit new product" do
+        valid_product_id = @product.id
+
+        get edit_product_path(valid_product_id)
+
+        expect(flash[:failure]).must_equal "A problem occurred: You must log in to edit a product"
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
+    end
+
+    describe "destroy" do
+      it "does not let guest user destroy product" do
+        valid_product_id = @product.id
+
+        expect {
+          delete product_path(@product.id)
+        }.wont_change "Product.count"
+
+        expect(flash[:failure]).must_equal "A problem occurred: You must log in to edit a product"
+
+        must_respond_with :redirect
+      end
+    end
   end
 
 
-  describe "authenticated" do 
+  describe "authenticated user" do 
     before do
       new_merchant = Merchant.new(username:"Kathy", email: "whatev@git.com", uid: 473837 )
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(new_merchant))
