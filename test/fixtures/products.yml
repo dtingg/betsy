@@ -4,7 +4,7 @@ potter:
   active: true
   stock_qty: 12
   price: 3.00
-  merchant: merchant_two
+  merchant: merchant_one
   photo_url: ""
 rose:
   name: "rose soap"

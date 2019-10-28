@@ -27,13 +27,9 @@ describe CategoriesController do
         must_respond_with :redirect
       end
     end
-  end
 
-  describe "authenticated" do
-    
     describe "new" do
       it "should get the new category path" do
-  
         get new_category_path
         must_respond_with :success
       end
@@ -52,30 +48,30 @@ describe CategoriesController do
         expect(new_category.name).must_equal new_category_params[:category][:name]
       end
 
-    it "should not create a new category when name is set to nil" do
-      new_category_params = {category: {name: nil}}
+      it "should not create a new category when name is set to nil" do
+        new_category_params = {category: {name: nil}}
 
-      expect {
-        post categories_path, params: new_category_params 
-      }.wont_change "Category.count"
-    end
+        expect {
+          post categories_path, params: new_category_params 
+        }.wont_change "Category.count"
+      end
 
-    it "should not create a new category when name is an empty string" do
-      # empty string
-      new_category_params = {category: {name: ""}}
+      it "should not create a new category when name is an empty string" do
+        # empty string
+        new_category_params = {category: {name: ""}}
 
-      expect {
-        post categories_path, params: new_category_params 
-      }.wont_change "Category.count"
+        expect {
+          post categories_path, params: new_category_params 
+        }.wont_change "Category.count"
 
-      # whitespace
-      new_category_params = {category: {name: "   "}}
+        # whitespace
+        new_category_params = {category: {name: "   "}}
 
-      expect {
-        post categories_path, params: new_category_params 
-      }.wont_change "Category.count"
+        expect {
+          post categories_path, params: new_category_params 
+        }.wont_change "Category.count"
+      end
     end
   end
-end
 
 end

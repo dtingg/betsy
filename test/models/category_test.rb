@@ -5,7 +5,6 @@ describe Category do
   describe "relations" do
 
     let(:bubbly) { categories(:bubbly) }
-  
     it "should have a list of products" do
     expect(bubbly.products.count).must_equal categories(:bubbly).products.count
     end

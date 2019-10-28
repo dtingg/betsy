@@ -1,3 +1,17 @@
 <h2>show.html.erb</h2>
 <p> Category Name: <%= @category.name %></p>
+<% @category.products.each do |product| %>
+  <% product.name.titleize %> </h2>
+    <ul>
+      <li><%= product.merchant.username %></li>
+      <li><%= product.description %></li>
+      <li>$<%= product.price %></li>
+      <ul>
+        <label>ALL CATEGORIES</label>
+        <% product.categories.each do |category| %>
+          <li><%= category.name %></li>
+        <% end %>
+      </ul>
+    </ul>
+<% end %>
 <%= link_to "All Categories", categories_path %>

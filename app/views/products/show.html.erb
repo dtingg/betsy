@@ -10,6 +10,12 @@
       <li><%= @product.merchant.username %></li>
       <li><%= @product.description %></li>
       <li>$<%= @product.price %></li>
+      <ul>
+        <label>categories</label>
+        <% @product.categories.each do |category| %>
+          <li><%= category.name %></li>
+        <% end %>
+      </ul>
     </ul>
 
     <% if @product.stock_qty > 0 && @product.active %>
