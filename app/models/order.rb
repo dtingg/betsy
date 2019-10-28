@@ -11,13 +11,4 @@ class Order < ApplicationRecord
   validates :cc_num, presence: true, :on => :update
   validates :cc_exp, presence: true, :on => :update
   validates :cc_cvv, presence: true, :on => :update  
-  
-  def order_item_total
-  end
-  
-  def order_item_total
-  end
-  
-  def order_item_qty
-  end
 end
