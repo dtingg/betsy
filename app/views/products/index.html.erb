@@ -19,7 +19,8 @@
   </section>
 
   <section class="products-list">
-    <% Product.order_active_products.each do |product| %>
+    <%# <% Product.order_active_products.each do |product| %>
+    <% @products.where(active: true).where("stock_qty > ?", 0).each do |product| %>
     <ul>
       <%= image_tag(product.photo_url, alt:"#{product.name}") %>
 

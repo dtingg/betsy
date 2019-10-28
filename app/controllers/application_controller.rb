@@ -31,8 +31,8 @@ class ApplicationController < ActionController::Base
     @recent = session[:recently_viewed]
     @recent.insert(0, product)
     
-    if @recent.count > 11
-      @recent.last.delete
+    if @recent.length > 5
+      @recent.delete_at(-1)
     end
     
     session[:recently_viewed] = @recent
