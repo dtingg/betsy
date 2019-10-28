@@ -68,10 +68,24 @@ describe Category do
       expect(category.valid?).must_equal false
       expect(category.errors.messages).must_include :name
       expect(category.errors.messages[:name]).must_equal ["can't be blank"]
-      # bubbly.name = ""
-      # expect(bubbly.name).must_equal ""
-      # expect(bubbly.errors).wont_be_nil
-      
+    end
+
+    it "should not allow an empty string for name" do
+      category = categories(:bubbly)
+      category.name = ""
+
+      expect(category.valid?).must_equal false
+      expect(category.errors.messages).must_include :name
+      expect(category.errors.messages[:name]).must_equal ["can't be blank"]
+    end
+
+    it "should not allow a string with only whitespace for name" do
+      category = categories(:bubbly)
+      category.name = "     "
+
+      expect(category.valid?).must_equal false
+      expect(category.errors.messages).must_include :name
+      expect(category.errors.messages[:name]).must_equal ["can't be blank"]
     end
   end
 end
