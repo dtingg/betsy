@@ -22,6 +22,10 @@ class OrdersController < ApplicationController
       redirect_back(fallback_location: root_path)
       return
     end
+    
+    if @order.status != "pending"
+      redirect_to order_path(@order)
+    end
   end
   
   def update
