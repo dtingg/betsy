@@ -1,19 +1,20 @@
 class ApplicationController < ActionController::Base
-  before_action :find_order
+  before_action :find_cart
   
   private
   
-  def find_order
-    if session[:order_id]
-      @order = Order.find_by(id: session[:order_id])
+  def find_cart
+    if session[:cart_id]
+      @cart = Order.find_by(id: session[:cart_id])
     end
     
-    if @order.nil?
-      @order = Order.create(status: "pending")
-      session[:order_id] = @order.id
+
+    if @cart.nil?
+      @cart = Order.create(status: "pending")
+      session[:cart_id] = @cart.id
       session[:recently_viewed] = Array.new
     end
-
+    
     current_user
   end
   
@@ -26,15 +27,16 @@ class ApplicationController < ActionController::Base
       session[:user_id] = nil
     end
   end
-
+  
   def add_to_recently_viewed(product)
     @recent = session[:recently_viewed]
     @recent.insert(0, product.id)
     
-    if @recent.count > 5
+
+    if @recent.length > 5
       @recent.delete_at(-1)
     end
-
+    
     session[:recently_viewed] = @recent
   end
 end

@@ -89,7 +89,7 @@ describe OrderitemsController do
     
     it "can update an existing orderitem with a larger quantity successfully, and redirects" do
       orderitem.save
-      changes_hash = { orderitem: { order_id: order.id, product_id: product.id, quantity: 5 } }
+      changes_hash = { orderitem: { order_id: order.id, product_id: product.id, quantity: 5}, old_quantity: 3 }
       
       expect { patch orderitem_path(orderitem.id), params: changes_hash }.wont_change "Orderitem.count"
       
@@ -104,7 +104,7 @@ describe OrderitemsController do
     
     it "can update an existing orderitem with a lower quantity successfully, and redirects" do
       orderitem.save
-      changes_hash = { orderitem: { order_id: order.id, product_id: product.id, quantity: 1 } }
+      changes_hash = { orderitem: { order_id: order.id, product_id: product.id, quantity: 1}, old_quantity: 3 }
       
       expect { patch orderitem_path(orderitem.id), params: changes_hash }.wont_change "Orderitem.count"
       
