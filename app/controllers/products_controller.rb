@@ -9,12 +9,17 @@ class ProductsController < ApplicationController
   def show ; end
 
   def new
-    @product = Product.new
+   #come back to determine if this is the best logic for Product new
+    if session[:user_id] != nil 
+      @product = Product.new
+    else
+      flash[:failure] = "A problem occurred: You must log in to add a product"
+      redirect_to root_path
+    end  
   end
 
   def create
     @product = Product.new(product_params)
-    
     if @product.save
       redirect_to product_path(@product.id)
       return
@@ -22,10 +27,20 @@ class ProductsController < ApplicationController
       flash.now[:failure] = "Product failed to save"
       render :new, status: :bad_request
       return
-    end
+    end  
   end
 
-  def edit ; end
+  def edit 
+    if session[:user_id]
+      if @product.merchant_id != Merchant.find_by(id: session[:user_id]).id
+        flash[:failure] = "A problem occurred: You cannot edit other merchants products."
+        redirect_to product_path(id: @product.id) 
+      end
+    else
+      flash[:failure] = "A problem occurred: You must log in to edit the product"
+      redirect_to root_path
+    end
+  end
 
   def update
     if @product.update(product_params)
