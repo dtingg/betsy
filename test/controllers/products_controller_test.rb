@@ -50,22 +50,20 @@ describe ProductsController do
       it "does not show the form to create new product" do
         get new_product_path
 
-        expect(flash[:failure]).must_equal "A problem occurred: You must log in to add a product"
-        
+        expect(flash[:failure]).must_equal "A problem occurred: You must log in to perform this action"
+
         must_respond_with :redirect
-        must_redirect_to root_path
       end
     end
 
-    describe "create" do
+    describe "edit" do
       it "does not show the form to edit new product" do
         valid_product_id = @product.id
 
         get edit_product_path(valid_product_id)
 
-        expect(flash[:failure]).must_equal "A problem occurred: You must log in to edit a product"
+        expect(flash[:failure]).must_equal "A problem occurred: You must log in to perform this action"
         must_respond_with :redirect
-        must_redirect_to root_path
       end
     end
 
@@ -77,13 +75,12 @@ describe ProductsController do
           delete product_path(@product.id)
         }.wont_change "Product.count"
 
-        expect(flash[:failure]).must_equal "A problem occurred: You must log in to edit a product"
+        expect(flash[:failure]).must_equal "A problem occurred: You must log in to perform this action"
 
         must_respond_with :redirect
       end
     end
   end
-
 
   describe "authenticated user" do 
     before do
@@ -216,4 +213,5 @@ describe ProductsController do
       end
     end
   end
+
 end

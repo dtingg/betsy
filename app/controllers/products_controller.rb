@@ -15,8 +15,7 @@ class ProductsController < ApplicationController
     if session[:user_id] != nil 
       @product = Product.new
     else
-      flash[:failure] = "A problem occurred: You must log in to add a product"
-      redirect_to root_path
+      not_authorized
     end  
   end
 
@@ -40,9 +39,7 @@ class ProductsController < ApplicationController
         return
       end
     else
-      flash[:failure] = "A problem occurred: You must log in to edit a product"
-      redirect_to root_path
-      return
+      not_authorized
     end
   end
 
@@ -63,9 +60,7 @@ class ProductsController < ApplicationController
       redirect_to products_path
       return
     else
-      flash[:failure] = "A problem occurred: You must log in to edit a product"
-      redirect_back(fallback_location: products_path)
-      return
+      not_authorized
     end
   end
 
@@ -85,5 +80,10 @@ class ProductsController < ApplicationController
       redirect_to products_path 
       return
     end
+  end
+
+  def not_authorized
+    flash[:failure] = "A problem occurred: You must log in to perform this action"
+    redirect_back(fallback_location: products_path)
   end
 end
