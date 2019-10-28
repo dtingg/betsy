@@ -27,6 +27,40 @@ class Merchant < ApplicationRecord
     end
     return active_prod.count.to_s + " Active Products"
   end
+
+  def all_orderitems
+    merchant_p = self.products
+
+    all_orderitems = []
+    gross_sales = 0
+
+    merchant_p.each do |product|
+      Orderitem.where(product: product).each do |orderitem|
+        all_orderitems << orderitem
+      end
+    end
+
+    return all_orderitems
+  end
+
+  def calculate_gross_sales
+    merchant_p = self.products
+
+    all_sales = []
+    gross_sales = 0
+
+    merchant_p.each do |product|
+      Orderitem.where(product: product).each do |orderitem|
+        all_sales << orderitem
+      end
+    end
+
+    all_sales.each do |orderitem|
+      gross_sales += orderitem.total
+    end
+
+    return gross_sales
+  end
   
   def self.build_from_github(auth_hash)
     merchant = Merchant.new
