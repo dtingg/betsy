@@ -1,3 +1,81 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.products-page-container {
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-template-rows: 300px auto;
+
+  .categories {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .recently-viewed {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .products-list {
+    grid-column: 2;
+    grid-row: 1 / span 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  
+    ul{
+      list-style-type: none;
+    }
+
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 5%;
+      display: block;
+      margin: 2% auto;
+    }
+  }
+}
+
+.product-name {
+  font-size: 1.2em;
+}
+
+.product-price {
+  font-weight: bold;
+}
+
+.product-page-container {
+  display: grid;
+  grid-template-columns: 500px auto;
+  grid-template-rows: 400px auto;
+
+  .product-image {
+    grid-column: 1;
+    grid-row: 1;
+
+    img {
+      width: 350px;
+      height: 350px;
+      margin: 10px auto;
+      display: block;
+    }
+  }
+
+  .product-details {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .product-reviews {
+    grid-column: 1 / span 1;
+    grid-row: 2;
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 5% 0;
+    }
+  }
+}

@@ -8,7 +8,8 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0 }
   
-  def self.active_products_alpha
+  # orders active products by name
+  def self.order_active_products
     active_products_alpha = []
     Product.all.each do |product| 
       if product.active == true 

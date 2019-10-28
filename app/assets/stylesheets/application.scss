@@ -31,13 +31,6 @@ nav ul li {
   list-style-type: none;
 }
 
-img {
-  width: 150px;
-  border-radius: 5%;
-  display: block;
-  margin: 2% auto;
-}
-
 footer {
   text-align: center;
   padding-top: 5rem;
@@ -48,25 +41,4 @@ footer {
 
 div.field_with_errors {
   display: inline;
-}
-
-.products-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-
-  ul li {
-    list-style-type: none;
-
-    a {
-      color: blue;
-    }
-  }
-}
-
-.product-name {
-  font-size: 1.2em;
-}
-
-.product-price {
-  font-weight: bold;
 }

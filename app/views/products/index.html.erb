@@ -2,32 +2,36 @@
   <h2>All Products</h2>
 </section>
 
-<section class="categories">
-</section>
+<section class="products-page-container">
+  <section class="categories">
+    <h5>Categories</h5>
+  </section>
 
-<section class="recently-viewed">
-</section>
+  <section class="recently-viewed">
+    <h5>Recently Viewed</h5>
+  </section>
 
-<section class="products-list">
-  <% Product.active_products_alpha.each do |product| %>
-  <ul>
-    <%= image_tag(product.photo_url, alt:"#{product.name}") %>
+  <section class="products-list">
+    <% Product.order_active_products.each do |product| %>
+    <ul>
+      <%= image_tag(product.photo_url, alt:"#{product.name}") %>
 
-    <section class="product-name">
-      <li><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
-    </section>
+      <section class="product-name">
+        <li><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
+      </section>
 
-    <section class="product-merchant">
-      <li><%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
-    </section>
+      <section class="product-merchant">
+        <li><%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
+      </section>
 
-    <section class="product-price">
-      <li>$<%= product.price %></li>
-    </section>
+      <section class="product-price">
+        <li>$<%= product.price %></li>
+      </section>
 
-    <section class="product-stock">
-      <li><%= product.stock_qty %> left in stock!</li>
-    </section>
-  </ul>
-  <% end%>
+      <section class="product-stock">
+        <li><%= product.stock_qty %> left in stock!</li>
+      </section>
+    </ul>
+    <% end%>
+  </section>
 </section>

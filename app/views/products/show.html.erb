@@ -1,22 +1,50 @@
-<h2><%= @product.name.titleize %> </h2>
-<ul>
-  <%= image_tag(@product.photo_url, alt:"#{@product.name}") %>
-  <li>Product Name: <%= @product.name.titleize %></li>
-  <li>Description: <%= @product.description %></li>
-  <li>Status: <%= @product.active %></li>
-  <li>Price: $<%= @product.price %></li>
-  <li>Merchant: <%= @product.merchant.username %></li>
-</ul>
+<section class="product-page-container">
+  <section class="product-image">
+    <%= image_tag(@product.photo_url, alt:"#{@product.name}") %>
+  </section>
 
-<% if @product.stock_qty > 0 %>
-  <%= form_for Orderitem.create do |f| %>
-    <%= f.hidden_field :order_id, value: @order.id %>
-    <%= f.hidden_field :product_id, value: @product.id %>
-    <%= f.label :quantity %>
-    <%= f.select :quantity, (1..@product.stock_qty)%>
-    <%= f.submit "Add to cart" %>
-  <% end %>
-<% else %>
-  Quantity<br>
-  Sold out
-<% end %>
+  <section class="product-details">
+    <h2><%= @product.name.titleize %> </h2>
+
+    <ul>
+      <li><%= @product.description %></li>
+      <li>$<%= @product.price %></li>
+      <li><%= @product.merchant.username %></li>
+    </ul>
+
+    <% if @product.stock_qty > 0 && @product.active %>
+      <%= form_for Orderitem.create do |f| %>
+        <%= f.hidden_field :order_id, value: @order.id %>
+        <%= f.hidden_field :product_id, value: @product.id %>
+        <%= f.label :quantity %>
+        <%= f.select :quantity, (1..@product.stock_qty)%>
+        <%= f.submit "Add to cart" %>
+      <% end %>
+    <% else %>
+      Quantity<br>
+      Sold out
+    <% end %>
+
+    <%if @product.active%>
+    <%= @product.stock_qty %> left in stock!
+    <%else%>
+    Item not in stock
+    <%end%>
+  </section>
+
+  <section class="product-reviews">
+    <h4>Reviews: </h4>
+    
+    <section class="review">
+      <% @product.reviews.each do |review| %>
+      <ul>
+        <li><%= review.reviewer %></li>
+        <li><%= review.date.strftime("%B %d, %Y") %></li>
+        <li>Rating: <%= review.rating %> </li>
+        <li><%= review.comment %></li>
+      </ul>
+      <% end %>
+    </section>
+   
+  </section>
+</section>
