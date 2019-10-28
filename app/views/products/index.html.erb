@@ -10,8 +10,10 @@
   <section class="recently-viewed">
     <h5>Recently Viewed</h5>
     <ul>
-    <% session[:recently_viewed].each do |product| %>
-      <li>Product: <%= product["name"] %></li>
+    <% if session[:recently_viewed] %>
+      <% session[:recently_viewed].each do |product| %>
+        <li>Product: <%= product["name"] %></li>
+      <% end %>
     <% end %>
     </ul>
   </section>
