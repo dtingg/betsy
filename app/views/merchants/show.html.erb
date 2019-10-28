@@ -104,7 +104,7 @@
 <% if product.active == false %>
   <tr>
     <td><%= link_to product.name, product_path(product.id) %></td>
-    <td><%= link_to product.description, product_path(product.id) %></td>
+    <td><%= product.description %></td>
     <td>❌</td> 
     <td><%= product.stock_qty %></td>
     <td>$<%= product.price%></td>

@@ -1,13 +1,13 @@
-<% if @order.errors.any? %>
+<% if @cart.errors.any? %>
 <h2>Errors</h2>
 <ul>
-  <% @order.errors.each do |column, message| %>
+  <% @cart.errors.each do |column, message| %>
     <li><%= message %></li>
   <% end %>
 </ul>
 <% end %>
 <h1>Checkout</h1>
-<%= form_with model: @order, url: order_path(@order) do |f| %>
+<%= form_with model: @cart, url: order_path(@cart) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %><br>
   <%= f.label :email, "E-mail" %>
