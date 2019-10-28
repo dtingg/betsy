@@ -3,7 +3,7 @@ class MerchantsController < ApplicationController
   before_action :if_merchant_missing, only: [:show]
   
   def index 
-    @merchants = Merchant.all
+    @merchants = Merchant.all.order(:username)
   end
   
   def show; end
@@ -112,4 +112,4 @@ class MerchantsController < ApplicationController
       return
     end
   end
- end
+end

@@ -26,8 +26,8 @@ Username: <%= @merchant.username %>
 <td><%= product.active %></td>
 <td><%= product.stock_qty %></td>
 <td>$<%= product.price%></td>
-<td><%= link_to "Edit Product", edit_product_path(product.id) %></td>
-<td><%= link_to "Delete Product", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
+<td><%= link_to "Edit", edit_product_path(product.id) %></td>
+<td><%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
 </tr>
 <% end %>
 </table>

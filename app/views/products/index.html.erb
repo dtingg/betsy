@@ -1,5 +1,5 @@
 <h2>All Products</h2>
-<% @products.order(:name).each do |product| %>
+<% @products.each do |product| %>
   <ul>
     <%= link_to image_tag(product.photo_url, alt:"#{product.name}"), product_path(product) %>
 
