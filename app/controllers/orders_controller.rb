@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
-  before_action :find_order, only: [:show, :edit]
+  # before_action :find_order, only: [:show]
+  
+  def index
+  end
   
   def show
+    @order = Order.find_by(id: params[:id])
+    
     if @order.nil?
       redirect_back(fallback_location: root_path)
       return
@@ -14,21 +19,21 @@ class OrdersController < ApplicationController
   end
   
   def edit
-    if @order.nil?
+    if @cart.nil?
       redirect_back(fallback_location: root_path)
       return
     end
   end
   
   def update
-    if @order.nil?
+    if @cart.nil?
       redirect_back(fallback_location: root_path)
       return
     end
     
-    if @order.update(order_params)
+    if @cart.update(order_params)
       flash[:success] = "Thank you for your order!"  
-      redirect_to order_path(@order)
+      redirect_to order_path(@cart)
       session[:order_id] = nil
       return
     else
@@ -37,8 +42,13 @@ class OrdersController < ApplicationController
     end
   end
   
-  # def cart
-  # end
+  def cart
+    
+    
+    
+    
+    
+  end
   
   private
   

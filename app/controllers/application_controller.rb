@@ -1,16 +1,16 @@
 class ApplicationController < ActionController::Base
-  before_action :find_order
+  before_action :find_cart
   
   private
   
-  def find_order
-    if session[:order_id]
-      @order = Order.find_by(id: session[:order_id])
+  def find_cart
+    if session[:cart_id]
+      @cart = Order.find_by(id: session[:cart_id])
     end
     
-    if @order.nil?
-      @order = Order.create(status: "pending")
-      session[:order_id] = @order.id
+    if @cart.nil?
+      @cart = Order.create(status: "pending")
+      session[:cart_id] = @cart.id
     end
   end
   
