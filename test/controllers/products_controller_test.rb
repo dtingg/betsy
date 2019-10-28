@@ -1,12 +1,6 @@
 require "test_helper"
 
 describe ProductsController do
-  
-  before do
-    @merchant = Merchant.create(uid: 9999, username: "random", email: "email" )
-    @product = Product.create(name: "Test ", price: 10.00, merchant: @merchant, photo_url: "")
-  end
-  
   let(:invalid_product_id) { -1 }
   
   describe "guest user (not authenticated)" do
@@ -18,7 +12,7 @@ describe ProductsController do
       end
       
       it "responds with success when there are no products" do
-        @product.destroy
+        Product.destroy_all
         
         get products_path
         
@@ -28,8 +22,7 @@ describe ProductsController do
     
     describe "show" do
       it "redirects to the details page of a valid product" do
-        
-        valid_product_id = @product.id
+        valid_product_id = products(:cucumber)
         
         get product_path(valid_product_id)
         
@@ -58,7 +51,7 @@ describe ProductsController do
 
     describe "edit" do
       it "does not show the form to edit new product" do
-        valid_product_id = @product.id
+        valid_product_id = products(:onion).id
 
         get edit_product_path(valid_product_id)
 
@@ -69,10 +62,10 @@ describe ProductsController do
 
     describe "destroy" do
       it "does not let guest user destroy product" do
-        valid_product_id = @product.id
+        valid_product_id = products(:onion).id
 
         expect {
-          delete product_path(@product.id)
+          delete product_path(valid_product_id)
         }.wont_change "Product.count"
 
         expect(flash[:failure]).must_equal "A problem occurred: You must log in to perform this action"
@@ -86,12 +79,14 @@ describe ProductsController do
     before do
       new_merchant = Merchant.new(username:"Kathy", email: "whatev@git.com", uid: 473837 )
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(new_merchant))
+
       get auth_github_callback_path
     end
 
     describe "new" do
       it 'shows the form to add a new product' do
         get new_product_path
+
         must_respond_with :success
       end
     end
@@ -102,7 +97,7 @@ describe ProductsController do
           product: {
             name: "Test2", 
             price: 10.00, 
-            merchant_id: @merchant.id
+            merchant_id: merchants(:merchant_three).id
           }
         }
         
@@ -136,9 +131,11 @@ describe ProductsController do
 
     describe "edit" do
       it "will show edit page for valid product" do
-        get edit_product_path(@product.id)
+        valid_product_id = products(:rose).id
+
+        get edit_product_path(valid_product_id)
         
-        must_redirect_to product_path(id: @product.id) 
+        must_redirect_to product_path(id: valid_product_id) 
       end
       
       it "will redirect if given invalid product" do
@@ -160,20 +157,25 @@ describe ProductsController do
           }
         }
         
+        valid_product = products(:rose)
+        valid_product_start_price = valid_product.price
+
+        expect(products(:rose).price).must_equal valid_product_start_price
+
         expect { 
-          patch product_path(@product.id), params: product_updates
+          patch product_path(valid_product.id), params: product_updates
         }.wont_change "Product.count"
         
-        updated_product = Product.find_by(id: @product.id)
+        updated_product = Product.find_by(id: valid_product.id)
         
         expect(updated_product.price).must_equal product_updates[:product][:price]
         
         must_respond_with :redirect
-        must_redirect_to product_path(@product.id)
+        must_redirect_to product_path(valid_product.id)
       end
       
       it "doesn't update product information with invalid information" do
-        original_product_price = @product.price
+        original_product_price = products(:cucumber).price
         
         invalid_product_updates = {
           product: {
@@ -182,19 +184,21 @@ describe ProductsController do
         }
         
         expect { 
-          patch product_path(@product.id), params: invalid_product_updates
+          patch product_path(products(:cucumber).id), params: invalid_product_updates
         }.wont_change "Product.count"
         
         expect(flash.now[:failure]).must_equal "Product failed to save"
-        expect(@product.price).must_equal original_product_price
+        expect(products(:cucumber).price).must_equal original_product_price
         must_respond_with :bad_request
       end
     end
     
     describe "destroy" do
       it "destroys product when given valid product id" do
+        valid_product_id = products(:rose).id
+
         expect {
-          delete product_path(@product.id)
+          delete product_path(valid_product_id)
         }.must_differ "Product.count", -1
         
         must_respond_with :redirect
@@ -213,5 +217,4 @@ describe ProductsController do
       end
     end
   end
-
 end
