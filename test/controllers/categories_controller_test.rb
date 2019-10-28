@@ -53,6 +53,7 @@ end
   
 
   describe "guest user" do 
+    
     describe "index" do
       it "should respond with success" do
       get categories_path
