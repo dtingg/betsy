@@ -3,7 +3,7 @@ class MerchantsController < ApplicationController
   before_action :if_merchant_missing, only: [:show]
   
   def index 
-    @merchants = Merchant.all
+    @merchants = Merchant.alphabetic
   end
   
   def show; end

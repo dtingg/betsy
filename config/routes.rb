@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   
   root "homepages#index"
   
+  get "/cart", to: "orders#cart", as: "cart"
+  get "/checkout", to: "orders#edit", as: "checkout"
+  
   resources :orders
-  get "/orders/:id/cart", to: "orders#cart", as: "cart"
-  get "/orders/:id/checkout", to: "orders#edit", as: "checkout"
   resources :merchants
   resources :orderitems
   resources :reviews, only: [:new, :create]

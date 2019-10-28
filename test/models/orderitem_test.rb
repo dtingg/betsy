@@ -106,6 +106,15 @@ describe Orderitem do
     end
   end
   
+  describe "total method" do
+    it "correctly returns the total of the orderitem" do
+      
+      total = orderitem.total
+      
+      expect(total).must_equal (orderitem.quantity * orderitem.product.price)
+    end
+  end
+  
   describe "self.exists method" do
     it "will return an orderitem object if it already exists" do
       orderitem.save
