@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
       return
     end
     
-    if @order.status != "pending"
+    if @order.status == "complete"
       redirect_to order_path(@order)
     end
   end

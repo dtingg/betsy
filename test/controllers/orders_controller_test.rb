@@ -44,7 +44,7 @@ describe OrdersController do
         must_respond_with :redirect
       end
       
-      it "responds with redirect when getting the edit page for an order that is not pending" do
+      it "responds with redirect when getting the edit page for a completed order" do
         order.save
         
         get edit_order_path(order.id)
