@@ -10,7 +10,7 @@ rose:
   name: "rose soap"
   description: "handmade"
   active: true
-  stock_qty: 12
+  stock_qty: 10
   price: 3.00
   merchant: merchant_two
   photo_url: ""

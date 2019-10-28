@@ -1,16 +1,13 @@
 require "test_helper"
 
 describe Product do
-  let (:merchant) { Merchant.create(username: "buddy", email: "buddy@aol.com") }
-  let (:product) { Product.create(merchant_id: merchant.id, name: "Honey soap", price: 5.55) }
-  
   describe "initialize" do
     it "can be instantiated" do
-      expect(product.valid?).must_equal true
+      expect(products(:potter).valid?).must_equal true
     end
     
     it "will have the required fields" do
-      product.save
+      product = products(:potter)
       
       [:name, :description, :active, :stock_qty, :price, :merchant_id, :photo_url].each do |field|
         expect(product).must_respond_to field
@@ -20,7 +17,7 @@ describe Product do
   
   describe "relationships" do
     it "can have a merchant" do
-      product.save
+      product = products(:potter)
       
       expect(product.merchant).must_be_instance_of Merchant      
     end
@@ -28,18 +25,16 @@ describe Product do
   
   describe "validations" do
     it "must have a name" do
+      product = products(:potter)
       product.name = nil
-      product.save
       
       expect(product.valid?).must_equal false
       expect(product.errors.messages).must_include :name
       expect(product.errors.messages[:name]).must_equal ["can't be blank"]
     end
     
-    it "must have a unique name" do
-      product.save
-      
-      duplicate_product = Product.create(merchant_id: merchant.id, name: "Honey soap", price: 4) 
+    it "must have a unique name" do      
+      duplicate_product = Product.create(merchant_id: merchants(:merchant_one), name: "harry potter soap", price: 4) 
       
       expect(duplicate_product.valid?).must_equal false
       expect(duplicate_product.errors.messages).must_include :name
@@ -47,8 +42,8 @@ describe Product do
     end
     
     it "must have a price" do
+      product = products(:potter)
       product.price = nil
-      product.save
       
       expect(product.valid?).must_equal false
       expect(product.errors.messages).must_include :price
@@ -56,8 +51,8 @@ describe Product do
     end
     
     it "must have a price greater than 0" do
+      product = products(:potter)
       product.price = 0
-      product.save
       
       expect(product.valid?).must_equal false
       expect(product.errors.messages).must_include :price
@@ -65,8 +60,8 @@ describe Product do
     end
     
     it "must have a merchant_id" do
+      product = products(:potter)
       product.merchant_id = nil
-      product.save
       
       expect(product.valid?).must_equal false
       expect(product.errors.messages).must_include :merchant_id
@@ -76,7 +71,7 @@ describe Product do
   
   describe "remove stock method" do
     it "decreases quantity of an item correctly" do
-      merchant.save
+      product = products(:rose)
       product.remove_stock(3)
       
       updated_product = Product.find_by(id: product.id)
@@ -87,6 +82,7 @@ describe Product do
   
   describe "return stock method" do
     it "increases quantity of an item correctly" do
+      product = products(:rose)
       product.return_stock(2)
       
       updated_product = Product.find_by(id: product.id)
