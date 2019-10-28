@@ -27,9 +27,9 @@ class CategoriesController < ApplicationController
   end
 
   private
+
   def category_params
-   
-    return params.require(:category).permit(:name, product_ids: [])
+    return params.require(:category).permit(:name, :product_id)
   end
 
   def valid_category?
