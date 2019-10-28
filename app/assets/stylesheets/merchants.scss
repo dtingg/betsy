@@ -1,3 +1,70 @@
 // Place all the styles related to the Merchants controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h4, h5 {
+  margin-left: 5%;
+}
+
+img {
+  align-self: center;
+  justify-self: center;
+  max-height: 250px;
+  max-width: 300px;
+}
+p {
+  text-align: center;
+}
+th {
+  text-align: center;
+}
+
+td {
+  width: 25%;
+  text-align: center;
+}
+
+.cell_center {
+  text-align: center;
+}
+
+.cell_left {
+  text-align: left;
+}
+
+.cell_right {
+  text-align: right;
+}
+
+.merchant_details {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.merchant_info {
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  width: 70%;
+  margin-left: 15%;
+}
+.merchant_info_details {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: auto auto auto auto;
+
+}
+
+.page_title {
+  margin-left: 5%;
+}
+
+.sm_product_image {
+  width: 75px;
+  height: 75px;
+  crop: fill;
+}
+
+#merchant_index {
+  width: 90%;
+  margin-left: 5%;
+}
