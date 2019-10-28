@@ -7,6 +7,7 @@ class Product < ApplicationRecord
   validates :merchant_id, presence: true
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0 }
+  validates :stock_qty, numericality: { greater_than_or_equal_to: 0 }, :on => :update
   
   def remove_stock(number)
     self.stock_qty -= number

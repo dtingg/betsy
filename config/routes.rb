@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   
   get "/cart", to: "orders#cart", as: "cart"
   get "/checkout", to: "orders#edit", as: "checkout"
-  get "/confirmation", to: "orders#confirmation", as: "confirmation"
   
   resources :orders
   resources :merchants
