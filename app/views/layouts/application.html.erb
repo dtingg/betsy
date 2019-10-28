@@ -18,6 +18,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/hbmnvixez/image/upload/v1572106015/duck.png">
   </head>
+
   <nav>
     <h1>SUDSY</h1>
     <ul>
@@ -27,26 +28,24 @@
       <li><%= link_to "Create product", new_product_path, class: "btn btn-primary" %></li>
       <li><%= link_to "Categories", categories_path, class: "btn btn-primary" %></li>
       <li><%= link_to "All merchants", merchants_path, class: "btn btn-primary" %></li>
-      <% if @current_user %>
+      <li><%= link_to "Shopping cart", cart_path(@order), class: "btn btn-primary" %></li>
 
-      <li><%= link_to "Log out", logout_path, class: "btn btn-primary", method: "delete" %></li>
+      <div class="login_header_container">
+      <% if session[:user_id] %>
+          <% @current_merchant = Merchant.find_by(id: session[:user_id]) %>
+          <% if @current_merchant.username != nil %>
+            <a class="btn btn-primary"> Logged in as <%= @current_merchant.username %></a>
+          <% else %>
+            <a class="btn btn-primary"> Logged in as Merchant ID: <%= @current_merchant.id %></a>
+          <% end %>
+          <li><%= link_to "Log out", logout_path, class: "btn btn-primary", method: "delete" %></li>
       <% else %>
       <li><%= link_to "Login with GitHub", github_login_path, class: "btn btn-primary" %></li>
       <% end %>
-      <li><%= link_to "Shopping cart", cart_path(@order), class: "btn btn-primary" %></li>
+      </div>
     </ul>
-    <h2>
-    <% if session[:user_id] %>
-      <% @current_merchant = Merchant.find_by(id: session[:user_id]) %>
-      <% if @current_merchant.username != nil %>
-        <h5>Logged in as <%= @current_merchant.username %></h5>      
-      <% else %>
-        <h5>Logged in as Merchant ID: <%= @current_merchant.id %></h5> 
-      <% end %>
-    <% end %>
-    <h2>
   </nav>
-  <body>
+  
     <section class="flash">
       <% flash.each do |name, message| %>
         <div class="<%= name %>"><%= message %></div>

@@ -14,7 +14,7 @@
 
 /* Custom bootstrap variables must be set or imported *before* bootstrap. */
 @import "bootstrap";
-/* Import scss content */
+
 @import "**/*";
 
 nav h1 {
@@ -35,7 +35,19 @@ img {
   width: 150px;
 }
 
-footer {
+.success {
+  background-color: lightgreen;
+}
+
+.failure {
+  background-color: darksalmon;
+}
+
+.login_header_container {
+  flex-direction: column;
+}
+
+  footer {
   text-align: center;
   padding-top: 5rem;
   padding-bottom: 5rem;

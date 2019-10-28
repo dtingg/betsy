@@ -8,11 +8,14 @@ Rails.application.routes.draw do
   get "/orders/:id/checkout", to: "orders#edit", as: "checkout"
   resources :merchants
   resources :orderitems
-  resources :categories, only: [:show, :index, :new, :create]
-  resources :products do
-    resources :reviews, except: [:index] 
-  end
+  resources :reviews, only: [:new, :create]
+  resources :products 
   
+  resources :categories, only: [:show, :index, :new, :create]
+  resources :products, only: [:show] do
+    resources :reviews, only: [:new, :create]
+  end
+
   get "/auth/github", as: "github_login"
   get "/auth/github/callback", to: "merchants#create"
   delete "/logout", to: "merchants#destroy", as: "logout"
