@@ -1,13 +1,42 @@
 require "test_helper"
 
 describe Category do
+  describe "initialize" do
+    before do
+      @new_category = Category.new(name: "The Best Category")
+    end
 
-  describe "relations" do
+    it "can be instantiated" do
+      expect(@new_category.valid?).must_equal true
+    end
+
+    it "will have the required fields" do
+      expect(@new_category).must_respond_to :name
+      
+    end
+  end
+
+  describe "relationships" do
 
     let(:bubbly) { categories(:bubbly) }
-    it "should have a list of products" do
-    expect(bubbly.products.count).must_equal categories(:bubbly).products.count
+    let(:goat) { categories(:goat)}
+    describe "products" do
+
+      it "should have a list of products" do
+        expect(bubbly.products.count).must_equal categories(:bubbly).products.count
+
+        expect(goat.products.count).must_equal 0
+      end
+
+      it "can set a product through category" do
+        bubbly.products.push(products(:onion))
+
+        expect(bubbly.products).must_include products(:onion)
+        expect(bubbly.products).must_include products(:potter)
+      end
     end
+    
+    
 
     it "should remove category relation when a product is deleted" do
       before_count = categories(:bubbly).products.count
