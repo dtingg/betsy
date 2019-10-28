@@ -29,36 +29,29 @@ describe OrdersController do
       must_respond_with :redirect
     end
     
+    describe "edit" do
+      it "responds with success when getting the edit page for a valid, pending order" do
+        get edit_order_path(pending_order.id)
+        
+        must_respond_with :success
+      end
+      
+      it "responds with redirect when getting the edit page for a non-existing order" do
+        order.save
+        invalid_id = -1
+        
+        get edit_order_path(invalid_id)
+        
+        must_respond_with :redirect
+      end
+      
+      
+      
+    end
     
     
     
     
     
-    # describe "edit" do
-    #   it "responds with success when getting the edit page for a valid, pending order" do
-    #     get edit_order_path(pending_order.id)
-    
-    #     must_respond_with :success
-    #   end
-    
-    #   it "responds with redirect when getting the edit page for a non-existing order" do
-    #     invalid_id = -1
-    
-    #     get edit_order_path(invalid_id)
-    
-    #     must_respond_with :redirect
-    #   end
-    # end
-    
-    # describe "update" do
-    #   it "does not update any order if given an invalid id, and responds with a redirect" do
-    #     changes_hash = { order: { order_id: new_order.id, name: "Wilma Flintstone" } }
-    
-    #     invalid_id = -1
-    
-    #     expect { patch order_path(invalid_id), params: changes_hash }.wont_change "Order.count"
-    
-    #     must_respond_with :redirect
-    #   end
   end
 end

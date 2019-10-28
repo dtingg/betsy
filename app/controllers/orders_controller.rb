@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :find_order, only: [:show]
+  before_action :find_order, only: [:show, :edit]
   
   def show
     @order = Order.find_by(id: params[:id])
@@ -16,7 +16,9 @@ class OrdersController < ApplicationController
   end
   
   def edit
-    if @cart.nil?
+    @order = Order.find_by(id: params[:id])
+    
+    if @order.nil?
       redirect_back(fallback_location: root_path)
       return
     end
