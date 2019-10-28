@@ -42,29 +42,33 @@ describe Product do
       end
     end
 
-    # describe "categories" do
-    #   it "has one or many categories" do
-    #     product = products(:potter)
+    describe "categories" do
+      it "has one or many categories" do
+        potter = products(:potter)
         
-    #     expect(product.category).must_be_instance_of Category   
-    #   end
+        expect(potter.categories.count).must_equal products(:potter).categories.count
 
-    #   it "can set a category through 'category" do
-    #     product = Product.new(name: "cats cats cats", price: 10.0, stock_qty: 9)
+        rose = products(:rose)
 
-    #     product.categories = categories(:viral)
+        expect(rose.categories.count).must_equal products(:rose).categories.count
+      end
 
-    #     product.category_id.must_equal categories(:viral).id
-    #   end
+      it "can set a category through 'category" do
+        product = Product.new(name: "cats cats cats", price: 10.0, stock_qty: 9)
 
-    #   it "can set a category through category_id" do
-    #     product = Product.new(name: "dogs dogs dogs", price: 10.0, stock_qty: 9)
+        product.categories << categories(:organic)
 
-    #     product.category = categories(:viral)
+        product.categories.last.id.must_equal categories(:organic).id
+      end
 
-    #     product.category.must_equal categories(:viral)
-    #   end
-    # end
+      it "can set a category through category_id" do
+        product = Product.new(name: "dogs dogs dogs", price: 10.0, stock_qty: 9)
+
+        product.categories << categories(:organic)
+
+        product.categories.last.must_equal categories(:organic)
+      end
+    end
   end
   
   describe "validations" do

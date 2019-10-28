@@ -20,7 +20,15 @@ describe Category do
 
     let(:bubbly) { categories(:bubbly) }
     let(:goat) { categories(:goat)}
+    let(:organic) { categories(:organic) }
     describe "products" do
+      it "should have one or more products" do
+        expect(bubbly.products.count).must_equal categories(:bubbly).products.count
+
+        expect(bubbly.products.first).must_be_instance_of Product
+        expect(organic.products.count).must_equal 2
+        expect(goat.products).must_be_empty
+      end
 
       it "should have a list of products" do
         expect(bubbly.products.count).must_equal categories(:bubbly).products.count
@@ -54,10 +62,16 @@ describe Category do
     end
 
     it "should validate the presence of name" do
-      # I need a teammate to confirm that this model test is comprehensive
-      bubbly.name = ""
-      expect(bubbly.name).must_equal ""
-      expect(bubbly.errors).wont_be_nil
+      category = categories(:bubbly)
+      category.name = nil
+
+      expect(category.valid?).must_equal false
+      expect(category.errors.messages).must_include :name
+      expect(category.errors.messages[:name]).must_equal ["can't be blank"]
+      # bubbly.name = ""
+      # expect(bubbly.name).must_equal ""
+      # expect(bubbly.errors).wont_be_nil
+      
     end
   end
 end
