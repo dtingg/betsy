@@ -11,6 +11,9 @@ class ApplicationController < ActionController::Base
     if @order.nil?
       @order = Order.create(status: "pending")
       session[:order_id] = @order.id
+    end
+
+    unless session[:recently_viewed] 
       session[:recently_viewed] = Array.new
     end
 
