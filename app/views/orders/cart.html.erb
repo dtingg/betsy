@@ -22,7 +22,6 @@
     <td><%= form_with model: item do |f| %>
       <%= f.hidden_field :id, value: @order.id %>
       <%= hidden_field_tag :old_quantity, item.quantity %>
-      <%= f.label :quantity %>
       <% available = item.product.stock_qty + item.quantity %>
       <%= f.select :quantity, (1..available)%>
       <%= f.submit "Update quantity" %>

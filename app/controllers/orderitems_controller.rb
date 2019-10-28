@@ -49,9 +49,6 @@ class OrderitemsController < ApplicationController
     elsif @orderitem.update(orderitem_params)
       difference = @orderitem.quantity - params[:old_quantity].to_i
       
-      binding.pry
-      
-      
       if difference > 0
         @orderitem.product.remove_stock(difference)
       elsif difference < 0 
