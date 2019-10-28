@@ -10,13 +10,17 @@ class Product < ApplicationRecord
   validates :stock_qty, numericality: { greater_than_or_equal_to: 0 }, :on => :update
   
   def remove_stock(number)
-    self.stock_qty -= number
-    self.save
+    unless number < 1
+      self.stock_qty -= number
+      self.save
+    end
   end
   
   def return_stock(number)
-    self.stock_qty += number
-    self.save
+    unless number < 1
+      self.stock_qty += number
+      self.save
+    end
   end
   
   # orders active products by name

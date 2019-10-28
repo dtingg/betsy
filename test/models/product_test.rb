@@ -1,45 +1,84 @@
 require "test_helper"
 
 describe Product do
-  let (:merchant) { Merchant.create(username: "buddy", email: "buddy@aol.com") }
-  let (:product) { Product.create(merchant_id: merchant.id, name: "Honey soap", price: 5.55) }
-  
   describe "initialize" do
+    before do
+      @new_product = Product.new(name: "random soap", price: 10.0, merchant: merchants(:merchant_one), stock_qty: 9)
+
+    end
     it "can be instantiated" do
-      expect(product.valid?).must_equal true
+      expect(@new_product.valid?).must_equal true
     end
     
     it "will have the required fields" do
-      product.save
-      
       [:name, :description, :active, :stock_qty, :price, :merchant_id, :photo_url].each do |field|
-        expect(product).must_respond_to field
+        expect(@new_product).must_respond_to field
       end
     end
   end
   
   describe "relationships" do
-    it "can have a merchant" do
-      product.save
-      
-      expect(product.merchant).must_be_instance_of Merchant      
+    describe "merchant" do
+      it "has a merchant" do
+        product = products(:potter)
+        
+        expect(product.merchant).must_be_instance_of Merchant      
+      end
+
+      it "can set a merchant through 'merchant'" do
+        product = Product.new(name: "cats cats cats", price: 10.0, stock_qty: 9)
+
+        product.merchant = merchants(:merchant_two)
+
+        expect(product.merchant_id).must_equal merchants(:merchant_two).id
+      end
+
+      it "can set a merchant through 'merchant_id'" do
+        product = Product.new(name: "dogs dogs dogs", price: 10.0, stock_qty: 9)
+
+        product.merchant_id = merchants(:merchant_two).id
+
+        expect(product.merchant).must_equal merchants(:merchant_two)
+      end
     end
+
+    # describe "categories" do
+    #   it "has one or many categories" do
+    #     product = products(:potter)
+        
+    #     expect(product.category).must_be_instance_of Category   
+    #   end
+
+    #   it "can set a category through 'category" do
+    #     product = Product.new(name: "cats cats cats", price: 10.0, stock_qty: 9)
+
+    #     product.categories = categories(:viral)
+
+    #     product.category_id.must_equal categories(:viral).id
+    #   end
+
+    #   it "can set a category through category_id" do
+    #     product = Product.new(name: "dogs dogs dogs", price: 10.0, stock_qty: 9)
+
+    #     product.category = categories(:viral)
+
+    #     product.category.must_equal categories(:viral)
+    #   end
+    # end
   end
   
   describe "validations" do
     it "must have a name" do
+      product = products(:potter)
       product.name = nil
-      product.save
       
       expect(product.valid?).must_equal false
       expect(product.errors.messages).must_include :name
       expect(product.errors.messages[:name]).must_equal ["can't be blank"]
     end
     
-    it "must have a unique name" do
-      product.save
-      
-      duplicate_product = Product.create(merchant_id: merchant.id, name: "Honey soap", price: 4) 
+    it "must have a unique name" do      
+      duplicate_product = Product.create(merchant_id: merchants(:merchant_one), name: "harry potter soap", price: 4) 
       
       expect(duplicate_product.valid?).must_equal false
       expect(duplicate_product.errors.messages).must_include :name
@@ -47,8 +86,8 @@ describe Product do
     end
     
     it "must have a price" do
+      product = products(:potter)
       product.price = nil
-      product.save
       
       expect(product.valid?).must_equal false
       expect(product.errors.messages).must_include :price
@@ -56,8 +95,8 @@ describe Product do
     end
     
     it "must have a price greater than 0" do
+      product = products(:potter)
       product.price = 0
-      product.save
       
       expect(product.valid?).must_equal false
       expect(product.errors.messages).must_include :price
@@ -65,8 +104,8 @@ describe Product do
     end
     
     it "must have a merchant_id" do
+      product = products(:potter)
       product.merchant_id = nil
-      product.save
       
       expect(product.valid?).must_equal false
       expect(product.errors.messages).must_include :merchant_id
@@ -76,22 +115,41 @@ describe Product do
   
   describe "remove stock method" do
     it "decreases quantity of an item correctly" do
-      merchant.save
+      product = products(:rose)
       product.remove_stock(3)
       
       updated_product = Product.find_by(id: product.id)
       
       expect(updated_product.stock_qty).must_equal 7
     end
+
+    it "does nothing if given negative stock to remove" do
+      product = products(:rose)
+      product.remove_stock(0)
+      
+      updated_product = Product.find_by(id: product.id)
+      
+      expect(updated_product.stock_qty).must_equal 10
+    end
   end
   
   describe "return stock method" do
     it "increases quantity of an item correctly" do
+      product = products(:rose)
       product.return_stock(2)
       
       updated_product = Product.find_by(id: product.id)
       
       expect(updated_product.stock_qty).must_equal 12
+    end
+
+    it "does nothing if given negative stock to return" do
+      product = products(:rose)
+      product.return_stock(0)
+      
+      updated_product = Product.find_by(id: product.id)
+      
+      expect(updated_product.stock_qty).must_equal 10
     end
   end
 
