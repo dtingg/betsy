@@ -26,23 +26,19 @@
       <li><%= link_to "All products", products_path, class: "btn btn-primary" %></li>
       <li><%= link_to "Create product", new_product_path, class: "btn btn-primary" %></li>
       <li><%= link_to "All merchants", merchants_path, class: "btn btn-primary" %></li>
-      <% if @current_user %>
-      <li><%= link_to "Log out", logout_path, class: "btn btn-primary", method: "delete" %></li>
-      <% else %>
-      <li><%= link_to "Login with GitHub", github_login_path, class: "btn btn-primary" %></li>
-      <% end %>
       <li><%= link_to "Shopping cart", cart_path(@order), class: "btn btn-primary" %></li>
+
+      <div class="login_header_container">
+
+        <% if @current_user %>
+        <li><%= link_to "Log out", logout_path, class: "btn btn-primary", method: "delete" %></li>
+        Logged in as <%= @current_user.username %>
+        <% else %>
+        <li><%= link_to "Login with GitHub", github_login_path, class: "btn btn-primary" %></li>
+        <% end %>
+      </div>
+
     </ul>
-    <h2>
-    <% if session[:user_id] %>
-      <% @current_merchant = Merchant.find_by(id: session[:user_id]) %>
-      <% if @current_merchant.username != nil %>
-        <h5>Logged in as <%= @current_merchant.username %></h5>      
-      <% else %>
-        <h5>Logged in as Merchant ID: <%= @current_merchant.id %></h5> 
-      <% end %>
-    <% end %>
-    <h2>
   </nav>
 
   <body>

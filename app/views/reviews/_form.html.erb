@@ -1,0 +1,40 @@
+    <section>
+      <% if @review.errors.any? %>
+        <section class="alert alert-danger">
+        <h1>Errors</h1>
+        <ul>
+          <% @review.errors.each do |key, message| %>
+            <li><strong><%= key.capitalize %></strong> <%= message %></li>
+          <% end %>
+        </ul>
+        </section>
+      <% end %>
+    </section>
+
+    <section>
+      <%= form_with model: @review do |f| %>
+
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        
+        <div>
+          <%= f.hidden_field :date, value: Time.now %>
+          Date: <%= Time.now.to_s[0..9] %> 
+        </div>
+
+        <div>
+          <%= f.hidden_field :product_id, value: params[:product_id] %> 
+        </div>
+      
+        <div>
+          <%= f.label :rating %>
+          <%= f.select :rating, [nil, 1, 2, 3, 4, 5] %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :comment%>
+          <%= f.text_area :comment, class: "form-control"%>
+        </div>
+
+        <%= f.submit "#{action_name} Review", formaction: product_reviews_path(product_id: params[:product_id]), method: "post",  class: "work-button" %>
+      <% end %>
+    

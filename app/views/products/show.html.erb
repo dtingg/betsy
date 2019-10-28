@@ -46,7 +46,9 @@
         <li><%= review.comment %></li>
       </ul>
       <% end %>
-    </section>
-   
+    </section>  
+
+    <%=link_to "Add Review",  new_product_review_path(@product.id), :class=>"btn btn-primary"%>
+ 
   </section>
 </section>
