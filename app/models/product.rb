@@ -18,4 +18,16 @@ class Product < ApplicationRecord
     self.stock_qty += number
     self.save
   end
+  
+  # orders active products by name
+  def self.order_active_products
+    active_products_alpha = []
+    Product.all.each do |product| 
+      if product.active == true 
+        active_products_alpha << product
+      end
+    end
+    
+    return active_products_alpha.sort_by { |p| p.name }
+  end
 end

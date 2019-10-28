@@ -1,21 +1,30 @@
 <section class="heading">
-<h1>Merchants</h1> <%= button_to "Add New merchant", new_merchant_path %>
+<h1 class="page_title">Merchants</h1>
+<br />
 </section>
-<table>
+<table class="table table-hover table-sm" frame = "box" id="merchant_index">
+<thead>
 <tr>
-<th> Photo </th>
-<th> Username </th>
+<th> PHOTO</th>
+<th> USERNAME </th>
+<th> EMAIL </th>
+<th> ACTIVE PRODUCTS </th>
+<th> GROSS SALES </th>
 </tr>
+</thead>
   <% @merchants.each do |merchant|  %>
   <tr>
-    <td>
-    <% if merchant.uid < 100000 %>
-      <%= image_tag "https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo" %>
-    <% else %>
-      <%= image_tag "https://avatars1.githubusercontent.com/u/#{merchant.uid}", alt: "github profile photo" %>
-    <% end %>
+    <td class="cell_center">
+      <% if merchant.uid < 100000 %>
+        <%= image_tag "https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo" %>
+      <% else %>
+        <%= image_tag "https://avatars1.githubusercontent.com/u/#{merchant.uid}", alt: "github profile photo" %>
+      <% end %>
     </td>
-    <td><%= link_to merchant.username, merchant_path(merchant) %></td>
+    <td class="cell_left"><%= link_to merchant.username, merchant_path(merchant.id) %></td>
+    <td class="cell_left"><%= mail_to merchant.email, merchant.email %></td>
+    <td class="cell_center"><%= merchant.active_products.to_s.first %></td>
+    <td class="cell_center">$ 0.00</td>
   </tr>
   <% end %>
 </table>

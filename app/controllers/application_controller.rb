@@ -11,7 +11,10 @@ class ApplicationController < ActionController::Base
     if @cart.nil?
       @cart = Order.create(status: "pending")
       session[:cart_id] = @cart.id
+      session[:recently_viewed] = Array.new
     end
+    
+    current_user
   end
   
   def current_user
@@ -22,5 +25,16 @@ class ApplicationController < ActionController::Base
     if @current_user.nil?
       session[:user_id] = nil
     end
+  end
+  
+  def add_to_recently_viewed(product)
+    @recent = session[:recently_viewed]
+    @recent.insert(0, product)
+    
+    if @recent.count > 11
+      @recent.last.delete
+    end
+    
+    session[:recently_viewed] = @recent
   end
 end

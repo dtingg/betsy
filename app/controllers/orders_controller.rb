@@ -4,8 +4,6 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find_by(id: params[:id])
     
-    binding.pry
-    
     if @order.nil?
       redirect_back(fallback_location: root_path)
       return
