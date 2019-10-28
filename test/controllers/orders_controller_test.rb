@@ -101,27 +101,3 @@ describe OrdersController do
     end
   end
 end
-
-
-
-
-# def update
-#   else
-#     render :edit
-#     return
-#   end
-# end
-
-# def cart
-# end
-
-# private
-
-# def find_order
-#   @order = Order.find_by(id: params[:id])
-# end
-
-# def order_params
-#   return params.require(:order).permit(:status, :name, :email, :address, :city, :state, :zipcode, :cc_num, :cc_exp, :cc_cvv, :order_date, :merchant_id)
-# end  
-# end
