@@ -1,22 +1,55 @@
 <h1>Shopping cart</h1>
-
+<aside class="order_summary">
+<table class="table table-sm table-borderless" frame = "box" id="order_total">
+<tr>
+<td>Order Total:</td>
+<td>$0.00</td>
+</tr>
+<tr>
+<td>Shipping:</td>
+<td>$0.00</td>
+</tr>
+<tr>
+<td>Total (# Items)</td>
+<td>$0.00</td>
+</tr>
+<tr>
+<td colspan=2><a class="btn btn-outline-primary" href="#" role="button">Proceed to Checkout</button></td>
+</tr>
+</table>
+</aside>
+<section class = "shopping_cart">
+<table class="table table-hover table-sm" frame = "box" id="shopping_cart">
+<thead>
+<tr>
+<th> IMAGE </th>
+<th> PRODUCT </th>
+<th> QTY </th>
+<th> PRICE </th>
+<th> TOTAL </th>
+<th> EDIT </th>
+<th> DELETE </th>
+</tr>
+</thead>
 <% if @order.orderitems.any? %>
-  <% alpha_items = @order.orderitems %>
-  <% alpha_items.order(:id).each do |item| %>
-    <%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %><br>
-    <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %><br>
-    <%= form_with model: item do |f| %>
-      <%= f.hidden_field :id, value: @order.id %>
-      <%= hidden_field_tag :old_quantity, item.quantity %>
-      <%= f.label :quantity %>
-      <% available = item.product.stock_qty + item.quantity %>
-      <%= f.select :quantity, (1..available)%>
-      <%= f.submit "Update quantity" %>
-    <% end %>
-    <%= button_to "Remove from cart", orderitem_path(item), method: :delete %><br><br>
+  <% @order.orderitems.each do |item| %>
+  <tr>
+  <td><%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %></td>
+  <td>
+  <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %>
+  <br />
+  <%= item.product.description %>
+  <br />
+  <%= item.product.merchant.username %>
+  </td>
+  <td><%= item.quantity %></td>
+  <td>$<%= item.product.price %></td>
+  <td>$<%= item.product.price*item.quantity %></td>
+  <td><%= link_to "Edit", orderitem_path(item) %></td>
+  <td><%= link_to "Delete", orderitem_path(item), method: :delete %></td>
+  </tr>
   <% end %>
-  <%# <%= button_to "Checkout", edit_order_path(@order), method: :get %>
-  <%= button_to "Checkout", checkout_path(@order), method: :get %><br><br>  
+  </table>
 <% else %>
   Your shopping cart is empty.
 <% end %>
