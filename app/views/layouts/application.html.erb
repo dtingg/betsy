@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150983786-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-150983786-1');
+    </script>
     <title>Sudsy</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/hbmnvixez/image/upload/v1572106015/duck.png">
   </head>
   <nav>
     <h1>SUDSY</h1>
     <ul>
-      <li><%= link_to "home", root_path, class: "btn btn-primary" %></li>
-      <li><%= link_to "all products", products_path, class: "btn btn-primary" %></li>
-      <li><%= link_to "create product", new_product_path, class: "btn btn-primary" %></li>
-      <li><%= link_to "all merchants", merchants_path, class: "btn btn-primary" %></li>
-      <% if session[:user_id] %>
-        <% @current_merchant = Merchant.find_by(id: session[:user_id]) %>
+      <li><%= link_to "Home", root_path, class: "btn btn-primary" %></li>
+      <li><%= link_to "All products", products_path, class: "btn btn-primary" %></li>
+      <li><%= link_to "Create product", new_product_path, class: "btn btn-primary" %></li>
+      <li><%= link_to "All merchants", merchants_path, class: "btn btn-primary" %></li>
+      <% if @current_user %>
       <li><%= link_to "Log out", logout_path, class: "btn btn-primary", method: "delete" %></li>
       <% else %>
       <li><%= link_to "Login with GitHub", github_login_path, class: "btn btn-primary" %></li>
       <% end %>
-      <li><%= link_to "Shopping cart", order_path(@cart), class: "btn btn-primary" %></li>
+      <li><%= link_to "Shopping cart", cart_path(@order), class: "btn btn-primary" %></li>
     </ul>
     <h2>
     <% if session[:user_id] %>
@@ -40,11 +49,10 @@
         <div class="<%= name %>"><%= message %></div>
       <% end %>
     </section>
-
     <%= yield %>
+    <footer>
+      This website is for a school project.  No products are actually for sale.<br>
+      Copyright &copy; 2019 Daniela, Dianna, Katie, Natalie, and Raisah. All rights reserved.
+    </footer>
   </body>
 </html>
-
-<nav class="nav loginout">
-
-  </nav>

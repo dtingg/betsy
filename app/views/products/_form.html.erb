@@ -1,3 +1,12 @@
+<% if @product.errors.any? %>
+<h2>Errors</h2>
+<ul>
+  <% @product.errors.each do |column, message| %>
+    <li><%= column.capitalize %> <%= message %></li>
+  <% end %>
+</ul>
+<% end %>
+
 <h2><%= verb %> <%= @product.name %></h2>
 
 <%= form_for @product do |f| %>

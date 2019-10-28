@@ -1,6 +1,9 @@
 class Merchant < ApplicationRecord
   has_many :products, dependent: :destroy
   
+  validates :username, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
+  
   def member_since
     time_diff_days = ((Time.current - self.created_at) / 1.day).round
     if time_diff_days == 0
