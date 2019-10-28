@@ -11,4 +11,12 @@ class Order < ApplicationRecord
   validates :cc_num, format: { with: /\A\d{13,16}\z/, message: "Credit card number must be 13-16 numbers in length" }, :on => :update
   validates :cc_exp, format: { with: /\A(0?[1-9]|1[012])\/?(19|2[\d])\z/, message: "Credit card expiration must be valid" }, :on => :update
   validates :cc_cvv, format: { with: /\A\d{3,4}\z/, message: "Credit card CVV must be 3-4 numbers in length" }, :on => :update  
+  
+  def total
+    order_total = self.orderitems.sum do |orderitem|
+      orderitem.total
+    end
+    
+    return order_total
+  end
 end

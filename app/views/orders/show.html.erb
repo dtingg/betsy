@@ -30,8 +30,9 @@ Credit card cvv: <%= @order.cc_cvv %><br>
 <td><%= item.product.description %></td>
 <td><%= link_to "#{item.product.merchant.username}", merchant_path(item.product.merchant) %></td>
 <td><%= item.quantity %></td>
-<td>$<%= item.product.price %></td>
-<td>$<%= item.quantity * item.product.price %></td>
+<td>$<%= sprintf('%.2f', item.product.price) %></td>
+<td>$<%= sprintf('%.2f', item.total) %></td>
 </tr>
 <% end %>
+<tr><td></td><td></td><td></td><td></td><td></td><td>Order total: $</td><td><%= @order.total %></tr>
 </table>
