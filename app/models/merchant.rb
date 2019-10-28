@@ -38,6 +38,6 @@ class Merchant < ApplicationRecord
   end
   
   def self.alphabetic
-    return Merchant.order(name: :asc)
+    return Merchant.order(username: :asc)
   end
 end
