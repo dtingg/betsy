@@ -1,6 +1,16 @@
 class OrdersController < ApplicationController
+  before_action :find_order, only: [:show, :edit]
+  
   def show
-    @order = Order.find_by(id: params[:id])    
+    if @order.nil?
+      redirect_back(fallback_location: root_path)
+      return
+    end
+    
+    if @order.status == "pending"
+      redirect_to cart_path(@order)
+      return
+    end
   end
   
   def edit
@@ -27,10 +37,14 @@ class OrdersController < ApplicationController
     end
   end
   
-  def cart
-  end
+  # def cart
+  # end
   
   private
+  
+  def find_order
+    @order = Order.find_by(id: params[:id])
+  end
   
   def order_params
     return params.require(:order).permit(:status, :name, :email, :address, :city, :state, :zipcode, :cc_num, :cc_exp, :cc_cvv, :order_date, :merchant_id)
