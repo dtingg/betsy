@@ -26,7 +26,7 @@ describe Category do
     end
 
     it "should validate the presence of name" do
-    # I need a teammate to confirm that this model test is comprehensive
+      # I need a teammate to confirm that this model test is comprehensive
       bubbly.name = ""
       expect(bubbly.name).must_equal ""
       expect(bubbly.errors).wont_be_nil
