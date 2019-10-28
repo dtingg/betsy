@@ -94,4 +94,25 @@ describe Product do
       expect(updated_product.stock_qty).must_equal 12
     end
   end
+
+  describe "self.order_active_products" do
+    it "sorts list of active products by name" do    
+      sorted_products = Product.order_active_products
+      
+      sorted_products.each do |product|
+        expect(product.active).must_equal true
+      end
+      expect(sorted_products.first.name).must_equal "cucumber"
+      expect(sorted_products.last.name).must_equal "rose soap"
+
+    end
+
+    it "if no active products, returns an empty array" do
+      Product.destroy_all
+
+      sorted_products = Product.order_active_products
+
+      expect(sorted_products).must_equal []
+    end
+  end
 end

@@ -112,4 +112,4 @@ class MerchantsController < ApplicationController
       return
     end
   end
- end
+end
