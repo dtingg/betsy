@@ -6,7 +6,9 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
-  def show ; end
+  def show 
+    add_to_recently_viewed(@product)
+  end
 
   def new
    #come back to determine if this is the best logic for Product new

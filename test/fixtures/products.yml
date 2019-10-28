@@ -22,6 +22,14 @@ cucumber:
   price: 3.00
   merchant: merchant_two
   photo_url: ""
+onion:
+  name: "onion"
+  description: "handmade"
+  active: false
+  stock_qty: 12
+  price: 3.00
+  merchant: merchant_two
+  photo_url: ""
 peppermint:
   name: "peppermint"
   description: "handmade"
@@ -30,4 +38,3 @@ peppermint:
   price: 3.00
   merchant: merchant_two
   photo_url: ""
-
