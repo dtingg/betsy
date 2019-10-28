@@ -2,25 +2,69 @@ require "test_helper"
 
 describe Product do
   describe "initialize" do
+    before do
+      @new_product = Product.new(name: "random soap", price: 10.0, merchant: merchants(:merchant_one), stock_qty: 9)
+
+    end
     it "can be instantiated" do
-      expect(products(:potter).valid?).must_equal true
+      expect(@new_product.valid?).must_equal true
     end
     
     it "will have the required fields" do
-      product = products(:potter)
-      
       [:name, :description, :active, :stock_qty, :price, :merchant_id, :photo_url].each do |field|
-        expect(product).must_respond_to field
+        expect(@new_product).must_respond_to field
       end
     end
   end
   
   describe "relationships" do
-    it "can have a merchant" do
-      product = products(:potter)
-      
-      expect(product.merchant).must_be_instance_of Merchant      
+    describe "merchant" do
+      it "has a merchant" do
+        product = products(:potter)
+        
+        expect(product.merchant).must_be_instance_of Merchant      
+      end
+
+      it "can set a merchant through 'merchant'" do
+        product = Product.new(name: "cats cats cats", price: 10.0, stock_qty: 9)
+
+        product.merchant = merchants(:merchant_two)
+
+        expect(product.merchant_id).must_equal merchants(:merchant_two).id
+      end
+
+      it "can set a merchant through 'merchant_id'" do
+        product = Product.new(name: "dogs dogs dogs", price: 10.0, stock_qty: 9)
+
+        product.merchant_id = merchants(:merchant_two).id
+
+        expect(product.merchant).must_equal merchants(:merchant_two)
+      end
     end
+
+    # describe "categories" do
+    #   it "has one or many categories" do
+    #     product = products(:potter)
+        
+    #     expect(product.category).must_be_instance_of Category   
+    #   end
+
+    #   it "can set a category through 'category" do
+    #     product = Product.new(name: "cats cats cats", price: 10.0, stock_qty: 9)
+
+    #     product.categories = categories(:viral)
+
+    #     product.category_id.must_equal categories(:viral).id
+    #   end
+
+    #   it "can set a category through category_id" do
+    #     product = Product.new(name: "dogs dogs dogs", price: 10.0, stock_qty: 9)
+
+    #     product.category = categories(:viral)
+
+    #     product.category.must_equal categories(:viral)
+    #   end
+    # end
   end
   
   describe "validations" do
@@ -78,6 +122,15 @@ describe Product do
       
       expect(updated_product.stock_qty).must_equal 7
     end
+
+    it "does nothing if given negative stock to remove" do
+      product = products(:rose)
+      product.remove_stock(0)
+      
+      updated_product = Product.find_by(id: product.id)
+      
+      expect(updated_product.stock_qty).must_equal 10
+    end
   end
   
   describe "return stock method" do
@@ -88,6 +141,15 @@ describe Product do
       updated_product = Product.find_by(id: product.id)
       
       expect(updated_product.stock_qty).must_equal 12
+    end
+
+    it "does nothing if given negative stock to return" do
+      product = products(:rose)
+      product.return_stock(0)
+      
+      updated_product = Product.find_by(id: product.id)
+      
+      expect(updated_product.stock_qty).must_equal 10
     end
   end
 
