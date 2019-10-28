@@ -15,7 +15,6 @@ describe MerchantsController do
   end
   
   describe "show" do
-    
     it "should respond with success when given a valid merchant" do
       merchant_one = merchants(:merchant_one)
       
@@ -43,24 +42,6 @@ describe MerchantsController do
       
       must_redirect_to merchants_path
       
-      
-      # new_merchant_params = {
-      #   merchant: {
-      #     uid: 567,
-      #     nickname: "Mr. Smith",
-      #     email: "smith@adadev.org"
-      #   }
-      # }
-      
-      # expect {
-      #   post merchants_path, params: new_merchant_params 
-      # }.must_change "Merchant.count", 1
-      
-      # new_merchant = Merchant.find_by(uid: new_merchant_params[:merchant][:uid])
-      # expect(new_merchant.username).must_equal new_merchant_params[:merchant][:username]
-      
-      # must_respond_with :redirect
-      # must_redirect_to merchant_path(new_merchant)
     end
     
     #Choosing not to include edit, update, or destroy
