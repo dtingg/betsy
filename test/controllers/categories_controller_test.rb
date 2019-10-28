@@ -2,7 +2,6 @@ require "test_helper"
 
 describe CategoriesController do
   describe "guest user" do 
-    
     describe "index" do
       it "should respond with success" do
       get categories_path
@@ -19,7 +18,6 @@ describe CategoriesController do
     describe "show" do
       it "should respond with success when asked to show a particular category" do
         bubbly_category = categories(:bubbly)
-
         get categories_path(bubbly_category.id)
         must_respond_with :success
       end
@@ -32,7 +30,7 @@ describe CategoriesController do
   end
 
   describe "authenticated" do
-    # perform login
+    
     describe "new" do
       it "should get the new category path" do
   
