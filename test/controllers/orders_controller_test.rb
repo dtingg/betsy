@@ -8,6 +8,7 @@ describe OrdersController do
   let (:orderitem) { Orderitem.create(order_id: order.id, product_id: product.id, quantity: 3) }
   let (:pending_order) { Order.create(status: "pending", name: "Fred Flintstone", email: "fred@aol.com", address: "123 Bedrock Lane", city: "Bedrock", 
   state: "CA", zipcode: "10025", cc_num: "1234567890123", cc_exp: "1219", cc_cvv: "123", order_date: Time.new ) }  
+  let (:new_order) { Order.create(status: "pending")}
   
   describe "show" do
     it "responds with success when showing a completed order" do
@@ -42,6 +43,18 @@ describe OrdersController do
       invalid_id = -1
       
       get edit_order_path(invalid_id)
+      
+      must_respond_with :redirect
+    end
+  end
+  
+  describe "update" do
+    it "does not update any order if given an invalid id, and responds with a redirect" do
+      changes_hash = { order: { order_id: new_order.id, name: "Wilma Flintstone" } }
+      
+      invalid_id = -1
+      
+      expect { patch order_path(invalid_id), params: changes_hash }.wont_change "Order.count"
       
       must_respond_with :redirect
     end
