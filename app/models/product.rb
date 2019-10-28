@@ -8,6 +8,17 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0 }
   
+  def self.active_products_alpha
+    active_products_alpha = []
+    Product.all.each do |product| 
+      if product.active == true 
+        active_products_alpha << product
+      end
+    end
+
+    return active_products_alpha.sort_by { |p| p.name }
+  end
+
   def remove_stock(number)
     self.stock_qty -= number
     self.save
