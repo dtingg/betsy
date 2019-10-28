@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
   def show ; end
 
   def new
+   #come back to determine if this is the best logic for Product new
     if session[:user_id] != nil 
       @product = Product.new
     else
