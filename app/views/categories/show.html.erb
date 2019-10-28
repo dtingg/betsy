@@ -1,6 +1,9 @@
 <h2>show.html.erb</h2>
 <p> Category Name: <%= @category.name %></p>
 <% @category.products.each do |product| %>
+<section class="product-image">
+    <%= image_tag(product.photo_url, alt:"#{product.name}") %>
+  </section>
   <% product.name.titleize %> </h2>
     <ul>
       <li><%= product.merchant.username %></li>
