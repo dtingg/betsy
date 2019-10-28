@@ -7,7 +7,8 @@ class Product < ApplicationRecord
   validates :merchant_id, presence: true
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0 }
-
+  validates :stock_qty, numericality: { greater_than_or_equal_to: 0 }, :on => :update
+  
   def remove_stock(number)
     self.stock_qty -= number
     self.save
@@ -17,7 +18,7 @@ class Product < ApplicationRecord
     self.stock_qty += number
     self.save
   end
-
+  
   # orders active products by name
   def self.order_active_products
     active_products_alpha = []
@@ -26,7 +27,7 @@ class Product < ApplicationRecord
         active_products_alpha << product
       end
     end
-
+    
     return active_products_alpha.sort_by { |p| p.name }
   end
 end

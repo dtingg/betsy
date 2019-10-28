@@ -1,7 +1,11 @@
 <p><%= link_to "Return to Merchant List", merchants_path %></p>
 <%# <p><%= link_to "Add New Product", merchant_products_path(@merchant.id), method: :post %></p>
 <section class="merchant_info">
-<%= image_tag("placeholder.jpg", :alt => "placeholder image") %>
+<% if @merchant.uid < 100000 %>
+  <%= image_tag "https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo" %>
+<% else %>
+  <%= image_tag "https://avatars1.githubusercontent.com/u/#{@merchant.uid}", alt: "github profile photo" %>
+<% end %>
 <section class="merchant_info_details">
   <h2 class="cell_left"><%= @merchant.username.capitalize %></h2>
   <h3 class="cell_right">$ 0.00</h3>
@@ -70,13 +74,13 @@
 <% if product.active == true %>
   <tr>
     <td><%= link_to product.name, product_path(product.id) %></td>
-    <td><%= link_to product.description, product_path(product.id) %></td>
+    <td><%= product.description %></td>
     <td>✅</td>
     <td><%= product.stock_qty %></td>
     <td>$<%= product.price%></td>
     <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
-    <td><%= link_to "Edit Product", edit_product_path(product.id) %></td>
-    <td><%= link_to "Delete Product", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
+    <td><%= link_to "Edit", edit_product_path(product.id) %></td>
+    <td><%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
   </tr>
 <% end %>
 <% end %>
@@ -100,16 +104,14 @@
 <% if product.active == false %>
   <tr>
     <td><%= link_to product.name, product_path(product.id) %></td>
-    <td><%= link_to product.description, product_path(product.id) %></td>
+    <td><%= product.description %></td>
     <td>❌</td> 
     <td><%= product.stock_qty %></td>
     <td>$<%= product.price%></td>
     <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
-    <td><%= link_to "Edit Product", edit_product_path(product.id) %></td>
-    <td><%= link_to "Delete Product", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
+    <td><%= link_to "Edit", edit_product_path(product.id) %></td>
+    <td><%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
   </tr>
 <% end %>
 <% end %>
 </table>
-
-

@@ -1,17 +1,17 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
   before_action :if_product_missing, only: [:show, :edit, :destroy]
-
+  
   def index
-    @products = Product.all
+    @products = Product.all.order(:name)
   end
-
+  
   def show 
     add_to_recently_viewed(@product)
   end
-
+  
   def new
-   #come back to determine if this is the best logic for Product new
+    #come back to determine if this is the best logic for Product new
     if session[:user_id] != nil 
       @product = Product.new
     else
@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
       redirect_to root_path
     end  
   end
-
+  
   def create
     @product = Product.new(product_params)
     if @product.save
@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
       return
     end  
   end
-
+  
   def edit 
     if session[:user_id]
       if @product.merchant_id != Merchant.find_by(id: session[:user_id]).id
@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
       redirect_to root_path
     end
   end
-
+  
   def update
     if @product.update(product_params)
       redirect_to product_path(@product.id)
@@ -54,20 +54,20 @@ class ProductsController < ApplicationController
       return
     end
   end
-
+  
   def destroy
     @product.destroy
-
+    
     redirect_to products_path
     return
   end
-
+  
   private
-
+  
   def product_params
     return params.require(:product).permit(:name, :description, :active, :stock_qty, :price, :merchant_id, :photo_url, category_ids: [])
   end
-
+  
   def find_product
     @product = Product.find_by(id: params[:id])
   end
