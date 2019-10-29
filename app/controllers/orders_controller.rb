@@ -30,16 +30,11 @@ class OrdersController < ApplicationController
       return
     end
     
-    # binding.pry
-    
-    
     if @order.update(order_params)
       flash[:success] = "Thank you for your order!"  
       redirect_to order_path(@cart)
       session[:cart_id] = nil
       
-      
-      # binding.pry
       return
     else
       render :edit

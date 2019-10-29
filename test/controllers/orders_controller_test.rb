@@ -81,15 +81,6 @@ describe OrdersController do
       assert_nil(session[:cart_id])
     end    
     
-    # Expected: "paid"
-    #   Actual: "pending"
-    
-    
-    
-    
-    
-    
-    
     it "does not update an order if given an invalid id and responds with a redirect" do
       changes_hash = { order: { status: "paid", name: "Wilma Flintstone", email: "wilma@yahoo.com", address: "123 Bedrock Lane", city: "Bedrock", state: "CA", zipcode: "10025", cc_num: "1234567890123", cc_exp: "1219", cc_cvv: "123", order_date: Time.new } }  
       invalid_id = -1
@@ -132,6 +123,3 @@ describe OrdersController do
     end
   end
 end
-
-
-
