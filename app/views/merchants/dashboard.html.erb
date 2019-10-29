@@ -34,31 +34,28 @@
       <tr>
         <th>Order ID</th>
         <th>Order Date</th>
-        <th>Product Name</th>
         <th>Product Image</th>
+        <th>Product Name</th>
         <th>Product Price</th>
         <th>Product Quantity</th>
         <th>Total Price</th>
-        <th>Status</th>
+        <th>Complete</th>
       </tr>
     </thead>
     <% @merchant.all_orderitems.each do |orderitem| %>
-    <% if orderitem.order.status == "pending" %>
+    <% if orderitem.complete == false %>
       <tr>
         <td><%= orderitem.order.id %></td>
         <td><%= orderitem.order.order_date %></td>
-        <td><%= orderitem.product.name %></td>
         <td><%= image_tag orderitem.product.photo_url, class: "sm_product_image", alt:"#{orderitem.product.name}" %></td>
+        <td><%= orderitem.product.name %></td>
         <td>$<%= orderitem.product.price %></td>
         <td><%= orderitem.quantity %></td>
         <td>$<%= orderitem.total %></td>
-        <td>
-          <% if orderitem.complete %>
-          complete
-          <% else %>
-          incomplete
-          <% end %>
-        </td>
+        <td><%= form_with model: orderitem do |f| %>
+            <%= f.hidden_field :complete, value: true %>
+            <%= f.submit "Complete Order" %>
+            <% end %></td>
       </tr>
     <% end %>
     <% end %>
@@ -72,8 +69,8 @@
       <tr>
         <th>Order ID</th>
         <th>Order Date</th>
-        <th>Product Name</th>
         <th>Product Image</th>
+        <th>Product Name</th>
         <th>Product Price</th>
         <th>Product Quantity</th>
         <th>Total Price</th>
@@ -81,12 +78,12 @@
       </tr>
     </thead>
     <% @merchant.all_orderitems.each do |orderitem| %>
-    <% if orderitem.order.status == "complete" %>
+    <% if orderitem.complete == true %>
       <tr>
         <td><%= orderitem.order.id %></td>
         <td><%= orderitem.order.order_date %></td>
-        <td><%= orderitem.product.name %></td>
         <td><%= image_tag orderitem.product.photo_url, class: "sm_product_image", alt:"#{orderitem.product.name}" %></td>
+        <td><%= orderitem.product.name %></td>
         <td>$<%= orderitem.product.price %></td>
         <td><%= orderitem.quantity %></td>
         <td>$<%= orderitem.total %></td>

@@ -35,14 +35,11 @@ class MerchantsController < ApplicationController
     redirect_to root_path
   end
   
-  def edit
-  end
-  
   def update 
   end
-
+  
   def dashboard; end
-
+  
   private
   
   def merchant_params

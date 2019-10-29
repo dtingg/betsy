@@ -22,6 +22,11 @@ class Orderitem < ApplicationRecord
     return total
   end
   
+  def mark_complete
+    self.complete = true
+    self.save
+  end
+  
   def self.exists?(order_id, product_id)
     result = Orderitem.where(order_id: order_id, product_id: product_id)  
     
