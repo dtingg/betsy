@@ -30,6 +30,14 @@ describe OrdersController do
     end
   end    
   
+  
+  
+  
+  
+  
+  
+  
+  
   describe "edit" do
     it "responds with success when getting the edit page for a valid, pending order" do
       get edit_order_path(pending_order.id)

@@ -9,10 +9,15 @@ class OrdersController < ApplicationController
     end
     
     if @order.status == "pending"
-      redirect_to cart_path(@order)
+      redirect_to cart_path(@order.id)
       return
     end
   end
+  
+  
+  
+  
+  
   
   def edit
     if @cart.nil? #@order.nil?
