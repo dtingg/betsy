@@ -2,20 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.applicaton-container {
-  display: grid;
-  grid-template-columns: 500px auto 500px;
-  grid-template-rows: 400px auto;
-}
+// .applicaton-container {
+//   display: grid;
+//   grid-template-columns: 500px auto 500px;
+//   grid-template-rows: 400px auto;
+// }
 
-h2, h3 {
+h3 {
+  padding-top: 10rem;
   text-align: center;
 }
 
-.carousel{
-  max-width: 100%;
+.random-carousel {
+  padding-top: 10rem;
 }
 
-.carousel-item img{
-  max-width: auto;
+.carousel-inner, .carousel-item, .active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-indicators {
+  color: pink;
 }
