@@ -24,7 +24,7 @@ class Product < ApplicationRecord
   end
   
   def self.highlight
-    return Product.order(stock_qty: :desc).first
+    return Product.find_by(id: 1)
   end
 
   # orders active products by name
