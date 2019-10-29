@@ -78,3 +78,55 @@ td {
   width: 90%;
   margin-left: 5%;
 }
+
+
+.merchant-show-container {
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  grid-template-rows: 300px 1fr;
+
+  .merchant-info {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: right;
+
+    img {
+      border-radius: 2%;
+    }
+  }
+
+  .merchant-info-details {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: left;
+    margin-left: 5%;
+    
+    p {
+      text-align: left;
+    }
+  }
+
+  .merchant-product-header {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+  }
+
+  .merchant-products-list {
+    grid-column: 1 / span 1;
+    grid-row: 3 / span 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    ul{
+      list-style-type: none;
+    }
+
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 5%;
+      display: block;
+      margin: 2% auto;
+    }
+  }
+}
