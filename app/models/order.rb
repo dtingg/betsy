@@ -20,3 +20,13 @@ class Order < ApplicationRecord
     return order_total
   end
 end
+
+#   def check_complete
+#     self.orderitems.each do |orderitem|
+#       if orderitem.complete != true
+#         return false
+#       end
+#     end
+#     return true
+#   end
+# end

@@ -52,7 +52,7 @@
           <li><%= link_to "Login with GitHub", github_login_path, class: "btn btn-primary" %></li>
           <% end %>
       </div>
-      <li><%= link_to "Shopping Cart", cart_path, class: "btn btn-primary" %></li>
+      <li><%= link_to "Shopping Cart", cart_path(id: @cart.id), class: "btn btn-primary" %></li>
     </ul>
   </nav>
 

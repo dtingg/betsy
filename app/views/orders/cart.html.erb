@@ -32,7 +32,7 @@
   </table>
   <br>
   <br>
-  <%= button_to "Checkout", checkout_path(@cart), method: :get %><br><br>  
+  <%= button_to "Checkout", checkout_path(@cart.id), method: :get %><br><br>  
 <% else %>
   Your shopping cart is empty.
 <% end %>
