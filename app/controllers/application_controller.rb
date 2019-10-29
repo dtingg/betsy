@@ -11,8 +11,7 @@ class ApplicationController < ActionController::Base
     if session[:cart_id]
       @cart = Order.find_by(id: session[:cart_id])
     end
-    
-
+  
     if @cart.nil?
       @cart = Order.create(status: "pending")
       session[:cart_id] = @cart.id
