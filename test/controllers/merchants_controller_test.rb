@@ -64,25 +64,61 @@ describe MerchantsController do
   end
 
   describe "authenticated user" do
+    before do
+      perform_login(merchants(:merchant_two))
+    end
+
     describe "dashboard" do
-      it "should show dashboard for user that is logged in" do
-        
+      it "shows dashboard for user that is logged in" do
+        get dashboard_path(merchants(:merchant_two))
+
+        must_respond_with :success
       end
 
-      it "should not show dashboard for another merchant account" do
+      it "does not show dashboard for another merchant account" do
+        get dashboard_path(merchants(:merchant_one))
 
+        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
+
+        must_respond_with :redirect
+        must_redirect_to merchants_path
       end
     end
 
     describe "delete" do
-      it "should delete valid user for user that is logged in" do
+      it "deletes valid user for user that is logged in" do
+        expect {
+          delete merchant_path(merchants(:merchant_two))
+        }.must_differ "Merchant.count", -1
+
+        must_respond_with :redirect
+        must_redirect_to merchants_path
       end
 
       it "cannot delete another merchant account" do
+        expect {
+          delete merchant_path(merchants(:merchant_one))
+        }.wont_change "Merchant.count"
+
+        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
+
+        must_respond_with :redirect
+        must_redirect_to merchants_path
       end
     end
 
     describe "logout" do
+      it "successfully logs out current user" do
+        expect(session[:user_id].nil?).must_equal false
+
+        post logout_path
+
+        assert_nil(session[:user_id])
+        expect(flash[:success]).must_equal "Successfully logged out"
+
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
     end
   end
 
@@ -126,5 +162,4 @@ describe MerchantsController do
       must_redirect_to merchants_path
     end
   end
-
 end
