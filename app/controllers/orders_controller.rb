@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :find_order, only: [:show, :edit, :cart] #update?
+  before_action :find_order, only: [:show, :edit, :cart, :update] #update?
   
   def show    
     if @order.nil?
@@ -24,14 +24,8 @@ class OrdersController < ApplicationController
     end
   end
   
-  
-  
-  
-  
-  
-  
   def update
-    if @cart.nil?
+    if @order.nil?
       redirect_back(fallback_location: root_path)
       return
     end
@@ -46,22 +40,6 @@ class OrdersController < ApplicationController
       return
     end
   end
-  
-  #   def update
-  #     if @order.nil?
-  #       redirect_back(fallback_location: root_path)
-  #       return
-  #     end
-  #     if @order.update(order_params)
-  #       flash[:success] = "Thank you for your order!"  
-  #       redirect_to order_path(@order)
-  #       session[:cart_id] = nil
-  #       return
-  #     else
-  #       render :edit
-  #       return
-  #     end
-  #   end
   
   def cart
     if @order.nil?
