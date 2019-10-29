@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get "/checkout/:id", to: "orders#edit", as: "checkout"
   
   resources :orders
-  resources :merchants
+  resources :merchants, except: [:delete]
+  post "/logout", to: "merchants#logout", as: "logout"
+  delete "merchants/:id", to: "merchants#destroy"
   
   get "merchants/:id/dashboard", to: "merchants#dashboard", as: "dashboard"
   
@@ -22,5 +24,6 @@ Rails.application.routes.draw do
   
   get "/auth/github", as: "github_login"
   get "/auth/github/callback", to: "merchants#create", as: "auth_callback"
-  delete "/logout", to: "merchants#destroy", as: "logout"
+  
+  
 end
