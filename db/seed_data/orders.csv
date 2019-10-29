@@ -1,0 +1,2 @@
+status,name,address,city,state,zipcode,email,cc_num,cc_exp,cc_cvv,order_date
+paid,Fred Flintstone,123 Bedrock Lane,Bedrock,CA,90210,fred@aol.com,1234567890123456,1220,123,2019-09-01
