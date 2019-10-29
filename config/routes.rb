@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :orderitems
   resources :reviews, only: [:new, :create]
   resources :products 
+
+  get "/search", to: "homepages#search", as: "search"
   
   resources :categories, only: [:show, :index, :new, :create]
   resources :products, only: [:show] do
