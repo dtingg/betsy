@@ -45,3 +45,11 @@ CSV.open("db/seed_data/reviews.csv", "w", :write_headers => true, :headers => ["
     csv << [comment, rating, date, reviewer, product_id]
   end
 end
+
+# Categories (20)
+CSV.open("db/seed_data/categories.csv", "w", :write_headers => true, :headers => ["name"]) do |csv|
+  20.times do 
+    name = Faker::Hipster.word.to_s
+    csv << [name]
+  end
+end

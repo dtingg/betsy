@@ -1,0 +1,35 @@
+<section class="product-page-container">
+  <h2><%= @category.name.titleize %> Products</h2>
+</section>
+<% if @category.products.count == 0  %>
+  <p>no items found</p>
+<% else %>
+  <section class="products-list">
+  <% @category.products.each do |product| %>
+    <% if product.stock_qty > 0 && product.active %>
+        <ul>
+          <%= image_tag(product.photo_url, alt:"#{product.name}") %>
+
+          <section class="product-name">
+            <li><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
+          </section>
+
+          <section class="product-merchant">
+            <li><%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
+          </section>
+
+          <section class="product-price">
+            <li>$<%= sprintf('%.2f', product.price) %></li>
+          </section>
+
+          <section class="product-stock">
+            <li><%= product.stock_qty %> left in stock!</li>
+          </section>
+        </ul>
+      <% end %>
+  <% end %>
+  </section>
+    
+<% end %>
+      
+<%= link_to "Shop by Category", categories_path, class: "btn btn-primary" %>

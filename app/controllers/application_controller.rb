@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :find_cart
   
+  def index
+    @categories = Category.all
+  end
+
   private
   
   def find_cart
@@ -39,4 +43,6 @@ class ApplicationController < ActionController::Base
     
     session[:recently_viewed] = @recent
   end
+
+  
 end
