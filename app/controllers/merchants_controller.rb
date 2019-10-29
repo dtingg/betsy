@@ -13,6 +13,7 @@ class MerchantsController < ApplicationController
     merchant = Merchant.find_by(uid: auth_hash[:uid])
     if merchant
       flash[:success] = "Logged in as returning merchant #{ merchant.username }"
+      
     else
       merchant = Merchant.build_from_github(auth_hash)
       if merchant.save
@@ -25,7 +26,7 @@ class MerchantsController < ApplicationController
     end
     
     session[:user_id] = merchant.id
-    return redirect_to merchants_path
+    redirect_to dashboard_path(session[:user_id])
   end
   
   def destroy

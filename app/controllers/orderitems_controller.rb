@@ -55,7 +55,7 @@ class OrderitemsController < ApplicationController
         @orderitem.product.return_stock(-difference)
       end
       
-      flash[:success] = "Product quantity updated"
+      flash[:success] = "Product Updated"
       redirect_back(fallback_location: root_path)
       return
     else
