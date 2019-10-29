@@ -26,6 +26,11 @@
         </div>
       
         <div>
+          <%= f.label :reviewer, "Name" %>
+          <%= f.text_field :reviewer, class: "form-control"%>
+        </div>
+
+        <div>
           <%= f.label :rating %>
           <%= f.select :rating, [nil, 1, 2, 3, 4, 5] %>
         </div>

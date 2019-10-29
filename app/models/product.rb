@@ -23,6 +23,10 @@ class Product < ApplicationRecord
     end
   end
   
+  def self.highlight
+    return Product.all.sample(5)
+  end
+
   # orders active products by name
   def self.order_active_products
     active_products_alpha = []

@@ -14,7 +14,7 @@
       <% if @product.categories.count > 0 %>
         <ul class="categories">
           <% @product.categories.each do |category| %>
-            <li><%= link_to "#{category.name}", category_path, class:"badge badge-light"%></li>
+            <li><%= link_to "#{category.name}", category_path(category.id), class:"badge badge-light"%></li>
           <% end %>
         </ul>
       <% end %>
@@ -49,10 +49,10 @@
     <section class="review">
       <% @product.reviews.each do |review| %>
       <ul>
-        <li><%= review.reviewer %></li>
-        <li><%= review.date.strftime("%B %d, %Y") %></li>
+        <li>Name: <%= review.reviewer %></li>
+        <li>Date: <%= review.date.strftime("%B %d, %Y") %></li>
         <li>Rating: <%= review.rating %> </li>
-        <li><%= review.comment %></li>
+        <li>Comment: <%= review.comment %></li>
       </ul>
       <% end %>
     </section>  

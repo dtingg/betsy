@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :find_order, only: [:show]
+  before_action :find_order, only: [:show, :edit, :update]
+ 
   
   def show
     @order = Order.find_by(id: params[:id])
@@ -16,19 +17,19 @@ class OrdersController < ApplicationController
   end
   
   def edit
-    if @cart.nil?
+    if @order.nil?
       redirect_back(fallback_location: root_path)
       return
     end
   end
   
   def update
-    if @cart.nil?
+    if @order.nil?
       redirect_back(fallback_location: root_path)
       return
     end
     
-    if @cart.update(order_params)
+    if @order.update(order_params)
       flash[:success] = "Thank you for your order!"  
       redirect_to order_path(@cart)
       session[:order_id] = nil
