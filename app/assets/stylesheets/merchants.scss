@@ -43,15 +43,25 @@ td {
 
 .merchant_info {
   display: grid;
-  grid-template-columns: 1fr 2.5fr;
+  grid-template-columns: 400px 400px;
   width: 70%;
-  margin-left: 15%;
+  margin-left: 20px;
+
+  img {
+    grid-column: 1;
+    grid-row: 1;
+    width: 200px;
+    height: 200px;
+    border-radius: 2%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 .merchant_info_details {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   grid-template-rows: auto auto auto auto;
-
 }
 
 .page_title {

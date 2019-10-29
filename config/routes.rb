@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   
   resources :orders
   resources :merchants
+
+  get "merchants/:id/dashboard", to: "merchants#dashboard", as: "dashboard"
+
   resources :orderitems
   resources :reviews, only: [:new, :create]
   resources :products 
