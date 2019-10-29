@@ -12,13 +12,23 @@ describe Review do
     it "will have the required fields" do
       new_review.save
       
-      [:comment, :product_id, :rating].each do |field|
+      [:comment, :product_id, :rating, :reviewer].each do |field|
         expect(new_review).must_respond_to field
       end
     end
   end
 
   describe "validations" do  
+    it "must have a reviewer" do
+      new_review.reviewer = nil
+      new_review.save
+      
+      # Assert
+      expect(new_review.valid?).must_equal false
+      expect(new_review.errors.messages).must_include :reviewer
+      expect(new_review.errors.messages[:reviewer]).must_equal ["can't be blank"]
+    end
+
     it "must have a comment" do
       new_review.comment = nil
       new_review.save
