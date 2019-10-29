@@ -60,38 +60,3 @@
 </tr>
 </table>
 </aside>
-<section class = "shopping_cart">
-<table class="table table-hover table-sm" frame = "box" id="shopping_cart">
-<thead>
-<tr>
-<th> IMAGE </th>
-<th> PRODUCT </th>
-<th> QTY </th>
-<th> PRICE </th>
-<th> TOTAL </th>
-<th> EDIT </th>
-<th> DELETE </th>
-</tr>
-</thead>
-<% if @cart.orderitems.any? %>
-  <% @cart.orderitems.each do |item| %>
-  <tr>
-  <td><%= image_tag(item.product.photo_url, alt:"#{item.product.name}") %></td>
-  <td>
-  <%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %>
-  <br />
-  <%= item.product.description %>
-  <br />
-  <%= item.product.merchant.username %>
-  </td>
-  <td><%= item.quantity %></td>
-  <td>$<%= item.product.price %></td>
-  <td>$<%= item.product.price*item.quantity %></td>
-  <td><%= link_to "Edit", orderitem_path(item) %></td>
-  <td><%= link_to "Delete", orderitem_path(item), method: :delete %></td>
-  </tr>
-  <% end %>
-  </table>
-<% else %>
-  Your shopping cart is empty.
-<% end %>
