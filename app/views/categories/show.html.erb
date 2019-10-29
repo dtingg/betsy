@@ -1,20 +1,16 @@
-<h2>show.html.erb</h2>
-<p> Category Name: <%= @category.name %></p>
-<% @category.products.each do |product| %>
-<section class="product-image">
-    <%= image_tag(product.photo_url, alt:"#{product.name}") %>
-  </section>
-  <% product.name.titleize %> </h2>
+<section class="product-page-container">
+  <h2>Category: <%= @category.name.titleize %></h2>
+</section>
+
+<section class="products-list">
+  <% @category.products.each do |product| %>
     <ul>
-      <li><%= product.merchant.username %></li>
-      <li><%= product.description %></li>
-      <li>$<%= product.price %></li>
-      <ul>
-        <label>ALL CATEGORIES</label>
-        <% product.categories.each do |category| %>
-          <li><%= category.name %></li>
-        <% end %>
-      </ul>
+      <li><%= image_tag(product.photo_url, alt:"#{product.name}") %></li>
+      <li><%= link_to "#{product.name.titleize}", product_path(product.id) %></li>
+      <li> This is where we put the ***</li>
     </ul>
-<% end %>
+  <% end %>
+</section>
+
+      
 <%= link_to "All Categories", categories_path %>
