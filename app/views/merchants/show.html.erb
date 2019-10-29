@@ -12,7 +12,11 @@
 
   <section class="merchant-info-details">
     <h2><%= @merchant.username.capitalize %></h2>
-    <p>Average product rating</p>
+    <% if @merchant.calculate_average_rating %>
+      <p>Average Product Rating: <%= @merchant.calculate_average_rating%></p>
+    <%else%>
+      <p>No Ratings<p>
+    <%end%>
   </section>
 
   <%# only shows active products %>

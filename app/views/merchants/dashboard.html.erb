@@ -16,7 +16,11 @@
       <p class="cell_left"><%= @merchant.uid %></p>
       <p class="cell_right">Active Products: <%= @merchant.active_products %></p>
       <p class="cell_left">Membership Duration: <%= @merchant.member_since %></p> 
-      <p class="cell_right">Average Product Rating: <%= @merchant.calculate_average_rating%></p>
+      <% if @merchant.calculate_average_rating %>
+        <p class="cell_right">Average Product Rating: <%= @merchant.calculate_average_rating%></p>
+      <%else%>
+        <p class="cell_right">No Ratings<p>
+      <%end%>
     </section>
   </section>
 
