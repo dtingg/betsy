@@ -19,7 +19,7 @@ class Merchant < ApplicationRecord
     else
       membership_duration = time_diff_days.to_s + " days"
     end
-    
+
     return membership_duration
   end
   
@@ -31,19 +31,6 @@ class Merchant < ApplicationRecord
     end
 
     return active_prod.count
-  end
-
-  def self.build_from_github(auth_hash)
-    merchant = Merchant.new
-    merchant.uid = auth_hash[:uid]
-    merchant.username = auth_hash[:info][:nickname]
-    merchant.email = auth_hash[:info][:email]
-
-    return merchant
-  end
-  
-  def self.alphabetic
-    return Merchant.order(username: :asc)
   end
 
   def all_orderitems
@@ -84,5 +71,18 @@ class Merchant < ApplicationRecord
     return nil if num_of_ratings == 0 
       
     return total_rating/num_of_ratings
+  end
+
+  def self.build_from_github(auth_hash)
+    merchant = Merchant.new
+    merchant.uid = auth_hash[:uid]
+    merchant.username = auth_hash[:info][:nickname]
+    merchant.email = auth_hash[:info][:email]
+
+    return merchant
+  end
+  
+  def self.alphabetic
+    return Merchant.order(username: :asc)
   end
 end
