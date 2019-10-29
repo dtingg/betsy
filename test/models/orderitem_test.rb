@@ -1,13 +1,14 @@
 require "test_helper"
 
 describe Orderitem do
-  let (:merchant) { Merchant.create(username: "Bob", email: "bob@aol.com") }
+  let (:merchant) { Merchant.create(username: "Bob", email: "bob@aol.com", uid: "12347") }
   let (:product) { Product.create(merchant_id: merchant.id, name: "Oatmeal soap", price: 5.55) }
   let (:order) { Order.create(status: "pending") }
   let (:orderitem) { Orderitem.create(order_id: order.id, product_id: product.id, quantity: 3) }
   
   describe "initialize" do
     it "can be instantiated" do
+      
       expect(orderitem.valid?).must_equal true
     end
     
@@ -108,7 +109,6 @@ describe Orderitem do
   
   describe "total method" do
     it "correctly returns the total of the orderitem" do
-      
       total = orderitem.total
       
       expect(total).must_equal (orderitem.quantity * orderitem.product.price)
