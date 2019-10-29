@@ -23,6 +23,10 @@ class Product < ApplicationRecord
     end
   end
   
+  def self.highlight
+    return Product.order(stock_qty: :desc).first
+  end
+
   # orders active products by name
   def self.order_active_products
     active_products_alpha = []
