@@ -23,7 +23,6 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      @product.name.downcase
       redirect_to product_path(@product.id)
       return
     else

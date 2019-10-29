@@ -5,7 +5,6 @@ before_action :blank_search, only: [:search]
   end
 
   def search
-    # word = params[:search].split(" ").first.capitalize
     @products = Product.where(name: params[:search])
     @merchants = Merchant.where(username: params[:search])
     if @products == [] && @merchants == [] 
