@@ -38,12 +38,13 @@ class ActiveSupport::TestCase
       }
     }
   end
-  def perform_login(merchant = nil)
-    merchant ||= Merchant.first
-    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
-    get auth_callback_path(:github)
-    expect(session[:user_id]).must_equal merchant.id
-    return merchant
-  end
-  # Add more helper methods to be used by all tests here...
+
+  # def perform_login(merchant = nil)
+  #   merchant ||= Merchant.first
+  #   OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
+  #   get auth_callback_path
+  #   expect(session[:user_id]).must_equal merchant.id
+  #   return merchant
+  # end
 end
+
