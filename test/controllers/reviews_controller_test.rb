@@ -16,6 +16,7 @@ describe ReviewsController do
         review_hash = {
           review:{
             product_id: new_product.id,
+            reviewer: "Tiffany",
             rating: 5,
             comment: "Great!"
           }
@@ -32,6 +33,7 @@ describe ReviewsController do
       it "will not create a new review if invalid fields are given" do 
         review_hash = {
           review:{
+            reviewer: "Tiffany",
             product_id: new_product.id, 
             rating: nil,
             comment: nil
@@ -56,13 +58,14 @@ describe ReviewsController do
       @other_merchant_product = products(:rose) 
 
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(@user))
-      get auth_github_callback_path
+      get auth_callback_path
     end
 
     describe "new" do
       it "will not show the form to add a review when his product" do     
         review_hash = {
           review:{
+            reviewer: "Tiffany",
             product_id: @merchant_product.id,
             rating: 5,
             comment: "Great!"
@@ -79,6 +82,7 @@ describe ReviewsController do
         
         review_hash = {
           review:{
+            reviewer: "Tiffany",
             product_id: @other_merchant_product.id,
             rating: 5,
             comment: "Great!"
@@ -95,6 +99,7 @@ describe ReviewsController do
       it "will not create a review when his own product" do 
         review_hash = {
           review:{
+            reviewer: "Tiffany",
             product_id: @merchant_product.id,
             rating: 5,
             comment: "Great!"
@@ -112,6 +117,7 @@ describe ReviewsController do
       it "will create a review when other merchant product" do 
         review_hash = {
           review:{
+            reviewer: "Tiffany",
             product_id: @other_merchant_product.id,
             rating: 5,
             comment: "Great!"
