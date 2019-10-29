@@ -1,5 +1,8 @@
 class HomepagesController < ApplicationController
 before_action :blank_search, only: [:search]
+  def index
+    @products = Product.highlight
+  end
 
   def search
     # word = params[:search].split(" ").first.capitalize
@@ -11,13 +14,11 @@ before_action :blank_search, only: [:search]
       return 
     end
   end
-end
 
 private
-def blank_search
-  if params[:search].blank?
-    redirect_to(root_path, alert: "Empty field!") and return    
-  def index
-    @products = Product.highlight
-  end
+  def blank_search
+    if params[:search].blank?
+      redirect_to(root_path, alert: "Empty field!") and return   
+    end
+  end 
 end
