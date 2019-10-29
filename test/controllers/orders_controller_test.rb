@@ -45,13 +45,13 @@ describe OrdersController do
       must_respond_with :redirect
     end
     
-    # it "responds with redirect when getting the edit page for a completed order" do
-    #   order.save
-    
-    #   get edit_order_path(order.id)
-    
-    #   must_respond_with :redirect
-    # end
+    it "responds with redirect when getting the edit page for a completed order" do
+      order.save
+      
+      get edit_order_path(order.id)
+      
+      must_respond_with :redirect
+    end
   end
   
   
@@ -103,6 +103,28 @@ describe OrdersController do
       
       updated_order = Order.find_by(id: old_order.id)
       expect(updated_order.name).must_equal old_order.name
+    end
+  end
+  
+  describe "cart method" do
+    it "shows the cart for a valid, pending order" do
+      get cart_path(pending_order.id)
+      
+      must_respond_with :success
+    end
+    
+    it "redirects to the root path for an invalid order" do
+      invalid_id = -1
+      
+      get cart_path(invalid_id)
+      
+      must_redirect_to :root
+    end
+    
+    it "redirects to the order show page for a valid, completed order" do
+      get cart_path(order.id)
+      
+      must_redirect_to order_path(order.id)
     end
   end
 end

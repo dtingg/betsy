@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :find_order, only: [:show, :edit] #update?
+  before_action :find_order, only: [:show, :edit, :cart] #update?
   
   def show    
     if @order.nil?
@@ -64,6 +64,15 @@ class OrdersController < ApplicationController
   #   end
   
   def cart
+    if @order.nil?
+      redirect_to root_path
+      return
+    end
+    
+    if @order.status == "complete"
+      redirect_to order_path(@order.id)
+      return
+    end
   end
   
   private
