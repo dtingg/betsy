@@ -115,6 +115,14 @@ describe Orderitem do
     end
   end
   
+  describe "marked check method" do
+    it "correctly changes complete on orderitems" do
+      orderitem.complete = false
+      orderitem.mark_complete
+      expect(orderitem.complete).must_equal true
+    end
+  end
+  
   describe "self.exists method" do
     it "will return an orderitem object if it already exists" do
       orderitem.save
