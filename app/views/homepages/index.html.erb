@@ -1,20 +1,23 @@
-<h2>WELCOME TO SUDSY</h2>
-<section class="product-page-container">
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+<h3>the online soap destination</h3>
+<section class="application-container">
+
+  <div class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-slide-to="0" class="active"></li>
+      <li data-slide-to="1"></li>
+      <li data-slide-to="2"></li>
     </ol>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-      
+    <div class="carousel-inner d-flex align-items-center justify-content-center min-vh-100">
+      <div class="carousel-item active carousel-item ">
+       <%= link_to image_tag(@products.first.photo_url, alt:"alt-text"), product_path(@products.first) %>
       </div>
 
-      <div class="carousel-item">
-        <%= link_to image_tag(@product.photo_url, alt:"alt-text"), product_path(@product) %>
-      </div>
-      
+      <% @products[1..-1].each do |product| %>
+        <div class="carousel-item d-flex align-items-center justify-content-center min-vh-100">
+        <%= link_to image_tag(product.photo_url, alt:"alt-text"), product_path(product) %>
+        </div>
+      <% end %>
     </div>
     
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

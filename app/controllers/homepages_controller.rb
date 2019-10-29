@@ -1,5 +1,5 @@
 class HomepagesController < ApplicationController
   def index
-    @product = Product.highlight
+    @products = Product.highlight
   end
 end

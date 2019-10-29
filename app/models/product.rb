@@ -24,7 +24,7 @@ class Product < ApplicationRecord
   end
   
   def self.highlight
-    return Product.find_by(id: 1)
+    return Product.all.sample(5)
   end
 
   # orders active products by name
