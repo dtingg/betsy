@@ -28,6 +28,7 @@
     ul{
       list-style-type: none;
     }
+    
 
     img {
       width: 150px;
@@ -37,6 +38,11 @@
       margin: 2% auto;
     }
   }
+}
+
+li {
+  list-style-type: none;
+  margin-left: 0;
 }
 
 .product-name {

@@ -17,12 +17,22 @@
 
 @import "**/*";
 
+// colors 
+// blues light #B8D8D8
+// blues med #7A9E9F
+// blues dark #4F6367
+// white #EEF5DB
+// pink #FE5F55
+
 * {
   font-family: 'Roboto Condensed', sans-serif;
+  color: #4F6367;
 }
 
 nav h1 {
   text-align: center;
+  color: #FE5F55; 
+  font-size: 3rem;
 }
 
 nav ul {
@@ -30,6 +40,20 @@ nav ul {
   flex-direction: row;
   justify-content: space-around;
 }
+
+
+.btn {
+  background-color:#7A9E9F;
+  border-color: #7A9E9F;
+  margin: .2rem;
+}
+
+.btn:hover {
+  background-color: #4F6367;
+  border-color: #4F6367;
+}
+
+
 
 nav ul li {
   list-style-type: none;

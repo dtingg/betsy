@@ -1,13 +1,10 @@
-<section class="products-header">
-  <h2>Categories Index</h2>
+<section class="categories-header">
+  <h3>All Categories</h3>
 </section>
 <section class="products-list">
 <% @categories.each do |category| %>
-  <ul>
-
-  <li><%= link_to "#{category.name.titleize}", category_path(category.id) %></li>
-  </ul>  
+  <p class="badge badge-primary"><%= link_to "#{category.name.titleize}", category_path(category.id) %></p>
 <% end %>
 </section>
 
-<%= link_to "Add a Category", new_category_path, class:"btn btn-primary" %>
+<%= link_to "Add a Category", new_category_path, class:"btn btn-primary", id: "add-btn" %>
