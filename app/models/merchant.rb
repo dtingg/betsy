@@ -13,16 +13,13 @@ class Merchant < ApplicationRecord
     if time_diff_days == 0
       time_diff_hours  = ((Time.current - self.created_at) / 1.hour).round
       membership_duration = time_diff_hours.to_s + " hours"
-      return membership_duration
-    end
-
-    if time_diff_days >= 365
+    elsif time_diff_days >= 365
       time_diff_years  = ((Time.current - self.created_at) / 1.year).round
       membership_duration = time_diff_years.to_s + " years"
-      return membership_duration
+    else
+      membership_duration = time_diff_days.to_s + " days"
     end
-
-    membership_duration = time_diff_days.to_s + " days"
+    
     return membership_duration
   end
   
@@ -36,7 +33,6 @@ class Merchant < ApplicationRecord
     return active_prod.count
   end
 
-  
   def self.build_from_github(auth_hash)
     merchant = Merchant.new
     merchant.uid = auth_hash[:uid]

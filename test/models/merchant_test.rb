@@ -1,7 +1,100 @@
 require "test_helper"
 
 describe Merchant do
+  describe "initialize" do
+    before do
+      @new_merchant = Merchant.new(username: "random", uid: 32132, email: "random@email")
+    end
 
+    it "can be instantiated" do
+      expect(@new_merchant.valid?).must_equal true
+    end
+    
+    it "will have the required fields" do
+      [:username, :uid, :email].each do |field|
+        expect(@new_merchant).must_respond_to field
+      end
+    end
+  end
+
+  describe "relationships" do
+    describe "product" do
+      before do
+        @merchant = Merchant.new(username: "random", uid: 32132, email: "random@email")
+      end
+
+      it "can be created without product" do
+        expect(@merchant.save).must_equal true
+      end
+
+      it "can have a product" do
+        @merchant.save
+        product = Product.create(name: "random soap", price: 10.0, merchant: @merchant, stock_qty: 9)
+        
+        expect(@merchant.products.last).must_be_instance_of Product      
+        expect(@merchant.products.last.name).must_equal product.name
+      end
+    end
+  end
+
+  describe "validations" do
+    describe "username" do
+      it "is valid with unique username" do
+        unique_username = Merchant.new(username: "patricia", uid: 43242, email: "random@email.here")
+      
+        empty_hash = Hash.new
+
+        expect(unique_username.valid?).must_equal true
+        expect(unique_username.errors.messages).must_equal empty_hash
+      end
+
+      it "won't be created if username is not unique" do
+        invalid_username = Merchant.new(username: "george", uid: 43242, email: "random@email.here")
+      
+        expect(invalid_username.valid?).must_equal false
+        expect(invalid_username.errors.messages).must_include :username
+        expect(invalid_username.errors.messages[:username]).must_equal ["has already been taken"]
+      end
+    end
+
+    describe "email" do
+      it "must have a unique email" do
+        unique_email = Merchant.new(username: "patricia", uid: 43242, email: "random@email.here")
+      
+        empty_hash = Hash.new
+
+        expect(unique_email.valid?).must_equal true
+        expect(unique_email.errors.messages).must_equal empty_hash
+      end
+
+      it "won't be created if email is not unique" do
+        invalid_email = Merchant.new(username: "hello_world", uid: 43242, email: "anemail@adadev.org")
+      
+        expect(invalid_email.valid?).must_equal false
+        expect(invalid_email.errors.messages).must_include :email
+        expect(invalid_email.errors.messages[:email]).must_equal ["has already been taken"]
+      end
+    end
+
+    describe "uid" do
+      it "must have a unique uid" do
+        unique_uid = Merchant.new(username: "patricia", uid: 43242, email: "random@email.here")
+      
+        empty_hash = Hash.new
+
+        expect(unique_uid.valid?).must_equal true
+        expect(unique_uid.errors.messages).must_equal empty_hash
+      end
+
+      it "won't be created if uid is not unique" do
+        invalid_uid = Merchant.new(username: "hello_world", uid: 1234, email: "afjdjklfda")
+      
+        expect(invalid_uid.valid?).must_equal false
+        expect(invalid_uid.errors.messages).must_include :uid
+        expect(invalid_uid.errors.messages[:uid]).must_equal ["has already been taken"]
+      end
+    end
+  end
   
   describe "build from github" do
     it "can build an auth_hash from github" do
@@ -26,8 +119,10 @@ describe Merchant do
   describe "member since method" do
     it "can calculate how long a merchant has been a member" do
       merchant = merchants(:merchant_two)
+      current_time = Time.current
+      expected_duration = (((current_time - merchant.created_at) / 1.hour).round)
 
-      expect((merchant.member_since).to_i).must_equal ((Time.current - merchant.created_at).to_i)
+      expect(merchant.member_since.to_i).must_equal expected_duration
     end
 
     it "does not calculate membership duration if merchant not saved" do
@@ -79,7 +174,6 @@ describe Merchant do
     end
 
     it "counts when a merchant has active products" do
-
       expect(@merchant.active_products).must_equal (@merchant.products.where(active: true)).count
     end
     
@@ -152,7 +246,7 @@ describe Merchant do
     it "calculates average rating for merchant with multiple reviews" do
       average_rating = @merchant.calculate_average_rating
 
-      expected_average = (@review_one.rating + @review_two.rating)/2
+      expected_average = ((@review_one.rating + @review_two.rating) / 2)
 
       expect(average_rating).must_equal expected_average
 
@@ -160,11 +254,10 @@ describe Merchant do
 
     it "calculates average rating for merchant with no reviews" do
       merchant_three = merchants(:merchant_three)
-      expected_average = nil
 
       average_rating = merchant_three.calculate_average_rating
 
-      expect(average_rating).must_equal expected_average
+      assert_nil(average_rating)
     end
   end  
 end
