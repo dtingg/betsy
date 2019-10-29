@@ -56,7 +56,7 @@ class Merchant < ApplicationRecord
   end
 
   def calculate_average_rating
-    total_rating = 0
+    total_rating = 0.0
     num_of_ratings = 0
 
     self.products.each do |product|

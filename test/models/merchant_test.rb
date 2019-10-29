@@ -203,7 +203,7 @@ describe Merchant do
 
   describe "calculate gross sales" do
     before do
-      @merchant = merchants(:merchant_one)
+      @merchant = Merchant.create(username: "golden merchant", uid: 1232, email: "hello@world.com")
       product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00)
       @order_one = Order.create(status: "pending")
       orderitem_one = Orderitem.create(order_id: @order_one.id, product_id: product.id, quantity: 3)
@@ -211,8 +211,8 @@ describe Merchant do
       @order_two = Order.create(status: "pending")
       orderitem_two = Orderitem.create(order_id: @order_two.id, product_id: product.id, quantity: 2)
 
-      merchant_two = merchants(:merchant_two)
-      product_two =  Product.create(merchant_id: merchant_two.id, name: "Rose soap", price: 5.00)
+      another_merchant = Merchant.create(username: "new merch", uid: 1232132, email: "email@world.com")
+      product_two =  Product.create(merchant_id: another_merchant.id, name: "Rose soap", price: 5.00)
       order_three = Order.create(status: "pending")
       orderitem_three = Orderitem.create(order_id: order_three.id, product_id: product_two.id, quantity: 3)
     end
@@ -237,7 +237,7 @@ describe Merchant do
 
   describe "calculate average rating" do
     before do
-      @merchant = merchants(:merchant_one)
+      @merchant = Merchant.create(username: "golden merchant", uid: 1232, email: "hello@world.com")
       product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00)
       @review_one = Review.create(comment: "blah blah", product_id: product.id, rating: 4)
       @review_two = Review.create(comment: "nothing", product_id: product.id, rating: 2)
@@ -246,7 +246,7 @@ describe Merchant do
     it "calculates average rating for merchant with multiple reviews" do
       average_rating = @merchant.calculate_average_rating
 
-      expected_average = ((@review_one.rating + @review_two.rating) / 2)
+      expected_average = ((@review_one.rating + @review_two.rating) / 2.0)
 
       expect(average_rating).must_equal expected_average
 
