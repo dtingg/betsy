@@ -78,9 +78,8 @@ describe ProductsController do
   describe "authenticated user" do 
     before do
       new_merchant = Merchant.new(username:"Kathy", email: "whatev@git.com", uid: 473837 )
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(new_merchant))
-
-      get auth_github_callback_path
+      
+      perform_login(new_merchant)
     end
 
     describe "new" do

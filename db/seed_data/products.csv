@@ -1,51 +1,49 @@
 name,description,active,stock_qty,price,merchant_id,photo_url
-Tacos,"28-day aged 300g USDA Certified Prime Ribeye, rosemary-thyme garlic butter, with choice of two sides.",true,10,6.69,18,http://bogisich.co/mauro
-Mushroom Risotto,"Three eggs with cilantro, tomatoes, onions, avocados and melted Emmental cheese. With a side of roasted potatoes, and your choice of toast or croissant.",true,5,52.08,5,http://mosciski.biz/ronnie
-Chicken Fajitas,"Three egg omelet with Roquefort cheese, chives, and ham. With a side of roasted potatoes, and your choice of toast or croissant.",true,8,48.56,9,http://franecki.org/roxy
-Massaman Curry,"Two buttermilk waffles, topped with whipped cream and maple syrup, a side of two eggs served any style, and your choice of smoked bacon or smoked ham.",false,6,11.39,8,http://powlowski.name/justin_parker
-Hummus,"Three egg whites with spinach, mushrooms, caramelized onions, tomatoes and low-fat feta cheese. With herbed quinoa, and your choice of rye or whole-grain toast.",true,14,25.05,24,http://schowalter.io/luther
-Arepas,Breaded fried chicken with waffles. Served with maple syrup.,true,2,15.53,16,http://cartergrant.org/kathleen_morar
-Poutine,"Smoked salmon, poached eggs, diced red onions and Hollandaise sauce on an English muffin. With a side of roasted potatoes.",true,13,11.97,9,http://kub.io/afton
-Fettuccine Alfredo,"Three eggs with cilantro, tomatoes, onions, avocados and melted Emmental cheese. With a side of roasted potatoes, and your choice of toast or croissant.",true,16,17.88,5,http://schadencartwright.io/elana
-Caprese Salad,"Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",false,18,11.11,20,http://monahan.io/thurman_brekke
-Pasta and Beans,"Smoked salmon, poached eggs, diced red onions and Hollandaise sauce on an English muffin. With a side of roasted potatoes.",false,1,76.99,22,http://hageneswilliamson.info/bethel
-Risotto with Seafood,"Fresh parsley, Italian sausage, shallots, garlic, sun-dried tomatoes and mozzarella cheese in an all-butter crust. With a side of mixed fruits.",false,16,5.23,23,http://raynor.name/tuyet
-Pasta with Tomato and Basil,"Breaded fried chicken with waffles, and a side of maple syrup.",false,11,19.49,14,http://grady.net/sharonda
-Katsu Curry,"Three egg omelet with Roquefort cheese, chives, and ham. With a side of roasted potatoes, and your choice of toast or croissant.",true,18,10.09,22,http://sanford.org/candy
-Som Tam,"Three egg whites with spinach, mushrooms, caramelized onions, tomatoes and low-fat feta cheese. With herbed quinoa, and your choice of rye or whole-grain toast.",false,16,36.15,19,http://tillman.co/lorenzo
-Ricotta Stuffed Ravioli,"Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",false,10,76.64,16,http://fahey.io/lonny.runolfon
-Caesar Salad,"Three egg omelet with Roquefort cheese, chives, and ham. With a side of roasted potatoes, and your choice of toast or croissant.",false,5,84.67,11,http://lockmanschaden.co/edythe
-Bruschette with Tomato,"Fresh Norwegian salmon, lightly brushed with our herbed Dijon mustard sauce, with choice of two sides.",false,6,46.25,25,http://hudsonbartell.net/cyrus_rogahn
-Peking Duck,"Three eggs with cilantro, tomatoes, onions, avocados and melted Emmental cheese. With a side of roasted potatoes, and your choice of toast or croissant.",true,15,83.49,15,http://larsonstanton.net/lettie
-Ebiten maki,"Fresh parsley, Italian sausage, shallots, garlic, sun-dried tomatoes and mozzarella cheese in an all-butter crust. With a side of mixed fruits.",true,8,94.87,17,http://hopperath.biz/lawrence
-Meatballs with Sauce,"Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",false,19,35.98,19,http://bashirian.com/andrew.romaguera
-Lasagne,"Three egg omelet with Roquefort cheese, chives, and ham. With a side of roasted potatoes, and your choice of toast or croissant.",false,15,93.31,17,http://jast.net/lacey
-French Toast,"Fresh Norwegian salmon, lightly brushed with our herbed Dijon mustard sauce, with choice of two sides.",false,10,3.94,21,http://schroederfisher.io/horace
-Tiramisù,"Creamy mascarpone cheese and custard layered between espresso and rum soaked house-made ladyfingers, topped with Valrhona cocoa powder.",false,4,65.9,10,http://schuster.io/zita
-Kebab,"Three egg omelet with Roquefort cheese, chives, and ham. With a side of roasted potatoes, and your choice of toast or croissant.",true,5,0.45,21,http://cormier.com/clarence.nienow
-French Fries with Sausages,"Fresh Norwegian salmon, lightly brushed with our herbed Dijon mustard sauce, with choice of two sides.",false,20,38.54,4,http://heidenreich.info/altha
-Pierogi,"28-day aged 300g USDA Certified Prime Ribeye, rosemary-thyme garlic butter, with choice of two sides.",false,9,51.84,18,http://klocko.name/fermin_beahan
-Cheeseburger,"Fresh Norwegian salmon, lightly brushed with our herbed Dijon mustard sauce, with choice of two sides.",false,15,72.33,25,http://purdy.org/fiona
-California Maki,"Fresh parsley, Italian sausage, shallots, garlic, sun-dried tomatoes and mozzarella cheese in an all-butter crust. With a side of mixed fruits.",true,13,41.43,16,http://moriette.name/nakia.gaylord
-Chicken Milanese,"Breaded fried chicken with waffles, and a side of maple syrup.",false,12,32.99,5,http://sporer.io/iac.wolff
-Souvlaki,"Smoked salmon, poached eggs, diced red onions and Hollandaise sauce on an English muffin. With a side of roasted potatoes.",true,2,23.93,12,http://goldner.org/gene
-Poke,"Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",false,2,64.5,5,http://reillycrona.co/annalee_beahan
-Pork Belly Buns,"Two butter croissants of your choice (plain, almond or cheese). With a side of herb butter or house-made hazelnut spread.",true,18,53.27,11,http://keeblerstanton.name/cherie
-Cauliflower Penne,"Smoked salmon, poached eggs, diced red onions and Hollandaise sauce on an English muffin. With a side of roasted potatoes.",true,17,16.09,17,http://romaguera.io/aldo_crooks
-Barbecue Ribs,"Breaded fried chicken with waffles, and a side of maple syrup.",true,5,62.76,24,http://keeling.com/paz.nienow
-Chicken Wings,"Three eggs with cilantro, tomatoes, onions, avocados and melted Emmental cheese. With a side of roasted potatoes, and your choice of toast or croissant.",false,10,92.13,22,http://schamberger.name/nestor
-Pizza,"Fresh Norwegian salmon, lightly brushed with our herbed Dijon mustard sauce, with choice of two sides.",true,0,85.98,2,http://ernservonrueden.io/margurite.rogahn
-Salmon Nigiri,Breaded fried chicken with waffles. Served with maple syrup.,false,14,30.55,13,http://smithhudson.biz/fabian
-Chicken Parm,"Two butter croissants of your choice (plain, almond or cheese). With a side of herb butter or house-made hazelnut spread.",false,6,91.18,15,http://gulgowski.com/brandie
-Linguine with Clams,"Breaded fried chicken with waffles, and a side of maple syrup.",false,16,47.48,25,http://runolfon.org/byron
-Bunny Chow,Breaded fried chicken with waffles. Served with maple syrup.,false,20,25.08,25,http://schmelerkutch.co/rasheeda
-Philadelphia Maki,"Fresh parsley, Italian sausage, shallots, garlic, sun-dried tomatoes and mozzarella cheese in an all-butter crust. With a side of mixed fruits.",false,8,93.89,3,http://rippin.com/vincenzo_harris
-Pho,"Granny Smith apples mixed with brown sugar and butter filling, in a flaky all-butter crust, with ice cream.",true,16,55.84,19,http://runte.co/dennis_luettgen
-Tuna Sashimi,"28-day aged 300g USDA Certified Prime Ribeye, rosemary-thyme garlic butter, with choice of two sides.",false,17,53.53,8,http://wolfbins.info/christie.willms
-Chilli con Carne,"28-day aged 300g USDA Certified Prime Ribeye, rosemary-thyme garlic butter, with choice of two sides.",true,4,98.33,9,http://abbottbaumbach.io/chuck
-Fish and Chips,"Fresh Norwegian salmon, lightly brushed with our herbed Dijon mustard sauce, with choice of two sides.",false,8,90.03,4,http://koepp.name/nevada_gibson
-Scotch Eggs,"Three eggs with cilantro, tomatoes, onions, avocados and melted Emmental cheese. With a side of roasted potatoes, and your choice of toast or croissant.",true,9,55.29,8,http://ortiz.io/zackary
-Seafood Paella,Breaded fried chicken with waffles. Served with maple syrup.,false,6,86.8,18,http://lynch.name/elmer_lakin
-Pasta Carbonara,"Two butter croissants of your choice (plain, almond or cheese). With a side of herb butter or house-made hazelnut spread.",false,9,66.21,23,http://gerhold.net/francisco
-Sushi,"Smoked salmon, poached eggs, diced red onions and Hollandaise sauce on an English muffin. With a side of roasted potatoes.",false,5,43.25,8,http://rogahn.co/carmina
-Pork Sausage Roll,"Breaded fried chicken with waffles, and a side of maple syrup.",false,20,98.53,15,http://king.io/tasha.rath
+Vegan soap,Handmade soap that is completely vegan,true,44,18.25,4,https://res.cloudinary.com/hbmnvixez/image/upload/v1572015603/table.jpg
+Olive oil soap,Soap made from extra virgin olive oil,true,34,21.15,5,https://res.cloudinary.com/hbmnvixez/image/upload/v1572015458/hands.jpg
+French soap,Finely milled soap made in France,true,53,8.5,2,https://res.cloudinary.com/hbmnvixez/image/upload/v1572015253/rope.jpg
+Sea salt soap,Exfoliating soap made from sea salt,true,23,18.4,3,https://res.cloudinary.com/hbmnvixez/image/upload/v1572015141/net.jpg
+Cinnamon soap,Soap made from cinnamon,true,55,9.99,1,https://res.cloudinary.com/hbmnvixez/image/upload/v1572015079/holiday.jpg
+Coffee soap,Soap made from coffee beans,true,46,14.8,1,https://res.cloudinary.com/hbmnvixez/image/upload/v1572015017/beans.jpg
+Rose petal soap,Soap made with rose petals,true,57,9.25,2,https://res.cloudinary.com/hbmnvixez/image/upload/v1572014954/petals.jpg
+Rose soap,Soap with a decorative rose,true,33,12.75,3,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933994/rose.jpg
+Pink soap,Natural soap,false,18,16.29,6,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933988/pink.jpg
+Italian soap,Soap from Italy,true,18,19.1,7,https://res.cloudinary.com/hbmnvixez/image/upload/v1571933512/green_blue.jpg
+Lime soap,Soap shaped like a lime,true,35,16.5,8,https://res.cloudinary.com/hbmnvixez/image/upload/v1571932674/lime.jpg
+Oregon soap,Soap made in Oregon,true,54,10,5,https://res.cloudinary.com/hbmnvixez/image/upload/v1572312888/oregon.jpg
+Fruit soap,Fruit shaped soaps,true,54,15.2,1,https://res.cloudinary.com/hbmnvixez/image/upload/v1572313030/fruit.jpg
+Lavender soap,Soap made from lavender,true,38,13.3,5,https://res.cloudinary.com/hbmnvixez/image/upload/v1572313275/lavender.jpg
+Purple soap,Purple colored soap,false,20,23,9,https://res.cloudinary.com/hbmnvixez/image/upload/v1572315143/purple.jpg
+Hair and body bar,Soap for your hair and body,true,44,10.5,11,https://res.cloudinary.com/hbmnvixez/image/upload/v1572313866/hairandbody.jpg
+Bath bomb,Bath bomb,true,58,10.99,13,https://res.cloudinary.com/hbmnvixez/image/upload/v1572314048/bathbombs.jpg
+Oatmeal soap,Soap made with oatmeal,true,52,6.99,15,https://res.cloudinary.com/hbmnvixez/image/upload/v1572314142/oatmeal.jpg
+Seahorse soap,Soap shaped like a seahorse,false,23,9.2,17,https://res.cloudinary.com/hbmnvixez/image/upload/v1572314646/seahorse.jpg
+Block soap,Soap shaped like blocks,true,56,7.34,30,https://res.cloudinary.com/hbmnvixez/image/upload/v1572314825/block.jpg
+Pear soap,Soap made from pears,true,63,14.5,23,https://res.cloudinary.com/hbmnvixez/image/upload/v1572315319/pear.jpg
+Raspberry soap,Soap made from raspberries,true,51,23.45,24,https://res.cloudinary.com/hbmnvixez/image/upload/v1572315496/raspberry.jpg
+Cranberry bath bomb,Bath bomb made with cranberries,true,52,24.34,13,https://res.cloudinary.com/hbmnvixez/image/upload/v1572315633/cranberry.jpg
+Seattle soap,Soap made in Seattle,true,63,12.34,20,https://res.cloudinary.com/hbmnvixez/image/upload/v1572315779/seattle.jpg
+Apple soap,Soap made from apples,true,49,11.2,20,https://res.cloudinary.com/hbmnvixez/image/upload/v1572315954/apple.jpg
+Organic soap,Organic homemade soap,true,67,24.99,4,https://res.cloudinary.com/hbmnvixez/image/upload/v1572316087/organic.jpg
+Lemon soap,Soap made from lemons,true,49,9.87,15,https://res.cloudinary.com/hbmnvixez/image/upload/v1572316223/lemon.jpg
+Calendula soap,Soap made from calendula flowers,true,43,13.24,3,https://res.cloudinary.com/hbmnvixez/image/upload/v1572316370/calendula.jpg
+Cucumber liquid soap,Liquid soap made from cucumbers,true,38,13.2,18,https://res.cloudinary.com/hbmnvixez/image/upload/v1572316545/cucumber.jpg
+Apricot soap,Soap made with apricots,true,42,15.2,4,https://res.cloudinary.com/hbmnvixez/image/upload/v1572316766/apricot.jpg
+Olive oil shaving soap,Shaving soap made from olive oil,true,24,16.4,21,https://res.cloudinary.com/hbmnvixez/image/upload/v1572317019/shaving.jpg
+Heart soap,Heart shaped soap,true,53,22.3,26,https://res.cloudinary.com/hbmnvixez/image/upload/v1572317152/heart.jpg
+Vanilla soap,Exfoliating soap scented with vanilla,true,44,20,27,https://res.cloudinary.com/hbmnvixez/image/upload/v1572317249/vanilla.jpg
+Unscented shaving soap,Unscented shaving soap,true,24,14,21,https://res.cloudinary.com/hbmnvixez/image/upload/v1572317500/unscented.jpg
+Blue soap,Blue glycerin soap,true,21,16,28,https://res.cloudinary.com/hbmnvixez/image/upload/v1572317631/blue.jpg
+California soap,Soap made in California,true,41,8,29,https://res.cloudinary.com/hbmnvixez/image/upload/v1572317746/california.jpg
+Sandcastle soap,Soap with sandcastle motif,true,63,17.99,22,https://res.cloudinary.com/hbmnvixez/image/upload/v1572317871/sandcastle.jpg
+Marseille soap,Soap made in Marseille,false,24,43,25,https://res.cloudinary.com/hbmnvixez/image/upload/v1572318016/marseille.jpg
+Organic French soap,Organic soap made in France,true,50,22.1,19,https://res.cloudinary.com/hbmnvixez/image/upload/v1572318334/organicfrench.jpg
+Chocolate soap,Soap that smells like chocolate,true,55,12.94,27,https://res.cloudinary.com/hbmnvixez/image/upload/v1572318512/chocolate.jpg
+Honey soap,Soap made from honey,true,34,12.99,19,https://res.cloudinary.com/hbmnvixez/image/upload/v1572318614/honey.jpg
+New York soap,Soap made in New York,true,60,35.99,2,https://res.cloudinary.com/hbmnvixez/image/upload/v1572318721/newyork.jpg
+Moisturizing soap,Soap made with moisturizers,false,24,12.5,16,https://res.cloudinary.com/hbmnvixez/image/upload/v1572318856/moisturizing.jpg
+Nurse duck,Rubber duck that looks like a nurse,true,50,20.99,1,https://res.cloudinary.com/hbmnvixez/image/upload/v1572362505/nurse.jpg
+Firefighter duck,Rubber duck that looks like a firefighter,true,50,15.99,3,https://res.cloudinary.com/hbmnvixez/image/upload/v1572362630/firefighter.jpg
+Soccer duck,Rubber duck playing soccer,true,50,18.99,4,https://res.cloudinary.com/hbmnvixez/image/upload/v1572362799/soccer.jpg
+Swimming duck,Rubber duck swimming,true,50,17.25,5,https://res.cloudinary.com/hbmnvixez/image/upload/v1572362968/swimming.jpg
+Angel duck,Rubber duck that looks like an angel,true,50,16.50,2,https://res.cloudinary.com/hbmnvixez/image/upload/v1572363094/angel.jpg

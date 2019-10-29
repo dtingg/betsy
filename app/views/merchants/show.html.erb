@@ -1,117 +1,50 @@
-<p><%= link_to "Return to Merchant List", merchants_path %></p>
-<%# <p><%= link_to "Add New Product", merchant_products_path(@merchant.id), method: :post %></p>
-<section class="merchant_info">
-<% if @merchant.uid < 100000 %>
-  <%= image_tag "https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo" %>
-<% else %>
-  <%= image_tag "https://avatars1.githubusercontent.com/u/#{@merchant.uid}", alt: "github profile photo" %>
-<% end %>
-<section class="merchant_info_details">
-  <h2 class="cell_left"><%= @merchant.username.capitalize %></h2>
-  <h3 class="cell_right">$ 0.00</h3>
-  <p class="cell_left"><%= @merchant.email %></p>
-  <p class="cell_right">Gross Sales</p>
-  <p class="cell_left"><%= @merchant.uid %></p>
-  <p class="cell_right"><%= @merchant.active_products %></p>
-  <p class="cell_left">Membership Duration: <%= @merchant.member_since %></p> 
-  <p class="cell_right"># Average Product Rating</p>
+<%# <p><%= link_to "Return to Merchant List", merchants_path %>
+<%# <p><%= link_to "Add New Product", merchant_products_path(@merchant.id), method: :post %>
+
+<section class="merchant-show-container">
+  <section class="merchant-info">
+    <% if @merchant.uid < 100000 %>
+      <%= image_tag "https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo" %>
+    <% else %>
+      <%= image_tag "https://avatars1.githubusercontent.com/u/#{@merchant.uid}", alt: "github profile photo" %>
+    <% end %>
+  </section>
+
+  <section class="merchant-info-details">
+    <h2><%= @merchant.username.capitalize %></h2>
+    <% if @merchant.calculate_average_rating %>
+      <p>Average Product Rating: <%= @merchant.calculate_average_rating%></p>
+    <%else%>
+      <p>No Ratings<p>
+    <%end%>
+  </section>
+
+  <%# only shows active products %>
+  <section class="merchant-product-header">
+    <h4>Products</h4>
+  </section>
+
+  <section class="merchant-products-list">
+    <% @merchant.products.where(active: true).where("stock_qty > ?", 0).each do |product| %>
+    <ul>
+      <%= image_tag(product.photo_url, alt:"#{product.name}") %>
+
+      <section class="product-name">
+        <li><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
+      </section>
+
+      <section class="product-merchant">
+        <li><%= link_to @merchant.username, merchant_path(@merchant) %></li>
+      </section>
+
+      <section class="product-price">
+        <li>$<%= sprintf('%.2f', product.price) %></li>
+      </section>
+
+      <section class="product-stock">
+        <li><%= product.stock_qty %> left in stock!</li>
+      </section>
+    </ul>
+    <% end %>
+  </section>
 </section>
-</section>
-<%# <section class="inpage_links">
-  <a href="#orders_active">Active Orders</a>
-  <a href="#orders_inactive">Inactive Orders</a>
-  <a href="#products_active">Active Products</a>
-  <a href="#products_inactive">Inactive Products</a>
-</section> %>
-<hr />
-<section class="info_section">
-<h4>Orders</h4>
-<h5><a name="orders_active">Active Orders</a></h5>
-<table class="table table-hover table-sm merchant_details" frame = "box" id="merchant_product_index">
-<thead>
-  <tr>
-    <th>#</th>
-    <th>DATE</th>
-    <th>STATUS</th>
-    <th>ITEMS</th>
-    <th>EDIT</th>
-  </tr>
-</thead>
-</table>
-<p>No Order History</p>
-<br /><br />
-<h5><a name="orders_inactive">Inactive Orders</a></h5>
-<table class="table table-hover table-sm merchant_details" frame = "box" id="merchant_product_index">
-<thead>
-  <tr>
-    <th>#</th>
-    <th>DATE</th>
-    <th>STATUS</th>
-    <th>ITEMS</th>
-    <th>EDIT</th>
-  </tr>
-</thead>
-</table>
-<p> No Order History </p>
-<br /><br />
-<hr />
-<h4>Products</h4>
-<h5><a name="products_active">Active Products</a></h5>
-<table class="table table-hover table-sm merchant_details" frame = "box">
-<thead>
-  <tr>
-    <th>NAME</th>
-    <th>DESCRIPTION</th>
-    <th>ACTIVE</th>
-    <th>STOCK QTY.</th>
-    <th>PRICE</th>
-    <th>PHOTO</th>
-    <th>EDIT</th>
-    <th>DELETE</th>
-  </tr>
-  </thead>
-<% @merchant.products.each do |product| %>
-<% if product.active == true %>
-  <tr>
-    <td><%= link_to product.name, product_path(product.id) %></td>
-    <td><%= product.description %></td>
-    <td>✅</td>
-    <td><%= product.stock_qty %></td>
-    <td>$<%= product.price%></td>
-    <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
-    <td><%= link_to "Edit", edit_product_path(product.id) %></td>
-    <td><%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
-  </tr>
-<% end %>
-<% end %>
-</table>
-<br /><br />
-<h5><a name="products_inactive">Inactive Products</a></h5>
-<table class="table table-hover table-sm merchant_details" frame = "box">
-<thead>
-  <tr>
-    <th>NAME</th>
-    <th>DESCRIPTION</th>
-    <th>ACTIVE</th>
-    <th>STOCK QTY.</th>
-    <th>PRICE</th>
-    <th>PHOTO</th>
-    <th>EDIT</th>
-    <th>DELETE</th>
-  </tr>
-  </thead>
-<% @merchant.products.each do |product| %>
-<% if product.active == false %>
-  <tr>
-    <td><%= link_to product.name, product_path(product.id) %></td>
-    <td><%= product.description %></td>
-    <td>❌</td> 
-    <td><%= product.stock_qty %></td>
-    <td>$<%= product.price%></td>
-    <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
-    <td><%= link_to "Edit", edit_product_path(product.id) %></td>
-    <td><%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
-  </tr>
-<% end %>
-<% end %>
-</table>
