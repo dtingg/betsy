@@ -1,1 +1,36 @@
-<h2>This is the homepage</h2>
+
+<h3>the online soap destination</h3>
+<section class="random-carousel">
+  <div class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-slide-to="0" class="active"></li>
+      <li data-slide-to="1"></li>
+      <li data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+       <%= link_to image_tag(@products.first.photo_url, alt:"alt-text"), product_path(@products.first) %>
+      </div>
+
+      <% @products[1..-1].each do |product| %>
+        <div class="carousel-item">
+        <%= link_to image_tag(product.photo_url, alt:"alt-text"), product_path(product) %>
+        </div>
+      <% end %>
+    </div>
+    
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</section>
+
+<section class="highlight">
+  
+</section>
