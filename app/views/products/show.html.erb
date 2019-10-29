@@ -13,9 +13,8 @@
 
       <% if @product.categories.count > 0 %>
         <ul class="categories">
-          <h3>categories</h3>
           <% @product.categories.each do |category| %>
-            <li><%= link_to "#{category.name}", category_path %></li>
+            <li><%= link_to "#{category.name}", category_path, class:"badge badge-light"%></li>
           <% end %>
         </ul>
       <% end %>

@@ -5,6 +5,11 @@
 <section class="products-page-container">
   <section class="categories">
     <h5>Categories</h5>
+    <ul>
+      <% @categories.each do |category| %>
+        <%= link_to "#{ category.name }", category_path(category), class:"badge badge-light" %>
+      <% end %>
+    </ul>
   </section>
 
   <section class="recently-viewed">
@@ -20,7 +25,6 @@
   </section>
 
   <section class="products-list">
-    <%# <% Product.order_active_products.each do |product| %>
     <% @products.where(active: true).where("stock_qty > ?", 0).each do |product| %>
     <ul>
       <%= image_tag(product.photo_url, alt:"#{product.name}") %>
