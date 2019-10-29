@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :find_order, only: [:show, :edit, :cart, :update] #update?
+  before_action :find_order, only: [:show, :edit, :cart, :update]
   
   def show    
     if @order.nil?
@@ -8,10 +8,19 @@ class OrdersController < ApplicationController
     end
     
     if @order.status == "pending"
-      redirect_to cart_path(@order.id)
+      redirect_to cart_path(@cart.id)
       return
     end
   end
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   def edit
     if @order.nil?
