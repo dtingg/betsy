@@ -17,5 +17,7 @@ private
 def blank_search
   if params[:search].blank?
     redirect_to(root_path, alert: "Empty field!") and return    
+  def index
+    @products = Product.highlight
   end
 end

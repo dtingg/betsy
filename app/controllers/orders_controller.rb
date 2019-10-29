@@ -1,37 +1,40 @@
 class OrdersController < ApplicationController
-  before_action :find_order, only: [:show]
+  before_action :find_order, only: [:show, :edit, :cart, :update]
   
-  def show
-    @order = Order.find_by(id: params[:id])
-    
+  def show    
     if @order.nil?
       redirect_back(fallback_location: root_path)
       return
     end
     
     if @order.status == "pending"
-      redirect_to cart_path(@order)
+      redirect_to cart_path(@cart.id)
       return
     end
   end
   
   def edit
-    if @cart.nil?
-      redirect_back(fallback_location: root_path)
-      return
-    end
-  end
-  
-  def update
-    if @cart.nil?
+    if @order.nil?
       redirect_back(fallback_location: root_path)
       return
     end
     
-    if @cart.update(order_params)
+    if @order.status == "complete"
+      redirect_to order_path(@order)
+    end
+  end
+  
+  def update
+    if @order.nil?
+      redirect_back(fallback_location: root_path)
+      return
+    end
+    
+    if @order.update(order_params)
       flash[:success] = "Thank you for your order!"  
       redirect_to order_path(@cart)
-      session[:order_id] = nil
+      session[:cart_id] = nil
+      
       return
     else
       render :edit
@@ -40,6 +43,15 @@ class OrdersController < ApplicationController
   end
   
   def cart
+    if @order.nil?
+      redirect_to root_path
+      return
+    end
+    
+    if @order.status != "pending"
+      redirect_to order_path(@order.id)
+      return
+    end
   end
   
   private

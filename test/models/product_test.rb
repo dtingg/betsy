@@ -72,48 +72,54 @@ describe Product do
   end
   
   describe "validations" do
-    it "must have a name" do
-      product = products(:potter)
-      product.name = nil
+    describe "name" do
+      it "must have a name" do
+        product = products(:potter)
+        product.name = nil
+        
+        expect(product.valid?).must_equal false
+        expect(product.errors.messages).must_include :name
+        expect(product.errors.messages[:name]).must_equal ["can't be blank"]
+      end
       
-      expect(product.valid?).must_equal false
-      expect(product.errors.messages).must_include :name
-      expect(product.errors.messages[:name]).must_equal ["can't be blank"]
+      it "must have a unique name" do      
+        duplicate_product = Product.create(merchant_id: merchants(:merchant_one), name: "harry potter soap", price: 4) 
+        
+        expect(duplicate_product.valid?).must_equal false
+        expect(duplicate_product.errors.messages).must_include :name
+        expect(duplicate_product.errors.messages[:name]).must_equal ["has already been taken"]
+      end
     end
     
-    it "must have a unique name" do      
-      duplicate_product = Product.create(merchant_id: merchants(:merchant_one), name: "harry potter soap", price: 4) 
+    describe "price" do
+      it "must have a price" do
+        product = products(:potter)
+        product.price = nil
+        
+        expect(product.valid?).must_equal false
+        expect(product.errors.messages).must_include :price
+        expect(product.errors.messages[:price]).must_equal ["can't be blank", "is not a number"]
+      end
       
-      expect(duplicate_product.valid?).must_equal false
-      expect(duplicate_product.errors.messages).must_include :name
-      expect(duplicate_product.errors.messages[:name]).must_equal ["has already been taken"]
+      it "must have a price greater than 0" do
+        product = products(:potter)
+        product.price = 0
+        
+        expect(product.valid?).must_equal false
+        expect(product.errors.messages).must_include :price
+        expect(product.errors.messages[:price]).must_equal ["must be greater than 0"]
+      end
     end
-    
-    it "must have a price" do
-      product = products(:potter)
-      product.price = nil
-      
-      expect(product.valid?).must_equal false
-      expect(product.errors.messages).must_include :price
-      expect(product.errors.messages[:price]).must_equal ["can't be blank", "is not a number"]
-    end
-    
-    it "must have a price greater than 0" do
-      product = products(:potter)
-      product.price = 0
-      
-      expect(product.valid?).must_equal false
-      expect(product.errors.messages).must_include :price
-      expect(product.errors.messages[:price]).must_equal ["must be greater than 0"]
-    end
-    
-    it "must have a merchant_id" do
-      product = products(:potter)
-      product.merchant_id = nil
-      
-      expect(product.valid?).must_equal false
-      expect(product.errors.messages).must_include :merchant_id
-      expect(product.errors.messages[:merchant_id]).must_equal ["can't be blank"]
+
+    describe "merchant" do
+      it "must have a merchant_id" do
+        product = products(:potter)
+        product.merchant_id = nil
+        
+        expect(product.valid?).must_equal false
+        expect(product.errors.messages).must_include :merchant_id
+        expect(product.errors.messages[:merchant_id]).must_equal ["can't be blank"]
+      end
     end
   end
   

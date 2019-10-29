@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   def index
     @categories = Category.all
   end
-
+  
   private
   
   def find_cart
@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
       @cart = Order.find_by(id: session[:cart_id])
     end
     
-
     if @cart.nil?
       @cart = Order.create(status: "pending")
       session[:cart_id] = @cart.id
@@ -36,13 +35,11 @@ class ApplicationController < ActionController::Base
     @recent = session[:recently_viewed]
     @recent.insert(0, product.id)
     
-
+    
     if @recent.length > 5
       @recent.delete_at(-1)
     end
     
     session[:recently_viewed] = @recent
   end
-
-  
 end

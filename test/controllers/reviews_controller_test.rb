@@ -58,7 +58,7 @@ describe ReviewsController do
       @other_merchant_product = products(:rose) 
 
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(@user))
-      get auth_github_callback_path
+      get auth_callback_path
     end
 
     describe "new" do
