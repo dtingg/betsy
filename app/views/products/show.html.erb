@@ -10,6 +10,15 @@
       <li><%= @product.merchant.username %></li>
       <li><%= @product.description %></li>
       <li>$<%= @product.price %></li>
+
+      <% if @product.categories.count > 0 %>
+        <ul class="categories">
+          <% @product.categories.each do |category| %>
+            <li><%= link_to "#{category.name}", category_path, class:"badge badge-light"%></li>
+          <% end %>
+        </ul>
+      <% end %>
+
     </ul>
 
     <% if @product.stock_qty > 0 && @product.active %>

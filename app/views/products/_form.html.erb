@@ -45,6 +45,12 @@
       <%= f.text_area :description, class: "form-control" %>
     </div>
 
+    # category 
+    <div class="form-group">
+      <%= f.label :categories %> 
+      <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name )%>
+    </div>
+
   <%= f.hidden_field :merchant_id, value: Merchant.find_by(id: session[:user_id]).id %>
   <%= f.submit action_name %>
   <% end %>

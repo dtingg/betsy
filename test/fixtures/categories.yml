@@ -1,0 +1,9 @@
+bubbly:
+  name: bubbly
+  products: [potter, rose, cucumber]
+organic:
+  name: organic
+  products: [onion, rose]
+goat:
+  name: goat
+  products: []

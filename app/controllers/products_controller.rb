@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
   
   def index
     @products = Product.all.order(:name)
+    @categories = Category.all.order(:name)
   end
   
   def show 
@@ -67,7 +68,7 @@ class ProductsController < ApplicationController
   private
   
   def product_params
-    return params.require(:product).permit(:name, :description, :active, :stock_qty, :price, :merchant_id, :photo_url)
+    return params.require(:product).permit(:name, :description, :active, :stock_qty, :price, :merchant_id, :photo_url, category_ids: [])
   end
   
   def find_product
