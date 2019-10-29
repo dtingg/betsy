@@ -1,53 +1,125 @@
 require "test_helper"
 
 describe MerchantsController do
-  describe "index" do
-    it "should display all merchants" do
-      get merchants_path 
+  describe "guest user (not authenticated)" do
+    describe "index" do
+      it "should display all merchants" do
+        get merchants_path 
 
-      must_respond_with :success
+        must_respond_with :success
+      end
+      
+      it "should not break if there are no merchants" do 
+        Merchant.destroy_all
+
+        get merchants_path
+
+        must_respond_with :success
+      end
     end
     
-    it "should not break if there are no merchants" do 
-      Merchant.destroy_all
+    describe "show" do
+      it "should respond with success when given a valid merchant" do
+        merchant_one = merchants(:merchant_one)
+        
+        get merchant_path(merchant_one.id)
+        must_respond_with :success
+      end
+      
+      it "should respond with redirect with an invalid merchant" do 
+        get merchant_path(-9)
 
-      get merchants_path
+        must_respond_with :redirect
+        must_redirect_to merchants_path
+      end
+    end
 
-      must_respond_with :success
+    describe "dashboard" do
+      it "should respond with error when guest user tries to access dashboard" do
+        merchant_one = merchants(:merchant_one)
+
+        get dashboard_path(merchant_one)
+
+        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
+
+        must_respond_with :redirect
+        must_redirect_to merchants_path
+      end
+    end
+
+    describe "delete" do
+      it "should respond with error when guest user tries to delete merchant" do
+        merchant_one = merchants(:merchant_one)
+
+        expect {
+          delete merchant_path(merchant_one)
+        }.wont_change "Merchant.count"
+
+        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
+
+        must_respond_with :redirect
+        must_redirect_to merchants_path
+      end
     end
   end
-  
-  describe "show" do
-    it "should respond with success when given a valid merchant" do
-      merchant_one = merchants(:merchant_one)
-      
-      get merchant_path(merchant_one.id)
-      must_respond_with :success
+
+  describe "authenticated user" do
+    before do
+      perform_login(merchants(:merchant_two))
     end
-    
-    it "should respond with redirect with an invalid merchant" do 
-      get merchant_path(-9)
-      must_respond_with :redirect
-      must_redirect_to merchants_path
-      
+
+    describe "dashboard" do
+      it "shows dashboard for user that is logged in" do
+        get dashboard_path(merchants(:merchant_two))
+
+        must_respond_with :success
+      end
+
+      it "does not show dashboard for another merchant account" do
+        get dashboard_path(merchants(:merchant_one))
+
+        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
+
+        must_respond_with :redirect
+        must_redirect_to merchants_path
+      end
     end
-  end
-  
-  describe "create" do
-    it "can create a new merchant" do
-      new_merchant = Merchant.new(username:"Kathy", email: "whatev@git.com", uid: 473837 )
-      
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(new_merchant))
-      # get auth_github_callback_path
-      expect{ get auth_callback_path }.must_change "Merchant.count", 1
-      
-      must_redirect_to merchants_path
-      
+
+    describe "delete" do
+      it "deletes valid user for user that is logged in" do
+        expect {
+          delete merchant_path(merchants(:merchant_two))
+        }.must_differ "Merchant.count", -1
+
+        must_respond_with :redirect
+        must_redirect_to merchants_path
+      end
+
+      it "cannot delete another merchant account" do
+        expect {
+          delete merchant_path(merchants(:merchant_one))
+        }.wont_change "Merchant.count"
+
+        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
+
+        must_respond_with :redirect
+        must_redirect_to merchants_path
+      end
     end
-    
-    #Choosing not to include edit, update, or destroy
-    #Merchant information is coming from GitHub OAuth 
-    #We do not see a need to destroy merchant
+
+    describe "logout" do
+      it "successfully logs out current user" do
+        expect(session[:user_id].nil?).must_equal false
+
+        post logout_path
+
+        assert_nil(session[:user_id])
+        expect(flash[:success]).must_equal "Successfully logged out"
+
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
+    end
   end
 
   describe "auth_callback" do
@@ -90,5 +162,4 @@ describe MerchantsController do
       must_redirect_to merchants_path
     end
   end
-
 end
