@@ -13,15 +13,6 @@ class OrdersController < ApplicationController
     end
   end
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
   def edit
     if @order.nil?
       redirect_back(fallback_location: root_path)
@@ -56,7 +47,7 @@ class OrdersController < ApplicationController
       return
     end
     
-    if @order.status == "complete"
+    if @order.status != "pending"
       redirect_to order_path(@order.id)
       return
     end
