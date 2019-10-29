@@ -1,28 +1,39 @@
 require "test_helper"
 
 describe Merchant do
-  
-  describe "Member Since Method" do
-    # it "can calculate how long a merchant has been a member" do
-    #   @merchant = merchants(:merchant_two)
-    #   expect((Time.current - @merchant.created_at).to_i).must_equal (@merchant.member_since).to_i
-    # end
-  end
-  
-  describe "Active Products Methods" do
-    it "counts when a merchant has active products" do
-      @merchant = merchants(:merchant_two)
-      expect((@merchant.products.where(active: true)).count.to_s).must_equal @merchant.active_products.slice(0)
-    end
-    
-    it "counts when a merchant doesn't have any active products" do
-      @merchant = merchants(:merchant_one)
-      expect((@merchant.products.where(active: true)).count.to_s).must_equal @merchant.active_products.slice(0)
-    end
-  end
+
   
   describe "build from github" do
     it "can build an auth_hash from github" do
+      auth_hash = { 
+        uid: 12300,
+        info: {
+          email: "random@email.com",
+          nickname: "random"
+        }
+      }
+
+      new_merchant = Merchant.build_from_github(auth_hash)
+
+      expect(new_merchant).must_be_kind_of Merchant
+
+      expect(new_merchant.uid).must_equal auth_hash[:uid]
+      expect(new_merchant.email).must_equal auth_hash[:info][:email]
+      expect(new_merchant.username).must_equal auth_hash[:info][:nickname]
+    end
+  end
+
+  describe "member since method" do
+    it "can calculate how long a merchant has been a member" do
+      merchant = merchants(:merchant_two)
+
+      expect((merchant.member_since).to_i).must_equal ((Time.current - merchant.created_at).to_i)
+    end
+
+    it "does not calculate membership duration if merchant not saved" do
+      merchant = Merchant.new(username: "r", uid: 12321, email: "email@email.com")
+
+      expect(merchant.member_since).must_equal "Date unknown"
     end
   end
 
@@ -62,6 +73,40 @@ describe Merchant do
     end
   end
 
+  describe "active products method" do
+    before do
+      @merchant = merchants(:merchant_two)
+    end
+
+    it "counts when a merchant has active products" do
+
+      expect(@merchant.active_products).must_equal (@merchant.products.where(active: true)).count
+    end
+    
+    it "counts when a merchant doesn't have any active products" do
+      expect(@merchant.active_products).must_equal @merchant.active_products
+    end
+  end
+  
+  describe "alphabetize" do
+    it "can alphabetically sort" do
+      @merchants = merchants(:merchant_one, :merchant_two, :merchant_three)
+
+      @merchants.shuffle
+
+      Merchant.alphabetic
+      
+      expect(@merchants[0].username < @merchants[1].username).must_equal true
+      expect(@merchants[1].username < @merchants[2].username).must_equal true
+    end
+
+    it "if no merchants, returns empty array" do
+      Merchant.destroy_all
+
+      expect(Merchant.alphabetic).must_equal [] 
+    end
+  end
+
   describe "calculate gross sales" do
     before do
       @merchant = merchants(:merchant_one)
@@ -94,7 +139,6 @@ describe Merchant do
 
       expect(gross_sales).must_equal expected_sum
     end
-
   end
 
   describe "calculate average rating" do
@@ -116,7 +160,7 @@ describe Merchant do
 
     it "calculates average rating for merchant with no reviews" do
       merchant_three = merchants(:merchant_three)
-      expected_average = 0
+      expected_average = nil
 
       average_rating = merchant_three.calculate_average_rating
 

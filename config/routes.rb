@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   end
 
   get "/auth/github", as: "github_login"
-  get "/auth/github/callback", to: "merchants#create"
+  get "/auth/github/callback", to: "merchants#create", as: "auth_callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
 end

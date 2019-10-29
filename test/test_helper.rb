@@ -17,7 +17,6 @@ require 'minitest/rails'
 require 'minitest/reporters'
 
 
-
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 class ActiveSupport::TestCase
@@ -43,10 +42,9 @@ class ActiveSupport::TestCase
     merchant ||= Merchant.first
 
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
+
+    get auth_callback_path
     
-    get auth_callback_path(:github)
-    expect(session[:user_id]).must_equal merchant.id
     return merchant
   end
-  # Add more helper methods to be used by all tests here...
 end
