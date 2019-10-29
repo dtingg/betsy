@@ -6,7 +6,6 @@ review_one:
   rating: 4
   comment: "OMG! I love this product.  Rated a four since the soap doesn't foam as much as I would like."
 review_two:
-  reviewer: "Natalie"
   product: rose
   reviewer: "Cynthia Tee"
   date: Time.now
