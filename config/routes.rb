@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   
   root "homepages#index"
   
-  get "/cart", to: "orders#cart", as: "cart"
-  get "/checkout", to: "orders#edit", as: "checkout"
+  get "/cart/:id", to: "orders#cart", as: "cart"
+  get "/checkout/:id", to: "orders#edit", as: "checkout"
   
   resources :orders
   resources :merchants, except: [:delete]
