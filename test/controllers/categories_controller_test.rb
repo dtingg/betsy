@@ -1,8 +1,8 @@
 require "test_helper"
 
 describe CategoriesController do
-  describe "guest user" do 
-    describe "index" do
+
+  describe "index" do
       it "should respond with success" do
       get categories_path
       must_respond_with :success
@@ -73,5 +73,3 @@ describe CategoriesController do
       end
     end
   end
-
-end
