@@ -49,10 +49,10 @@
     <section class="review">
       <% @product.reviews.each do |review| %>
       <ul>
-        <li><%= review.reviewer %></li>
-        <li><%= review.date.strftime("%B %d, %Y") %></li>
+        <li>Name: <%= review.reviewer %></li>
+        <li>Date: <%= review.date.strftime("%B %d, %Y") %></li>
         <li>Rating: <%= review.rating %> </li>
-        <li><%= review.comment %></li>
+        <li>Comment: <%= review.comment %></li>
       </ul>
       <% end %>
     </section>  
