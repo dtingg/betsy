@@ -64,7 +64,7 @@ class ProductsController < ApplicationController
       not_authorized
     end
   end
-  
+
   private
   
   def product_params

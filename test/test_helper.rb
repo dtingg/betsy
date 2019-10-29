@@ -17,7 +17,6 @@ require 'minitest/rails'
 require 'minitest/reporters'
 
 
-
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 class ActiveSupport::TestCase
@@ -39,12 +38,14 @@ class ActiveSupport::TestCase
     }
   end
 
-  # def perform_login(merchant = nil)
-  #   merchant ||= Merchant.first
-  #   OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
-  #   get auth_callback_path
-  #   expect(session[:user_id]).must_equal merchant.id
-  #   return merchant
-  # end
+  def perform_login(merchant = nil)
+    merchant ||= Merchant.first
+
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
+
+    get auth_callback_path
+    
+    return merchant
+  end
 end
 
