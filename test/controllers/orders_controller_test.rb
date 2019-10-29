@@ -37,13 +37,13 @@ describe OrdersController do
       must_respond_with :success
     end
     
-    # it "responds with redirect when getting the edit page for a non-existing order" do
-    #   invalid_id = -1
-    
-    #   get edit_order_path(invalid_id)
-    
-    #   must_respond_with :redirect
-    # end
+    it "responds with redirect when getting the edit page for a non-existing order" do
+      invalid_id = -1
+      
+      get edit_order_path(invalid_id)
+      
+      must_respond_with :redirect
+    end
     
     # it "responds with redirect when getting the edit page for a completed order" do
     #   order.save
