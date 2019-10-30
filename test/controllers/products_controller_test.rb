@@ -37,6 +37,24 @@ describe ProductsController do
         must_respond_with :redirect
         must_redirect_to products_path
       end
+
+      it "adds product to recently viewed array" do
+        # puts one product in recently viewed array
+        get product_path(products(:cucumber))
+        start_count = session[:recently_viewed].length
+
+        valid_product = products(:rose)
+        get product_path(valid_product)
+        # end_count = session[:recently_viewed].length
+
+        # expect(end_count).must_equal (start_count + 1)
+      end
+
+      it "deletes a current product in array if recently_viewed is less than 5" do
+      end
+
+      it "does not add a duplicate product to recently viewed array" do
+      end
     end
 
     describe "new" do

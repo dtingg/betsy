@@ -47,6 +47,7 @@
     <h4>Reviews: </h4>
     
     <section class="review">
+    <% if @product.reviews != []%>
       <% @product.reviews.each do |review| %>
       <ul>
         <li>Name: <%= review.reviewer %></li>
@@ -55,6 +56,7 @@
         <li>Comment: <%= review.comment %></li>
       </ul>
       <% end %>
+    <%end%>
     </section>  
 
     <%=link_to "Add Review",  new_product_review_path(@product.id), :class=>"btn btn-primary"%>
