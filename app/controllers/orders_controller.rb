@@ -34,7 +34,6 @@ class OrdersController < ApplicationController
       flash[:success] = "Thank you for your order!"  
       redirect_to order_path(@cart)
       session[:cart_id] = nil
-      
       return
     else
       render :edit
