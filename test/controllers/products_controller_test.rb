@@ -45,15 +45,43 @@ describe ProductsController do
 
         valid_product = products(:rose)
         get product_path(valid_product)
-        # end_count = session[:recently_viewed].length
 
-        # expect(end_count).must_equal (start_count + 1)
+        expect(session[:recently_viewed].length).must_equal (start_count + 1)
+        expect(session[:recently_viewed].include?(valid_product.id)).must_equal true
       end
 
       it "deletes a current product in array if recently_viewed is less than 5" do
+        all_products = [products(:rose), products(:cucumber), products(:potter), products(:onion), products(:peppermint)]
+        all_products.each do |product|
+          get product_path(product)
+        end
+
+        expect(session[:recently_viewed].length).must_equal 5
+        
+        Product.create(name: "world soap", price: 8.00, stock_qty: 10, merchant_id: merchants(:merchant_one).id, photo_url: "")
+
+        created_product = Product.find_by(name: "world soap")
+
+        # new product is not included in recently viewed array until user visits product show path
+        expect(session[:recently_viewed].include?(created_product.id)).must_equal false
+
+        get product_path(created_product)
+
+        expect(session[:recently_viewed].length).must_equal 5
+        expect(session[:recently_viewed].include?(created_product.id)).must_equal true
       end
 
       it "does not add a duplicate product to recently viewed array" do
+        # puts one product in recently viewed array
+
+        valid_product = products(:cucumber)
+
+        get product_path(valid_product)
+        start_count = session[:recently_viewed].length
+
+        get product_path(valid_product)
+
+        expect(session[:recently_viewed].length).must_equal start_count
       end
     end
 

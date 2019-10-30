@@ -51,7 +51,9 @@
       <% @product.reviews.each do |review| %>
       <ul>
         <li>Name: <%= review.reviewer %></li>
-        <li>Date: <%= review.date.strftime("%B %d, %Y") %></li>
+        <% if review.date %>
+          <li>Date: <%= review.date.strftime( "%B %e, %Y %l:%M %p") %></li>
+        <% end %>
         <li>Rating: <%= review.rating %> </li>
         <li>Comment: <%= review.comment %></li>
       </ul>
