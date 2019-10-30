@@ -30,16 +30,4 @@ class ApplicationController < ActionController::Base
       session[:user_id] = nil
     end
   end
-  
-  def add_to_recently_viewed(product)
-    @recent = session[:recently_viewed]
-    @recent.insert(0, product.id)
-    
-    
-    if @recent.length > 5
-      @recent.delete_at(-1)
-    end
-    
-    session[:recently_viewed] = @recent
-  end
 end

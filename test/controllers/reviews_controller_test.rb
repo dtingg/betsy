@@ -5,8 +5,9 @@ describe ReviewsController do
 
   describe "guest user (not-authenticated)" do
     describe "new" do
-      it 'shows the form to add a review' do
+      it 'can see the form to add a review' do
         get new_product_review_path(new_product.id)
+
         must_respond_with :success
       end
     end
@@ -27,7 +28,7 @@ describe ReviewsController do
         }.must_differ "Review.count", 1
         
         must_respond_with :redirect
-        must_redirect_to  product_path(id: new_product.id)     
+        must_redirect_to product_path(id: new_product.id)     
       end
       
       it "will not create a new review if invalid fields are given" do 
@@ -50,45 +51,23 @@ describe ReviewsController do
     end
   end
   
-  describe "authentication" do
-    
+  describe "authenticated" do
     before do
-      @user = merchants(:merchant_three)
-      @merchant_product = Product.create(merchant_id: @user.id, name: "Soap", price: 10)
+      @merchant_product = Product.create(merchant_id: merchants(:merchant_three).id, name: "Soap", price: 10)
       @other_merchant_product = products(:rose) 
 
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(@user))
-      get auth_callback_path
+      perform_login(@user)
     end
 
     describe "new" do
-      it "will not show the form to add a review when his product" do     
-        review_hash = {
-          review:{
-            reviewer: "Tiffany",
-            product_id: @merchant_product.id,
-            rating: 5,
-            comment: "Great!"
-          }
-        }
-    
+      it "will not allow merchant to see new review form for their own product" do     
         get new_product_review_path(@merchant_product.id)
         
-        must_redirect_to  product_path(id: @merchant_product.id) 
+        must_redirect_to product_path(id: @merchant_product.id) 
         expect(flash[:failure]).wont_be_nil
       end
 
-      it "will show the form to add a review when not his product" do
-        
-        review_hash = {
-          review:{
-            reviewer: "Tiffany",
-            product_id: @other_merchant_product.id,
-            rating: 5,
-            comment: "Great!"
-          }
-        }
-        
+      it "will allow merchant to see new review form for products that are not their own" do
         get new_product_review_path(@other_merchant_product.id)
     
         must_respond_with :success 
@@ -96,7 +75,7 @@ describe ReviewsController do
     end
 
     describe "create" do
-      it "will not create a review when his own product" do 
+      it "will not allow merchant to create a review for their own product" do 
         review_hash = {
           review:{
             reviewer: "Tiffany",
@@ -114,7 +93,7 @@ describe ReviewsController do
         expect(flash[:failure]).wont_be_nil  
       end
 
-      it "will create a review when other merchant product" do 
+      it "will allow merchant to create review for products that are not their own" do 
         review_hash = {
           review:{
             reviewer: "Tiffany",
@@ -128,7 +107,7 @@ describe ReviewsController do
           post product_reviews_path(@other_merchant_product.id), params: review_hash
         }.must_differ "Review.count", 1
 
-        must_redirect_to  product_path(id: @other_merchant_product.id) 
+        must_redirect_to product_path(id: @other_merchant_product.id) 
         expect(flash[:success]).wont_be_nil  
       end
     end
