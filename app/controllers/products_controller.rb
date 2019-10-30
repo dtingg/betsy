@@ -9,7 +9,18 @@ class ProductsController < ApplicationController
   end
   
   def show 
-    add_to_recently_viewed(@product)
+    # adds product to recently viewed array
+    @recent = session[:recently_viewed]
+
+    if @recent.include?(@product.id) == false
+      @recent.insert(0, @product.id)
+    end 
+    
+    if @recent.length > 5
+      @recent.delete_at(-1)
+    end
+    
+    session[:recently_viewed] = @recent
   end
   
   def new
@@ -89,4 +100,8 @@ class ProductsController < ApplicationController
       return
     end
   end
+
+  # def add_to_recently_viewed
+
+  # end
 end
