@@ -14,44 +14,60 @@
 
     <%= form_with model: @cart, url: order_path(@cart) do |f| %>
       <section>
-        <h2>User details</h2>
-        
         <div class="form-group">
-          <%= f.label :name %>
-          <%= f.text_field :name, class: "form-control" %><br>
+          <div class="form-row">
+            <div class="col">
+              <%= f.label :name %>
+              <%= f.text_field :name, class: "form-control" %><br>
+            </div>
+                
+            <div class="col">
+              <%= f.label :email, "E-mail" %>
+              <%= f.text_field :email, class: "form-control"  %><br>
+            </div>
           </div>
-          
-          <%= f.label :email, "E-mail" %>
-          <%= f.text_field :email, class: "form-control"  %><br>
-          <br>
+        </div>
       </section>
 
       <section>  
-        <h2>Shipping information</h2>
         <%= f.label :address %>
         <%= f.text_field :address, class: "form-control"  %><br>
         
-        <%= f.label :city %>
-        <%= f.text_field :city, class: "form-control"  %><br>
-        
-        <%= f.label :state %>
-        <%= f.text_field :state, class: "form-control" %><br>
-        
-        <%= f.label :zip_code %>
-        <%= f.text_field :zipcode, class: "form-control"  %><br>
-        <br>
+        <div class="form-row">
+          <div class="col">
+            <%= f.label :city %>
+            <%= f.text_field :city, class: "form-control"  %><br>
+          </div>
+          
+          <div class="col">
+            <%= f.label :state %>
+            <%= f.text_field :state, class: "form-control" %><br>
+          </div>
+
+          <div class="col">
+            <%= f.label :zip_code %>
+            <%= f.text_field :zipcode, class: "form-control"  %><br>
+          </div> 
+        </div>
       </section>
 
       <section>
-        <h2>Billing information</h2>
-        <%= f.label :credit_card_number, "Credit card number" %>
-        <%= f.text_field :cc_num, class: "form-control"  %><br>
+        <div class="form-row">
+          <div class="col">
+            <%= f.label :credit_card_number, "Credit card number" %>
+            <%= f.text_field :cc_num, class: "form-control"  %><br>
+          </div> 
 
-        <%= f.label :credit_card_expiration, "Credit card expiration" %>
-        <%= f.text_field :cc_exp, class: "form-control"  %><br>
+          <div class="col">
+            <%= f.label :credit_card_expiration, "Credit card expiration" %>
+            <%= f.text_field :cc_exp, class: "form-control"  %><br>
+          </div> 
 
-        <%= f.label :credit_card_cvv, "Credit card CVV" %>
-        <%= f.text_field :cc_cvv, class: "form-control"  %><br>
+          <div class="col">
+            <%= f.label :credit_card_cvv, "Credit card CVV" %>
+            <%= f.text_field :cc_cvv, class: "form-control"  %><br>
+          </div> 
+        </div>
 
         <%= f.hidden_field :status, value: "paid" %>
         <%= f.hidden_field :order_date, value: Time.new %>
