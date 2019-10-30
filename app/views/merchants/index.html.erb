@@ -8,7 +8,7 @@
       <% @merchants.each do |merchant|  %>
       <div class="card">
         <% if merchant.uid < 100000 %>
-          <%= image_tag "https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo", id: "card-img" %>
+          <%= link_to image_tag("https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo"), merchant_path(merchant.id), id: "card-img" %>
         <% else %>
           <%= link_to image_tag("https://avatars1.githubusercontent.com/u/#{merchant.uid}", alt: "github profile photo"), merchant_path(merchant.id), id: "card-img"%>
         <% end %>
