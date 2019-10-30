@@ -164,7 +164,7 @@ CSV.foreach(CATEGORIES_FILE, :headers => true) do |row|
     category_failures << category
     puts "Failed to save category: #{category.inspect}"
   else
-    # puts "Created merchant: #{merchant.inspect}"
+    # puts "Created category: #{category.inspect}"
   end
 end
 
