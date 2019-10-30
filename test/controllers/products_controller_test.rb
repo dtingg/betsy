@@ -226,7 +226,6 @@ describe ProductsController do
         expect(updated_product.price).must_equal product_updates[:product][:price]
         
         must_respond_with :redirect
-        must_redirect_to product_path(valid_product.id)
       end
       
       it "doesn't update product information with invalid information" do
