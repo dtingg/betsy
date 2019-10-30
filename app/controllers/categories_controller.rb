@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
-  
   before_action :valid_category?, only: [:show]
+  
   def index
     @categories = Category.all.order(:name)
   end
