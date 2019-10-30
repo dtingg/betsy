@@ -22,8 +22,6 @@
 
   <body>
   <header>
-
-    <h1>SUDSY</h1>
     <section class="profile">
       <% if @current_user %>
         <%= link_to "Log out", logout_path, class: "btn btn-primary", method: "post" %>
@@ -32,6 +30,8 @@
         <%= link_to "Login with GitHub", github_login_path, class: "btn btn-primary" %>
       <% end %>
     </section>
+    
+    <h1>SUDSY</h1>
 
     <section class="searchbar">
       <%= form_tag(search_path, :method => "get", class: 'navbar-form navbar-left') do %>  
