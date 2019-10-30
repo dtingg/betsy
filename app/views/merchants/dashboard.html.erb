@@ -53,10 +53,9 @@
         <td><%= orderitem.quantity %></td>
         <td>$<%= orderitem.total %></td>
         <td>
-          <% if orderitem.complete %>
-          complete
-          <% else %>
-          incomplete
+          <%= form_with model: orderitem do |f| %>
+          <%= hidden_field_tag :complete, true %>
+          <%= f.submit "Complete Order" %>
           <% end %>
         </td>
       </tr>
