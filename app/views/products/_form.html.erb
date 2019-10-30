@@ -1,3 +1,4 @@
+<div class="new-form">
 <section>
       <% if @product.errors.any? %>
         <section class="alert alert-danger">
@@ -9,50 +10,52 @@
         </ul>
         </section>
       <% end %>
-    </section>
-
-<h2><%= verb %> Product</h2>
-
-<section>
-  <%= form_with model: @product do |f| %>
-    <div class="form-group">
-      <%= f.label :name, "Product Name" %> 
-      <%= f.text_field :name, class: "form-control"%>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :price %> 
-      <%= f.text_field :price, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :stock_qty %> 
-      <%= f.text_field :stock_qty, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label "Status Active?" %> 
-      <%= f.select :active,[[true], [false]]%>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :photo_url  %> 
-      <%= f.text_field :photo_url, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :description %> 
-      <%= f.text_area :description, class: "form-control" %>
-    </div>
-
-    # category 
-    <div class="form-group">
-      <%= f.label :categories %> 
-      <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name )%>
-    </div>
-
-  <%= f.hidden_field :merchant_id, value: Merchant.find_by(id: session[:user_id]).id %>
-  <%= f.submit action_name %>
-  <% end %>
 </section>
+
+  
+  <h2><%= verb %> Product</h2>
+  <section>
+ 
+    <%= form_with model: @product do |f| %>
+      <div class="form-group">
+        <%= f.label :name, "Product Name" %> 
+        <%= f.text_field :name, class: "form-control"%>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :price %> 
+        <%= f.text_field :price, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :stock_qty %> 
+        <%= f.text_field :stock_qty, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label "Status Active?" %> 
+        <%= f.select :active,[[true], [false]]%>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :photo_url  %> 
+        <%= f.text_field :photo_url, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %> 
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+
+      <h5>select categories</h5>
+      
+      <div class="form-group checkboxes">
+        <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name ) %>
+      </div>
+
+    <%= f.hidden_field :merchant_id, value: Merchant.find_by(id: session[:user_id]).id %>
+    <%= f.submit action_name %>
+    <% end %>
+  </section>
+  </div>
 

@@ -3,7 +3,7 @@
 </section>
 <section class="products-list">
 <% @categories.each do |category| %>
-  <p class="badge badge-primary"><%= link_to "#{category.name.titleize}", category_path(category.id) %></p>
+  <p class="badge badge-light"><%= link_to "#{category.name.titleize}", category_path(category.id) %></p>
 <% end %>
 </section>
 

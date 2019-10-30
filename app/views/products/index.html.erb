@@ -3,48 +3,37 @@
 </section>
 
 <section class="products-page-container">
-  <section class="categories">
-    <h5>Categories</h5>
-    <ul>
-      <% @categories.each do |category| %>
-        <%= link_to "#{ category.name }", category_path(category), class:"badge badge-light" %>
-      <% end %>
-    </ul>
-  </section>
+  <section class="sidebar">
+    <section class="categories">
+      <h5>Categories</h5>
+      <ul>
+        <% @categories.each do |category| %>
+          <%= link_to "#{ category.name }", category_path(category), class:"badge" %>
+        <% end %>
+      </ul>
+    </section>
 
-  <section class="recently-viewed">
-    <h5>Recently Viewed</h5>
-    <ul>
-    <% if session[:recently_viewed] %>
-      <% session[:recently_viewed].each do |product| %>
-        <% p = Product.find(product) %>
-        <li><%= link_to "#{p["name"]}", product_path(product) %></li>
+    <section class="recently-viewed">
+      <h5>Recently Viewed</h5>
+      <ul>
+      <% if session[:recently_viewed] %>
+        <% session[:recently_viewed].each do |product| %>
+          <% p = Product.find(product) %>
+          <li><%= link_to "#{p["name"]}", product_path(product) %></li>
+        <% end %>
       <% end %>
-    <% end %>
-    </ul>
+      </ul>
+    </section>
   </section>
-
   <section class="products-list">
     <% @products.where(active: true).where("stock_qty > ?", 0).each do |product| %>
-    <ul>
-      <%= image_tag(product.photo_url, alt:"#{product.name}") %>
-
-      <section class="product-name">
-        <li><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
-      </section>
-
-      <section class="product-merchant">
-        <li><%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
-      </section>
-
-      <section class="product-price">
-        <li>$<%= sprintf('%.2f', product.price) %></li>
-      </section>
-
-      <section class="product-stock">
-        <li><%= product.stock_qty %> left in stock!</li>
-      </section>
-    </ul>
+      <ul>
+        <li><%= link_to image_tag(product.photo_url, alt:"#{product.name}"), product_path(product) %></li>
+        <li class="product-name"><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
+        <li class="product-merchant"><%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
+        <li class="product-price">$<%= sprintf('%.2f', product.price) %></li>
+        <li class="product-stock"><%= product.stock_qty %> left in stock!</li>
+      </ul>
     <% end %>
   </section>
 </section>
