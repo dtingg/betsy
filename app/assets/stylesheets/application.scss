@@ -52,8 +52,15 @@ header {
 
 header h1 {
   text-align: center;
+}
+
+header h1 a{
   color: #FE5F55; 
   font-size: 3rem;
+}
+
+header h1 a:hover{
+  style: none;
 }
 
 nav ul {

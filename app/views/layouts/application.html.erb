@@ -30,8 +30,8 @@
         <%= link_to "Login with GitHub", github_login_path, class: "btn btn-primary" %>
       <% end %>
     </section>
-    
-    <h1>SUDSY</h1>
+
+    <h1><%= link_to "SUDSY", root_path %> </h1>
 
     <section class="searchbar">
       <%= form_tag(search_path, :method => "get", class: 'navbar-form navbar-left') do %>  
@@ -47,7 +47,7 @@
       <ul>
         <li><%= link_to "Home", root_path, class: "btn btn-primary" %></li>
         <li><%= link_to "All products", products_path, class: "btn btn-primary" %></li>
-        <li><%= link_to "Create product", new_product_path, class: "btn btn-primary" %></li>
+        <li><%= link_to "Sell a Soap", new_product_path, class: "btn btn-primary" %></li>
         <li>
           <div class="btn-group">
             <%= link_to "Categories", categories_path, class: "btn btn-primary" %>
