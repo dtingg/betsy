@@ -58,15 +58,16 @@ describe Product do
 
         product.categories << categories(:organic)
 
-        product.categories.last.id.must_equal categories(:organic).id
+        expect(product.categories.last.id).must_equal categories(:organic).id
       end
 
-      it "can set a category through category_id" do
-        product = Product.new(name: "dogs dogs dogs", price: 10.0, stock_qty: 9)
+      it "should remove a product relation when category is deleted" do
+        before_count = products(:rose).categories.count
 
-        product.categories << categories(:organic)
+        bubbly = categories(:bubbly)
+        bubbly.destroy
 
-        product.categories.last.must_equal categories(:organic)
+        expect(products(:rose).categories.count).must_equal (before_count - 1) 
       end
     end
   end
