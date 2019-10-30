@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
   before_action :if_product_missing, only: [:show, :edit, :destroy]
+  before_action :find_merchant, only: [:edit, :destroy]
   
   def index
     @products = Product.all.order(:name)
@@ -8,22 +9,35 @@ class ProductsController < ApplicationController
   end
   
   def show 
-    add_to_recently_viewed(@product)
+    # adds product to recently viewed array
+    @recent = session[:recently_viewed]
+
+    if @recent.include?(@product.id) == false
+      @recent.insert(0, @product.id)
+    end 
+    
+    if @recent.length > 5
+      @recent.delete_at(-1)
+    end
+    
+    session[:recently_viewed] = @recent
   end
   
   def new
-    #come back to determine if this is the best logic for Product new
-    if session[:user_id] != nil 
+    if @current_user
       @product = Product.new
     else
-      not_authorized
+      flash[:failure] = "A problem occurred: You must log in to perform this action"
+
+      redirect_back(fallback_location: products_path)
+      return
     end  
   end
   
   def create
     @product = Product.new(product_params)
+
     if @product.save
-      @product.name.downcase
       redirect_to product_path(@product.id)
       return
     else
@@ -33,17 +47,7 @@ class ProductsController < ApplicationController
     end  
   end
   
-  def edit 
-    if session[:user_id]
-      if @product.merchant_id != Merchant.find_by(id: session[:user_id]).id
-        flash[:failure] = "A problem occurred: You cannot edit other merchants products."
-        redirect_to product_path(id: @product.id) 
-        return
-      end
-    else
-      not_authorized
-    end
-  end
+  def edit; end
   
   def update
     if @product.update(product_params)
@@ -57,13 +61,9 @@ class ProductsController < ApplicationController
   end
   
   def destroy
-    if session[:user_id]
-      @product.destroy
-      redirect_to products_path
-      return
-    else
-      not_authorized
-    end
+    @product.destroy
+    redirect_to products_path
+    return
   end
 
   private
@@ -84,8 +84,20 @@ class ProductsController < ApplicationController
     end
   end
 
-  def not_authorized
-    flash[:failure] = "A problem occurred: You must log in to perform this action"
-    redirect_back(fallback_location: products_path)
+  def find_merchant
+    merchant = @product.merchant
+  
+    if merchant.nil?
+      flash[:failure] = "Could not find merchant for this product"
+      redirect_to merchants_path 
+      return
+    end
+  
+    if @current_user != merchant
+      flash[:failure] = "A problem occurred: You are not authorized to perform this action"
+
+      redirect_to products_path
+      return
+    end
   end
 end
