@@ -90,13 +90,7 @@
         <td>$<%= orderitem.product.price %></td>
         <td><%= orderitem.quantity %></td>
         <td>$<%= orderitem.total %></td>
-        <td>
-          <% if orderitem.complete %>
-          complete
-          <% else %>
-          incomplete
-          <% end %>
-        </td>
+        <td>Completed</td>
       </tr>
     <% end %>
     <% end %>
@@ -131,7 +125,11 @@
         <td>$<%= product.price%></td>
         <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
         <td>
-            Mark Inactive
+          <%= form_with model: product do |f| %>
+          <%= f.hidden_field :active, value: false %>
+          <%= hidden_field_tag :active, false %>
+          <%= f.submit "Inactivate" %>
+          <% end %>
         </td>
         <td><%= link_to "Edit", edit_product_path(product.id) %></td>
         <td><%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
@@ -164,7 +162,13 @@
         <td><%= product.stock_qty %></td>
         <td>$<%= product.price%></td>
         <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
-        <td>Mark Active</td>
+        <td>
+          <%= form_with model: product do |f| %>
+          <%= f.hidden_field :active, value: true %>
+          <%= hidden_field_tag :active, true %>
+          <%= f.submit "Activate" %>
+          <% end %>
+          </td>
         <td><%= link_to "Edit", edit_product_path(product.id) %></td>
         <td><%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
       </tr>
