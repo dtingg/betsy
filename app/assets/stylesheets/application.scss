@@ -17,12 +17,13 @@
 
 @import "**/*";
 
-// colors 
-// blues light #B8D8D8
-// blues med #7A9E9F
-// blues dark #4F6367
-// white #EEF5DB
-// pink #FE5F55
+:root {
+  --color-timid_blue: #bdcff2;
+  --color-mid_blue: #487adb;
+  --color-dark_blue: #07193d;
+  --color-burnt_orange: #963d1a;
+  --color-sand: #b5a78f;
+}
 
 * {
   font-family: 'Roboto Condensed', sans-serif;
@@ -34,7 +35,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #B8D8D8;
+  background-color: #e6eff0;
   z-index: 100;
 }
 
@@ -55,12 +56,12 @@ header h1 {
 }
 
 header h1 a{
-  color: #FE5F55; 
+  color: var(--deep_navy); 
   font-size: 3rem;
 }
 
 header h1 a:hover{
-  style: none;
+  style: var(--baby_blue);
 }
 
 nav ul {
@@ -71,25 +72,28 @@ nav ul {
 }
 
 a {
-  color: #7A9E9F;
+  color: var(--deep_navy);
 }
 
 a:hover {
-  color: #FE5F55;
+  color: var(--baby_blue);
 }
 
 .searchbar {
   margin-top: 4rem;
 }
 .btn {
-  background-color:#7A9E9F;
-  border-color: #7A9E9F;
+  background-color: var(--deep_navy);
   margin: .2rem;
 }
 
+.btn-primary {
+  background-color: var(--deep_navy);
+}
+
 .btn:hover {
-  background-color: #4F6367;
-  border-color: #4F6367;
+  background-color: var(--deep_navy);
+  border-color: var(--deep_navy);
 }
 
 nav ul li {
@@ -130,8 +134,8 @@ div.field_with_errors {
 
 
 .badge, .badge-light {
-  background-color:#7A9E9F;
-  border-color: #7A9E9F;
+  background-color: deep_navy;
+  border-color: deep_navy;
   margin: .2rem;
 }
 
