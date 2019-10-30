@@ -134,11 +134,11 @@ td {
 .card-deck {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 5rem;
+  grid-gap: 2rem;
 
   .card {
-    width: 100%;
-    height: 100%;
+    // width: 100%;
+    // height: 100%;
   }
 }
 
