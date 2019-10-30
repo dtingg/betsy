@@ -18,11 +18,11 @@
 @import "**/*";
 
 :root {
-  --color-timid_blue: #bdcff2;
-  --color-mid_blue: #487adb;
-  --color-dark_blue: #07193d;
-  --color-burnt_orange: #963d1a;
-  --color-sand: #b5a78f;
+  --timid: #bdcff2;
+  --mid: #487adb;
+  --navy: #375cbf;
+  --burnt_orange: #8f3907;
+  --sand: #b5a78f;
 }
 
 * {
@@ -35,12 +35,12 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #e6eff0;
+  background-color: var(--timid);
   z-index: 100;
 }
 
 .flash {
-  margin-top: 290px;
+  margin-top: 400px;
 }
 
 .profile {
@@ -56,12 +56,12 @@ header h1 {
 }
 
 header h1 a{
-  color: var(--deep_navy); 
-  font-size: 3rem;
+  color: var(--navy); 
+  font-size: 6rem;
 }
 
 header h1 a:hover{
-  style: var(--baby_blue);
+  style: var(--timid);
 }
 
 nav ul {
@@ -72,28 +72,37 @@ nav ul {
 }
 
 a {
-  color: var(--deep_navy);
+  color: var(--navy);
 }
 
 a:hover {
-  color: var(--baby_blue);
+  color: var(--navy);
 }
 
 .searchbar {
   margin-top: 4rem;
 }
 .btn {
-  background-color: var(--deep_navy);
+  background-color: var(--navy);
+  border-color: var(--navy);
   margin: .2rem;
 }
 
 .btn-primary {
-  background-color: var(--deep_navy);
+  background-color: var(--navy);
 }
 
 .btn:hover {
-  background-color: var(--deep_navy);
-  border-color: var(--deep_navy);
+  background-color: var(--navy);
+  border-color: var(--navy);
+}
+
+.btn-primary {
+  background-color: var(--navy);
+}
+
+.btn-primary::selection {
+  background-color: var(--navy);
 }
 
 nav ul li {
@@ -134,13 +143,13 @@ div.field_with_errors {
 
 
 .badge, .badge-light {
-  background-color: deep_navy;
-  border-color: deep_navy;
+  background-color: var(--navy);
+  border-color: var(--navy);
   margin: .2rem;
 }
 
 .badge, .badge-light:hover {
-  background-color: #A9E9F;
+  background-color: var(--navy);
 }
 
 .badge, .badge-light a {
@@ -151,5 +160,5 @@ h2, h3, h5 {
   text-align: center;
   margin-bottom: 1.5rem;
   margin-left: 1rem;
-  color: #FE5F55;
+  color: var(--burnt_orange);
 }
