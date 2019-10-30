@@ -2,21 +2,23 @@
   <h2>All Merchants</h2>
 </section>
 
-<div class="container" id="merchant-index">
-  <div class="card-deck">
-    <% @merchants.each do |merchant|  %>
-    <div class="card">
-      <% if merchant.uid < 100000 %>
-        <%= image_tag "https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo", id: "card-img" %>
-      <% else %>
-        <%= link_to image_tag("https://avatars1.githubusercontent.com/u/#{merchant.uid}", alt: "github profile photo"), merchant_path(merchant.id), id: "card-img"%>
-      <% end %>
-      <div class="card-body">
-        <h5 class="card-title"><%= link_to merchant.username, merchant_path(merchant.id) %></h5>
-        <% date = merchant.created_at.in_time_zone("Pacific Time (US & Canada)") %>
-        <p class="card-text"><%= "Joined: #{date.strftime( "%B %e, %Y" )}"%></p>
+<section id="merchant-index">
+  <%# <div class="container"> %>
+    <div class="card-deck">
+      <% @merchants.each do |merchant|  %>
+      <div class="card">
+        <% if merchant.uid < 100000 %>
+          <%= image_tag "https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo", id: "card-img" %>
+        <% else %>
+          <%= link_to image_tag("https://avatars1.githubusercontent.com/u/#{merchant.uid}", alt: "github profile photo"), merchant_path(merchant.id), id: "card-img"%>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to merchant.username, merchant_path(merchant.id) %></h5>
+          <% date = merchant.created_at.in_time_zone("Pacific Time (US & Canada)") %>
+          <p class="card-text"><%= "Joined: #{date.strftime( "%B %e, %Y" )}"%></p>
+        </div>
       </div>
+      <% end %>
     </div>
-    <% end %>
-  </div>
-</div>
+  <%# </div> %>
+</section>
