@@ -130,3 +130,31 @@ td {
     }
   }
 }
+
+.card-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 5rem;
+
+  .card {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+#card-img {
+  text-align: center;
+}
+
+#merchant-index {
+
+}
+
+.card-img-top {
+  height: 250px;
+
+  .img {
+  text-align: center;
+}
+}
