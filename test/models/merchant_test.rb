@@ -236,20 +236,18 @@ describe Merchant do
   end
 
   describe "calculate average rating" do
-    before do
-      @merchant = Merchant.create(username: "golden merchant", uid: 1232, email: "hello@world.com")
-      product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00)
-      @review_one = Review.create(comment: "blah blah", product_id: product.id, rating: 4)
-      @review_two = Review.create(comment: "nothing", product_id: product.id, rating: 2)
-    end
+   
+      let(:merchant) { Merchant.create(username: "golden merchant", uid: 1232, email: "hello@world.com") }
+      let(:product) { Product.create(merchant: merchant, name: "Oatmeal soap", price: 6.00) }
+      
+    
 
     it "calculates average rating for merchant with multiple reviews" do
-      average_rating = @merchant.calculate_average_rating
+      review_one = Review.create(comment: "blah blah", product_id: product.id, rating: 4, date: Time.now, reviewer: "hello") 
+      review_two = Review.create(comment: "nothing", product_id: product.id, rating: 2, date: Time.now, reviewer: "natalie") 
+      expected_average = ((review_one.rating + review_two.rating) / 2.0)
 
-      expected_average = ((@review_one.rating + @review_two.rating) / 2.0)
-
-      expect(average_rating).must_equal expected_average
-
+      expect(merchant.calculate_average_rating).must_equal expected_average
     end
 
     it "calculates average rating for merchant with no reviews" do
