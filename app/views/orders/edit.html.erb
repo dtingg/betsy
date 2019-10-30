@@ -8,52 +8,57 @@
   </section>
 <% end %>
 
-<section>
-  <h1>Checkout</h1>
+<div class="new-form">
+  <section>
+    <h1>Checkout</h1>
 
-  <%= form_with model: @cart, url: order_path(@cart) do |f| %>
-    <section>
-      <h2>User details</h2>
-        <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control" %><br>
+    <%= form_with model: @cart, url: order_path(@cart) do |f| %>
+      <section>
+        <h2>User details</h2>
         
-        <%= f.label :email, "E-mail" %>
-        <%= f.text_field :email, class: "form-control"  %><br>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control" %><br>
+          </div>
+          
+          <%= f.label :email, "E-mail" %>
+          <%= f.text_field :email, class: "form-control"  %><br>
+          <br>
+      </section>
+
+      <section>  
+        <h2>Shipping information</h2>
+        <%= f.label :address %>
+        <%= f.text_field :address, class: "form-control"  %><br>
+        
+        <%= f.label :city %>
+        <%= f.text_field :city, class: "form-control"  %><br>
+        
+        <%= f.label :state %>
+        <%= f.text_field :state, class: "form-control" %><br>
+        
+        <%= f.label :zip_code %>
+        <%= f.text_field :zipcode, class: "form-control"  %><br>
         <br>
-    </section>
+      </section>
 
-    <section>  
-      <h2>Shipping information</h2>
-      <%= f.label :address %>
-      <%= f.text_field :address, class: "form-control"  %><br>
-      
-      <%= f.label :city %>
-      <%= f.text_field :city, class: "form-control"  %><br>
-      
-      <%= f.label :state %>
-      <%= f.text_field :state, class: "form-control" %><br>
-      
-      <%= f.label :zip_code %>
-      <%= f.text_field :zipcode, class: "form-control"  %><br>
-      <br>
-    </section>
+      <section>
+        <h2>Billing information</h2>
+        <%= f.label :credit_card_number, "Credit card number" %>
+        <%= f.text_field :cc_num, class: "form-control"  %><br>
 
-    <section>
-      <h2>Billing information</h2>
-      <%= f.label :credit_card_number, "Credit card number" %>
-      <%= f.text_field :cc_num, class: "form-control"  %><br>
+        <%= f.label :credit_card_expiration, "Credit card expiration" %>
+        <%= f.text_field :cc_exp, class: "form-control"  %><br>
 
-      <%= f.label :credit_card_expiration, "Credit card expiration" %>
-      <%= f.text_field :cc_exp, class: "form-control"  %><br>
+        <%= f.label :credit_card_cvv, "Credit card CVV" %>
+        <%= f.text_field :cc_cvv, class: "form-control"  %><br>
 
-      <%= f.label :credit_card_cvv, "Credit card CVV" %>
-      <%= f.text_field :cc_cvv, class: "form-control"  %><br>
-
-      <%= f.hidden_field :status, value: "paid" %>
-      <%= f.hidden_field :order_date, value: Time.new %>
-      <%= hidden_field_tag :order_paid, true %>
-      <%= f.submit "Complete order" %>
-    </section>
-  <% end %>
-</section>
+        <%= f.hidden_field :status, value: "paid" %>
+        <%= f.hidden_field :order_date, value: Time.new %>
+        <%= hidden_field_tag :order_paid, true %>
+        <%= f.submit "Complete order" %>
+      </section>
+    <% end %>
+  </section>
+</div>
 
