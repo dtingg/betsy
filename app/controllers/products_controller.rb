@@ -100,8 +100,4 @@ class ProductsController < ApplicationController
       return
     end
   end
-
-  # def add_to_recently_viewed
-
-  # end
 end
