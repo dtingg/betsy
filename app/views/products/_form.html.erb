@@ -1,4 +1,5 @@
 <div class="new-form">
+
 <section>
       <% if @product.errors.any? %>
         <section class="alert alert-danger">
@@ -12,10 +13,8 @@
       <% end %>
 </section>
 
-  
   <h2><%= verb %> Product</h2>
   <section>
- 
     <%= form_with model: @product do |f| %>
       <div class="form-group">
         <%= f.label :name, "Product Name" %> 
@@ -48,7 +47,7 @@
       </div>
 
       <h5>select categories</h5>
-   
+
       <div class="form-group form-check">
         <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name ) do |b| %>
           <% b.label(:"data-value" => b.value) { b.check_box + b.text }  %>
