@@ -28,7 +28,7 @@ describe Category do
       end
 
       it "can have one or more products" do
-        expect(bubbly.products.count).must_equal categories(:bubbly).products.count
+        expect(bubbly.products.count).must_equal bubbly.products.count
 
         expect(bubbly.products.first).must_be_instance_of Product
         expect(organic.products.count).must_equal 2
@@ -46,45 +46,56 @@ describe Category do
     end
     
     it "should remove category relation when a product is deleted" do
-      before_count = categories(:bubbly).products.count
+      before_count = bubbly.products.count
       potter = products(:potter)
       potter.destroy
-      expect(categories(:bubbly).products.count).must_equal (before_count - 1) 
+      expect(bubbly.products.count).must_equal (before_count - 1) 
     end
   end
 
   describe "validations" do
   let(:bubbly) { categories(:bubbly) }
-    it "should have a name that is a string" do
-      expect(bubbly.name).must_be_instance_of String
-      expect(bubbly.name).must_equal categories(:bubbly).name
-    end
 
-    it "should validate the presence of name" do
-      category = categories(:bubbly)
-      category.name = nil
+    describe "name" do
+      it "should have a name that is a string" do
+        expect(bubbly.name).must_be_instance_of String
+        expect(bubbly.name).must_equal categories(:bubbly).name
+      end
 
-      expect(category.valid?).must_equal false
-      expect(category.errors.messages).must_include :name
-      expect(category.errors.messages[:name]).must_equal ["can't be blank"]
-    end
+      it "should not allow an empty string for name" do
+        category = categories(:bubbly)
+        category.name = ""
 
-    it "should not allow an empty string for name" do
-      category = categories(:bubbly)
-      category.name = ""
+        expect(category.valid?).must_equal false
+        expect(category.errors.messages).must_include :name
+        expect(category.errors.messages[:name]).must_equal ["can't be blank"]
+      end
 
-      expect(category.valid?).must_equal false
-      expect(category.errors.messages).must_include :name
-      expect(category.errors.messages[:name]).must_equal ["can't be blank"]
-    end
+      it "should validate the presence of name" do
+        category = categories(:bubbly)
+        category.name = nil
+  
+        expect(category.valid?).must_equal false
+        expect(category.errors.messages).must_include :name
+        expect(category.errors.messages[:name]).must_equal ["can't be blank"]
+      end
 
-    it "should not allow a string with only whitespace for name" do
-      category = categories(:bubbly)
-      category.name = "     "
+      it "should not allow a string with only whitespace for name" do
+        category = categories(:bubbly)
+        category.name = "     "
+  
+        expect(category.valid?).must_equal false
+        expect(category.errors.messages).must_include :name
+        expect(category.errors.messages[:name]).must_equal ["can't be blank"]
+      end
 
-      expect(category.valid?).must_equal false
-      expect(category.errors.messages).must_include :name
-      expect(category.errors.messages[:name]).must_equal ["can't be blank"]
-    end
+      it "is not valid if name is not unique" do
+        duplicate_category = Category.new(name: "bubbly")
+
+        expect(duplicate_category.valid?).must_equal false
+        expect(duplicate_category.errors.messages).must_include :name
+        expect(duplicate_category.errors.messages[:name]).must_equal ["has already been taken"]
+      end
+    end   
   end
 end
