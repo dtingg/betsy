@@ -39,6 +39,11 @@ header {
   z-index: 100;
 }
 
+a:hover {
+  color: var(--burnt_orange);
+  text-decoration: none;
+}
+
 .flash {
   margin-top: 400px;
 }
@@ -76,12 +81,13 @@ a {
 }
 
 a:hover {
-  color: var(--navy);
+  color: var(--burnt_orange);
 }
 
 .searchbar {
   margin-top: 4rem;
 }
+
 .btn {
   background-color: var(--navy);
   border-color: var(--navy);
@@ -89,14 +95,20 @@ a:hover {
   border-radius: 40px;
 }
 
+.btn:hover {
+  background-color: var(--burnt_orange);
+  border-color: var(--burnt_orange);
+}
+
 .btn-primary {
   background-color: var(--navy);
   border-radius: 25px;
 }
 
-.btn:hover {
+.btn a:hover {
   background-color: var(--navy);
   border-color: var(--navy);
+  color: var(--burnt_orange);
 }
 
 .btn-primary {
@@ -145,23 +157,26 @@ div.field_with_errors {
 
 
 .badge, .badge-light {
+  color: white;
   background-color: var(--navy);
   border-color: var(--navy);
   margin: .2rem;
   border-radius: 20px;
 }
 
-.badge, .badge-light:hover {
-  background-color: var(--navy);
-}
-
-.badge, .badge-light a {
+.badge a {
   color: white;
 }
 
-a:hover {
-  color: var(--burnt_orange);
+.badge a:hover, .badge-light a:hover {
+  color: white;
   text-decoration: none;
+}
+
+.badge:hover, .badge-light:hover {
+  background-color: var(--burnt_orange);
+  border-color: var(--burnt_orange); 
+  color: white;
 }
 
 h2, h3, h5 {
