@@ -118,11 +118,13 @@ label {
   text-align: center;
 }
 
-
-.checkboxes {
-  margin: 10px 10px 10px 10px;
+.form-check {
+  position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1.25rem;
 }
 
-.form-group input {
-
+input {
+  color: white;
 }
