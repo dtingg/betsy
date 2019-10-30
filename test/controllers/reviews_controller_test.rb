@@ -51,7 +51,7 @@ describe ReviewsController do
     end
   end
   
-  describe "authentication" do
+  describe "authenticated" do
     before do
       @merchant_product = Product.create(merchant_id: merchants(:merchant_three).id, name: "Soap", price: 10)
       @other_merchant_product = products(:rose) 
