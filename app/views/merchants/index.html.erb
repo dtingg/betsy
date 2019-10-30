@@ -1,30 +1,24 @@
-<section class="heading">
-<h1 class="page_title">Merchants</h1>
-<br />
+<section class="products-header">
+  <h2>All Merchants</h2>
 </section>
-<table class="table table-hover table-sm" frame = "box" id="merchant_index">
-<thead>
-<tr>
-<th> PHOTO</th>
-<th> USERNAME </th>
-<th> EMAIL </th>
-<th> ACTIVE PRODUCTS </th>
-<th> GROSS SALES </th>
-</tr>
-</thead>
-  <% @merchants.each do |merchant|  %>
-  <tr>
-    <td class="cell_center">
-      <% if merchant.uid < 100000 %>
-        <%= image_tag "https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo" %>
-      <% else %>
-        <%= image_tag "https://avatars1.githubusercontent.com/u/#{merchant.uid}", alt: "github profile photo" %>
+
+<section id="merchant-index">
+  <%# <div class="container"> %>
+    <div class="card-deck">
+      <% @merchants.each do |merchant|  %>
+      <div class="card">
+        <% if merchant.uid < 100000 %>
+          <%= link_to image_tag("https://avatars1.githubusercontent.com/u/0", alt: "Anonymous profile photo"), merchant_path(merchant.id), id: "card-img" %>
+        <% else %>
+          <%= link_to image_tag("https://avatars1.githubusercontent.com/u/#{merchant.uid}", alt: "github profile photo"), merchant_path(merchant.id), id: "card-img"%>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to merchant.username, merchant_path(merchant.id) %></h5>
+          <% date = merchant.created_at.in_time_zone("Pacific Time (US & Canada)") %>
+          <p class="card-text"><%= "Joined: #{date.strftime( "%B %e, %Y" )}"%></p>
+        </div>
+      </div>
       <% end %>
-    </td>
-    <td class="cell_left"><%= link_to merchant.username, merchant_path(merchant.id) %></td>
-    <td class="cell_left"><%= mail_to merchant.email, merchant.email %></td>
-    <td class="cell_center"><%= merchant.active_products.to_s.first %></td>
-    <td class="cell_center">$ 0.00</td>
-  </tr>
-  <% end %>
-</table>
+    </div>
+  <%# </div> %>
+</section>

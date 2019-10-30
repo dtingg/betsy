@@ -1,15 +1,27 @@
 class CategoriesController < ApplicationController
-  
-  before_action :valid_category?, only: [:show]
   def index
     @categories = Category.all.order(:name)
   end
 
   def show
     @category = Category.find_by(id: params[:id])
+
+    if @category.nil? 
+      flash[:error] = "Category with id #{params[:id]} doesn't exist"
+
+      redirect_to categories_path
+      return
+    end
   end
 
   def new
+    if @current_user.nil?
+      flash[:failure] = "You must log in to perform this action"
+
+      redirect_to categories_path
+      return
+    end
+
     @category = Category.new
   end
 
@@ -21,6 +33,7 @@ class CategoriesController < ApplicationController
       return
     else
       flash.now[:failure] = "Category failed to save"
+
       render :new, status: :bad_request
       return
     end
@@ -30,13 +43,5 @@ class CategoriesController < ApplicationController
 
   def category_params
     return params.require(:category).permit(:name, :product_id)
-  end
-
-  def valid_category?
-    @category = Category.find_by(id: params[:id])
-    if @category.nil? 
-      flash[:error] = "category doesn't exist"
-      redirect_to categories_path
-    end
   end
 end
