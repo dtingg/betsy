@@ -6,22 +6,17 @@
 .products-page-container {
   display: grid;
   grid-template-columns: 200px auto;
-  grid-template-rows: 300px auto;
-  padding-bottom: 100rem;
+  grid-template-rows: auto;
+  margin-bottom: 2rem;
 
-  .categories {
+  .sidebar {
     grid-column: 1;
     grid-row: 1;
   }
 
-  .recently-viewed {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
   .products-list {
     grid-column: 2;
-    grid-row: 1 / span 1;
+    grid-row: 1;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
   
@@ -29,13 +24,11 @@
       list-style-type: none;
     }
     
-
     img {
       width: 150px;
       height: 150px;
       border-radius: 5%;
       display: block;
-      margin: 2% auto;
     }
   }
 }
