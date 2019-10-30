@@ -55,7 +55,8 @@ describe ProductsController do
 
         get edit_product_path(valid_product_id)
 
-        expect(flash[:failure]).must_equal "A problem occurred: You must log in to perform this action"
+        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
+
         must_respond_with :redirect
       end
     end
@@ -68,7 +69,7 @@ describe ProductsController do
           delete product_path(valid_product_id)
         }.wont_change "Product.count"
 
-        expect(flash[:failure]).must_equal "A problem occurred: You must log in to perform this action"
+        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
 
         must_respond_with :redirect
       end
@@ -77,9 +78,9 @@ describe ProductsController do
 
   describe "authenticated user" do 
     before do
-      new_merchant = Merchant.new(username:"Kathy", email: "whatev@git.com", uid: 473837 )
+      existing_merchant = merchants(:merchant_two)
       
-      perform_login(new_merchant)
+      perform_login(existing_merchant)
     end
 
     describe "new" do
@@ -129,12 +130,12 @@ describe ProductsController do
     end
 
     describe "edit" do
-      it "will show edit page for valid product" do
+      it "will show edit page for merchant's valid product" do
         valid_product_id = products(:rose).id
 
         get edit_product_path(valid_product_id)
         
-        must_redirect_to product_path(id: valid_product_id) 
+        must_respond_with :success
       end
       
       it "will redirect if given invalid product" do
@@ -146,6 +147,15 @@ describe ProductsController do
         must_redirect_to products_path
       end
       
+      it "will not show edit page for product that is not connected to merchant" do
+        other_merchant_product_id = products(:potter).id
+
+        get edit_product_path(other_merchant_product_id)
+
+        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
+
+        must_respond_with :redirect
+      end
     end
     
     describe "update" do
@@ -213,6 +223,18 @@ describe ProductsController do
         expect(flash[:warning]).must_equal "Could not find product with id #{invalid_product_id}"
         must_respond_with :redirect
         must_redirect_to products_path
+      end
+
+      it "will not allow user to destroy product that is not theirs" do
+        other_merchant_product_id = products(:potter).id
+
+        expect {
+          delete product_path(other_merchant_product_id)
+        }.wont_change "Product.count"
+
+        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
+
+        must_respond_with :redirect
       end
     end
   end
