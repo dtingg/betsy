@@ -43,7 +43,7 @@
       </tr>
     </thead>
     <% @merchant.all_orderitems.each do |orderitem| %>
-    <% if orderitem.order.status == "pending" %>
+    <% if orderitem.complete == false %>
       <tr>
         <td><%= orderitem.order.id %></td>
         <td><%= orderitem.order.order_date %></td>
@@ -53,10 +53,9 @@
         <td><%= orderitem.quantity %></td>
         <td>$<%= orderitem.total %></td>
         <td>
-          <% if orderitem.complete %>
-          complete
-          <% else %>
-          incomplete
+          <%= form_with model: orderitem do |f| %>
+          <%= hidden_field_tag :complete, true %>
+          <%= f.submit "Complete Order" %>
           <% end %>
         </td>
       </tr>
@@ -81,7 +80,7 @@
       </tr>
     </thead>
     <% @merchant.all_orderitems.each do |orderitem| %>
-    <% if orderitem.order.status == "complete" %>
+    <% if orderitem.complete == true %>
       <tr>
         <td><%= orderitem.order.id %></td>
         <td><%= orderitem.order.order_date %></td>

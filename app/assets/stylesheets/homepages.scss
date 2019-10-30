@@ -8,21 +8,10 @@
 //   grid-template-rows: 400px auto;
 // }
 
-h3 {
-  padding-top: 10rem;
-  text-align: center;
-}
 
-.random-carousel {
-  padding-top: 10rem;
-}
 
 .carousel-inner, .carousel-item, .active {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.carousel-indicators {
-  color: pink;
 }
