@@ -164,9 +164,32 @@ CSV.foreach(CATEGORIES_FILE, :headers => true) do |row|
     category_failures << category
     puts "Failed to save category: #{category.inspect}"
   else
-    # puts "Created merchant: #{merchant.inspect}"
+    # puts "Created category: #{category.inspect}"
   end
 end
 
 puts "Added #{Category.count} category records"
 puts "#{category_failures.length} categories failed to save"
+
+CATEGORIESPRODUCTS_FILE = Rails.root.join('db', "seed_data", 'categoriesproducts.csv')
+puts "Loading raw categoriesproducts data from #{CATEGORIESPRODUCTS_FILE}"
+
+categoryproduct_failures = []
+
+CSV.foreach(CATEGORIESPRODUCTS_FILE, :headers => true) do |row|
+  product = Product.find_by(id: row["product_id"])
+  category = Category.find_by(id: row["category_id"])
+  
+  product.category_ids = product.category_ids << category.id
+  
+  successful = product.save
+  
+  if !successful
+    categoryproduct_failures << product
+    puts "Failed to add a category to product: #{product.inspect}"
+  else
+    # puts "Added a category to product: #{product.inspect}"
+  end
+end
+
+puts "#{categoryproduct_failures.length} categoriesproducts failed to save"
