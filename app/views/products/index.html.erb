@@ -16,9 +16,9 @@
     <h5>Recently Viewed</h5>
     <ul>
     <% if session[:recently_viewed] %>
-      <% session[:recently_viewed].each do |product| %>
-        <% p = Product.find(product) %>
-        <li><%= link_to "#{p["name"]}", product_path(product) %></li>
+      <% session[:recently_viewed].each do |product_id| %>
+        <% p = Product.find(product_id) %>
+        <li><%= p.name %></li>
       <% end %>
     <% end %>
     </ul>
