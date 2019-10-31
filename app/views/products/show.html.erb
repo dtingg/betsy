@@ -27,7 +27,7 @@
         <%= f.hidden_field :product_id, value: @product.id %>
         <%= f.label :quantity %>
         <%= f.select :quantity, (1..@product.stock_qty)%>
-        <%= f.submit "Add to cart" %>
+        <%= f.submit "Add to cart", class:"btn-primary" %>
       <% end %>
     <% else %>
       Quantity<br>
