@@ -93,6 +93,24 @@ describe Orderitem do
       expect(updated_product.stock_qty).must_equal (previous_product_quantity - 3)      
     end
   end
+
+  describe "check quantity method" do
+    it "will return true when requested quantity is less than or equal to amount in stock" do
+      product_quantity = product.stock_qty
+
+      status = orderitem.check_qty(product_quantity)
+
+      expect(status).must_equal true
+    end
+
+    it "will return false when requested quantity is greater than amount in stock" do
+      product_quantity = product.stock_qty
+
+      status = orderitem.check_qty(product_quantity + 1)
+
+      expect(status).must_equal false
+    end
+  end
   
   describe "remove from cart method" do
     it "will return the orderitem's quantity to the product's inventory and will be destroyed" do

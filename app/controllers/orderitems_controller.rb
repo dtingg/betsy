@@ -9,7 +9,18 @@ class OrderitemsController < ApplicationController
     
     # Look for existing orderitem for this order
     @orderitem = Orderitem.exists?(params[:orderitem][:order_id], params[:orderitem][:product_id])
-    
+
+    # Check if desired quantity is in stock
+    if @orderitem
+      status = @orderitem.check_qty(params[:orderitem][:quantity])
+
+      if status == false
+        flash[:error] = "Product not in stock at the requested amount"
+        redirect_back(fallback_location: root_path)
+        return
+      end
+    end
+
     # If it exists, update the quantity
     if @orderitem
       @orderitem.increase_qty(params[:orderitem][:quantity])
