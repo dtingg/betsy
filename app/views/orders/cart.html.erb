@@ -46,11 +46,11 @@
     <%= hidden_field_tag :old_quantity, item.quantity %>
     <% available = item.product.stock_qty + item.quantity %>
     <%= f.select :quantity, (1..available)%>
-    <%= f.submit "Update quantity" %>
+    <%= f.submit "Update quantity", class:"btn btn-primary" %>
     <% end %></td>
   <td>$<%= item.product.price %></td>
   <td>$<%= item.product.price*item.quantity %></td>
-  <td><%= button_to "Remove from cart", orderitem_path(item), method: :delete %></td>
+  <td><%= button_to "Remove from cart", orderitem_path(item), method: :delete, class:"btn btn-primary" %></td>
   </tr>
   <% end %>
   </table>
