@@ -10,7 +10,7 @@ class OrderitemsController < ApplicationController
     # Look for existing orderitem for this order
     @orderitem = Orderitem.exists?(params[:orderitem][:order_id], params[:orderitem][:product_id])
 
-    # Check if desired quantity is in stock
+    # Check if desired quantity is in stock and that product is active
     if @orderitem
       status = @orderitem.check_qty(params[:orderitem][:quantity])
 

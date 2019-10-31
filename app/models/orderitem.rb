@@ -13,7 +13,7 @@ class Orderitem < ApplicationRecord
   end
   
   def check_qty(desired_purchase)
-    if self.product.stock_qty - desired_purchase.to_i >= 0
+    if self.product.stock_qty - desired_purchase.to_i >= 0 && self.product.active == true
       return true
     end
 
