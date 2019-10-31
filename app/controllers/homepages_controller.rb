@@ -6,9 +6,8 @@ class HomepagesController < ApplicationController
   end
   
   def search
-    # @products = Product.where(name: params[:search])
-    @products = Product.where("lower(name) = ?", params[:search].downcase)
-    @merchants = Merchant.where("lower(username) = ?", params[:search].downcase)
+    @products = Product.where("lower(name) LIKE :prefix", prefix: "%#{params[:search]}%".downcase)
+    @merchants = Merchant.where("lower(username) LIKE :prefix", prefix: "%#{params[:search]}%".downcase)
   end
   
   private
