@@ -1,6 +1,6 @@
 <section class="product-page-container">
   <section class="product-image">
-    <%= image_tag(@product.photo_url, alt:"#{@product.name}") %>
+    <%= image_tag(@product.photo_url, alt:"#{@product.name}", onerror:"this.src='https://res.cloudinary.com/demo/image/upload/v1371750447/sample.jpg';") %>
   </section>
 
   <section class="product-details">

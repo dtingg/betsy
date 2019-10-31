@@ -48,7 +48,7 @@
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
         <td><%= orderitem.order.order_date %></td>
         <td><%= link_to orderitem.product.name, product_path(orderitem.product.id) %></td>
-        <td><%= image_tag orderitem.product.photo_url, class: "sm_product_image", alt:"#{orderitem.product.name}" %></td>
+        <td><%= image_tag(orderitem.product.photo_url, class: "sm_product_image", alt:"#{orderitem.product.name}", onerror:"this.src='https://res.cloudinary.com/demo/image/upload/v1371750447/sample.jpg';") %></td>
         <td>$<%= orderitem.product.price %></td>
         <td><%= orderitem.quantity %></td>
         <td>$<%= orderitem.total %></td>
@@ -86,7 +86,7 @@
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
         <td><%= orderitem.order.order_date %></td>
         <td><%= link_to orderitem.product.name, product_path(orderitem.product.id) %></td>
-        <td><%= image_tag orderitem.product.photo_url, class: "sm_product_image", alt:"#{orderitem.product.name}" %></td>
+        <td><%= image_tag(orderitem.product.photo_url, class: "sm_product_image", alt:"#{orderitem.product.name}", onerror:"this.src='https://res.cloudinary.com/demo/image/upload/v1371750447/sample.jpg';") %></td>
         <td>$<%= orderitem.product.price %></td>
         <td><%= orderitem.quantity %></td>
         <td>$<%= orderitem.total %></td>
@@ -123,7 +123,7 @@
         <td>✅</td>
         <td><%= product.stock_qty %></td>
         <td>$<%= product.price%></td>
-        <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
+        <td><%= image_tag(product.photo_url, class: "sm_product_image", alt:"#{product.name}", onerror:"this.src='https://res.cloudinary.com/demo/image/upload/v1371750447/sample.jpg';") %></td>
         <td>
           <%= form_with model: product do |f| %>
           <%= f.hidden_field :active, value: false %>
@@ -161,7 +161,7 @@
         <td>❌</td> 
         <td><%= product.stock_qty %></td>
         <td>$<%= product.price%></td>
-        <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
+        <td><%= image_tag(product.photo_url, class: "sm_product_image", alt:"#{product.name}", onerror:"this.src='https://res.cloudinary.com/demo/image/upload/v1371750447/sample.jpg';") %></td>
         <td>
           <%= form_with model: product do |f| %>
           <%= f.hidden_field :active, value: true %>
