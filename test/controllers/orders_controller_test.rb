@@ -45,7 +45,7 @@ describe OrdersController do
         #need to add orderitem to order first
         a_merchant = Merchant.create(username: "random merchant", email: "bob@aol.com", uid: 43223)
         another_order = Order.create(status: "pending", name: "Random person here", email: "fred@aol.com", address: "123 Bedrock Lane", city: "Bedrock", state: "CA", zipcode: "10025", cc_num: "1234567890123", cc_exp: "1219", cc_cvv: "123", order_date: Time.new )
-        a_product = Product.create(merchant_id: a_merchant.id, name: "hello world soap", price: 5.55, photo_url: "")
+        a_product = Product.create(merchant_id: a_merchant.id, name: "hello world soap", price: 5.55, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
         orderitem = Orderitem.create(order_id: another_order.id, product_id: a_product.id, quantity: 3)
 
         get edit_order_path(another_order.id)
@@ -150,7 +150,7 @@ describe OrdersController do
     before do
       @a_merchant = Merchant.create(username: "random merchant", email: "bob@aol.com", uid: 43223)
       @another_order = Order.create(status: "complete", name: "Random person here", email: "fred@aol.com", address: "123 Bedrock Lane", city: "Bedrock", state: "CA", zipcode: "10025", cc_num: "1234567890123", cc_exp: "1219", cc_cvv: "123", order_date: Time.new )
-      a_product = Product.create(merchant_id: @a_merchant.id, name: "hello world soap", price: 5.55, photo_url: "")
+      a_product = Product.create(merchant_id: @a_merchant.id, name: "hello world soap", price: 5.55, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
       orderitem = Orderitem.create(order_id: @another_order.id, product_id: a_product.id, quantity: 3)
 
       perform_login(@a_merchant)
@@ -158,7 +158,6 @@ describe OrdersController do
 
     describe "show" do
       it "responds with success when showing a valid, completed order to merchant involved in order" do
-
         get order_path(@another_order.id)
 
         must_respond_with :success

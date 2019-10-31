@@ -34,7 +34,7 @@ class Orderitem < ApplicationRecord
     self.complete = true
     self.save
 
-    self.order.check_complete
+    # self.order.check_complete
   end
 
   def self.exists?(order_id, product_id)
