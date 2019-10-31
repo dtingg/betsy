@@ -26,7 +26,25 @@ class Product < ApplicationRecord
   def self.highlight
     return Product.all.sample(5)
   end
-
+  
+  def calculate_average_rating
+    total_rating = 0.0
+    num_of_ratings = 0
+    
+    self.reviews.each do |review|
+      total_rating += review.rating
+      num_of_ratings += 1
+    end
+    
+    
+    return nil if num_of_ratings == 0 
+    average = (total_rating/num_of_ratings).to_i
+    
+    star = "\u2605"
+    rating = star.encode("utf-8") * average
+    return rating
+  end
+  
   # orders active products by name
   def self.order_active_products
     active_products_alpha = []
