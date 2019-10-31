@@ -9,8 +9,6 @@ h4, h5 {
 img {
   align-self: center;
   justify-self: center;
-  // max-height: 250px;
-  // max-width: 300px;
   max-height: 100%;
   max-width: 100%
 }
@@ -113,13 +111,13 @@ td {
   .merchant-product-header {
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
+    text-align: center;
+    margin-top: 5rem;
   }
 
   .merchant-products-list {
-    grid-column: 1 / span 1;
-    grid-row: 3 / span 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: flex;
+    margin-top: 5rem;
 
     ul{
       list-style-type: none;
