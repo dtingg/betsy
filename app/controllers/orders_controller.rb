@@ -18,9 +18,15 @@ class OrdersController < ApplicationController
       redirect_back(fallback_location: root_path)
       return
     end
-    
+
+    if @order.orderitems == []
+      redirect_to order_path(@order)
+      return
+    end
+
     if @order.status == "complete"
       redirect_to order_path(@order)
+      return
     end
   end
   

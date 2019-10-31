@@ -31,8 +31,14 @@ describe OrdersController do
   end    
   
   describe "edit" do
-    it "responds with success when getting the edit page for a valid, pending order" do
-      get edit_order_path(pending_order.id)
+    it "responds with success when getting the edit page for a valid, pending order with order items" do
+      #need to add orderitem to order first
+      a_merchant = Merchant.create(username: "random merchant", email: "bob@aol.com", uid: 43223)
+      another_order = Order.create(status: "pending", name: "Random person here", email: "fred@aol.com", address: "123 Bedrock Lane", city: "Bedrock", state: "CA", zipcode: "10025", cc_num: "1234567890123", cc_exp: "1219", cc_cvv: "123", order_date: Time.new )
+      a_product = Product.create(merchant_id: a_merchant.id, name: "hello world soap", price: 5.55, photo_url: "")
+      orderitem = Orderitem.create(order_id: another_order.id, product_id: a_product.id, quantity: 3)
+
+      get edit_order_path(another_order.id)
       
       must_respond_with :success
     end
@@ -51,6 +57,17 @@ describe OrdersController do
       get edit_order_path(order.id)
       
       must_respond_with :redirect
+    end
+
+    it "respond with redirect when going to the edit page for a pending order with no orderitems" do
+      new_order =  Order.create(status: "pending", name: "random", email: "random@aol.com", address: "223 Seattle Ave", city: "Seattle", state: "WA", zipcode: "90001", cc_num: "1234567890123", cc_exp: "1219", cc_cvv: "123", order_date: Time.new )
+
+      new_order.save
+
+      get edit_order_path(new_order.id)
+
+      must_respond_with :redirect
+      must_redirect_to order_path(new_order)
     end
   end
   
