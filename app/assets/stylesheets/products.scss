@@ -48,7 +48,7 @@ li {
 
 .product-page-container {
   display: grid;
-  grid-template-columns: 500px auto;
+  grid-template-columns: 750px auto;
   grid-template-rows: 400px auto;
 
   .product-image {
@@ -68,6 +68,11 @@ li {
     grid-column: 2;
     grid-row: 1;
 
+    #product-name {
+      text-align: left;
+      margin-left: 0
+    }
+
     ul {
       list-style-type: none;
       padding: 0;
@@ -76,17 +81,16 @@ li {
 
   .product-reviews {
     display: flex;
-
   }
 }
 
 #reviews{
-  margin-left: 5rem;
+  margin-left: 10rem;
 }
 
 .review {
   display: flex;
-  margin-left: 5rem;
+  margin-left: 10rem;
 
   .single-review {
     margin-top: 2rem;
@@ -96,7 +100,7 @@ li {
 }
 
 #add-review {
-  margin-left: 5rem;
+  margin-left: 10rem;
 }
 
 .cart-item {

@@ -3,7 +3,7 @@
     <%= image_tag(@product.photo_url, alt:"#{@product.name}") %>
   </section>
   <section class="product-details">
-    <h2><%= @product.name.titleize %> </h2>
+    <h2 id="product-name"><%= @product.name.titleize %> </h2>
     <ul>
       <li><%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %></li>
       <li><%= @product.description %></li>
