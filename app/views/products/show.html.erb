@@ -13,7 +13,7 @@
       <% end %>
     <ul>
     <br>
-      <li><%= @product.calculate_average_rating %></li>
+      <li><%= rating_width = @product.calculate_average_rating %></li>
       <li><%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %></li>
       <li><%= @product.description %></li>
       <li>$<%= sprintf('%.2f', @product.price) %></li>

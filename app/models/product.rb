@@ -31,18 +31,21 @@ class Product < ApplicationRecord
     total_rating = 0.0
     num_of_ratings = 0
     
+    if (self.reviews).count == 0
+      return "Not Yet Rated"
+    end
+    
     self.reviews.each do |review|
       total_rating += review.rating
       num_of_ratings += 1
     end
     
-    
-    return nil if num_of_ratings == 0 
     average = (total_rating/num_of_ratings).to_i
     
     star = "\u2605"
     rating = star.encode("utf-8") * average
     return rating
+    
   end
   
   # orders active products by name
