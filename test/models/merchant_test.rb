@@ -29,7 +29,7 @@ describe Merchant do
       
       it "can have a product" do
         @merchant.save
-        product = Product.create(name: "random soap", price: 10.0, merchant: @merchant, stock_qty: 9)
+        product = Product.create(name: "random soap", price: 10.0, merchant: @merchant, stock_qty: 9, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
         
         expect(@merchant.products.last).must_be_instance_of Product      
         expect(@merchant.products.last.name).must_equal product.name

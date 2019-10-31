@@ -37,102 +37,102 @@ describe ProductsController do
         must_respond_with :redirect
         must_redirect_to products_path
       end
-
+      
       it "adds product to recently viewed array" do
         # puts one product in recently viewed array
         get product_path(products(:cucumber))
         start_count = session[:recently_viewed].length
-
+        
         valid_product = products(:rose)
         get product_path(valid_product)
-
+        
         expect(session[:recently_viewed].length).must_equal (start_count + 1)
         expect(session[:recently_viewed].include?(valid_product.id)).must_equal true
       end
-
+      
       it "deletes a current product in array if recently_viewed is less than 5" do
         all_products = [products(:rose), products(:cucumber), products(:potter), products(:onion), products(:peppermint)]
         all_products.each do |product|
           get product_path(product)
         end
-
+        
         expect(session[:recently_viewed].length).must_equal 5
         
         Product.create(name: "world soap", price: 8.00, stock_qty: 10, merchant_id: merchants(:merchant_one).id, photo_url: "")
-
+        
         created_product = Product.find_by(name: "world soap")
-
+        
         # new product is not included in recently viewed array until user visits product show path
         expect(session[:recently_viewed].include?(created_product.id)).must_equal false
-
+        
         get product_path(created_product)
-
+        
         expect(session[:recently_viewed].length).must_equal 5
         expect(session[:recently_viewed].include?(created_product.id)).must_equal true
       end
-
+      
       it "does not add a duplicate product to recently viewed array" do
         # puts one product in recently viewed array
-
+        
         valid_product = products(:cucumber)
-
+        
         get product_path(valid_product)
         start_count = session[:recently_viewed].length
-
+        
         get product_path(valid_product)
-
+        
         expect(session[:recently_viewed].length).must_equal start_count
       end
     end
-
+    
     describe "new" do
       it "does not show the form to create new product" do
         get new_product_path
-
+        
         expect(flash[:failure]).must_equal "A problem occurred: You must log in to perform this action"
-
+        
         must_respond_with :redirect
       end
     end
-
+    
     describe "edit" do
       it "does not show the form to edit new product" do
         valid_product_id = products(:onion).id
-
+        
         get edit_product_path(valid_product_id)
-
+        
         expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
-
+        
         must_respond_with :redirect
       end
     end
-
+    
     describe "destroy" do
       it "does not let guest user destroy product" do
         valid_product_id = products(:onion).id
-
+        
         expect {
           delete product_path(valid_product_id)
         }.wont_change "Product.count"
-
+        
         expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
-
+        
         must_respond_with :redirect
       end
     end
   end
-
+  
   describe "authenticated user" do 
     before do
       existing_merchant = merchants(:merchant_two)
       
       perform_login(existing_merchant)
     end
-
+    
     describe "new" do
       it 'shows the form to add a new product' do
         get new_product_path
-
+        
         must_respond_with :success
       end
     end
@@ -143,7 +143,8 @@ describe ProductsController do
           product: {
             name: "Test2", 
             price: 10.00, 
-            merchant_id: merchants(:merchant_three).id
+            merchant_id: merchants(:merchant_three).id,
+            photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg"
           }
         }
         
@@ -174,11 +175,11 @@ describe ProductsController do
         must_respond_with :bad_request
       end
     end
-
+    
     describe "edit" do
       it "will show edit page for merchant's valid product" do
         valid_product_id = products(:rose).id
-
+        
         get edit_product_path(valid_product_id)
         
         must_respond_with :success
@@ -195,11 +196,11 @@ describe ProductsController do
       
       it "will not show edit page for product that is not connected to merchant" do
         other_merchant_product_id = products(:potter).id
-
+        
         get edit_product_path(other_merchant_product_id)
-
+        
         expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
-
+        
         must_respond_with :redirect
       end
     end
@@ -214,9 +215,9 @@ describe ProductsController do
         
         valid_product = products(:rose)
         valid_product_start_price = valid_product.price
-
+        
         expect(products(:rose).price).must_equal valid_product_start_price
-
+        
         expect { 
           patch product_path(valid_product.id), params: product_updates
         }.wont_change "Product.count"
@@ -251,7 +252,7 @@ describe ProductsController do
     describe "destroy" do
       it "destroys product when given valid product id" do
         valid_product_id = products(:rose).id
-
+        
         expect {
           delete product_path(valid_product_id)
         }.must_differ "Product.count", -1
@@ -270,16 +271,16 @@ describe ProductsController do
         must_respond_with :redirect
         must_redirect_to products_path
       end
-
+      
       it "will not allow user to destroy product that is not theirs" do
         other_merchant_product_id = products(:potter).id
-
+        
         expect {
           delete product_path(other_merchant_product_id)
         }.wont_change "Product.count"
-
+        
         expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
-
+        
         must_respond_with :redirect
       end
     end

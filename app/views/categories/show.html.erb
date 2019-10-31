@@ -2,14 +2,14 @@
   <h2><%= @category.name.titleize %> Products</h2>
 </section>
 
-<section class="products-page-container">
+<section class="products-by-category">
   <% if @category.products.count == 0  %>
     <h3>no items found</h3>
   <% else %>
-    <section class="product-list">
+    <%# <section class="product-list"> %>
       <% @category.products.each do |product| %>
         <% if product.stock_qty > 0 && product.active %> 
-          <ul>
+          <ul class="product-item">
             <li><%= link_to image_tag(product.photo_url, alt:"#{product.name}"), product_path(product) %></li>
             <li class="product-name"><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
             <li class="product-merchant"><%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
@@ -17,7 +17,7 @@
             <li class="product-stock"><%= product.stock_qty %> left in stock!</li>
           </ul>
       <% end %>
-    </section>
+    <%# </section> %>
     <% end %>
   <% end %>
 </section>      

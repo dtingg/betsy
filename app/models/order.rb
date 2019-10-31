@@ -17,7 +17,7 @@ class Order < ApplicationRecord
       orderitem.total
     end
     
-    return order_total
+    return order_total 
   end
 end
 

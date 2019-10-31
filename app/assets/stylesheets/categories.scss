@@ -2,15 +2,97 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+:root {
+  --timid: #bdcff2;
+  --mid: #487adb;
+  --navy: #375cbf;
+  --burnt_orange: #8f3907;
+  --sand: #b5a78f;
+}
+
 h3 {
   margin-top: 5rem;
   text-align: center;
   color: #FE5F55;
-  font-size: 2rem;
+  font-size: 4rem;
 }
-
 
 #add-btn {
   margin-top: 10rem;
 }
 
+.form-group {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.form-button {
+  margin-top: 50px;
+}
+
+.categories-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.add-category {
+  margin-top: 50px;
+  margin-left: 200px;
+}
+
+.categories-list a {
+  color: white;
+}
+
+
+.btn {
+  background-color: var(--navy);
+  border-color: var(--navy);
+  margin: .2rem;
+  border-radius: 40px;
+}
+
+.btn:hover {
+  background-color: var(--burnt_orange);
+  border-color: var(--burnt_orange);
+}
+
+.btn-primary {
+  background-color: var(--navy);
+  border-radius: 25px;
+}
+
+.btn a:hover {
+  background-color: var(--navy);
+  border-color: var(--navy);
+  color: var(--burnt_orange);
+}
+
+.btn-primary {
+  background-color: var(--navy);
+}
+
+.btn-primary::selection {
+  background-color: var(--navy);
+}
+
+.products-by-category {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+}
+
+.product-list {
+
+}
+
+.product-item {
+  align-items: flex-start;
+}
+
+img {
+  border-radius: 5%;
+}
