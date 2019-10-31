@@ -78,6 +78,10 @@ class Merchant < ApplicationRecord
         if orderitem.complete == true
           order_count += 1
         end
+      elsif criteria == "cancelled"
+        if orderitem.complete == nil
+          order_count += 1
+        end
       else
         break
       end
