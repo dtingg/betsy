@@ -2,7 +2,7 @@ require "test_helper"
 
 describe OrderitemsController do
   let (:merchant) { Merchant.create(username: "Bob", email: "bob@aol.com", uid: "12348") }
-  let (:product) { Product.create(merchant_id: merchant.id, name: "Oatmeal soap", price: 5.55) }
+  let (:product) { Product.create(merchant_id: merchant.id, name: "Oatmeal soap", price: 5.55, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg") }
   let (:order) { Order.create(status: "pending") }
   let (:orderitem) { Orderitem.create(order_id: order.id, product_id: product.id, quantity: 3) }
   

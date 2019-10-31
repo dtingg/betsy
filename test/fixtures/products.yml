@@ -5,7 +5,7 @@ potter:
   stock_qty: 12
   price: 3.00
   merchant: merchant_one
-  photo_url: ""
+  photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg"
 rose:
   name: "rose soap"
   description: "handmade"
@@ -13,7 +13,7 @@ rose:
   stock_qty: 10
   price: 3.00
   merchant: merchant_two
-  photo_url: ""
+  photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg"
 cucumber:
   name: "cucumber"
   description: "handmade"
@@ -21,7 +21,7 @@ cucumber:
   stock_qty: 12
   price: 3.00
   merchant: merchant_two
-  photo_url: ""
+  photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg"
 onion:
   name: "onion"
   description: "handmade"
@@ -29,7 +29,7 @@ onion:
   stock_qty: 12
   price: 3.00
   merchant: merchant_two
-  photo_url: ""
+  photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg"
 peppermint:
   name: "peppermint"
   description: "handmade"
@@ -37,4 +37,4 @@ peppermint:
   stock_qty: 12
   price: 3.00
   merchant: merchant_two
-  photo_url: ""
+  photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg"

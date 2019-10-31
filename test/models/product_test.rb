@@ -3,7 +3,7 @@ require "test_helper"
 describe Product do
   describe "initialize" do
     before do
-      @new_product = Product.new(name: "random soap", price: 10.0, merchant: merchants(:merchant_one), stock_qty: 9)
+      @new_product = Product.new(name: "random soap", price: 10.0, merchant: merchants(:merchant_one), stock_qty: 9, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
       
     end
     it "can be instantiated" do
@@ -187,7 +187,7 @@ describe Product do
   
   describe "calculate average rating" do
     before do
-      @new_product = Product.create(name: "random soap", price: 10.0, merchant: merchants(:merchant_one), stock_qty: 9)
+      @new_product = Product.create(name: "random soap", price: 10.0, merchant: merchants(:merchant_one), stock_qty: 9, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
       @review_1 = Review.create(product_id: @new_product.id, date: Time.now, comment: "test 1", rating: 2, reviewer: "test 1")
       @review_2 = Review.create(product_id: @new_product.id, date: Time.now, comment: "test 2", rating: 4, reviewer: "test 2")
       @new_product_2 = Product.create(name: "random soap", price: 10.0, merchant: merchants(:merchant_one), stock_qty: 9)
