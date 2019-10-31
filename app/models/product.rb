@@ -8,14 +8,7 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :stock_qty, numericality: { greater_than_or_equal_to: 0 }, :on => :update
-  
-  def image_validation(url)
-  image = Image.new
-  image.src = "#{url}"
-    if image.naturalWidth == 0
-    end
-  end
-  
+   
   def remove_stock(number)
     unless number < 1
       self.stock_qty -= number
