@@ -1,5 +1,6 @@
 class MerchantsController < ApplicationController
-  before_action :find_merchant, only: [:show, :dashboard, :destroy]
+  before_action :find_other_merchant, only: [:show]
+  before_action :find_self_merchant, only: [:dashboard, :destroy]
   before_action :if_merchant_missing, only: [:show, :dashboard, :destroy]
   before_action :if_invalid_merchant, only: [:dashboard, :destroy]
   
@@ -55,13 +56,22 @@ class MerchantsController < ApplicationController
     return params.require(:merchant).permit(:uid, :username, :email)
   end
   
-  def find_merchant
+  def find_self_merchant
+    if session[:user_id] == params[:id]
+      @merchant = Merchant.find_by(id: session[:user_id])
+    else
+      @merchant = Merchant.find_by(id: params[:id])
+    end
+  end
+
+  def find_other_merchant
     @merchant = Merchant.find_by(id: params[:id])
   end
   
   def if_merchant_missing
     if @merchant.nil?
       flash[:redirect] = "Could not find merchant with id #{params[:id]}"
+
       redirect_to merchants_path 
       return
     end
@@ -70,7 +80,7 @@ class MerchantsController < ApplicationController
   def if_invalid_merchant
     if @current_user != @merchant
       flash[:failure] = "A problem occurred: You are not authorized to perform this action"
-
+      
       redirect_to merchants_path
       return
     end
