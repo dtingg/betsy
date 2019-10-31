@@ -37,26 +37,29 @@
     <%end%> <br />
 
   </section>
+</section>
 
   <section class="product-reviews">
-    <h4>Reviews: </h4>
+    <h4 id="reviews">Reviews </h4>
     
     <section class="review">
     <% if @product.reviews != []%>
       <% @product.reviews.each do |review| %>
-      <ul>
-        <li>Name: <%= review.reviewer %></li>
+      <span class="single-review">
+        Name: <%= review.reviewer %><br>
         <% if review.date %>
-          <li>Date: <%= review.date.strftime( "%B %e, %Y %l:%M %p") %></li>
+          Date: <%= review.date.strftime( "%B %e, %Y %l:%M %p") %><br>
         <% end %>
-        <li>Rating: <%= review.rating %> </li>
-        <li>Comment: <%= review.comment %></li>
-      </ul>
+        Rating: <%= review.rating %><br>
+        Comment: <%= review.comment %><br>
+      </span>
       <% end %>
     <%end%>
     </section>  
 
-    <%=link_to "Add Review",  new_product_review_path(@product.id), :class=>"btn btn-primary"%>
+    
+<%=link_to "Add Review",  new_product_review_path(@product.id), :class=>"btn btn-primary", id: "add-review"%>
+
+
  
-  </section>
 </section>

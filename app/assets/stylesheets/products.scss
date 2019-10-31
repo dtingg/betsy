@@ -75,16 +75,31 @@ li {
   }
 
   .product-reviews {
-    grid-column: 1 / span 1;
-    grid-row: 2;
+    display: flex;
 
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 5% 0;
-    }
   }
 }
+
+#reviews{
+  margin-left: 5rem;
+}
+
+.review {
+  display: flex;
+  margin-left: 5rem;
+
+  .single-review {
+    margin-top: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+#add-review {
+  margin-left: 5rem;
+}
+
+
 
 .cart-item {
   display: grid;
