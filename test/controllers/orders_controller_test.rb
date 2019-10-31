@@ -2,7 +2,7 @@ require "test_helper"
 
 describe OrdersController do
   let (:merchant) { Merchant.create(username: "Bob", email: "bob@aol.com", uid: "12345") }
-  let (:product) { Product.create(merchant_id: merchant.id, name: "Oatmeal soap", price: 5.55, photo_url: "") }
+  let (:product) { Product.create(merchant_id: merchant.id, name: "Oatmeal soap", price: 5.55, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg") }
   let (:order) { Order.create(status: "complete", name: "Fred Flintstone", email: "fred@aol.com", address: "123 Bedrock Lane", city: "Bedrock", state: "CA", zipcode: "10025", cc_num: "1234567890123", cc_exp: "1219", cc_cvv: "123", order_date: Time.new ) }  
   let (:orderitem) { Orderitem.create(order_id: order.id, product_id: product.id, quantity: 3) }
   let (:pending_order) { Order.create(status: "pending", name: "Fred Flintstone", email: "fred@aol.com", address: "123 Bedrock Lane", city: "Bedrock", state: "CA", zipcode: "10025", cc_num: "1234567890123", cc_exp: "1219", cc_cvv: "123", order_date: Time.new ) }  

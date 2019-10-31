@@ -1,12 +1,17 @@
-<section class="categories-header">
-  <h3>All Categories</h3>
-</section>
-<section class="products-list">
-<% @categories.each do |category| %>
-  <p class="badge badge-light"><%= link_to "#{category.name.titleize}", category_path(category.id) %></p>
-<% end %>
-</section>
 
-<% if @current_user %>
-  <%= link_to "Add a Category", new_category_path, class:"btn btn-primary", id: "add-btn" %>
-<% end %>
+  <section class="categories-header">
+    <h3>All Categories</h3>
+  </section>
+
+<section class="categories-container">
+  <section class="categories-list">
+    <% @categories.each do |category| %>
+      <p class="btn btn-primary category-btn"><%= link_to "#{category.name.titleize}", category_path(category.id) %></p>
+    <% end %>
+  </section>
+</section>
+<section class="add-category">
+  <% if @current_user %>
+    <%= link_to "Add a Category", new_category_path, class:"btn btn-primary submit" %>
+  <% end %>
+</section>
