@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
-  before_action :if_product_missing, only: [:show, :edit, :destroy]
-  before_action :find_merchant, only: [:edit, :destroy]
+  before_action :if_product_missing, only: [:show, :edit, :update, :destroy]
+  before_action :find_merchant, only: [:edit, :update, :destroy]
   
   def index
     @products = Product.all.order(:name)
@@ -61,7 +61,9 @@ class ProductsController < ApplicationController
   end
   
   def destroy
+    session[:recently_viewed].delete(@product.id)
     @product.destroy
+
     redirect_to products_path
     return
   end
@@ -92,7 +94,7 @@ class ProductsController < ApplicationController
       redirect_to merchants_path 
       return
     end
-  
+      
     if @current_user != merchant
       flash[:failure] = "A problem occurred: You are not authorized to perform this action"
 
