@@ -5,12 +5,10 @@
 
   <section class="product-details">
     <h2><%= @product.name.titleize %> </h2>
-
     <ul>
       <li><%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %></li>
       <li><%= @product.description %></li>
-      <li>$<%= @product.price %></li>
-
+      <li>$<%= sprintf('%.2f', @product.price) %></li>
       <% if @product.categories.count > 0 %>
         <ul class="categories">
           <% @product.categories.each do |category| %>
@@ -18,7 +16,6 @@
           <% end %>
         </ul>
       <% end %>
-
     </ul>
 
     <% if @product.stock_qty > 0 && @product.active %>
