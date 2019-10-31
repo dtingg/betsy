@@ -91,11 +91,13 @@ li {
 
 .review {
   display: flex;
+  flex-wrap: wrap;
   margin-left: 10rem;
 
   .single-review {
     margin-top: 2rem;
-    margin-right: 5rem;
+    padding: 2rem;
+    width: 20rem;
     margin-bottom: 2rem;
   }
 }
