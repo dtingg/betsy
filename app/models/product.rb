@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :stock_qty, numericality: { greater_than_or_equal_to: 0 }, :on => :update
+  validates :photo_url, url: true
   
   def remove_stock(number)
     unless number < 1
@@ -26,7 +27,7 @@ class Product < ApplicationRecord
   def self.highlight
     return Product.all.sample(5)
   end
-
+  
   # orders active products by name
   def self.order_active_products
     active_products_alpha = []
