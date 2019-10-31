@@ -13,7 +13,7 @@
   <section class="merchant-info-details">
     <h2><%= @merchant.username.capitalize %></h2>
     <% if @merchant.calculate_average_rating %>
-      <p>Average Product Rating: <%= @merchant.calculate_average_rating%></p>
+      <p>Average Product Rating: <%= sprintf('%.2f', @merchant.calculate_average_rating)%></p>
     <%else%>
       <p>No Ratings<p>
     <%end%>
@@ -27,7 +27,7 @@
   <section class="merchant-products-list">
     <% @merchant.products.where(active: true).where("stock_qty > ?", 0).each do |product| %>
     <ul>
-      <%= image_tag(product.photo_url, alt:"#{product.name}") %>
+      <%= link_to image_tag(product.photo_url, alt:"#{product.name}"), product_path(product.id) %>
 
       <section class="product-name">
         <li><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
