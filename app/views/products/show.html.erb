@@ -7,7 +7,7 @@
     <h2><%= @product.name.titleize %> </h2>
 
     <ul>
-      <li><%= @product.merchant.username %></li>
+      <li><%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %></li>
       <li><%= @product.description %></li>
       <li>$<%= @product.price %></li>
 
