@@ -201,7 +201,7 @@ describe Merchant do
     end
   end
   
-  describe "calculate gross sales" do
+  describe "calculate total revenue" do
     before do
       @merchant = Merchant.create(username: "golden merchant", uid: 1232, email: "hello@world.com")
       product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00)
@@ -217,21 +217,21 @@ describe Merchant do
       orderitem_three = Orderitem.create(order_id: order_three.id, product_id: product_two.id, quantity: 3)
     end
     
-    it "calculates the gross sales for a merchant with multiple orders" do
+    it "calculates the total revenue for a merchant with multiple orders" do
       expected_sum = @order_one.total + @order_two.total
       
-      gross_sales = @merchant.calculate_gross_sales
+      total_revenue = @merchant.calculate_total_revenue("all")
       
-      expect(gross_sales).must_equal expected_sum
+      expect(total_revenue).must_equal expected_sum
     end
     
-    it "calculates gross sales for a merchant with no orders" do
+    it "calculates total revenue for a merchant with no orders" do
       merchant_three = merchants(:merchant_three)
       expected_sum = 0
       
-      gross_sales = merchant_three.calculate_gross_sales
+      total_revenue = merchant_three.calculate_total_revenue("all")
       
-      expect(gross_sales).must_equal expected_sum
+      expect(total_revenue).must_equal expected_sum
     end
   end
   
@@ -263,8 +263,8 @@ describe Merchant do
     it "will take the time off of the date object" do
       test_date = Time.now
       formatted_date = Merchant.date_formatting(Time.now)
-      expect(formatted_date).wont_be_instance_of Datetime
-      expect(formatted_date).wont_include :
+      expect(formatted_date).wont_be_instance_of Time
+      expect(formatted_date).wont_include ":"
     end
   end
 end

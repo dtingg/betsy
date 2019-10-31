@@ -45,14 +45,44 @@ class Merchant < ApplicationRecord
     return all_orderitems
   end
   
-  def calculate_gross_sales
-    gross_sales = 0
-    
+  def calculate_total_revenue (criteria)
+    total_revenue = 0
     self.all_orderitems.each do |orderitem|
-      gross_sales += orderitem.total
+      if criteria == "all"
+        total_revenue += orderitem.total
+      elsif criteria == "pending"
+        if orderitem.complete == false
+          total_revenue += orderitem.total
+        end
+      elsif criteria == "completed"
+        if orderitem.complete == true
+          total_revenue += orderitem.total
+        end
+      else
+        break
+      end
     end
-    
-    return gross_sales
+    return total_revenue
+  end
+  
+  def calculate_order_count (criteria)
+    order_count = 0
+    self.all_orderitems.each do |orderitem|
+      if criteria == "all"
+        order_count += 1
+      elsif criteria == "pending"
+        if orderitem.complete == false
+          order_count += 1
+        end
+      elsif criteria == "completed"
+        if orderitem.complete == true
+          order_count += 1
+        end
+      else
+        break
+      end
+    end
+    return order_count
   end
   
   def calculate_average_rating
