@@ -1,9 +1,14 @@
-<%= form_for @category do |f| %>
-  <div>
-    <%= f.label :name %> 
-    <%= f.text_field :name %>
-  </div>
-
-  <%= f.submit "Create", method: :post %>
-<% end %>
+<div class="new-category-form">
+    <%= form_for @category do |f| %>
+      <div class="form-group">
+        <div class="form-row">
+          <%= f.label :name %> 
+          <%= f.text_field :name, class:"form-control"%>
+        </div>
+        <div class="form-button">
+          <%= f.submit "Create", method: :post, class:"btn, btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+</div>
 
