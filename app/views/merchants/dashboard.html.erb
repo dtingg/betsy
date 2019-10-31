@@ -57,7 +57,7 @@
           <%= form_with model: orderitem do |f| %>
           <%= f.hidden_field :complete, value: true %>
           <%= hidden_field_tag :complete, true %>
-          <%= f.submit "Complete Order" %>
+          <button type="submit" class="btn btn-primary">Complete Order</button>
           <% end %>
         </td>
       </tr>
@@ -130,7 +130,7 @@
           <%= form_with model: product do |f| %>
           <%= f.hidden_field :active, value: false %>
           <%= hidden_field_tag :active, false %>
-          <%= f.submit "Inactivate" %>
+          <button type="submit" class="btn btn-primary">Inactivate</button>
           <% end %>
         </td>
         <td><%= link_to "Edit", edit_product_path(product.id) %></td>
@@ -168,7 +168,7 @@
           <%= form_with model: product do |f| %>
           <%= f.hidden_field :active, value: true %>
           <%= hidden_field_tag :active, true %>
-          <%= f.submit "Activate" %>
+          <button type="submit" class="btn btn-primary">Activate</button>
           <% end %>
           </td>
         <td><%= link_to "Edit", edit_product_path(product.id) %></td>
