@@ -9,9 +9,8 @@ Rails.application.routes.draw do
   resources :orders, except: [:index, :new, :create, :put, :delete]
 
   resources :merchants, only: [:index, :show]
-
   post "/logout", to: "merchants#logout", as: "logout"
-  get "merchants/:id/dashboard", to: "merchants#dashboard", as: "dashboard"
+  get "/dashboard", to: "merchants#dashboard", as: "dashboard"
   
   resources :orderitems, except: [:index, :put, :new, :show]
 
