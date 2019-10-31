@@ -38,7 +38,7 @@
   <br />
   <%= item.product.description %>
   <br />
-  <%= item.product.merchant.username %>
+  <%= link_to "#{item.product.merchant.username}", merchant_path(item.product.merchant.id) %>
   </td>
   <td>
     <%= form_with model: item do |f| %>
