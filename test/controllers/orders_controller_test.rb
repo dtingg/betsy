@@ -129,24 +129,19 @@ describe OrdersController do
     end
     
     describe "cart method" do
-      it "shows the cart for a valid, pending order" do
-        get cart_path(pending_order.id)
+      it "shows the cart for a valid, pending order" do        
+        get cart_path
         
         must_respond_with :success
+
       end
       
-      it "redirects to the root path for an invalid order" do
-        invalid_id = -1
+      it "shows the cart for valid, pending order when no current orders" do
+        Order.destroy_all
+
+        get cart_path
         
-        get cart_path(invalid_id)
-        
-        must_redirect_to :root
-      end
-      
-      it "redirects to the order show page for a valid, completed order" do
-        get cart_path(order.id)
-        
-        must_redirect_to order_path(order.id)
+        must_respond_with :success
       end
     end
   end

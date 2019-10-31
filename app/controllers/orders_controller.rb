@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
     end
     
     if @order.status == "pending"
-      redirect_to cart_path(@cart.id)
+      redirect_to cart_path
       return
     end
 
@@ -52,6 +52,8 @@ class OrdersController < ApplicationController
   end
   
   def cart
+    @order = Order.find_by(id: @cart.id)
+    
     if @order.nil?
       redirect_to root_path
       return

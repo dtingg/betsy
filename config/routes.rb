@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root "homepages#index"
   get "/search", to: "homepages#search", as: "search"
   
-  get "/cart/:id", to: "orders#cart", as: "cart"
+  get "/cart", to: "orders#cart", as: "cart"
   get "/checkout/:id", to: "orders#edit", as: "checkout"
   resources :orders, except: [:index, :new, :create, :put, :delete]
 
