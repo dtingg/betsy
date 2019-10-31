@@ -28,8 +28,8 @@
   <section class="info_section">
     <h4>Orders</h4>
     <h5><a name="orders_active">Paid Pending Orders</a></h5>
-    <p>Pending Order Count: <%= @merchant.calculate_order_count("pending") %><br />
-    Pending Order Revenue: <%= number_to_currency @merchant.calculate_total_revenue("pending") %></p>
+    <p>Pending Order Revenue: <%= number_to_currency @merchant.calculate_total_revenue("pending") %><br />
+    Pending Order Count: <%= @merchant.calculate_order_count("pending") %></p>
     <table class="table table-hover table-sm merchant_details" frame = "box" id="merchant_product_index">
     <thead>
       <tr>
@@ -40,7 +40,7 @@
         <th>Product Price</th>
         <th>Product Quantity</th>
         <th>Total Price</th>
-        <th>Status</th>
+        <th colspan="2">Status</th>
       </tr>
     </thead>
     <% @merchant.all_orderitems.each do |orderitem| %>
@@ -55,6 +55,13 @@
         <td><%= number_to_currency orderitem.total %></td>
         <td>
           <%= form_with model: orderitem do |f| %>
+          <%= f.hidden_field :complete, value: nil %>
+          <%= hidden_field_tag :complete, nil %>
+          <button type="submit" class="btn btn-primary">Cancel</button>
+          <% end %>
+        </td>
+        <td>
+          <%= form_with model: orderitem do |f| %>
           <%= f.hidden_field :complete, value: true %>
           <%= hidden_field_tag :complete, true %>
           <button type="submit" class="btn btn-primary">Complete Order</button>
@@ -67,9 +74,10 @@
 
     <br /><br />
 
-    <h5><a name="orders_active">Completed Orders</a></h5>
-    <p>Completed Order Count: <%= @merchant.calculate_order_count("completed") %><br />
-    Completed Order Revenue: <%= number_to_currency @merchant.calculate_total_revenue("completed") %></p>
+    <h5><a name="orders_active">Order History</a></h5>
+    <p>Completed Order Revenue: <%= number_to_currency @merchant.calculate_total_revenue("completed") %><br />
+    Completed Order Count: <%= @merchant.calculate_order_count("completed") %><br />
+    Cancelled Order Count: <%= @merchant.calculate_order_count("cancelled") %></p></p>
     <table class="table table-hover table-sm merchant_details" frame = "box" id="merchant_product_index">
     <thead>
       <tr>
@@ -84,7 +92,7 @@
       </tr>
     </thead>
     <% @merchant.all_orderitems.each do |orderitem| %>
-    <% if orderitem.complete == true %>
+    <% if orderitem.complete != false %>
       <tr>
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
         <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
@@ -93,7 +101,11 @@
         <td><%= number_to_currency orderitem.product.price %></td>
         <td><%= orderitem.quantity %></td>
         <td><%= number_to_currency orderitem.total %></td>
-        <td>Completed</td>
+        <% if orderitem.complete == true %>
+          <td>Completed</td>
+        <% else %>
+          <td>Cancelled</td>
+        <% end %>
       </tr>
     <% end %>
     <% end %>
@@ -134,8 +146,8 @@
           <button type="submit" class="btn btn-primary">Inactivate</button>
           <% end %>
         </td>
-        <td><%= link_to "Edit", edit_product_path(product.id) %></td>
-        <td><%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
+        <td><%= link_to "Edit", edit_product_path(product.id), class: "btn btn-primary" %></td>
+        <td><%= link_to "Delete", product_path(product.id), class: "btn btn-primary", method: :delete, data: {confirm: "Are you sure?"}%></td>
       </tr>
     <% end %>
     <% end %>
