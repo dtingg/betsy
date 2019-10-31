@@ -22,14 +22,18 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :price %> 
-        <%= f.text_field :price, class: "form-control" %>
-      </div>
+        <div class="form-row">
+          <div class="col">
+            <%= f.label :price %> 
+            <%= f.text_field :price, class: "form-control" %>
+          </div>
 
-      <div class="form-group">
-        <%= f.label :stock_qty %> 
-        <%= f.text_field :stock_qty, class: "form-control" %>
-      </div>
+          <div class="col">
+            <%= f.label :stock_qty %> 
+            <%= f.text_field :stock_qty, class: "form-control" %>
+          </div>
+        </div>
+      </div>  
 
       <div class="form-group">
         <%= f.label "Status Active?" %> 
@@ -53,8 +57,7 @@
           <% b.label(:"data-value" => b.value) { b.check_box + b.text }  %>
         <% end %>
       </div>
-
-    <%= f.hidden_field :merchant_id, value: Merchant.find_by(id: session[:user_id]).id %>
+      <%= f.hidden_field :merchant_id, value: Merchant.find_by(id: session[:user_id]).id %>
     <%= f.submit action_name, class:"btn" %>
     <% end %>
   </section>

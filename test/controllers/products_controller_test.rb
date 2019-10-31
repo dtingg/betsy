@@ -223,6 +223,7 @@ describe ProductsController do
         
         updated_product = Product.find_by(id: valid_product.id)
         
+        assert_nil(flash[:failure])
         expect(updated_product.price).must_equal product_updates[:product][:price]
         
         must_respond_with :redirect
