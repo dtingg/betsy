@@ -45,7 +45,7 @@ a:hover {
 }
 
 .flash {
-  margin-top: 400px;
+  margin-top: 320px;
 }
 
 .profile {
@@ -62,14 +62,16 @@ header h1 {
 
 header h1 a{
   color: var(--navy); 
-  font-size: 6rem;
+  font-size: 5rem;
 }
 
 header h1 a:hover{
   style: var(--timid);
 }
 
+
 nav ul {
+  margin-top: 100px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -85,7 +87,9 @@ a:hover {
 }
 
 .searchbar {
-  margin-top: 4rem;
+  margin-top: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .btn {
