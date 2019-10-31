@@ -11,6 +11,8 @@ class OrdersController < ApplicationController
       redirect_to cart_path(@cart.id)
       return
     end
+
+    verify_user
   end
   
   def edit
@@ -19,7 +21,7 @@ class OrdersController < ApplicationController
       return
     end
 
-    if @order.orderitems == []
+    if @order.orderitems == [] || @order.orderitems.nil?
       redirect_to order_path(@order)
       return
     end
@@ -37,6 +39,8 @@ class OrdersController < ApplicationController
     end
     
     if @order.update(order_params)
+      cookies[:completed_order] = { value: "complete", expires: 1.minute }
+
       flash[:success] = "Thank you for your order!"  
       redirect_to order_path(@cart)
       session[:cart_id] = nil
@@ -68,4 +72,19 @@ class OrdersController < ApplicationController
   def order_params
     return params.require(:order).permit(:status, :name, :email, :address, :city, :state, :zipcode, :cc_num, :cc_exp, :cc_cvv, :order_date, :merchant_id)
   end  
+
+  def verify_user
+    order_merchants = []
+    @order.orderitems.each do |orderitem|
+      product = orderitem.product
+      merchant = product.merchant
+
+      order_merchants << merchant.id
+    end
+
+    unless order_merchants.include?(session[:user_id]) || cookies[:completed_order]
+      redirect_to root_path
+      return
+    end
+  end
 end
