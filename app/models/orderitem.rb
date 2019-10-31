@@ -33,10 +33,10 @@ class Orderitem < ApplicationRecord
   def mark_complete
     self.complete = true
     self.save
+
+    self.order.check_complete
   end
 
-  
-  
   def self.exists?(order_id, product_id)
     result = Orderitem.where(order_id: order_id, product_id: product_id)  
     
