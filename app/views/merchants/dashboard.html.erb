@@ -17,7 +17,7 @@
       <p class="cell_right">Active Products: <%= @merchant.active_products %></p>
       <p class="cell_left">Membership Duration: <%= @merchant.member_since %></p> 
       <% if @merchant.calculate_average_rating %>
-        <p class="cell_right">Average Product Rating: <%= @merchant.calculate_average_rating%></p>
+        <p class="cell_right">Avg. Product Rating: <%= @merchant.calculate_average_rating%></p>
       <%else%>
         <p class="cell_right">No Ratings<p>
       <%end%>
@@ -46,12 +46,13 @@
     <% if orderitem.complete == false %>
       <tr>
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
-        <td><%= orderitem.order.order_date %></td>
+        <% date = orderitem.order.order_date.in_time_zone("Pacific Time (US & Canada)") %>
+        <td><%= date.strftime( "%B %e, %Y") %></td>
         <td><%= link_to orderitem.product.name, product_path(orderitem.product.id) %></td>
         <td><%= image_tag orderitem.product.photo_url, class: "sm_product_image", alt:"#{orderitem.product.name}" %></td>
-        <td>$<%= orderitem.product.price %></td>
+        <td><%= number_to_currency orderitem.product.price %></td>
         <td><%= orderitem.quantity %></td>
-        <td>$<%= orderitem.total %></td>
+        <td><%= number_to_currency orderitem.total %></td>
         <td>
           <%= form_with model: orderitem do |f| %>
           <%= f.hidden_field :complete, value: true %>
@@ -84,12 +85,13 @@
     <% if orderitem.complete == true %>
       <tr>
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
-        <td><%= orderitem.order.order_date %></td>
+        <% date = orderitem.order.order_date.in_time_zone("Pacific Time (US & Canada)") %>
+        <td><%= date.strftime( "%B %e, %Y") %></td>
         <td><%= link_to orderitem.product.name, product_path(orderitem.product.id) %></td>
         <td><%= image_tag orderitem.product.photo_url, class: "sm_product_image", alt:"#{orderitem.product.name}" %></td>
-        <td>$<%= orderitem.product.price %></td>
+        <td><%= number_to_currency orderitem.product.price %></td>
         <td><%= orderitem.quantity %></td>
-        <td>$<%= orderitem.total %></td>
+        <td><%= number_to_currency orderitem.total %></td>
         <td>Completed</td>
       </tr>
     <% end %>
@@ -122,7 +124,7 @@
         <td><%= product.description %></td>
         <td>✅</td>
         <td><%= product.stock_qty %></td>
-        <td>$<%= product.price%></td>
+        <td><%= number_to_currency product.price%></td>
         <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
         <td>
           <%= form_with model: product do |f| %>
@@ -160,7 +162,7 @@
         <td><%= product.description %></td>
         <td>❌</td> 
         <td><%= product.stock_qty %></td>
-        <td>$<%= product.price%></td>
+        <td><%= number_to_currency product.price%></td>
         <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
         <td>
           <%= form_with model: product do |f| %>
