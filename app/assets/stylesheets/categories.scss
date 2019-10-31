@@ -79,3 +79,16 @@ h3 {
   background-color: var(--navy);
 }
 
+.products-by-category {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+}
+
+.product-list {
+
+}
+
+.product-item {
+  align-items: flex-start;
+}
