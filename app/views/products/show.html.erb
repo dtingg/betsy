@@ -2,66 +2,58 @@
   <section class="product-image">
     <%= image_tag(@product.photo_url, alt:"#{@product.name}") %>
   </section>
-
   <section class="product-details">
-    <h2><%= @product.name.titleize %> </h2>
-
-    <ul>
-      <li><%= @product.merchant.username %></li>
-      <li><%= @product.description %></li>
-      <li>$<%= @product.price %></li>
-
+    <h2 id="product-name"><%= @product.name.titleize %> </h2>
       <% if @product.categories.count > 0 %>
-        <ul class="categories">
+        <span class="categories">
           <% @product.categories.each do |category| %>
-            <li><%= link_to "#{category.name}", category_path(category.id), class:"badge badge-light"%></li>
+            <%= link_to "#{category.name}", category_path(category.id), class:"badge badge-light"%>
           <% end %>
-        </ul>
+        </span>
       <% end %>
+    <ul>
+    <br>
+      <li><%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %></li>
+      <li><%= @product.description %></li>
+      <li>$<%= sprintf('%.2f', @product.price) %></li>
 
     </ul>
-
     <% if @product.stock_qty > 0 && @product.active %>
       <%= form_for Orderitem.create do |f| %>
         <%= f.hidden_field :order_id, value: @cart.id %>
         <%= f.hidden_field :product_id, value: @product.id %>
         <%= f.label :quantity %>
         <%= f.select :quantity, (1..@product.stock_qty)%>
-        <%= f.submit "Add to cart" %>
+        <%= f.submit "Add to cart", class:"btn-primary" %>
       <% end %>
+      <br>
     <% else %>
-      Quantity<br>
-      Sold out
+      Not available<br>
     <% end %>
-
-    <%if @product.active%>
-    <%= @product.stock_qty %> left in stock!
+    <%if @product.stock_qty > 0 && @product.active %>
+      <%= @product.stock_qty %> left in stock!
     <%else%>
-    Item not in stock
+      Item not in stock
     <%end%> <br />
-
-    <%= link_to "Edit Product", edit_product_path %>
   </section>
-
+</section>
   <section class="product-reviews">
-    <h4>Reviews: </h4>
-    
+    <h4 id="reviews">Reviews </h4>
     <section class="review">
     <% if @product.reviews != []%>
       <% @product.reviews.each do |review| %>
-      <ul>
-        <li>Name: <%= review.reviewer %></li>
+      <span class="single-review">
+        Name: <%= review.reviewer %><br>
         <% if review.date %>
-          <li>Date: <%= review.date.strftime( "%B %e, %Y %l:%M %p") %></li>
+          Date: <%= review.date.strftime( "%B %e, %Y") %><br>
         <% end %>
-        <li>Rating: <%= review.rating %> </li>
-        <li>Comment: <%= review.comment %></li>
-      </ul>
+        <% star = "\u2605" %>
+        <% rating = star.encode("utf-8") * review.rating %>
+        Rating: <%= rating %><br>
+        Comment: <%= review.comment %><br>
+      </span>
       <% end %>
     <%end%>
     </section>  
-
-    <%=link_to "Add Review",  new_product_review_path(@product.id), :class=>"btn btn-primary"%>
- 
-  </section>
+  <%=link_to "Add Review",  new_product_review_path(@product.id), :class=>"btn btn-primary", id: "add-review"%>
 </section>
