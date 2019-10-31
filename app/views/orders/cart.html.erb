@@ -4,16 +4,16 @@
   <aside class="order_summary">
   <table class="table table-sm table-borderless" frame = "box" id="order_total">
     <tr>
-    <td>Order Total:</td>
-    <td>$<%= @order.total %></td>
+      <td>Subtotal:</td>
+      <td>$<%= @order.total %></td>
     </tr>
     <tr>
-    <td>Shipping:</td>
-    <td>$5.00</td>
+      <td>Shipping:</td>
+      <td>$5.00</td>
     </tr>
     <tr>
-    <td>Total (# Items)</td>
-    <td>$<%= @order.total + 5 %></td>
+      <td>Total:</td>
+      <td>$<%= @order.total + 5 %></td>
     </tr>
     <tr>
     <td colspan=2>  <%= button_to "Checkout", checkout_path(@cart.id), class: "btn btn-outline-primary", method: :get %><br></td>
