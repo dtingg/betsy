@@ -48,7 +48,7 @@ li {
 
 .product-page-container {
   display: grid;
-  grid-template-columns: 500px auto;
+  grid-template-columns: 750px auto;
   grid-template-rows: 400px auto;
 
   .product-image {
@@ -60,12 +60,19 @@ li {
       height: 350px;
       margin: 10px auto;
       display: block;
+      border-radius: 2%;
     }
   }
 
   .product-details {
     grid-column: 2;
     grid-row: 1;
+
+    #product-name {
+      text-align: left;
+      margin-left: 0;
+      margin-bottom: 1rem;
+    }
 
     ul {
       list-style-type: none;
@@ -74,15 +81,29 @@ li {
   }
 
   .product-reviews {
-    grid-column: 1 / span 1;
-    grid-row: 2;
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 5% 0;
-    }
+    display: flex;
   }
+}
+
+#reviews{
+  margin-left: 10rem;
+}
+
+.review {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 10rem;
+
+  .single-review {
+    margin-top: 2rem;
+    padding: 1rem;
+    width: 20rem;
+    margin-bottom: 2rem;
+  }
+}
+
+#add-review {
+  margin-left: 10rem;
 }
 
 .cart-item {
