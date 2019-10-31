@@ -35,30 +35,13 @@ describe MerchantsController do
     end
 
     describe "dashboard" do
-      it "should respond with error when guest user tries to access dashboard" do
-        merchant_one = merchants(:merchant_one)
+      it "redirects to root path when merchant not logged in" do
+        get dashboard_path(merchants(:merchant_two))
 
-        get dashboard_path(merchant_one)
-
-        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
-
-        must_respond_with :redirect
-        must_redirect_to merchants_path
-      end
-    end
-
-    describe "delete" do
-      it "should respond with error when guest user tries to delete merchant" do
-        merchant_one = merchants(:merchant_one)
-
-        expect {
-          delete merchant_path(merchant_one)
-        }.wont_change "Merchant.count"
 
         expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
-
         must_respond_with :redirect
-        must_redirect_to merchants_path
+        must_redirect_to root_path
       end
     end
   end
@@ -75,36 +58,7 @@ describe MerchantsController do
         must_respond_with :success
       end
 
-      it "does not show dashboard for another merchant account" do
-        get dashboard_path(merchants(:merchant_one))
 
-        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
-
-        must_respond_with :redirect
-        must_redirect_to merchants_path
-      end
-    end
-
-    describe "delete" do
-      it "deletes valid user for user that is logged in" do
-        expect {
-          delete merchant_path(merchants(:merchant_two))
-        }.must_differ "Merchant.count", -1
-
-        must_respond_with :redirect
-        must_redirect_to merchants_path
-      end
-
-      it "cannot delete another merchant account" do
-        expect {
-          delete merchant_path(merchants(:merchant_one))
-        }.wont_change "Merchant.count"
-
-        expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
-
-        must_respond_with :redirect
-        must_redirect_to merchants_path
-      end
     end
 
     describe "logout" do
