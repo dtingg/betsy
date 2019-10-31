@@ -235,6 +235,40 @@ describe Merchant do
     end
   end
   
+  describe "calculate total revenue" do
+    before do
+      @merchant = Merchant.create(username: "golden merchant", uid: 1232, email: "hello@world.com")
+      product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00)
+      @order_one = Order.create(status: "pending")
+      orderitem_one = Orderitem.create(order_id: @order_one.id, product_id: product.id, quantity: 3)
+      
+      @order_two = Order.create(status: "pending")
+      orderitem_two = Orderitem.create(order_id: @order_two.id, product_id: product.id, quantity: 2)
+      
+      another_merchant = Merchant.create(username: "new merch", uid: 1232132, email: "email@world.com")
+      product_two =  Product.create(merchant_id: another_merchant.id, name: "Rose soap", price: 5.00)
+      order_three = Order.create(status: "pending")
+      orderitem_three = Orderitem.create(order_id: order_three.id, product_id: product_two.id, quantity: 3)
+    end
+    
+    it "calculates the total revenue for a merchant with multiple orders" do
+      expected_sum = 2
+      
+      order_count = @merchant.calculate_order_count("all")
+      
+      expect(order_count).must_equal expected_sum
+    end
+    
+    it "calculates total revenue for a merchant with no orders" do
+      merchant_three = merchants(:merchant_three)
+      expected_sum = 0
+      
+      order_count = merchant_three.calculate_order_count("all")
+      
+      expect(order_count).must_equal expected_sum
+    end
+  end
+  
   describe "calculate average rating" do
     
     let(:merchant) { Merchant.create(username: "golden merchant", uid: 1232, email: "hello@world.com") }
