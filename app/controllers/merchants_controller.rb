@@ -37,6 +37,7 @@ class MerchantsController < ApplicationController
 
   def logout
     session[:user_id] = nil
+    @current_user = nil
     flash[:success] = "Successfully logged out"
     
     redirect_to root_path
@@ -57,11 +58,7 @@ class MerchantsController < ApplicationController
   end
   
   def find_self_merchant
-    if session[:user_id] == params[:id]
-      @merchant = Merchant.find_by(id: session[:user_id])
-    else
-      @merchant = Merchant.find_by(id: params[:id])
-    end
+    @merchant = Merchant.find_by(id: session[:user_id])
   end
 
   def find_other_merchant
