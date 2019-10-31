@@ -1,16 +1,29 @@
 class MerchantsController < ApplicationController
-  before_action :find_other_merchant, only: [:show]
-  before_action :find_self_merchant, only: [:dashboard, :destroy]
-  before_action :if_merchant_missing, only: [:show, :dashboard, :destroy]
-  before_action :if_invalid_merchant, only: [:dashboard, :destroy]
-  
   def index 
     @merchants = Merchant.alphabetic
   end
   
-  def show; end
+  def show
+    @merchant = Merchant.find_by(id: params[:id])
 
-  def dashboard;  end
+    if @merchant.nil?
+      flash[:redirect] = "Could not find merchant with id #{params[:id]}"
+
+      redirect_to merchants_path 
+      return
+    end
+  end
+
+  def dashboard
+    @merchant = Merchant.find_by(id: session[:user_id])
+    
+    if @current_user.nil?
+      flash[:failure] = "A problem occurred: You are not authorized to perform this action"
+      
+      redirect_to root_path
+      return
+    end
+  end
   
   def create
     auth_hash = request.env["omniauth.auth"]
@@ -44,42 +57,9 @@ class MerchantsController < ApplicationController
     return
   end
 
-  def destroy
-    @merchant.destroy
-
-    redirect_to merchants_path
-    return
-  end
-
   private
   
   def merchant_params
     return params.require(:merchant).permit(:uid, :username, :email)
-  end
-  
-  def find_self_merchant
-    @merchant = Merchant.find_by(id: session[:user_id])
-  end
-
-  def find_other_merchant
-    @merchant = Merchant.find_by(id: params[:id])
-  end
-  
-  def if_merchant_missing
-    if @merchant.nil?
-      flash[:redirect] = "Could not find merchant with id #{params[:id]}"
-
-      redirect_to merchants_path 
-      return
-    end
-  end
-
-  def if_invalid_merchant
-    if @current_user != @merchant
-      flash[:failure] = "A problem occurred: You are not authorized to perform this action"
-      
-      redirect_to merchants_path
-      return
-    end
   end
 end
