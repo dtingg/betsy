@@ -27,17 +27,15 @@
         <%= f.submit "Add to cart", class:"btn-primary" %>
       <% end %>
     <% else %>
-      Quantity<br>
-      Sold out
+      Not available<br>
     <% end %>
 
-    <%if @product.active%>
-    <%= @product.stock_qty %> left in stock!
+    <%if @product.stock_qty > 0 && @product.active %>
+      <%= @product.stock_qty %> left in stock!
     <%else%>
-    Item not in stock
+      Item not in stock
     <%end%> <br />
 
-    <%# <%= link_to "Edit Product", edit_product_path %>
   </section>
 
   <section class="product-reviews">
