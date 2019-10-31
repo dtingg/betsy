@@ -58,7 +58,7 @@ describe ProductsController do
         
         expect(session[:recently_viewed].length).must_equal 5
         
-        Product.create(name: "world soap", price: 8.00, stock_qty: 10, merchant_id: merchants(:merchant_one).id, photo_url: "")
+        Product.create(name: "world soap", price: 8.00, stock_qty: 10, merchant_id: merchants(:merchant_one).id, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
         
         created_product = Product.find_by(name: "world soap")
         
