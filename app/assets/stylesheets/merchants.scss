@@ -10,11 +10,13 @@ img {
   align-self: center;
   justify-self: center;
   max-height: 250px;
-  max-width: 300px;
+  max-width: 250px;
 }
+
 p {
   text-align: center;
 }
+
 th {
   text-align: center;
 }
@@ -100,8 +102,14 @@ td {
     grid-row: 1;
     text-align: left;
     margin-left: 5%;
+
+    h2 {
+      text-align: left;
+      margin-left: 0;
+    }
     
     p {
+      font-size: 1.5rem;
       text-align: left;
     }
   }
@@ -109,13 +117,17 @@ td {
   .merchant-product-header {
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
+    text-align: center;
+    margin-top: 5rem;
+
+    h4{
+      text-align: right;
+    }
   }
 
   .merchant-products-list {
-    grid-column: 1 / span 1;
-    grid-row: 3 / span 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: flex;
+    margin-top: 5rem;
 
     ul{
       list-style-type: none;
@@ -139,11 +151,9 @@ td {
 
 #card-img {
   text-align: center;
-  // padding-top: 1rem;
 }
 
 #merchant-index {
   padding-left: 5rem;
   padding-right: 5rem;
-
 }
