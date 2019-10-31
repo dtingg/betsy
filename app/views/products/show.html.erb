@@ -2,7 +2,6 @@
   <section class="product-image">
     <%= image_tag(@product.photo_url, alt:"#{@product.name}") %>
   </section>
-
   <section class="product-details">
     <h2><%= @product.name.titleize %> </h2>
     <ul>
@@ -17,7 +16,6 @@
         </ul>
       <% end %>
     </ul>
-
     <% if @product.stock_qty > 0 && @product.active %>
       <%= form_for Orderitem.create do |f| %>
         <%= f.hidden_field :order_id, value: @cart.id %>
@@ -29,19 +27,15 @@
     <% else %>
       Not available<br>
     <% end %>
-
     <%if @product.stock_qty > 0 && @product.active %>
       <%= @product.stock_qty %> left in stock!
     <%else%>
       Item not in stock
     <%end%> <br />
-
   </section>
 </section>
-
   <section class="product-reviews">
     <h4 id="reviews">Reviews </h4>
-    
     <section class="review">
     <% if @product.reviews != []%>
       <% @product.reviews.each do |review| %>
@@ -56,10 +50,5 @@
       <% end %>
     <%end%>
     </section>  
-
-    
-<%=link_to "Add Review",  new_product_review_path(@product.id), :class=>"btn btn-primary", id: "add-review"%>
-
-
- 
+  <%=link_to "Add Review",  new_product_review_path(@product.id), :class=>"btn btn-primary", id: "add-review"%>
 </section>
