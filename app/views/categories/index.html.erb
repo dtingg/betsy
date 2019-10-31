@@ -6,7 +6,7 @@
 <section class="categories-container">
   <section class="categories-list">
     <% @categories.each do |category| %>
-      <p class="btn btn-primary category-btn"><%= link_to "#{category.name.titleize}", category_path(category.id) %></p>
+      <%= link_to "#{category.name.titleize}", category_path(category.id), class:"btn btn-primary" %>
     <% end %>
   </section>
 </section>
