@@ -10,14 +10,14 @@
     
     <section class="merchant_info_details">
       <h3 class="cell_left"><%= @merchant.username.capitalize %></h3>
-      <h3 class="cell_right">$ <%= @merchant.calculate_gross_sales %></h3>
+      <h3 class="cell_right"><%= number_to_currency @merchant.calculate_total_revenue("all") %></h3>
       <p class="cell_left"><%= @merchant.email %></p>
-      <p class="cell_right">Gross Sales</p>
+      <p class="cell_right">Total Order Count: <%= @merchant.calculate_order_count("all") %></p>
       <p class="cell_left"><%= @merchant.uid %></p>
       <p class="cell_right">Active Products: <%= @merchant.active_products %></p>
-      <p class="cell_left">Membership Duration: <%= @merchant.member_since %></p> 
+      <p class="cell_left">Merchant Duration: <%= @merchant.member_since %></p> 
       <% if @merchant.calculate_average_rating %>
-        <p class="cell_right">Average Product Rating: <%= @merchant.calculate_average_rating%></p>
+        <p class="cell_right">Avg. Product Rating: <%= @merchant.calculate_average_rating%></p>
       <%else%>
         <p class="cell_right">No Ratings<p>
       <%end%>
@@ -27,8 +27,9 @@
   <hr />
   <section class="info_section">
     <h4>Orders</h4>
-    <%# later change to Paid Order %>
-    <h5><a name="orders_active">Pending Orders</a></h5>
+    <h5><a name="orders_active">Paid Pending Orders</a></h5>
+    <p>Pending Order Count: <%= @merchant.calculate_order_count("pending") %><br />
+    Pending Order Revenue: <%= number_to_currency @merchant.calculate_total_revenue("pending") %></p>
     <table class="table table-hover table-sm merchant_details" frame = "box" id="merchant_product_index">
     <thead>
       <tr>
@@ -46,17 +47,17 @@
     <% if orderitem.complete == false %>
       <tr>
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
-        <td><%= orderitem.order.order_date %></td>
+        <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
         <td><%= link_to orderitem.product.name, product_path(orderitem.product.id) %></td>
-        <td><%= image_tag orderitem.product.photo_url, class: "sm_product_image", alt:"#{orderitem.product.name}" %></td>
-        <td>$<%= orderitem.product.price %></td>
+        <td><%= link_to image_tag(orderitem.product.photo_url, alt:"#{orderitem.product.name}", class: "sm_product_image"), product_path(orderitem.product.id) %>
+        <td><%= number_to_currency orderitem.product.price %></td>
         <td><%= orderitem.quantity %></td>
-        <td>$<%= orderitem.total %></td>
+        <td><%= number_to_currency orderitem.total %></td>
         <td>
           <%= form_with model: orderitem do |f| %>
           <%= f.hidden_field :complete, value: true %>
           <%= hidden_field_tag :complete, true %>
-          <%= f.submit "Complete Order" %>
+          <button type="submit" class="btn btn-primary">Complete Order</button>
           <% end %>
         </td>
       </tr>
@@ -67,6 +68,8 @@
     <br /><br />
 
     <h5><a name="orders_active">Completed Orders</a></h5>
+    <p>Completed Order Count: <%= @merchant.calculate_order_count("completed") %><br />
+    Completed Order Revenue: <%= number_to_currency @merchant.calculate_total_revenue("completed") %></p>
     <table class="table table-hover table-sm merchant_details" frame = "box" id="merchant_product_index">
     <thead>
       <tr>
@@ -84,12 +87,12 @@
     <% if orderitem.complete == true %>
       <tr>
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
-        <td><%= orderitem.order.order_date %></td>
+        <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
         <td><%= link_to orderitem.product.name, product_path(orderitem.product.id) %></td>
-        <td><%= image_tag orderitem.product.photo_url, class: "sm_product_image", alt:"#{orderitem.product.name}" %></td>
-        <td>$<%= orderitem.product.price %></td>
+        <td><%= link_to image_tag(orderitem.product.photo_url, alt:"#{orderitem.product.name}", class: "sm_product_image"), product_path(orderitem.product.id) %>
+        <td><%= number_to_currency orderitem.product.price %></td>
         <td><%= orderitem.quantity %></td>
-        <td>$<%= orderitem.total %></td>
+        <td><%= number_to_currency orderitem.total %></td>
         <td>Completed</td>
       </tr>
     <% end %>
@@ -122,13 +125,13 @@
         <td><%= product.description %></td>
         <td>✅</td>
         <td><%= product.stock_qty %></td>
-        <td>$<%= product.price%></td>
-        <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
+        <td><%= number_to_currency product.price%></td>
+        <td><%= link_to image_tag(product.photo_url, alt:"#{product.name}", class: "sm_product_image"), product_path(product.id) %></td>
         <td>
           <%= form_with model: product do |f| %>
           <%= f.hidden_field :active, value: false %>
           <%= hidden_field_tag :active, false %>
-          <%= f.submit "Inactivate" %>
+          <button type="submit" class="btn btn-primary">Inactivate</button>
           <% end %>
         </td>
         <td><%= link_to "Edit", edit_product_path(product.id) %></td>
@@ -160,17 +163,17 @@
         <td><%= product.description %></td>
         <td>❌</td> 
         <td><%= product.stock_qty %></td>
-        <td>$<%= product.price%></td>
-        <td><%= image_tag product.photo_url, class: "sm_product_image", alt:"#{product.name}" %></td>
+        <td><%= number_to_currency product.price%></td>
+        <td><%= link_to image_tag(product.photo_url, alt:"#{product.name}", class: "sm_product_image"), product_path(product.id) %></td>
         <td>
           <%= form_with model: product do |f| %>
           <%= f.hidden_field :active, value: true %>
           <%= hidden_field_tag :active, true %>
-          <%= f.submit "Activate" %>
+          <button type="submit" class="btn btn-primary">Activate</button>
           <% end %>
           </td>
-        <td><%= link_to "Edit", edit_product_path(product.id) %></td>
-        <td><%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
+        <td><%= link_to "Edit", edit_product_path(product.id), class: "btn btn-primary"  %></td>
+        <td><%= link_to "Delete", product_path(product.id), class: "btn btn-primary", method: :delete, data: {confirm: "Are you sure?"}%></td>
       </tr>
     <% end %>
     <% end %>

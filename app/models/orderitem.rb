@@ -36,4 +36,5 @@ class Orderitem < ApplicationRecord
       return result[0]
     end
   end
+  
 end
