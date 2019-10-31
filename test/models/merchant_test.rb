@@ -135,7 +135,7 @@ describe Merchant do
   describe "all orderitems" do
     before do
       @merchant = merchants(:merchant_one)
-      product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00)
+      product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
       order_one = Order.create(status: "pending")
       orderitem_one = Orderitem.create(order_id: order_one.id, product_id: product.id, quantity: 3)
       
@@ -143,7 +143,7 @@ describe Merchant do
       orderitem_two = Orderitem.create(order_id: order_two.id, product_id: product.id, quantity: 2)
       
       merchant_two = merchants(:merchant_two)
-      product_two =  Product.create(merchant_id: merchant_two.id, name: "Rose soap", price: 5.00)
+      product_two =  Product.create(merchant_id: merchant_two.id, name: "Rose soap", price: 5.00, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
       order_three = Order.create(status: "pending")
       orderitem_three = Orderitem.create(order_id: order_three.id, product_id: product_two.id, quantity: 3)
     end
@@ -204,7 +204,7 @@ describe Merchant do
   describe "calculate total revenue" do
     before do
       @merchant = Merchant.create(username: "golden merchant", uid: 1232, email: "hello@world.com")
-      product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00)
+      product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
       @order_one = Order.create(status: "pending")
       orderitem_one = Orderitem.create(order_id: @order_one.id, product_id: product.id, quantity: 3)
       
@@ -212,7 +212,7 @@ describe Merchant do
       orderitem_two = Orderitem.create(order_id: @order_two.id, product_id: product.id, quantity: 2)
       
       another_merchant = Merchant.create(username: "new merch", uid: 1232132, email: "email@world.com")
-      product_two =  Product.create(merchant_id: another_merchant.id, name: "Rose soap", price: 5.00)
+      product_two =  Product.create(merchant_id: another_merchant.id, name: "Rose soap", price: 5.00, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
       order_three = Order.create(status: "pending")
       orderitem_three = Orderitem.create(order_id: order_three.id, product_id: product_two.id, quantity: 3)
     end
@@ -238,7 +238,7 @@ describe Merchant do
   describe "calculate total revenue" do
     before do
       @merchant = Merchant.create(username: "golden merchant", uid: 1232, email: "hello@world.com")
-      product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00)
+      product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
       @order_one = Order.create(status: "pending")
       orderitem_one = Orderitem.create(order_id: @order_one.id, product_id: product.id, quantity: 3)
       
@@ -246,7 +246,7 @@ describe Merchant do
       orderitem_two = Orderitem.create(order_id: @order_two.id, product_id: product.id, quantity: 2)
       
       another_merchant = Merchant.create(username: "new merch", uid: 1232132, email: "email@world.com")
-      product_two =  Product.create(merchant_id: another_merchant.id, name: "Rose soap", price: 5.00)
+      product_two =  Product.create(merchant_id: another_merchant.id, name: "Rose soap", price: 5.00, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
       order_three = Order.create(status: "pending")
       orderitem_three = Orderitem.create(order_id: order_three.id, product_id: product_two.id, quantity: 3)
     end
@@ -272,7 +272,7 @@ describe Merchant do
   describe "calculate average rating" do
     
     let(:merchant) { Merchant.create(username: "golden merchant", uid: 1232, email: "hello@world.com") }
-    let(:product) { Product.create(merchant: merchant, name: "Oatmeal soap", price: 6.00) }
+    let(:product) { Product.create(merchant: merchant, name: "Oatmeal soap", price: 6.00, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg") }
     
     
     
