@@ -17,12 +17,13 @@
 
 @import "**/*";
 
-// colors 
-// blues light #B8D8D8
-// blues med #7A9E9F
-// blues dark #4F6367
-// white #EEF5DB
-// pink #FE5F55
+:root {
+  --timid: #bdcff2;
+  --mid: #487adb;
+  --navy: #375cbf;
+  --burnt_orange: #8f3907;
+  --sand: #b5a78f;
+}
 
 * {
   font-family: 'Roboto Condensed', sans-serif;
@@ -34,12 +35,17 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #B8D8D8;
+  background-color: var(--timid);
   z-index: 100;
 }
 
+a:hover {
+  color: var(--burnt_orange);
+  text-decoration: none;
+}
+
 .flash {
-  margin-top: 290px;
+  margin-top: 400px;
 }
 
 .profile {
@@ -55,12 +61,12 @@ header h1 {
 }
 
 header h1 a{
-  color: #FE5F55; 
-  font-size: 3rem;
+  color: var(--navy); 
+  font-size: 6rem;
 }
 
 header h1 a:hover{
-  style: none;
+  style: var(--timid);
 }
 
 nav ul {
@@ -71,25 +77,46 @@ nav ul {
 }
 
 a {
-  color: #7A9E9F;
+  color: var(--navy);
 }
 
 a:hover {
-  color: #FE5F55;
+  color: var(--burnt_orange);
 }
 
 .searchbar {
   margin-top: 4rem;
 }
+
 .btn {
-  background-color:#7A9E9F;
-  border-color: #7A9E9F;
+  background-color: var(--navy);
+  border-color: var(--navy);
   margin: .2rem;
+  border-radius: 40px;
 }
 
 .btn:hover {
-  background-color: #4F6367;
-  border-color: #4F6367;
+  background-color: var(--burnt_orange);
+  border-color: var(--burnt_orange);
+}
+
+.btn-primary {
+  background-color: var(--navy);
+  border-radius: 25px;
+}
+
+.btn a:hover {
+  background-color: var(--navy);
+  border-color: var(--navy);
+  color: var(--burnt_orange);
+}
+
+.btn-primary {
+  background-color: var(--navy);
+}
+
+.btn-primary::selection {
+  background-color: var(--navy);
 }
 
 nav ul li {
@@ -130,16 +157,25 @@ div.field_with_errors {
 
 
 .badge, .badge-light {
-  background-color:#7A9E9F;
-  border-color: #7A9E9F;
+  color: white;
+  background-color: var(--navy);
+  border-color: var(--navy);
   margin: .2rem;
+  border-radius: 20px;
 }
 
-.badge, .badge-light:hover {
-  background-color: #A9E9F;
+.badge a {
+  color: white;
 }
 
-.badge, .badge-light a {
+.badge a:hover, .badge-light a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.badge:hover, .badge-light:hover {
+  background-color: var(--burnt_orange);
+  border-color: var(--burnt_orange); 
   color: white;
 }
 
@@ -147,5 +183,9 @@ h2, h3, h5 {
   text-align: center;
   margin-bottom: 1.5rem;
   margin-left: 1rem;
-  color: #FE5F55;
+  color: var(--burnt_orange);
+}
+
+footer {
+  color: var(--burnt_orange);
 }

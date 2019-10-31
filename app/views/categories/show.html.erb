@@ -1,35 +1,24 @@
-<section class="product-page-container">
+<section class="products-header">
   <h2><%= @category.name.titleize %> Products</h2>
 </section>
-<% if @category.products.count == 0  %>
-  <p>no items found</p>
-<% else %>
-  <section class="products-list">
-  <% @category.products.each do |product| %>
-    <% if product.stock_qty > 0 && product.active %>
-        <ul>
-          <%= image_tag(product.photo_url, alt:"#{product.name}") %>
 
-          <section class="product-name">
-            <li><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
-          </section>
-
-          <section class="product-merchant">
-            <li><%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
-          </section>
-
-          <section class="product-price">
-            <li>$<%= sprintf('%.2f', product.price) %></li>
-          </section>
-
-          <section class="product-stock">
-            <li><%= product.stock_qty %> left in stock!</li>
-          </section>
-        </ul>
+<section class="products-page-container">
+  <% if @category.products.count == 0  %>
+    <h3>no items found</h3>
+  <% else %>
+    <section class="product-list">
+      <% @category.products.each do |product| %>
+        <% if product.stock_qty > 0 && product.active %> 
+          <ul>
+            <li><%= link_to image_tag(product.photo_url, alt:"#{product.name}") %></li>
+            <li class="product-name"><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
+            <li class="product-merchant"><%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
+            <li class="product-price">$<%= sprintf('%.2f', product.price) %></li>
+            <li class="product-stock"><%= product.stock_qty %> left in stock!</li>
+          </ul>
       <% end %>
+    </section>
+    <% end %>
   <% end %>
-  </section>
-    
-<% end %>
-      
+</section>      
 <%= link_to "Shop by Category", categories_path, class: "btn btn-primary" %>

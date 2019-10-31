@@ -2,6 +2,13 @@
   <h2>Search match: <%=params[:search]%> </h2>
 </section>
 
+<section class="product-name">
+<% if @products == [] && @merchants == [] %>
+  Sorry, we couldn't find any exact matches for your search.
+<% end%>
+</section>
+
+
   <section class="products-list">
     <% @products.each do |product| %>
     <ul>
