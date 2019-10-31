@@ -13,7 +13,7 @@
   <section class="merchant-info-details">
     <h2><%= @merchant.username.capitalize %></h2>
     <% if @merchant.calculate_average_rating %>
-      <p>Average Product Rating: <%= @merchant.calculate_average_rating%></p>
+      <p>Average Product Rating: <%= sprintf('%.2f', @merchant.calculate_average_rating)%></p>
     <%else%>
       <p>No Ratings<p>
     <%end%>
