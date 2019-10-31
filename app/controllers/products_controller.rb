@@ -51,7 +51,8 @@ class ProductsController < ApplicationController
   
   def update
     if @product.update(product_params)
-      redirect_to dashboard_path(@current_user.id)
+      # redirect_to dashboard_path(@current_user.id)
+      redirect_to dashboard_path
       return
     else
       flash.now[:failure] = "Product failed to save"

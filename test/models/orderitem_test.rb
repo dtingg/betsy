@@ -53,6 +53,15 @@ describe Orderitem do
       expect(orderitem.errors.messages).must_include :product_id
       expect(orderitem.errors.messages[:product_id]).must_equal ["can't be blank"]
     end
+
+    it "must have a valid product_id" do
+      orderitem.product_id = -1
+      orderitem.save
+      
+      expect(orderitem.valid?).must_equal false
+      expect(orderitem.errors.messages).must_include :product
+      expect(orderitem.errors.messages[:product]).must_equal ["must exist"]
+    end
     
     it "must have a quantity" do
       orderitem.quantity = nil
@@ -91,6 +100,33 @@ describe Orderitem do
       updated_product = Product.find_by(id: product.id)
       expect(updated_orderitem.quantity).must_equal (previous_orderitem_quantity + 3)
       expect(updated_product.stock_qty).must_equal (previous_product_quantity - 3)      
+    end
+  end
+
+  describe "check quantity method" do
+    it "will return true when requested quantity is less than or equal to amount in stock and product is active" do
+      product_quantity = product.stock_qty
+
+      status = orderitem.check_qty(product_quantity)
+
+      expect(status).must_equal true
+    end
+
+    it "will return false when requested quantity is greater than amount in stock" do
+      product_quantity = product.stock_qty
+
+      status = orderitem.check_qty(product_quantity + 1)
+
+      expect(status).must_equal false
+    end
+
+    it "will return false when product requested is marked inactive" do
+      product.update(active: false)
+      product_quantity = product.stock_qty
+
+      status = orderitem.check_qty(product_quantity)
+
+      expect(status).must_equal false
     end
   end
   

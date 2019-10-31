@@ -12,6 +12,14 @@ class Orderitem < ApplicationRecord
     self.save
   end
   
+  def check_qty(desired_purchase)
+    if self.product.stock_qty - desired_purchase.to_i >= 0 && self.product.active == true
+      return true
+    end
+
+    return false
+  end
+
   def remove_from_cart
     self.product.return_stock(self.quantity)    
     self.destroy
@@ -25,8 +33,10 @@ class Orderitem < ApplicationRecord
   def mark_complete
     self.complete = true
     self.save
+
+    # self.order.check_complete
   end
-  
+
   def self.exists?(order_id, product_id)
     result = Orderitem.where(order_id: order_id, product_id: product_id)  
     

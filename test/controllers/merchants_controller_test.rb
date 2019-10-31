@@ -36,8 +36,8 @@ describe MerchantsController do
 
     describe "dashboard" do
       it "redirects to root path when merchant not logged in" do
-        get dashboard_path(merchants(:merchant_two))
-
+        get dashboard_path
+      
 
         expect(flash[:failure]).must_equal "A problem occurred: You are not authorized to perform this action"
         must_respond_with :redirect
@@ -53,12 +53,10 @@ describe MerchantsController do
 
     describe "dashboard" do
       it "shows dashboard for user that is logged in" do
-        get dashboard_path(merchants(:merchant_two))
+        get dashboard_path
 
         must_respond_with :success
       end
-
-
     end
 
     describe "logout" do
