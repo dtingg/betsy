@@ -11,8 +11,6 @@
           <% end %>
         </span>
       <% end %>
-
-
     <ul>
     <br>
       <li><%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %></li>
@@ -28,6 +26,7 @@
         <%= f.select :quantity, (1..@product.stock_qty)%>
         <%= f.submit "Add to cart", class:"btn-primary" %>
       <% end %>
+      <br>
     <% else %>
       Not available<br>
     <% end %>
