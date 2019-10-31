@@ -42,9 +42,11 @@
       <span class="single-review">
         Name: <%= review.reviewer %><br>
         <% if review.date %>
-          Date: <%= review.date.strftime( "%B %e, %Y %l:%M %p") %><br>
+          Date: <%= review.date.strftime( "%B %e, %Y") %><br>
         <% end %>
-        Rating: <%= review.rating %><br>
+        <% star = "\u2605" %>
+        <% rating = star.encode("utf-8") * review.rating %>
+        Rating: <%= rating %><br>
         Comment: <%= review.comment %><br>
       </span>
       <% end %>
