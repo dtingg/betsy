@@ -104,7 +104,7 @@ class Merchant < ApplicationRecord
     
     return nil if num_of_ratings == 0 
     
-    return total_rating/num_of_ratings
+    return (total_rating/num_of_ratings).round(2)
   end
   
   def self.build_from_github(auth_hash)
