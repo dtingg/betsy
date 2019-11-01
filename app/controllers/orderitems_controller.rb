@@ -56,13 +56,16 @@ class OrderitemsController < ApplicationController
     if @orderitem.nil?
       redirect_back(fallback_location: root_path)
       return
-      #   # This is for updating quantity in shopping cart view
-      # elsif @orderitem.mark_complete
-      #   @orderitem.mark_complete
-      
     elsif @orderitem.update(orderitem_params)
       if @orderitem.complete == true
+        @orderitem.mark_complete
         flash[:success] = "Product Order Completed"
+        redirect_back(fallback_location: root_path)
+        return  
+      end
+      if orderitem_params[:complete] == nil
+        @orderitem.mark_cancelled
+        flash[:success] = "Orderitem cancelled"
         redirect_back(fallback_location: root_path)
         return  
       end

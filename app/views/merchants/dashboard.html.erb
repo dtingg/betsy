@@ -45,14 +45,10 @@
       </tr>
     </thead>
     <% @merchant.all_orderitems.each do |orderitem| %>
-    <% if orderitem.complete == false %>
+    <% if orderitem.complete == false && orderitem.order.status == "paid" %>
       <tr>
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
-        <% if orderitem.order.order_date %>
-          <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
-        <%else%>
-          <td>Not Available</td>
-        <% end %>
+        <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
         <td><%= link_to orderitem.product.name, product_path(orderitem.product.id) %></td>
         <td><%= link_to image_tag(orderitem.product.photo_url, alt:"#{orderitem.product.name}", class: "sm_product_image"), product_path(orderitem.product.id) %>
         <td><%= number_to_currency orderitem.product.price %></td>
@@ -60,8 +56,8 @@
         <td><%= number_to_currency orderitem.total %></td>
         <td>
           <%= form_with model: orderitem do |f| %>
-          <%= f.hidden_field :complete, value: nil %>
-          <%= hidden_field_tag :complete, nil %>
+          <%= f.hidden_field :cancelled, value: nil %>
+          <%= hidden_field_tag :cancelled, nil %>
           <button type="submit" class="btn btn-primary">Cancel</button>
           <% end %>
         </td>
@@ -100,11 +96,7 @@
     <% if orderitem.complete != false %>
       <tr>
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
-        <% if orderitem.order.order_date %>
-          <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
-        <%else%>
-         <td>Not Available</td>
-        <% end %>
+        <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
         <td><%= link_to orderitem.product.name, product_path(orderitem.product.id) %></td>
         <td><%= link_to image_tag(orderitem.product.photo_url, alt:"#{orderitem.product.name}", class: "sm_product_image"), product_path(orderitem.product.id) %>
         <td><%= number_to_currency orderitem.product.price %></td>
