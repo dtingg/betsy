@@ -5,15 +5,15 @@
   <table class="table table-sm table-borderless" frame = "box" id="order_total">
     <tr>
       <td>Subtotal:</td>
-      <td>$<%= @order.total %></td>
+      <td><%= number_to_currency @order.total %></td>
     </tr>
     <tr>
       <td>Shipping:</td>
-      <td>$5.00</td>
+      <td><%= number_to_currency 5 %></td>
     </tr>
     <tr>
       <td>Total:</td>
-      <td>$<%= @order.total + 5 %></td>
+      <td><%= number_to_currency @order.total + 5 %></td>
     </tr>
     <tr>
     <td colspan=2>  <%= button_to "Checkout", checkout_path(@cart.id), class: "btn btn-primary", method: :get %><br></td>
@@ -48,8 +48,8 @@
     <%= f.select :quantity, (1..available)%>
     <%= f.submit "Update quantity", class:"btn btn-primary" %>
     <% end %></td>
-  <td>$<%= item.product.price %></td>
-  <td>$<%= item.product.price*item.quantity %></td>
+  <td><%= number_to_currency item.product.price %></td>
+  <td><%= number_to_currency item.product.price*item.quantity %></td>
   <td><%= button_to "Remove from cart", orderitem_path(item), method: :delete, class:"btn btn-primary" %></td>
   </tr>
   <% end %>

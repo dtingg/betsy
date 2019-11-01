@@ -38,6 +38,14 @@ li {
   margin-left: 0;
 }
 
+.categories-list {
+  display: flex;
+  flex-direction: row;
+  margin-left: 50px;
+  margin-right: 50px;
+  max-height: 10%;
+}
+
 .product-name {
   font-size: 1.2em;
 }
