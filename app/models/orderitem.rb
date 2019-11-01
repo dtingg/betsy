@@ -39,6 +39,7 @@ class Orderitem < ApplicationRecord
 
   def mark_cancelled
     self.complete = nil
+    self.product.return_stock(self.quantity)
     self.save
 
     self.order.check_status

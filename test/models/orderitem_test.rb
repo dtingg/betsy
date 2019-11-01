@@ -176,6 +176,21 @@ describe Orderitem do
 
       assert_nil(orderitem.complete)
     end
+
+    it "will change increase stock quantity based on quantity in order item" do
+      orderitem.complete = false
+      orderitem.save
+
+      starting_product_quant = orderitem.product.stock_qty
+
+      starting_orderitem_quant = orderitem.quantity
+
+      expect(orderitem.complete).must_equal false
+
+      orderitem.mark_cancelled
+
+      expect(orderitem.product.stock_qty).must_equal (starting_product_quant + starting_orderitem_quant)
+    end
   end
   
   describe "self.exists method" do
