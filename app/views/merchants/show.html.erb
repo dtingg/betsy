@@ -20,31 +20,33 @@
   </section>
 
   <%# only shows active products %>
-  <section class="merchant-product-header">
-    <h4>Products</h4>
-  </section>
+  <section class = "merchant-products-all">
+    <section class="merchant-product-header">
+      <h4>Products</h4>
+    </section>
 
-  <section class="merchant-products-list">
-    <% @merchant.products.where(active: true).where("stock_qty > ?", 0).each do |product| %>
-    <ul>
-      <%= link_to image_tag(product.photo_url, alt:"#{product.name}"), product_path(product.id) %>
+    <section class="merchant-products-list">
+      <% @merchant.products.where(active: true).where("stock_qty > ?", 0).each do |product| %>
+      <ul>
+        <%= link_to image_tag(product.photo_url, alt:"#{product.name}"), product_path(product.id) %>
 
-      <section class="product-name">
-        <li><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
-      </section>
+        <section class="product-name">
+          <li><%= link_to "#{ product.name.capitalize}", product_path(product) %></li>
+        </section>
 
-      <section class="product-merchant">
-        <li><%= link_to @merchant.username, merchant_path(@merchant) %></li>
-      </section>
+        <section class="product-merchant">
+          <li><%= link_to @merchant.username, merchant_path(@merchant) %></li>
+        </section>
 
-      <section class="product-price">
-        <li>$<%= sprintf('%.2f', product.price) %></li>
-      </section>
+        <section class="product-price">
+          <li>$<%= sprintf('%.2f', product.price) %></li>
+        </section>
 
-      <section class="product-stock">
-        <li><%= product.stock_qty %> left in stock!</li>
-      </section>
-    </ul>
-    <% end %>
+        <section class="product-stock">
+          <li><%= product.stock_qty %> left in stock!</li>
+        </section>
+      </ul>
+      <% end %>
+    </section>
   </section>
 </section>

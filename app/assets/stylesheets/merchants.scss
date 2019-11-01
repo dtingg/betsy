@@ -114,20 +114,24 @@ td {
     }
   }
 
-  .merchant-product-header {
+  .merchant-products-all {
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
-    text-align: center;
-    margin-top: 5rem;
+    margin: 0 5%;
+  }
 
+  .merchant-product-header {
+    text-align: left;
+    
     h4{
-      text-align: right;
+      font-size: 2.5em;
     }
   }
 
+
   .merchant-products-list {
     display: flex;
-    margin-top: 5rem;
+    margin-top: 1rem;
 
     ul{
       list-style-type: none;
