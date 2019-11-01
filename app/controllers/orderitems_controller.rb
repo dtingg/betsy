@@ -64,7 +64,7 @@ class OrderitemsController < ApplicationController
         redirect_back(fallback_location: root_path)
         return 
       end 
-
+      
       difference = @orderitem.quantity - params[:old_quantity].to_i
       
       if difference > 0
@@ -76,20 +76,20 @@ class OrderitemsController < ApplicationController
       flash[:success] = "Product quantity updated"
       redirect_back(fallback_location: root_path)
       return
-
-      #If orderitem is cancelled by merchant
-      if orderitem_params[:complete] == nil
-        @orderitem.mark_cancelled
-        flash[:success] = "Orderitem cancelled"
-        redirect_back(fallback_location: root_path)
-        return  
-      end
     else
       flash[:error] = "Unable to update product quantity"
       redirect_back(fallback_location: root_path)
       return
     end
-
+    
+  end
+  
+  def cancel
+    @orderitem = Orderitem.find_by(id: params[:id])
+    @orderitem.mark_cancelled
+    flash[:success] = "Orderitem cancelled"
+    redirect_back(fallback_location: root_path)
+    return    
   end
   
   def destroy
