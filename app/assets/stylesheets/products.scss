@@ -135,17 +135,21 @@ li {
   margin: 100px 100px 100px 100px;
 }
 
-label {
-  text-align: center;
+.form-check {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.form-check {
-  position: relative;
-    display: flex;
-    flex-direction: column;
-    padding-left: 1.25rem;
+label {
+  margin-right: 50px;
 }
 
 input {
   color: white;
+  margin-right: 3px;
+}
+
+.submit {
+  margin-left: 100px;
 }
