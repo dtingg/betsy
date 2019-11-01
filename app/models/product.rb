@@ -41,12 +41,9 @@ class Product < ApplicationRecord
       num_of_ratings += 1
     end
     
-    average = (total_rating/num_of_ratings).to_i
-    
-    star = "\u2605"
-    rating = star.encode("utf-8") * average
-    return rating
-    
+    average = (total_rating/num_of_ratings).round(2)
+    average_string = "Average rating: #{average}"
+    return average_string
   end
   
   # orders active products by name
