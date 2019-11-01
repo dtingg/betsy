@@ -27,16 +27,17 @@ h3 {
   margin-top: 50px;
 }
 
-.categories-container {
+.categories-list {
+  // margin-left: 20px;
+  // margin-right: 200px;
   display: flex;
   flex-direction: row;
-  margin-left: 200px;
-  margin-right: 200px;
+  flex-wrap: wrap;
 }
 
 .add-category {
   margin-top: 50px;
-  margin-left: 200px;
+  margin-left: 50px;
 }
 
 .categories-list a {
