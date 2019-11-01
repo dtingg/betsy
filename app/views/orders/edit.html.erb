@@ -40,12 +40,12 @@
           </div>
           
           <div class="col">
-            <%= f.label :state %>
+            <%= f.label :state, "State (Ex: WA)" %>
             <%= f.text_field :state, class: "form-control" %><br>
           </div>
 
           <div class="col">
-            <%= f.label :zip_code %>
+            <%= f.label :zip_code, "Zip code (5 digits)" %>
             <%= f.text_field :zipcode, class: "form-control"  %><br>
           </div> 
         </div>
@@ -54,17 +54,17 @@
       <section>
         <div class="form-row">
           <div class="col">
-            <%= f.label :credit_card_number, "Credit card number" %>
+            <%= f.label :credit_card_number, "Credit card number (13-16 digits)" %>
             <%= f.text_field :cc_num, class: "form-control"  %><br>
           </div> 
 
           <div class="col">
-            <%= f.label :credit_card_expiration, "Credit card expiration" %>
+            <%= f.label :credit_card_expiration, "Credit card expiration (Ex: 12/20)" %>
             <%= f.text_field :cc_exp, class: "form-control"  %><br>
           </div> 
 
           <div class="col">
-            <%= f.label :credit_card_cvv, "Credit card CVV" %>
+            <%= f.label :credit_card_cvv, "Credit card CVV (3-4 digits)" %>
             <%= f.text_field :cc_cvv, class: "form-control"  %><br>
           </div> 
         </div>
