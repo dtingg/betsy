@@ -34,7 +34,14 @@ class Orderitem < ApplicationRecord
     self.complete = true
     self.save
 
-    # self.order.check_complete
+    self.order.check_status
+  end
+
+  def mark_cancelled
+    self.complete = nil
+    self.save
+
+    self.order.check_status
   end
 
   def self.exists?(order_id, product_id)
@@ -46,5 +53,4 @@ class Orderitem < ApplicationRecord
       return result[0]
     end
   end
-  
 end

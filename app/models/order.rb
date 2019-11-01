@@ -20,19 +20,24 @@ class Order < ApplicationRecord
     return order_total 
   end
 
-  # def check_complete
-  #   completed_orderitems_count = 0
+  def check_status
+    completed_orderitems_count = 0
+    cancelled_orderitems_count = 0
 
-  #   self.orderitems.each do |orderitem|
-  #     if orderitem.complete == true
-  #       completed_orderitems_count += 1
-  #     end
-  #   end
+    self.orderitems.each do |orderitem|
+      if orderitem.complete == true
+        completed_orderitems_count += 1
+      elsif orderitem.complete == nil
+        cancelled_orderitems_count += 1
+      end
+    end
     
-  #   if completed_orderitems_count == self.orderitems.length
-  #     self.update(status: "complete")
-  #   end
-  # end
+    if completed_orderitems_count == self.orderitems.length
+      self.update(status: "complete")
+    elsif cancelled_orderitems_count == self.orderitems.length
+      self.update(status: "cancelled")
+    end
+  end
 end
 
 
