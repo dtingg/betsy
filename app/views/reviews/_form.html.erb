@@ -33,7 +33,7 @@
       <%= f.hidden_field :date, value: Time.now %>
       <%= f.hidden_field :product_id, value: params[:product_id] %>  
 
-      <%= f.submit "#{action_name} Review", formaction: product_reviews_path(product_id: params[:product_id]), method: "post",  class: "work-button" %>
+      <%= f.submit "#{action_name} Review", formaction: product_reviews_path(product_id: params[:product_id]), method: "post",  class: "btn btn-primary" %>
     <% end %>
   </section>
 </div>
