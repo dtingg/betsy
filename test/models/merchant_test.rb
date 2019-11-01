@@ -244,6 +244,9 @@ describe Merchant do
       
       @order_two = Order.create(status: "pending")
       orderitem_two = Orderitem.create(order_id: @order_two.id, product_id: product.id, quantity: 2)
+
+      @order_five = Order.create(status: "pending")
+      orderitem_two = Orderitem.create(order_id: @order_two.id, product_id: product.id, quantity: 2, complete: nil)
       
       another_merchant = Merchant.create(username: "new merch", uid: 1232132, email: "email@world.com")
       product_two =  Product.create(merchant_id: another_merchant.id, name: "Rose soap", price: 5.00, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
@@ -252,7 +255,7 @@ describe Merchant do
     end
     
     it "calculates the order count of all merchant orderitems" do
-      expected_sum = 2
+      expected_sum = 3
       
       order_count = @merchant.calculate_order_count("all")
       
@@ -280,6 +283,14 @@ describe Merchant do
       expected_count = 0
 
       order_count = @merchant.calculate_order_count("completed")
+
+      expect(order_count).must_equal expected_count
+    end
+
+    it "returns a list of cancelled orderitems" do
+      expected_count = 1
+
+      order_count = @merchant.calculate_order_count("cancelled")
 
       expect(order_count).must_equal expected_count
     end
