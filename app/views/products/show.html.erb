@@ -11,14 +11,12 @@
           <% end %>
         </span>
       <% end %>
-    <ul>
     <br>
-      <li><%= rating_width = @product.calculate_average_rating %></li>
-      <li><%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %></li>
-      <li><%= @product.description %></li>
-      <li>$<%= sprintf('%.2f', @product.price) %></li>
+      <%= @product.calculate_average_rating %><br><br>
+      <%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %><br>
+      <%= @product.description %><br>
+      $<%= sprintf('%.2f', @product.price) %><br><br>
 
-    </ul>
     <% if @product.stock_qty > 0 && @product.active %>
       <%= form_for Orderitem.create do |f| %>
         <%= f.hidden_field :order_id, value: @cart.id %>

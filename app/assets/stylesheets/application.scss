@@ -46,6 +46,17 @@ a:hover {
 
 .flash {
   margin-top: 320px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+
+.flash .failure, .flash .success{
+  border-radius: 5px;
+}
+
+.flash .failure div, .flash .success div{
+  margin-left: 10px;
 }
 
 .profile {

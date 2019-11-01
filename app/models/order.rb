@@ -19,11 +19,11 @@ class Order < ApplicationRecord
     
     return order_total 
   end
-
+  
   def check_status
     completed_orderitems_count = 0
     cancelled_orderitems_count = 0
-
+    
     self.orderitems.each do |orderitem|
       if orderitem.complete == true
         completed_orderitems_count += 1
@@ -39,6 +39,3 @@ class Order < ApplicationRecord
     end
   end
 end
-
-
-

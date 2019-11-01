@@ -131,7 +131,8 @@ td {
 
   .merchant-products-list {
     display: flex;
-    margin-top: 1rem;
+    flex-wrap: wrap;
+    margin-top: 5rem;
 
     ul{
       list-style-type: none;
