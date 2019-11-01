@@ -56,8 +56,8 @@
         <td><%= number_to_currency orderitem.total %></td>
         <td>
           <%= form_with model: orderitem do |f| %>
-          <%= f.hidden_field :cancelled, value: nil %>
-          <%= hidden_field_tag :cancelled, nil %>
+          <%= f.hidden_field :complete, value: nil %>
+          <%= hidden_field_tag :complete, nil %>
           <button type="submit" class="btn btn-primary">Cancel</button>
           <% end %>
         </td>
@@ -93,7 +93,7 @@
       </tr>
     </thead>
     <% @merchant.all_orderitems.each do |orderitem| %>
-    <% if orderitem.complete != false %>
+    <% if orderitem.complete == true || orderitem.complete == nil %>
       <tr>
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
         <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
