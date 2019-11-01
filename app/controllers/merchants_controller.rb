@@ -45,7 +45,7 @@ class MerchantsController < ApplicationController
     end
     
     session[:user_id] = merchant.id
-    return redirect_to dashboard_path(fallback_location: merchants_path)
+    return redirect_to dashboard_path
   end
   
   def logout
