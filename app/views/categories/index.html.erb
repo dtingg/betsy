@@ -3,7 +3,7 @@
     <h3>All Categories</h3>
   </section>
 
-<section class="categories-container">
+<section>
   <section class="categories-list">
     <% @categories.each do |category| %>
       <%= link_to "#{category.name.titleize}", category_path(category.id), class:"btn btn-primary" %>
