@@ -1,19 +1,37 @@
-<h1>Order details</h1>
+<h2 class="cell_center">Order details</h2>
+<table class="table table-hover table-sm merchant_details" frame = "box" id="order_info">
+<thead>
+<tr>
+<th rowspan="2"><h2>Order #<%= @order.id %></h2></th>
 <% date = @order.order_date.in_time_zone("Pacific Time (US & Canada)") %>
-Placed: <%= date.strftime( "%B %e, %Y %l:%M %p") %><br>
-Status: <%= @order.status.capitalize %><br>
-Name: <%= @order.name %><br>
-Email: <%= @order.email %><br>
-Address: <%= @order.address %><br>
-City: <%= @order.city %><br>
-State: <%= @order.state %><br>
-Zipcode: <%= @order.zipcode %><br>
+<th>Status: <%= @order.status.capitalize %></th>
+</tr>
+<tr>
+<th>Placed: <%= date.strftime( "%B %e, %Y %l:%M %p") %></th>
+</tr>
+<thead>
+<tr>
+<td><%= @order.name %></td>
+<td>Payment Info:</td>
+</tr>
+<tr>
+<td><%= @order.email %></td>
+<td>
 <% cc_length = @order.cc_num.length %>
-Credit card number: <%= "X" * (cc_length - 4) + @order.cc_num[-4..-1] %><br>
-Credit card expriation: <%= @order.cc_exp %><br>
-Credit card cvv: <%= @order.cc_cvv %><br>
+<%= "X" * (cc_length - 4) + @order.cc_num[-4..-1] %>
+</td>
+</tr>
+<tr>
+<td rowspan="2"><%= @order.address %><br /> <%= @order.city %>, <%= @order.state %> <%= @order.zipcode %></td>
+<td>Exp: <%= @order.cc_exp %> 
+</tr>
+<tr>
+<td>CVV: <%= @order.cc_cvv %></td>
+</tr>
+</table>
 
-<table>
+<table class="table table-sm merchant_details" frame = "box" id="order_products">
+<thead>
   <tr>
     <th>PHOTO</th>
     <th>NAME</th>
@@ -22,19 +40,42 @@ Credit card cvv: <%= @order.cc_cvv %><br>
     <th>QUANTITY</th>
     <th>UNIT PRICE</th>
     <th>LINE PRICE</th>
+    <th> </th>
   </tr>
-
+</thead>
   <% @order.orderitems.each do |item| %>
     <tr>
-      <td><%= link_to image_tag(item.product.photo_url, alt:"#{item.product.name}"), product_path(item.product) %></td>
+      <td><%= link_to image_tag(item.product.photo_url, alt:"#{item.product.name}", class: "sm_product_image"), product_path(item.product) %></td>
       <td><%= link_to "#{ item.product.name.capitalize }", product_path(item.product) %></td>
       <td><%= item.product.description %></td>
       <td><%= link_to "#{item.product.merchant.username}", merchant_path(item.product.merchant) %></td>
       <td><%= item.quantity %></td>
       <td>$<%= sprintf('%.2f', item.product.price) %></td>
       <td>$<%= sprintf('%.2f', item.total) %></td>
+      <td>
+        <%= form_with model: item do |f| %>
+        <%= f.hidden_field :complete, value: nil %>
+        <%= hidden_field_tag :complete, nil %>
+        <button type="submit" class="btn btn-primary">Cancel</button>
+        <% end %>
+      </td>
     </tr>
   <% end %>
   
-  <tr><td></td><td></td><td></td><td></td><td>Shipping $5.00</td><td>Order total: $</td><td><%= @order.total + 5 %></tr>
+  <tr>
+    <td colspan="5"></td>
+    <td>Shipping:</td>
+    <td><%= number_to_currency 5 %></td>
+    <td> </td>
+  </tr>
+  <tr>
+  <td colspan="5"></td>
+  <td>Total:</td>
+  <td><%= number_to_currency @order.total + 5 %></td>
+  <td> </td>
+  </tr>
+<tr>
+<th colspan="8"><p>Please print this order confirmation for your records.  If you need to cancel any orderitems you must do it now, otherwise the merchant for each item will need to be contacted directly.</p>
+</th>
+</tr>
 </table>
