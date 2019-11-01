@@ -134,7 +134,7 @@ describe Merchant do
       expect(merchant.member_since.to_i).must_equal expected_duration
     end
     
-    it "can calculate how long a merchant has been a member - days" do
+    it "can calculate how long a merchant has been a member - years" do
       merchant = merchants(:merchant_two)
       merchant.created_at = Time.current - 71944000000
       current_time = Time.current
