@@ -192,11 +192,11 @@ describe Product do
       @review_2 = Review.create(product_id: @new_product.id, date: Time.now, comment: "test 2", rating: 4, reviewer: "test 2")
       @new_product_2 = Product.create(name: "random soap", price: 10.0, merchant: merchants(:merchant_one), stock_qty: 9)
     end
-    it "averages rating and shows correct amount of stars" do
-      star = "\u2605"
-      rating = star.encode("utf-8") * 3
-      expect(@new_product.calculate_average_rating).must_equal rating
+    
+    it "correctly averages the product's rating" do
+      expect(@new_product.calculate_average_rating).must_equal "Average rating: 3.0"
     end
+    
     it "doesn't show anything if no ratings exist" do
       expect(@new_product_2.calculate_average_rating).must_equal "Not Yet Rated"
     end
