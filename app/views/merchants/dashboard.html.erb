@@ -48,7 +48,11 @@
     <% if orderitem.complete == false %>
       <tr>
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
-        <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
+        <% if orderitem.order.order_date %>
+          <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
+        <%else%>
+          <td>Not Available</td>
+        <% end %>
         <td><%= link_to orderitem.product.name, product_path(orderitem.product.id) %></td>
         <td><%= link_to image_tag(orderitem.product.photo_url, alt:"#{orderitem.product.name}", class: "sm_product_image"), product_path(orderitem.product.id) %>
         <td><%= number_to_currency orderitem.product.price %></td>
@@ -96,7 +100,11 @@
     <% if orderitem.complete != false %>
       <tr>
         <td><%= link_to orderitem.order.id, order_path(orderitem.order.id) %></td>
-        <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
+        <% if orderitem.order.order_date %>
+          <td><%=  Merchant.date_formatting(orderitem.order.order_date) %></td>
+        <%else%>
+         <td>Not Available</td>
+        <% end %>
         <td><%= link_to orderitem.product.name, product_path(orderitem.product.id) %></td>
         <td><%= link_to image_tag(orderitem.product.photo_url, alt:"#{orderitem.product.name}", class: "sm_product_image"), product_path(orderitem.product.id) %>
         <td><%= number_to_currency orderitem.product.price %></td>

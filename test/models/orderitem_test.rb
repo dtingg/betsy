@@ -5,7 +5,8 @@ describe Orderitem do
   let (:product) { Product.create(merchant_id: merchant.id, name: "Oatmeal soap", price: 5.55, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg") }
   let (:order) { Order.create(status: "pending") }
   let (:orderitem) { Orderitem.create(order_id: order.id, product_id: product.id, quantity: 3) }
-  
+  let (:pending_order) { Order.create(status: "pending", name: "Fred Flintstone", email: "fred@aol.com", address: "123 Bedrock Lane", city: "Bedrock", state: "CA", zipcode: "10025", cc_num: "1234567890123", cc_exp: "1219", cc_cvv: "123", order_date: Time.new ) } 
+
   describe "initialize" do
     it "can be instantiated" do
       
@@ -151,12 +152,29 @@ describe Orderitem do
     end
   end
   
-  describe "change orderitem status" do
-    it "will correctly change orderitem status" do
+  describe "mark_complete method" do
+    it "will correctly change orderitem complete to true" do
       orderitem.complete = false
       orderitem.save
+
+      expect(orderitem.complete).must_equal false
+
       orderitem.mark_complete
+
       expect(orderitem.complete).must_equal true
+    end
+  end
+
+  describe "mark_cancelled method" do
+    it "will change orderitem complete to nil" do
+      orderitem.complete = false
+      orderitem.save
+
+      expect(orderitem.complete).must_equal false
+      
+      orderitem.mark_cancelled
+
+      assert_nil(orderitem.complete)
     end
   end
   
