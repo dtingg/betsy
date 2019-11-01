@@ -233,6 +233,22 @@ describe Merchant do
       
       expect(total_revenue).must_equal expected_sum
     end
+
+    it "calculates total revenue for merchant's pending orders" do
+      expected_sum = @order_one.total + @order_two.total
+      
+      total_revenue = @merchant.calculate_total_revenue("pending")
+      
+      expect(total_revenue).must_equal expected_sum
+    end
+
+    it "calculates total revenue for merchant's completed orders" do
+      expected_sum = 0
+      
+      total_revenue = @merchant.calculate_total_revenue("completed")
+      
+      expect(total_revenue).must_equal expected_sum
+    end
   end
   
   describe "calculate order count" do
