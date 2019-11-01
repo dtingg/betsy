@@ -235,7 +235,7 @@ describe Merchant do
     end
   end
   
-  describe "calculate total revenue" do
+  describe "calculate order count" do
     before do
       @merchant = Merchant.create(username: "golden merchant", uid: 1232, email: "hello@world.com")
       product =  Product.create(merchant_id: @merchant.id, name: "Oatmeal soap", price: 6.00, photo_url: "https://res.cloudinary.com/hbmnvixez/image/upload/v1572551624/generic.jpg")
@@ -251,7 +251,7 @@ describe Merchant do
       orderitem_three = Orderitem.create(order_id: order_three.id, product_id: product_two.id, quantity: 3)
     end
     
-    it "calculates the total revenue for a merchant with multiple orders" do
+    it "calculates the order count of all merchant orderitems" do
       expected_sum = 2
       
       order_count = @merchant.calculate_order_count("all")
@@ -266,6 +266,22 @@ describe Merchant do
       order_count = merchant_three.calculate_order_count("all")
       
       expect(order_count).must_equal expected_sum
+    end
+
+    it "returns a list of pending orderitems" do
+      expected_count = 2
+
+      order_count = @merchant.calculate_order_count("pending")
+
+      expect(order_count).must_equal expected_count
+    end
+
+    it "returns a list of completed orderitems" do
+      expected_count = 0
+
+      order_count = @merchant.calculate_order_count("completed")
+
+      expect(order_count).must_equal expected_count
     end
   end
   
