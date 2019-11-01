@@ -117,10 +117,28 @@ describe Merchant do
   end
   
   describe "member since method" do
-    it "can calculate how long a merchant has been a member" do
+    it "can calculate how long a merchant has been a member - hour" do
       merchant = merchants(:merchant_two)
       current_time = Time.current
       expected_duration = (((current_time - merchant.created_at) / 1.hour).round)
+      
+      expect(merchant.member_since.to_i).must_equal expected_duration
+    end
+    
+    it "can calculate how long a merchant has been a member - days" do
+      merchant = merchants(:merchant_two)
+      merchant.created_at = Time.current - 7776000
+      current_time = Time.current
+      expected_duration = (((current_time - merchant.created_at) / 1.day).round)
+      
+      expect(merchant.member_since.to_i).must_equal expected_duration
+    end
+    
+    it "can calculate how long a merchant has been a member - days" do
+      merchant = merchants(:merchant_two)
+      merchant.created_at = Time.current - 71944000000
+      current_time = Time.current
+      expected_duration = (((current_time - merchant.created_at) / 1.year).round)
       
       expect(merchant.member_since.to_i).must_equal expected_duration
     end
