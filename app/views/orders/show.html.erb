@@ -2,7 +2,7 @@
 <table class="table table-hover table-sm merchant_details" frame = "box" id="order_info">
 <thead>
 <tr>
-<th rowspan="2"><h2>Order #<%= @order.id %></h2></th>
+<th rowspan="2" bgcolor ="#bdcff2"><h2>Order #<%= @order.id %></h2></th>
 <% date = @order.order_date.in_time_zone("Pacific Time (US & Canada)") %>
 <th>Status: <%= @order.status.capitalize %></th>
 </tr>
@@ -40,7 +40,6 @@
     <th>QUANTITY</th>
     <th>UNIT PRICE</th>
     <th>LINE PRICE</th>
-    <th> </th>
   </tr>
 </thead>
   <% @order.orderitems.each do |item| %>
@@ -52,30 +51,21 @@
       <td><%= item.quantity %></td>
       <td>$<%= sprintf('%.2f', item.product.price) %></td>
       <td>$<%= sprintf('%.2f', item.total) %></td>
-      <td>
-        <%= form_with model: item do |f| %>
-        <%= f.hidden_field :complete, value: nil %>
-        <%= hidden_field_tag :complete, nil %>
-        <button type="submit" class="btn btn-primary">Cancel</button>
-        <% end %>
-      </td>
     </tr>
-  <% end %>
+    <% end %>
   
   <tr>
     <td colspan="5"></td>
     <td>Shipping:</td>
     <td><%= number_to_currency 5 %></td>
-    <td> </td>
   </tr>
   <tr>
   <td colspan="5"></td>
   <td>Total:</td>
   <td><%= number_to_currency @order.total + 5 %></td>
-  <td> </td>
   </tr>
 <tr>
-<th colspan="8"><p>Please print this order confirmation for your records.  If you need to cancel any orderitems you must do it now, otherwise the merchant for each item will need to be contacted directly.</p>
+<th colspan="7"><p>Please print this order confirmation for your records.  If you need to cancel any orderitems you must contact the merchant directly for each item.</p>
 </th>
 </tr>
 </table>
