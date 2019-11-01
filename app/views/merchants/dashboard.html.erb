@@ -59,7 +59,11 @@
           <%= f.hidden_field :complete, value: nil %>
           <%= hidden_field_tag :complete, nil %>
           <button type="submit" class="btn btn-primary">Cancel</button>
+
           <% end %>
+          <%= link_to "Cancel", cancel_path(orderitem.id), method: :patch %>
+
+
         </td>
         <td>
           <%= form_with model: orderitem do |f| %>
