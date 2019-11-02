@@ -132,6 +132,24 @@ describe OrderitemsController do
       must_respond_with :redirect
     end    
   end
+
+  describe "cancel" do
+    it "flashs confirmation of update and cancels orderitem" do
+      orderitem.save
+      orderitem.update(complete: false)
+      expect(orderitem.complete).must_equal false
+
+      changes_hash = { orderitem: { complete: nil } }
+
+      patch cancel_path(orderitem.id)
+
+      find_orderitem = Orderitem.find_by(id: orderitem.id)
+
+      assert_nil(find_orderitem.complete)
+      expect(flash[:success]).must_equal "Orderitem cancelled"
+      must_respond_with :redirect
+    end
+  end
   
   describe "destroy" do
     it "does not change the database when the orderitem does not exist, and responds with a redirect" do  
