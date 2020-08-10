@@ -89,5 +89,5 @@ group :test do
 end
 
 gem "omniauth"
-gem "omniauth-github"
+gem "omniauth-github", '>= 1.4.0'
 gem "validate_url"
